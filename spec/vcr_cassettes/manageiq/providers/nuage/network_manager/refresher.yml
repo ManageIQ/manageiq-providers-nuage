@@ -1,0 +1,569 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/me
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.0.0 x86_64) ruby/2.3.1p112
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic NUAGE_NETWORK_AUTHORIZATION
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 22-Aug-2017 15:27:29
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 23 Aug 2017 15:27:29 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAF2Q3YrbMBCF30XXETiy/JerJrEvQhcnbFJoWZZlZI9YgWIZ
+        SdlNKH33TprELb2RmG80Z87Ry0+mjQ+xhSOyBfv+tFyxGbMwkW8BPZETXXdy
+        tqCI4BGMvZdfrOvAvrsQqXF0ylhsT0dFk4vhZO2MjRDCp/P9o/bOXqXW+93z
+        dnu4qg0R/ehNwPsWahGGD4jgD5cRH5M3UtPxINZ0OARcwwi02ESDgS1eWNOu
+        n3/sDptt+9a0y9VTU7PXGQsRognRdKEZQFkkRxpswFsnHPb1ao/+A/2y7z0G
+        UmJTtoUUUpApbd3n2lmLXTRu+F+Hkph42Xfur2c8U7gB7GbKv6lJOOu7rtC5
+        4IWSCZfzouKq15qLXGksK1SJkLRuudt8xQu9L9K0z9U84QIKxWWpBK+youQq
+        gVJpLUUlkul9cx6Np6l5lqRZWco0LdPs33/+Y6HIE5nnRcr7BIFLyAuuciAL
+        paiqTOiknF8TTwHqW4Bfr78B2TtQ7zgCAAA=
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 15:27:30 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/enterprises
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.0.0 x86_64) ruby/2.3.1p112
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjo3MzNkNmIxMC0yYTdiLTQ4YjItOTU3OC1iMGE4YmZmNDI5MjA=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 22-Aug-2017 15:27:29
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '2'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 23 Aug 2017 15:27:29 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAM1V227bRhD9lYDPXmDv3PWbLCmOUbt1IqcoEORhdnc2IUCT
+        wlKyqxb59w5lyZEdO4mBougDCXB25sxlzxx++LuKn5s2Feyq427dtkfVEuhj
+        dbVZ4t5Cn81qs4j9aKrmv17N312+O1vMq6OqhWH1fplghelkQ4daZeesy0yH
+        KJiuZWQ+Cc+MUinmGAQifxg2o1d1LAxXhkuuNef8qIoFYdX03ZOHHVyPdUy6
+        oQktsiscVgSZcIilWY5RdDgdATC9CptXOz9ygRtYQTns7M5CWWBvyW1PmbtP
+        Z5fD23U/2oV9YH0/YKqOqQxo2/72qqwHyvO6L7dQEnlMqbWhOs7QDrjzmaQb
+        6CKmt78tpn2Xm0/rAndlHnp9A4IE86F6U33cOZxSQ7ewuYAOPuE13cl9PHZA
+        DU6Wy7aJW+RLLLkv12PWJ91j2WwH9fXwok/jTGdni8nJ+Xw2XlEfoZ0s9nNJ
+        TRwjoGx+xzJsq5dPVH6HcxfS33ZYCDTJFBVEy7gATZwwhhFFLEMesM7KZu4c
+        JTybkW8tVOIBOEsIjmkdNHMQa2YjBE8wUkBd7Tk6RuwY+ucKSwftV0uke+mv
+        sYwWSymp2Nmb6eU5woBnHXnfQEst6C27sSxLM+Bl6XPT4raQLNBgIOZGWwPT
+        1gjmOVGa+K1RKhRJWSqkYMTmBi/W7aqZEqnPm2FbVsWdENZny2KQtA3RInPo
+        NQs1F1JqMEILih+wS98G18ppbWNkXFoKdrRPvhaOBaGyVp47U4eRz8PQx2bk
+        +Wnp18tfcDO/v9rDXrRBr4ALZlVK1ItMzAUrGALyGnKQ0usHcPP7kSwwrgst
+        /w6Hm4wpMFri8XLQshCVZy4GFYOBJLN9gEMVLWjSWC76rln128uovDdeRSuZ
+        wdoybVQiFMz0ktIlMmajCOV8Nrmcb4md7pk72ibr1ee+NH9tif7Y4eT0UcyX
+        o/+PwInayto8I3CHhzuB++N8cvJY2A5l68VCNmK/WMlWZf1jITtwekbHJtTJ
+        2M2UnlFextm+pueUnu9q3B30z0rc3vu/VTgHJGIoOQNN26Fd7Rgkp5mP0Yra
+        2Ei03iscrY7w2mpGRI9Mg6pZkB7oUyaog/Hk/mKFo6vl+oUKJ1yWGrVniY/b
+        7JEKCTqwkIx2WZiA1n1P4YxCyBFJRnyiPeaaVthGx3LtvTWBdqE2zyqcCMaE
+        BIoprGmNuEOaGJURAqctwqi1gxconPNScaDkigtOakuT9SFIBk6DBZVj5vAz
+        Cpc4UvNaMVBKMq2kJ82NiQkbpYh6lDj+Y4ULVmtTK8Hq2humJQdGvz/DhKTR
+        ekzWb5v7lxTu4z/Lg+mMxAkAAA==
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 15:27:30 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.0.0 x86_64) ruby/2.3.1p112
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjo3MzNkNmIxMC0yYTdiLTQ4YjItOTU3OC1iMGE4YmZmNDI5MjA=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 22-Aug-2017 15:27:30
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 23 Aug 2017 15:27:29 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAJVU226cMBD9F57XEgaMIW97Uxspm66yadSqqqrBHrJWvICM
+        abuq+u8dsyHJRqmqviDsOXM5Z8bz5Vek9sZqh0100QzWzqIO6OBvjx1GFxH9
+        oeuc6TGahYPxx51qR9P6+nZ9s7253K3JZKH3HzsNHvXiSMYsrYsiL2qWVYqz
+        TCaKlZqXTKSpVrWqOGJ87raiT3TBRcxlXuYxj+N4FimH4E3bnBmzJBuNrh08
+        rkzvTXM/mH6PjhLnQqTZRcZlnESPkFtw9+ifbDyVJSdbA4dAYwE9XqV01tgr
+        Z7qQbpLiAIb4N9Ao3LQ6oFeXu/niar0K+L3qdui+o5tr0q/vsZ/8hkajs3Bc
+        N1BZ1Od+XWuNOi730NzjzoMfntwqUA/vYbA3fycmCh54nSFf8RNJKooXmLvr
+        y1XQTvAilWIWgaaSPXV06Qw118CU3hy61vm3Qk6S4c9/Ihrljo8aviRtWwV2
+        vptStT+akVQBeR1jEjPIdMWyQhYMdJGxUqmcS5ErLcLgBQKRFGRCLJhMcsWy
+        UsSspOliOQiAKs/ylOtoGt/RA+OCl1meMZQ1eUAqWZWUQMdEg6xESQlGViRD
+        Azb4nMrrqa1GYbiQPJZxKXlJwzj0vj2gG+WkCcxm0er9crvAPXw3baCz/HC9
+        +7gJ7yEYzobjObRqGw3u+FeEhQrHWlLBRUFDOFhvFD2Uc0W389s3xwv6vlUm
+        vChCbKDrTgWfYj8bN1PUMIgNWkK+4O8derUPoWuwPc4iPwTQ41K4+3Q1v6ZU
+        6+Vmu2yHhirjBMFDZyn0qVmViGXNY5arnJaA0CUr0wSYrNIURMYxT07jMq2X
+        /2nY0FnTPGwd1ki9VqEk2kOb+c3nb7s19WBFfwS7t20F4xOhd/Sk1SMhi/Dw
+        xvVqe/nqtaI7GE+CzdXLzfAs5OLdduva2lh81o/uXgfWbVgmY1uljIt0urkj
+        KcNt/PvrH+W8N9iMBQAA
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 15:27:30 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/zones
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.0.0 x86_64) ruby/2.3.1p112
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulZone'
+      Authorization:
+      - Basic eGxhYjo3MzNkNmIxMC0yYTdiLTQ4YjItOTU3OC1iMGE4YmZmNDI5MjA=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 22-Aug-2017 15:27:30
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Page:
+      - "-1"
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Pagesize:
+      - '50'
+      X-Nuage-Count:
+      - '2'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulZone'
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 23 Aug 2017 15:27:29 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAANVTTY/TMBD9K8jnWnIS20l626URa4kuVVs4gDiMP6KNSJwo
+        cYAI8d8Zd7esCgiBxIG9RPLMvOfxey/vvhBz17R2dJ6s/dy2KzIAHsJxGRxZ
+        E9t30HiyIlhqwnIw/alc3R6r/W6vDhW2WpjC68FCcPZ6wWYBsmYuZRS41ZQX
+        eUHBFpyWxsgkF9JY4S5hG/yQdSJYksuSZwljbEXM6CA0vf9lEyyuPE3nnb0L
+        HUwfvh+hi1u+7b17xvAqu2ClMWr4KK8ugdZNZmyGeM+5FB8cnAdv3La3kWej
+        DlfXL6sNMg2zbhsTicm6hnZyURkzLg8MRN3eVHt1PM32n7wb/1wPtcHZTCcJ
+        pJbRlBUp5Wmd0DJFFNNMpJLXWZ7G2XuPTohcIJlzBc1TaSgvBaMl14ZKEABa
+        cpklNvr3ObjRQxsx9+9Uu5/UULsH29XuDUeQnzvtxlf1TT+FSfnDrFFonEYD
+        guuGFp155Bt6VGZ5MfbzEItJXhasEDy61c1taAz6/YNCME29aWICtueJ53fg
+        vWu3MDwyb3bqAvh19T+mNvtdarO/TG3ypFIrUyFLwTUtrZWUZ85iBusajwCy
+        yEAXmj2R1JZCMM7w7/v3qX3/DYzOjy9tBQAA
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 15:27:30 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/subnets
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.0.0 x86_64) ruby/2.3.1p112
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Authorization:
+      - Basic eGxhYjo3MzNkNmIxMC0yYTdiLTQ4YjItOTU3OC1iMGE4YmZmNDI5MjA=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 22-Aug-2017 15:27:30
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Page:
+      - "-1"
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Pagesize:
+      - '50'
+      X-Nuage-Count:
+      - '2'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 23 Aug 2017 15:27:30 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAOVV226bQBD9lWqfvdHeWXhzYpQgNZFlu32p+rDsLjEKBgRL
+        Ulr137vg4NhReonUSq0qARJzZubMzgyHD1+A3uaFaWwJorIrihmolX9xm762
+        IAKfq9KCGfCG3PVrXY3G+GYTr5arZB17qFCte1cb5aw57z0olciQJQgqZlLI
+        ZCChMpLBUGuBAy604fY0bOEfIMIc4UCEPCQIoRnQjVUur8oTkNFgBJXxBbet
+        Z8PobH8hn7O0bqfaO28mnJ9N94io3VD4uku9z5vBYnpvy3VS34v5lM01nZ2B
+        W8/4oPrj5HgIsK1u8nqoaerUTuWls6Uqtb2uzECwSNbz87fxwvs3VefsIm9d
+        Xt52ebu1jccF55RFAmMcTi4b1dxad8AwQoR47L5MDPCeXFDCZqArjW0K1cel
+        SgvrEZDcXMWrZDNyTSiIMlW09jAvNzZvX2xbF7nbN+DITTf945FOElYP5Vjv
+        Lw4zWXhfY9M0zKSEGeEEMk0RDBUOoBHKUim4pYKDab3GCJpirIhBkCDpI0iG
+        YUg8D0oRJ4JlNCDj8n1ytilVMcTsz5Isj6Y2mR43Nlm+Z2DvcjlN8rEDtrnP
+        tR3SYEE5lUHA8WHe1/OLQ0ogZMRZFC8ihCJBo3jIuJxvXu5+XRW57i/9NOsx
+        t+QcozBEgYe61GOHfju7qwtP93QS1baVzoevYL31jTE31j1Uzd3KtlXX6CPH
+        xdXFcmX9jIehdu3prtVN9amfr5YHol1XuFz7T+xZqU9015PHxVaVpS2uVX1E
+        tkyeb1hrL4sqVYVv0zH319nfJiAC4R8ICKMvCgh5nYDgVwkI+e0CQnhA5XcE
+        hAlKD/qBkcSYsn9EQAQyFAsFNVYaMoYJlJhqGApOUpNqZhk+FRBBuP9jsBSG
+        xgjIqDUwZFnmX5USkqpUpugPCYhEofQixfnPBeR8Hs3JawQEE8JDyUL0PwjI
+        x2835wL9gwgAAA==
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 15:27:30 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/subnets
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.0.0 x86_64) ruby/2.3.1p112
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Authorization:
+      - Basic eGxhYjo3MzNkNmIxMC0yYTdiLTQ4YjItOTU3OC1iMGE4YmZmNDI5MjA=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 22-Aug-2017 15:27:30
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Page:
+      - "-1"
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Pagesize:
+      - '50'
+      X-Nuage-Count:
+      - '2'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 23 Aug 2017 15:27:30 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAOVV226bQBD9lWqfvdHeWXhzYpQgNZFlu32p+rDsLjEKBgRL
+        Ulr137vg4NhReonUSq0qARJzZubMzgyHD1+A3uaFaWwJorIrihmolX9xm762
+        IAKfq9KCGfCG3PVrXY3G+GYTr5arZB17qFCte1cb5aw57z0olciQJQgqZlLI
+        ZCChMpLBUGuBAy604fY0bOEfIMIc4UCEPCQIoRnQjVUur8oTkNFgBJXxBbet
+        Z8PobH8hn7O0bqfaO28mnJ9N94io3VD4uku9z5vBYnpvy3VS34v5lM01nZ2B
+        W8/4oPrj5HgIsK1u8nqoaerUTuWls6Uqtb2uzECwSNbz87fxwvs3VefsIm9d
+        Xt52ebu1jccF55RFAmMcTi4b1dxad8AwQoR47L5MDPCeXFDCZqArjW0K1cel
+        SgvrEZDcXMWrZDNyTSiIMlW09jAvNzZvX2xbF7nbN+DITTf945FOElYP5Vjv
+        Lw4zWXhfY9M0zKSEGeEEMk0RDBUOoBHKUim4pYKDab3GCJpirIhBkCDpI0iG
+        YUg8D0oRJ4JlNCDj8n1ytilVMcTsz5Isj6Y2mR43Nlm+Z2DvcjlN8rEDtrnP
+        tR3SYEE5lUHA8WHe1/OLQ0ogZMRZFC8ihCJBo3jIuJxvXu5+XRW57i/9NOsx
+        t+QcozBEgYe61GOHfju7qwtP93QS1baVzoevYL31jTE31j1Uzd3KtlXX6CPH
+        xdXFcmX9jIehdu3prtVN9amfr5YHol1XuFz7T+xZqU9015PHxVaVpS2uVX1E
+        tkyeb1hrL4sqVYVv0zH319nfJiAC4R8ICKMvCgh5nYDgVwkI+e0CQnhA5XcE
+        hAlKD/qBkcSYsn9EQAQyFAsFNVYaMoYJlJhqGApOUpNqZhk+FRBBuP9jsBSG
+        xgjIqDUwZFnmX5USkqpUpugPCYhEofQixfnPBeR8Hs3JawQEE8JDyUL0PwjI
+        x2835wL9gwgAAA==
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 15:27:31 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (darwin16.0.0 x86_64) ruby/2.3.1p112
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Authorization:
+      - Basic eGxhYjo3MzNkNmIxMC0yYTdiLTQ4YjItOTU3OC1iMGE4YmZmNDI5MjA=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 22-Aug-2017 15:27:30
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Page:
+      - "-1"
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Pagesize:
+      - '50'
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 23 Aug 2017 15:27:30 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAI1QzU+DMBz9V5aeadJCP4CbOjS7zGVDPRgPpf2hJKUQ6KLE
+        +L9bWNSZePDSpO+jfe89viP90lgzgEO5O1oboV6Fiy+nHlCOTNeqxqEIBajx
+        00F3C1xsy2K/228ORaCsGv1db5QHczkFkhutZS1iLCtGMKMyw5WpaxyLqoY0
+        g4rE7LdtHQ6UU04SwmlGE0JIhPQAyjed+5N0qp1zlDD61a6zjZ5WN0N37MO7
+        BkY9NP1snZO2vZ9W51iE/Knb4fa6fLjYzxXgzcPglEV5rewI33X98vdpl+7V
+        wfD/ept10JIYiIyhxlplPGgFwykXBid1TaWsMk0Tjb4mXxySK5MCpFjGQmOW
+        cYIzVmksFFeqEkwk1JwFnj2neMX9bnvVte3RheClev7CPbS9DTV+lP2y1zLX
+        DFKRxYmUKUs/nj4B8q6H7Q8CAAA=
+    http_version: 
+  recorded_at: Wed, 23 Aug 2017 15:27:31 GMT
+recorded_with: VCR 3.0.3
