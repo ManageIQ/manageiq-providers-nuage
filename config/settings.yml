@@ -14,3 +14,9 @@
   :nuage_network:
     :inventory_object_refresh: true
     :allow_targeted_refresh: true
+:workers:
+  :worker_base:
+    :event_catcher:
+      :event_catcher_nuage_network:
+        :topics:
+          - topic/CNAMessages
