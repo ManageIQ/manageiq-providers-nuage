@@ -1,0 +1,38 @@
+{
+  "assoicatedEvent": true,
+  "diffMap": null,
+  "enterpriseName": null,
+  "entities": [
+    {
+      "ID": "5911286f-030c-43c2-8fef-4b01fdef40df",
+      "acknowledged": false,
+      "alarmedObjectID": "a6ef5485-c8fb-4509-9e70-51e4262a2abf",
+      "children": null,
+      "creationDate": 1506659170000,
+      "description": "Gateway [201.26.92.41:NSGBR] was disconnected from the controller.",
+      "enterpriseID": "76046673-d0ea-4a67-b6af-2829952f0812",
+      "entityScope": "GLOBAL",
+      "errorCondition": 4707,
+      "externalID": null,
+      "lastUpdatedBy": "43f8868f-4bc1-472c-9d19-533dcfcb1ee0",
+      "lastUpdatedDate": 1506659170000,
+      "name": "NSGBR 201.26.92.41 Gateway with system-id [201.26.92.41] is disconnected",
+      "numberOfOccurances": 1,
+      "owner": "43f8868f-4bc1-472c-9d19-533dcfcb1ee0",
+      "parentID": "a6ef5485-c8fb-4509-9e70-51e4262a2abf",
+      "parentType": "nsgateway",
+      "reason": "Gateway with system-id [201.26.92.41] is disconnected",
+      "severity": "MAJOR",
+      "targetObject": "nsgateway",
+      "timestamp": 1506659170849
+    }
+  ],
+  "entityType": "alarm",
+  "entityVersion": null,
+  "eventReceivedTime": 1506659231856,
+  "ignoreDiffInMediationEvents": false,
+  "requestID": null,
+  "type": "DELETE",
+  "updateMechanism": "DEFAULT",
+  "userName": null
+}

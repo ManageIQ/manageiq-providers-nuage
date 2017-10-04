@@ -3,6 +3,8 @@ if ENV['CI']
   SimpleCov.start
 end
 
+require 'qpid_proton'
+
 # Uncomment in case you use vcr cassettes
 VCR.configure do |config|
   config.ignore_hosts 'codeclimate.com' if ENV['CI']
