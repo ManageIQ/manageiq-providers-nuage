@@ -124,7 +124,7 @@ module ManageIQ::Providers
         :type          => self.class.security_group_type,
         :ems_ref       => uid,
         :name          => pg['name'],
-        :network_group => NetworkGroup.find_by(:name => (@domains[pg['parentID']][2]).to_s)
+        :network_group => @data_index.fetch_path(:network_groups, @domains[pg['parentID']][1])
       }
       return uid, new_result
     end
