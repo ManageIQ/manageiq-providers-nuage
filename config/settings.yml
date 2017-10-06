@@ -12,4 +12,4 @@
     :user:
 :ems_refresh:
   :nuage_network:
-    :inventory_object_refresh: false
+    :inventory_object_refresh: true
