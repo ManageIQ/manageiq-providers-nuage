@@ -47,23 +47,7 @@ class ManageIQ::Providers::Nuage::InventoryCollectionDefault::NetworkManager < M
         ]
       }
 
-      # super(attributes.merge!(extra_attributes))
-      super_network_groups(attributes.merge!(extra_attributes))
-    end
-
-    # TODO(miha-plesko) Remove this function once it gets merged into core repo i.e. once this PR gets merged:
-    # https://github.com/ManageIQ/manageiq/pull/16136
-    # Doing this, also make sure that `network_groups` function then calls `super` instead `super_network_groups`
-    def super_network_groups(extra_attributes = {})
-      attributes = {
-        :model_class    => ::NetworkGroup,
-        :association    => :network_groups,
-        :builder_params => {
-          :ems_id => ->(persister) { persister.manager.try(:network_manager).try(:id) || persister.manager.id },
-        }
-      }
-
-      attributes.merge!(extra_attributes)
+      super(attributes.merge!(extra_attributes))
     end
   end
 end
