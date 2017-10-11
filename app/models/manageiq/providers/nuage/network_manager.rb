@@ -1,9 +1,14 @@
 class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkManager
   include SupportsFeatureMixin
+
   require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
   require_nested :VsdClient
+  require_nested :CloudSubnet
+  require_nested :SecurityGroup
+  require_nested :NetworkGroup
+
   supports :ems_network_new
 
   include Vmdb::Logging
