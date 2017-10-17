@@ -1,5 +1,6 @@
 class ManageIQ::Providers::Nuage::Inventory::Persister < ManagerRefresh::Inventory::Persister
   require_nested :NetworkManager
+  require_nested :TargetCollection
 
   protected
 

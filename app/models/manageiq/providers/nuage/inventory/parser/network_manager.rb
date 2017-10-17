@@ -25,7 +25,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
   def security_groups
     collector.security_groups.each do |sg|
       domain_id = sg['parentID']
-      domain = collector.domains[domain_id]
+      domain = collector.domain(domain_id)
 
       persister.security_groups.find_or_build(sg['ID']).assign_attributes(
         :name          => sg['name'],
@@ -44,11 +44,11 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
   end
 
   def map_extra_attributes(zone_id)
-    zone = collector.zones[zone_id]
+    zone = collector.zone(zone_id)
     domain_id = zone['parentID']
-    domain = collector.domains[domain_id]
+    domain = collector.domain(domain_id)
     network_group_id = domain['parentID']
-    network_group = collector.network_groups.find { |ng| ng['ID'] == network_group_id }
+    network_group = collector.network_group(network_group_id)
 
     {
       "enterprise_name" => network_group['name'],
