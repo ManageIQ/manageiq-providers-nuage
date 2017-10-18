@@ -11,7 +11,7 @@ env:
   - RUBY_GC_HEAP_GROWTH_FACTOR=1.25
 addons:
   postgresql: '9.4'
-before_install: sudo bin/qpid_install.sh
+before_install: bin/qpid_install.sh
 install: bin/setup
 after_script: bundle exec codeclimate-test-reporter
 notifications:

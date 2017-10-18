@@ -30,13 +30,13 @@ sed -i .bak -e 's/ 0/ 2/' proton-c/bindings/ruby/qpid_proton.gemspec.in
 # Configure the source of Qpid Proton.
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DSYSINSTALL_BINDINGS=OFF
+cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/pkg -DSYSINSTALL_BINDINGS=OFF
 
 # Make system libraries and the gem.
 make all
 
 # Install system libraries
-sudo make install
+make install
 
 # Manually install the Ruby Gem. This will be installed inside $GEM_HOME directory.
-gem install proton-c/bindings/ruby/qpid_proton-0.18.0.gem
+gem install proton-c/bindings/ruby/qpid_proton-0.18.0.gem -- --with-qpid-proton-lib=$HOME/pkg/lib --with-qpid-proton-include=$HOME/pkg/include/
