@@ -20,7 +20,7 @@ sudo apt-get install -y swig
 
 # Get the latest Qpid Proton source
 cd $HOME/build
-git clone https://github.com/apache/qpid-proton.git
+git clone --branch 0.18.0-rc1 https://github.com/apache/qpid-proton.git
 cd qpid-proton
 
 # There is a strange dependency on JSON that we need to change to version of
