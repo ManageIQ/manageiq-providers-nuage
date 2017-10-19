@@ -1,5 +1,6 @@
 class ManageIQ::Providers::Nuage::Inventory::Collector < ManagerRefresh::Inventory::Collector
   require_nested :NetworkManager
+  require_nested :TargetCollection
 
   def initialize(_manager, _target)
     super

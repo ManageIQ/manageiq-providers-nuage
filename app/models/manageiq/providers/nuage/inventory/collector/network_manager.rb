@@ -23,4 +23,20 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     return @domains if @domains.any?
     @domains = vsd_client.get_domains.map { |domain| [domain['ID'], domain] } .to_h
   end
+
+  def security_group(ems_ref)
+    security_groups.find { |sg| sg['ID'] == ems_ref }
+  end
+
+  def network_group(ems_ref)
+    network_groups.find { |ng| ng['ID'] == ems_ref }
+  end
+
+  def zone(ems_ref)
+    zones[ems_ref]
+  end
+
+  def domain(ems_ref)
+    domains[ems_ref]
+  end
 end

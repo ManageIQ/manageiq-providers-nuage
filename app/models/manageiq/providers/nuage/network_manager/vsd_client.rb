@@ -29,11 +29,47 @@ module ManageIQ::Providers
       _log.error('Error in connection for server ' + @server.to_s + ' ' + response.code.to_s)
     end
 
+    def get_enterprise(id)
+      response = @rest_call.get(@server + '/enterprises/' + id)
+      if response.code == 200
+        if response.body == ''
+          _log.warn("Enterprise with ID not found: #{id}")
+          return
+        end
+        return JSON.parse(response.body).first
+      end
+      _log.error('Error in connection for server ' + @server.to_s + ' ' + response.code.to_s)
+    end
+
     def get_domains
       response = @rest_call.get(@server + '/domains')
       if response.code == 200
         if response.body == ''
           _log.warn('No domains present')
+          return
+        end
+        return JSON.parse(response.body)
+      end
+      _log.error('Error in connection ' + response.code.to_s)
+    end
+
+    def get_domain(id)
+      response = @rest_call.get(@server + '/domains/' + id)
+      if response.code == 200
+        if response.body == ''
+          _log.warn("Domain with ID not found: #{id}")
+          return
+        end
+        return JSON.parse(response.body).first
+      end
+      _log.error('Error in connection ' + response.code.to_s)
+    end
+
+    def get_domains_for_enterprise(enterprise_id)
+      response = @rest_call.get(@server + '/enterprises/' + enterprise_id + '/domains')
+      if response.code == 200
+        if response.body == ''
+          _log.warn("Domains for enterprise with ID not found: #{enterprise_id}")
           return
         end
         return JSON.parse(response.body)
@@ -55,6 +91,20 @@ module ManageIQ::Providers
       _log.error('Error in connection ' + response.code.to_s)
     end
 
+    def get_zone(id)
+      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
+      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulZone'")
+      response = @rest_call.get(@server + '/zones/' + id)
+      if response.code == 200
+        if response.body == ''
+          _log.warn("Zone with ID not found: #{id}")
+          return
+        end
+        return JSON.parse(response.body).first
+      end
+      _log.error('Error in connection ' + response.code.to_s)
+    end
+
     def get_subnets
       @rest_call.append_headers("X-Nuage-FilterType", "predicate")
       @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulSubnet'")
@@ -66,6 +116,34 @@ module ManageIQ::Providers
         end
         subnets = JSON.parse(response.body)
         return subnets
+      end
+      _log.error('Error in connection ' + response.code.to_s)
+    end
+
+    def get_subnet(id)
+      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
+      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulSubnet'")
+      response = @rest_call.get(@server + '/subnets/' + id)
+      if response.code == 200
+        if response.body == ''
+          _log.warn("Subnet with ID not found: #{id}")
+          return
+        end
+        return JSON.parse(response.body).first
+      end
+      _log.error('Error in connection ' + response.code.to_s)
+    end
+
+    def get_subnets_for_domain(domain_id)
+      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
+      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulSubnet'")
+      response = @rest_call.get(@server + '/domains/' + domain_id + '/subnets')
+      if response.code == 200
+        if response.body == ''
+          _log.warn("Subnets for domain with ID not found: #{domain_id}")
+          return
+        end
+        return JSON.parse(response.body)
       end
       _log.error('Error in connection ' + response.code.to_s)
     end
@@ -99,6 +177,30 @@ module ManageIQ::Providers
       if response.code == 200
         if response.body == ''
           _log.warn('No policy Group present')
+          return
+        end
+        return JSON.parse(response.body)
+      end
+      _log.error('Error in connection ' + response.code.to_s)
+    end
+
+    def get_policy_group(id)
+      response = @rest_call.get(@server + '/policygroups/' + id)
+      if response.code == 200
+        if response.body == ''
+          _log.warn("PolicyGroup with ID not found: #{id}")
+          return
+        end
+        return JSON.parse(response.body).first
+      end
+      _log.error('Error in connection ' + response.code.to_s)
+    end
+
+    def get_policy_groups_for_domain(domain_id)
+      response = @rest_call.get(@server + '/domains/' + domain_id + '/policygroups')
+      if response.code == 200
+        if response.body == ''
+          _log.warn("Domain with ID not found: #{domain_id}")
           return
         end
         return JSON.parse(response.body)
