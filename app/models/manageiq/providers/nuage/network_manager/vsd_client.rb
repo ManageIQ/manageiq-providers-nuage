@@ -18,194 +18,86 @@ module ManageIQ::Providers
     end
 
     def get_enterprises
-      response = @rest_call.get(@server + '/enterprises')
-      if response.code == 200
-        if response.body == ''
-          _log.warn('No enterprises present')
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection for server ' + @server.to_s + ' ' + response.code.to_s)
+      get_list('enterprises')
     end
 
     def get_enterprise(id)
-      response = @rest_call.get(@server + '/enterprises/' + id)
-      if response.code == 200
-        if response.body == ''
-          _log.warn("Enterprise with ID not found: #{id}")
-          return
-        end
-        return JSON.parse(response.body).first
-      end
-      _log.error('Error in connection for server ' + @server.to_s + ' ' + response.code.to_s)
+      get_first("enterprises/#{id}")
     end
 
     def get_domains
-      response = @rest_call.get(@server + '/domains')
-      if response.code == 200
-        if response.body == ''
-          _log.warn('No domains present')
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      get_list('domains')
     end
 
     def get_domain(id)
-      response = @rest_call.get(@server + '/domains/' + id)
-      if response.code == 200
-        if response.body == ''
-          _log.warn("Domain with ID not found: #{id}")
-          return
-        end
-        return JSON.parse(response.body).first
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      get_first("domains/#{id}")
     end
 
     def get_domains_for_enterprise(enterprise_id)
-      response = @rest_call.get(@server + '/enterprises/' + enterprise_id + '/domains')
-      if response.code == 200
-        if response.body == ''
-          _log.warn("Domains for enterprise with ID not found: #{enterprise_id}")
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      get_list("enterprises/#{enterprise_id}/domains")
     end
 
     def get_zones
-      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
-      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulZone'")
-      response = @rest_call.get(@server + '/zones')
-      if response.code == 200
-        if response.body == ''
-          _log.warn('No zones present')
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      exclude_name('BackHaulZone')
+      get_list('zones')
     end
 
     def get_zone(id)
-      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
-      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulZone'")
-      response = @rest_call.get(@server + '/zones/' + id)
-      if response.code == 200
-        if response.body == ''
-          _log.warn("Zone with ID not found: #{id}")
-          return
-        end
-        return JSON.parse(response.body).first
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      exclude_name('BackHaulZone')
+      get_first("zones/#{id}")
     end
 
     def get_subnets
-      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
-      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulSubnet'")
-      response = @rest_call.get(@server + '/subnets')
-      if response.code == 200
-        if response.body == ''
-          _log.warn('No subnets present')
-          return
-        end
-        subnets = JSON.parse(response.body)
-        return subnets
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      exclude_name('BackHaulSubnet')
+      get_list('subnets')
     end
 
     def get_subnet(id)
-      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
-      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulSubnet'")
-      response = @rest_call.get(@server + '/subnets/' + id)
-      if response.code == 200
-        if response.body == ''
-          _log.warn("Subnet with ID not found: #{id}")
-          return
-        end
-        return JSON.parse(response.body).first
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      exclude_name('BackHaulSubnet')
+      get_first("subnets/#{id}")
     end
 
     def get_subnets_for_domain(domain_id)
-      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
-      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT 'BackHaulSubnet'")
-      response = @rest_call.get(@server + '/domains/' + domain_id + '/subnets')
-      if response.code == 200
-        if response.body == ''
-          _log.warn("Subnets for domain with ID not found: #{domain_id}")
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
-    end
-
-    def get_vports
-      response = @rest_call.get(@server + '/vports')
-      if response.code == 200
-        if response.body == ''
-          _log.warn('No vports present')
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      exclude_name('BackHaulSubnet')
+      get_list("domains/#{domain_id}/subnets")
     end
 
     def get_vms
-      response = @rest_call.get(@server + '/vms')
-      if response.code == 200
-        if response.body == ''
-          _log.warn('No VM present')
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      get_list('vms')
     end
 
     def get_policy_groups
-      response = @rest_call.get(@server + '/policygroups')
-      if response.code == 200
-        if response.body == ''
-          _log.warn('No policy Group present')
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      get_list('policygroups')
     end
 
     def get_policy_group(id)
-      response = @rest_call.get(@server + '/policygroups/' + id)
-      if response.code == 200
-        if response.body == ''
-          _log.warn("PolicyGroup with ID not found: #{id}")
-          return
-        end
-        return JSON.parse(response.body).first
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      get_first("policygroups/#{id}")
     end
 
     def get_policy_groups_for_domain(domain_id)
-      response = @rest_call.get(@server + '/domains/' + domain_id + '/policygroups')
-      if response.code == 200
-        if response.body == ''
-          _log.warn("Domain with ID not found: #{domain_id}")
-          return
-        end
-        return JSON.parse(response.body)
-      end
-      _log.error('Error in connection ' + response.code.to_s)
+      get_list("domains/#{domain_id}/policygroups")
+    end
+
+    private
+
+    # TODO(miha-plesko): Is this filter really supposed to be used here in client? Looks like debugging leftover,
+    # consider removing it.
+    def exclude_name(name)
+      @rest_call.append_headers("X-Nuage-FilterType", "predicate")
+      @rest_call.append_headers("X-Nuage-Filter", "name ISNOT '#{name}'")
+    end
+
+    def get_list(url)
+      response = @rest_call.get("#{@server}/#{url}")
+      return unless response.code == 200
+      return if response.body.empty?
+      JSON.parse(response.body)
+    end
+
+    def get_first(url)
+      list = get_list(url)
+      return if list.nil? || list.empty?
+      list.first
     end
   end
 end
