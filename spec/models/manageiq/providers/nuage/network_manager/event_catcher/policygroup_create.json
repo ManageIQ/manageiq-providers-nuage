@@ -1,0 +1,10 @@
+{
+  "entityType":"policygroup",
+  "type":"CREATE",
+  "eventReceivedTime":1508854841922,
+  "entities":[
+    {
+      "ID":"fadd09c4-9fea-46ec-8342-73f1b6a4df74"
+    }
+  ]
+}

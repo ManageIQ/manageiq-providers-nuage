@@ -1,0 +1,38 @@
+{
+  "userName":null,
+  "enterpriseName":null,
+  "type":"CREATE",
+  "entityType":"alarm",
+  "eventReceivedTime":1481063680946,
+  "entities":[
+    {
+      "children":null,
+      "parentType":"nsgateway",
+      "entityScope":"ENTERPRISE",
+      "lastUpdatedBy":"43f8868f-4bc1-472c-9d19-533dcfcb1ee0",
+      "lastUpdatedDate":1481063680000,
+      "creationDate":1481063680000,
+      "name":"NSG-Ottawa 213.50.60.102 Gateway with system-id [213.50.60.102] is disconnected",
+      "reason":"Gateway with system-id [213.50.60.102] is disconnected",
+      "description":"Gateway [213.50.60.102:NSG-Ottawa] was disconnected from the controller.",
+      "alarmTimeStamp":1481063680945,
+      "acknowledged":false,
+      "alarmId":"NSG-Ottawa-213.50.60.102-gwstate-916ea220-c381-4701-ba33-da1e423c992d",
+      "numberOfOccurances":1,
+      "alarmedObjectType":"nsgateway",
+      "alarmedObjectId":"05117fac-eac2-4ed7-b421-e70fcb42daee",
+      "severity":"MAJOR",
+      "errorCondition":4707,
+      "incrementNumberOfOccurances":false,
+      "enterpriseId":"40d29496-c5ef-41c6-aa6b-ef1cd8655457",
+      "owner":"43f8868f-4bc1-472c-9d19-533dcfcb1ee0",
+      "ID":"1336a16b-6d2e-46c2-bbfa-e8bf4343534c",
+      "parentID":"05117fac-eac2-4ed7-b421-e70fcb42daee",
+      "externalID":null
+    }
+  ],
+  "diffMap":null,
+  "ignoreDiffInMediationEvents":false,
+  "updateMechanism":"DEFAULT",
+  "writeToDb":true
+}
