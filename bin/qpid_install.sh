@@ -4,7 +4,6 @@
 sudo apt-get install -y gcc cmake cmake-curses-gui uuid-dev
 sudo apt-get install -y libssl-dev
 sudo apt-get install -y libsasl2-2 libsasl2-dev
-sudo apt-get install -y swig
 
 # Get the latest Qpid Proton source
 cd $HOME/build
@@ -14,7 +13,7 @@ cd qpid-proton
 # Configure the source of Qpid Proton.
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_BINDINGS= -DSYSINSTALL_BINDINGS=OFF
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_BINDINGS=
 
 # Compile system libraries.
 make all
