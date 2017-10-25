@@ -21,4 +21,12 @@ FactoryGirl.define do
       ems.authentications << FactoryGirl.create(:authentication, cred)
     end
   end
+
+  factory :ems_nuage_network_with_authentication,
+          :parent => :ems_nuage_network do
+    after :create do |x|
+      x.authentications << FactoryGirl.create(:authentication)
+      x.authentications << FactoryGirl.create(:authentication, :authtype => "amqp")
+    end
+  end
 end

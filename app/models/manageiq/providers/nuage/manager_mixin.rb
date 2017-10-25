@@ -41,18 +41,51 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   def verify_credentials(auth_type = nil, options = {})
     auth_type ||= 'default'
 
+    raise MiqException::MiqInvalidCredentialsError, "Unsupported auth type: #{auth_type}" unless supports_authentication?(auth_type)
     raise MiqException::MiqHostError, "No credentials defined" if missing_credentials?(auth_type)
 
     options[:auth_type] = auth_type
+    case auth_type.to_s
+    when 'default' then verify_api_credentials(options)
+    when 'amqp'    then verify_amqp_credentials(options)
+    end
+  end
+
+  def event_monitor_options
+    @event_monitor_options ||= begin
+      url = ''
+      amqp = connection_configuration_by_role('amqp')
+      if (endpoint = amqp.try(:endpoint))
+        url = "#{endpoint.hostname}:#{endpoint.port}"
+      end
+
+      if (authentication = amqp.try(:authentication))
+        url = "#{authentication.userid}:#{authentication.password}@#{url}"
+      end
+
+      {
+        :ems                       => self,
+        :url                       => url,
+        :sasl_allow_insecure_mechs => true, # Only plain (insecure) mechanism currently supported
+      }
+    end
+  end
+
+  private
+
+  def verify_api_credentials(options = {})
     with_provider_connection(options) {}
     true
-
   rescue => err
     miq_exception = translate_exception(err)
     raise unless miq_exception
 
     _log.error("Error Class=#{err.class.name}, Message=#{err.message}")
     raise miq_exception
+  end
+
+  def verify_amqp_credentials(_options = {})
+    ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream.test_amqp_connection(event_monitor_options)
   end
 
   def auth_url(protocol, server, port, version)
