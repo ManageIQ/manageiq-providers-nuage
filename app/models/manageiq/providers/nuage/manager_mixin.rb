@@ -2,24 +2,37 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def raw_connect(auth_url, username, password)
-      ManageIQ::Providers::Nuage::NetworkManager::VsdClient.new(auth_url, username, password)
+    def raw_connect(username, password, endpoint_opts)
+      protocol    = endpoint_opts[:protocol].strip if endpoint_opts[:protocol]
+      hostname    = endpoint_opts[:hostname].strip
+      api_port    = endpoint_opts[:api_port]
+      # In case API port is represented as a string, ensure it has no whitespaces.
+      api_port.strip! if api_port.kind_of?(String)
+      api_version = endpoint_opts[:api_version].strip
+
+      url = auth_url(protocol, hostname, api_port, api_version)
+      _log.info("Connecting to Nuage VSD with url #{url}")
+      ManageIQ::Providers::Nuage::NetworkManager::VsdClient.new(url, username, password)
+    end
+
+    def auth_url(protocol, server, port, version)
+      scheme = protocol == "ssl-with-validation" ? "https" : "http"
+      URI::Generic.build(:scheme => scheme, :host => server, :port => port, :path => "/nuage/api/#{version}").to_s
     end
   end
 
   def connect(options = {})
     raise "no credentials defined" if self.missing_credentials?(options[:auth_type])
 
+    username = options[:user] || authentication_userid(options[:auth_type])
+    password = options[:pass] || authentication_password(options[:auth_type])
     protocol = options[:protocol] || security_protocol
     server   = options[:ip] || address
     port     = options[:port] || self.port
-    username = options[:user] || authentication_userid(options[:auth_type])
-    password = options[:pass] || authentication_password(options[:auth_type])
     version  = options[:version] || api_version
 
-    url = auth_url(protocol, server, port, version)
-    _log.info("Connecting to Nuage VSD with url #{url}")
-    self.class.raw_connect(url, username, password)
+    endpoint_opts = {:protocol => protocol, :hostname => server, :api_port => port, :api_version => version}
+    self.class.raw_connect(username, password, endpoint_opts)
   end
 
   def translate_exception(err)
@@ -86,10 +99,5 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
   def verify_amqp_credentials(_options = {})
     ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream.test_amqp_connection(event_monitor_options)
-  end
-
-  def auth_url(protocol, server, port, version)
-    scheme = protocol == "ssl-with-validation" ? "https" : "http"
-    "#{scheme}://#{server}:#{port}/nuage/api/#{version}"
   end
 end
