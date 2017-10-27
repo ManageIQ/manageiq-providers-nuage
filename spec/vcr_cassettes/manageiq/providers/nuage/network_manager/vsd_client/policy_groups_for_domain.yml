@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/domains/d0c3274c-397a-4173-8981-bfd2f99ef8c6/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.3.5p376
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjo4ZDE2MTdjZC02ZjhlLTQyN2QtYTBjNy0wODI5MzAzYmRkNWI=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Sun, 22-Oct-2017 12:11:47
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 23 Oct 2017 12:11:47 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAI2QUUvDMBSF/0ueF0jbtEn7Nm2VoWyjq9uDiGTJjRbStHQZ
+        WsT/brqyqeCDLxdyzz33ni+PH0i+1kb1YFFmj8bMUCf8w1VDByhDqm1EbdEM
+        +Vbtho1sT+1iWRXlulxsCi8ZcXAPnRIO1NXgRS4STSAkWFC1x5QzjoXiFKdS
+        JgGLE6li+G3LfUFZEBMWhoTGESFkhmQPwtWt/VO0ohlz5MWWBM+7VXl3v5rn
+        fqmCg+zrbvSdedxEslndVLt5OQaGdwe9FQZlWpgDXODc6dLkat8s9P+HWeR+
+        VgulSCq9qEFgmoDEPKIhZpEO9olfoBlF5w8+ORSRUcioxFHKvCNgEeYpD/Be
+        q1CnKWgukx+BR88Ur9iul9dt0xytD16JlwssNJ3xGN+TXWtqOdz27bEbmyHh
+        QZT6knw+fQGgiWrZ/QEAAA==
+    http_version: 
+  recorded_at: Mon, 23 Oct 2017 12:11:47 GMT
+recorded_with: VCR 3.0.3

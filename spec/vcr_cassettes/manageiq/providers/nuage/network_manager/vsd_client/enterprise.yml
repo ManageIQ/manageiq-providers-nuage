@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/enterprises/6abac3ad-a05d-4b93-9556-4ba5010fb13b
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.3.5p376
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjo4ZDE2MTdjZC02ZjhlLTQyN2QtYTBjNy0wODI5MzAzYmRkNWI=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Sun, 22-Oct-2017 11:31:49
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 23 Oct 2017 11:31:49 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAG1UTXPTMBD9Lz5XM7Il2XJvaRJKhhYCabkwHFbSqnhGtTyy
+        nRIY/jtrpyn94CCP/bT79Hb11t9+Z/ZHE1zCNjtvxxDOsg7oY7g5dHhC6LMZ
+        DjsbJyhbf7xZf9l+2ezW2VkWoB9uOwcDuosDbUrhtS61Z9LYnMmqsKx2ec2U
+        EM56a3JE/jJtRY/sPFe8LKpaVYpzfpbZhDA0sX3alDmvS8nnzRbuJx0r3GOI
+        3T2pI0aHvU1NNyWdZMMeBkjPCzkiRAonxIdIB7V3m23/eYwTnk9HPINve3TZ
+        OWEQQny4SWNPot/F9ADJUcSSSumz8yGN+BiycHtoLbrPn3bL2PrmbkxwlPUs
+        6A0FEsm3bEGVXNBa0lrRmlr8jtYlrffZ98fkS+rKAxyuoYU7nOt/pMYWTMBF
+        14XGzmduMfmY7ic9/4u26TB37N/edXRzbze7xcXVepIQooWw2J0a5ho7ZUA6
+        fMXUz2UV/6npyHNMiQ8tJiJ1hbMCbMl4DpK8oRQjq5QMucHKi9JzrenAzYpi
+        SzBAwY4BV47MVAtWK1XSGyiec29yYbKTV6eMR6f+HDC1EP4hlu4r3mOaEF2R
+        N6mx75fbK4QeNy1F7yFQCXJ2OaYuNT1uU/RNwFlIrn0hUdbMca6ZrLFixkjD
+        jFNS+1wZLCfRCS02e7wew9AsydxXTT/LypRA8BZzhrUj+Vx6Zkqrma/qulSG
+        RqJSlN9j694m50Yp40AwgRVNE9fIwJEMYzgNE1opNVAy2SfaZhqmyxTH7gMe
+        1k9X+7wWp0qJZQkM84JqyWXFoEaaUO117WpZuUq+oFs/tWSHdkz0E5h5jJRo
+        jQBWOKSLdJVj2pDAAmqBDjwS/IKHFO2o05iuY9sMcb6MzHv6VWgumREoiIWa
+        AiByJrQoZeFKITgSy9VqsV3PvqYx9BB6PGKLcfgRU/Nr9vnrgIvLVzl/vv8F
+        mMxR1+oEAAA=
+    http_version: 
+  recorded_at: Mon, 23 Oct 2017 11:31:49 GMT
+recorded_with: VCR 3.0.3

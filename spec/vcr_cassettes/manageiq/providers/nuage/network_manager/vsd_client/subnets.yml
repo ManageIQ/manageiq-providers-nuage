@@ -1,0 +1,114 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/subnets
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.3.5p376
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Authorization:
+      - Basic eGxhYjo4ZDE2MTdjZC02ZjhlLTQyN2QtYTBjNy0wODI5MzAzYmRkNWI=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Sun, 22-Oct-2017 11:31:50
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Page:
+      - "-1"
+      X-Nuage-Filtertype:
+      - predicate
+      X-Nuage-Pagesize:
+      - '50'
+      X-Nuage-Count:
+      - '10'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      X-Nuage-Filter:
+      - name ISNOT 'BackHaulSubnet'
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Content-Encoding:
+      - gzip
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 23 Oct 2017 11:31:50 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        rmoDEFDKeIf/HwrkH/8G16kRQuQqAAA=
+    http_version: 
+  recorded_at: Mon, 23 Oct 2017 11:31:51 GMT
+recorded_with: VCR 3.0.3
