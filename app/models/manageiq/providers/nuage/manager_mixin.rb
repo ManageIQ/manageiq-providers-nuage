@@ -66,25 +66,26 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
   def event_monitor_options
     @event_monitor_options ||= begin
-      url = ''
-      amqp = connection_configuration_by_role('amqp')
-      if (endpoint = amqp.try(:endpoint))
-        url = "#{endpoint.hostname}:#{endpoint.port}"
-      end
-
-      if (authentication = amqp.try(:authentication))
-        url = "#{authentication.userid}:#{authentication.password}@#{url}"
-      end
-
       {
         :ems                       => self,
-        :url                       => url,
+        :urls                      => amqp_urls,
         :sasl_allow_insecure_mechs => true, # Only plain (insecure) mechanism currently supported
       }
     end
   end
 
   private
+
+  def amqp_urls
+    amqp_endpoints = endpoints.select { |e| e.role == 'amqp' || e.role.start_with?('amqp_fallback') }
+    amqp_auth      = authentications.detect { |a| a.authtype == 'amqp' }
+
+    amqp_endpoints.map do |e|
+      url = "#{e.hostname}:#{e.port}"
+      url = "#{amqp_auth.userid}:#{amqp_auth.password}@#{url}" if amqp_auth
+      url
+    end
+  end
 
   def verify_api_credentials(options = {})
     with_provider_connection(options) {}

@@ -5,14 +5,13 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler
     super()
     @options = options
 
-    @url = @options.delete(:url)
     @topics = @options.delete(:topics)
     @test_connection = @options.delete(:test_connection)
     @message_handler_block = @options.delete(:message_handler_block)
   end
 
   def on_start(event)
-    @conn = event.container.connect(@url, @options)
+    @conn = event.container.connect(@options)
     unless @test_connection
       @topics.each { |topic| event.container.create_receiver(@conn, :source => "topic://#{topic}") }
     end
@@ -28,7 +27,9 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler
   end
 
   def on_transport_error(_event)
-    raise MiqException::MiqHostError, "Transport error"
+    # Only raise error if single URL is used, as otherwise qpid will attempt
+    # to fallback to alternative URLs.
+    raise MiqException::MiqHostError, "Transport error" unless @options[:urls].length > 1
   end
 
   def on_message(event)
