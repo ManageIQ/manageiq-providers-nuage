@@ -14,6 +14,8 @@
   :nuage_network:
     :inventory_object_refresh: true
     :allow_targeted_refresh: true
+:product:
+  :nuage: true
 :workers:
   :worker_base:
     :event_catcher:
