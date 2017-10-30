@@ -132,4 +132,18 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
       expect(ManageIQ::Providers::Nuage::NetworkManager.event_monitor_class).to eq(ManageIQ::Providers::Nuage::NetworkManager::EventCatcher)
     end
   end
+
+  context '.auth_url' do
+    it 'builds insecure URL' do
+      expect(described_class.auth_url(nil, 'hostname', 8443, 'v5')).to eq('http://hostname:8443/nuage/api/v5')
+    end
+
+    it 'builds secure URL' do
+      expect(described_class.auth_url('ssl-with-validation', 'hostname', 8443, 'v5')).to eq('https://hostname:8443/nuage/api/v5')
+    end
+
+    it 'builds correct IPv6 URL' do
+      expect(described_class.auth_url('ssl-with-validation', '::1', 8443, 'v5')).to eq('https://[::1]:8443/nuage/api/v5')
+    end
+  end
 end
