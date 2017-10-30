@@ -8,7 +8,8 @@ module ManageIQ::Providers::Nuage::ManagerMixin
       api_port    = endpoint_opts[:api_port]
       # In case API port is represented as a string, ensure it has no whitespaces.
       api_port.strip! if api_port.kind_of?(String)
-      api_version = endpoint_opts[:api_version].strip
+      # v5_0 is the default API version unless it is given in the opts.
+      api_version = endpoint_opts[:api_version] ? endpoint_opts[:api_version].strip : 'v5_0'
 
       url = auth_url(protocol, hostname, api_port, api_version)
       _log.info("Connecting to Nuage VSD with url #{url}")

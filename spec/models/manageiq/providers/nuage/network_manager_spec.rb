@@ -13,13 +13,19 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     end
 
     it 'connects over insecure channel' do
-      expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("http://host:8000/nuage/api/", "testuser", "secret")
+      expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("http://host:8000/nuage/api/v5_0", "testuser", "secret")
       @ems.connect
     end
 
     it 'connects over secure channel' do
       @ems.security_protocol = 'ssl-with-validation'
-      expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("https://host:8000/nuage/api/", "testuser", "secret")
+      expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("https://host:8000/nuage/api/v5_0", "testuser", "secret")
+      @ems.connect
+    end
+
+    it 'uses correct API version' do
+      @ems.api_version = 'v4_0'
+      expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("http://host:8000/nuage/api/v4_0", "testuser", "secret")
       @ems.connect
     end
   end
