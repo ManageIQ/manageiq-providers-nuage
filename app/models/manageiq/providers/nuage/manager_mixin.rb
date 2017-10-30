@@ -5,6 +5,11 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     def raw_connect(auth_url, username, password)
       ManageIQ::Providers::Nuage::NetworkManager::VsdClient.new(auth_url, username, password)
     end
+
+    def auth_url(protocol, server, port, version)
+      scheme = protocol == "ssl-with-validation" ? "https" : "http"
+      "#{scheme}://#{server}:#{port}/nuage/api/#{version}"
+    end
   end
 
   def connect(options = {})
@@ -89,7 +94,6 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   end
 
   def auth_url(protocol, server, port, version)
-    scheme = protocol == "ssl-with-validation" ? "https" : "http"
-    "#{scheme}://#{server}:#{port}/nuage/api/#{version}"
+    self.class.auth_url(protocol, server, port, version)
   end
 end
