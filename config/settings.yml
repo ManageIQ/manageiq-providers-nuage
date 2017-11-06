@@ -22,3 +22,6 @@
       :event_catcher_nuage_network:
         :topics:
           - topic/CNAMessages
+        :poll: 15.seconds
+        :qpid_rest_interval: 15.seconds
+        :qpid_rest_time: 15.seconds
