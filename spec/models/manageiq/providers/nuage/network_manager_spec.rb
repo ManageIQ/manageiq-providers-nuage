@@ -113,6 +113,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
       allow(@ems).to receive(:with_provider_connection).and_raise(exception)
       expect { @ems.verify_credentials }.to raise_error(MiqException::MiqHostError, /invalid host/)
     end
+
+    it 'handles Net::HTTPBadResponse' do
+      exception = Net::HTTPBadResponse.new
+      allow(@ems).to receive(:with_provider_connection).and_raise(exception)
+      expect { @ems.verify_credentials }.to raise_error(MiqException::MiqEVMLoginError, /Login failed due to a bad security protocol, hostname or port./)
+    end
   end
 
   context '#authentications_to_validate' do

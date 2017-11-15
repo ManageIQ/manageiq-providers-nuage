@@ -35,6 +35,8 @@ module ManageIQ::Providers::Nuage::ManagerMixin
         MiqException::MiqHostError.new("Socket error: #{err.message}")
       when MiqException::MiqInvalidCredentialsError, MiqException::MiqHostError
         err
+      when Net::HTTPBadResponse
+        MiqException::MiqEVMLoginError.new("Login failed due to a bad security protocol, hostname or port.")
       else
         MiqException::MiqEVMLoginError.new("Unexpected response returned from system: #{err.message}")
       end
