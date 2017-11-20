@@ -17,6 +17,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
       @ems.connect
     end
 
+    it 'connects over secure channel without validation' do
+      @ems.security_protocol = 'ssl'
+      expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("https://host:8000/nuage/api/v5_0", "testuser", "secret")
+      @ems.connect
+    end
+
     it 'connects over secure channel' do
       @ems.security_protocol = 'ssl-with-validation'
       expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("https://host:8000/nuage/api/v5_0", "testuser", "secret")
@@ -142,6 +148,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
   context '.auth_url' do
     it 'builds insecure URL' do
       expect(described_class.auth_url(nil, 'hostname', 8443, 'v5')).to eq('http://hostname:8443/nuage/api/v5')
+    end
+
+    it 'builds insecure ssl URL' do
+      expect(described_class.auth_url('ssl', 'hostname', 8443, 'v5')).to eq('https://hostname:8443/nuage/api/v5')
     end
 
     it 'builds secure URL' do
