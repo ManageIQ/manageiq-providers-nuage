@@ -13,12 +13,40 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
       url = auth_url(protocol, hostname, api_port, api_version)
       _log.info("Connecting to Nuage VSD with url #{url}")
-      ManageIQ::Providers::Nuage::NetworkManager::VsdClient.new(url, username, password)
+
+      connection_rescue_block do
+        ManageIQ::Providers::Nuage::NetworkManager::VsdClient.new(url, username, password)
+      end
     end
 
     def auth_url(protocol, server, port, version)
       scheme = protocol == "ssl-with-validation" ? "https" : "http"
       URI::Generic.build(:scheme => scheme, :host => server, :port => port, :path => "/nuage/api/#{version}").to_s
+    end
+
+    def translate_exception(err)
+      require 'excon'
+      case err
+      when Excon::Errors::Unauthorized
+        MiqException::MiqInvalidCredentialsError.new("Login failed due to a bad username or password.")
+      when Excon::Errors::Timeout
+        MiqException::MiqUnreachableError.new("Login attempt timed out")
+      when Excon::Errors::SocketError
+        MiqException::MiqHostError.new("Socket error: #{err.message}")
+      when MiqException::MiqInvalidCredentialsError, MiqException::MiqHostError
+        err
+      else
+        MiqException::MiqEVMLoginError.new("Unexpected response returned from system: #{err.message}")
+      end
+    end
+
+    def connection_rescue_block
+      yield
+    rescue => err
+      miq_exception = translate_exception(err)
+
+      _log.error("Error Class=#{err.class.name}, Message=#{err.message}")
+      raise miq_exception
     end
   end
 
@@ -34,22 +62,6 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
     endpoint_opts = {:protocol => protocol, :hostname => server, :api_port => port, :api_version => version}
     self.class.raw_connect(username, password, endpoint_opts)
-  end
-
-  def translate_exception(err)
-    require 'excon'
-    case err
-    when Excon::Errors::Unauthorized
-      MiqException::MiqInvalidCredentialsError.new "Login failed due to a bad username or password."
-    when Excon::Errors::Timeout
-      MiqException::MiqUnreachableError.new "Login attempt timed out"
-    when Excon::Errors::SocketError
-      MiqException::MiqHostError.new "Socket error: #{err.message}"
-    when MiqException::MiqInvalidCredentialsError, MiqException::MiqHostError
-      err
-    else
-      MiqException::MiqEVMLoginError.new "Unexpected response returned from system: #{err.message}"
-    end
   end
 
   def verify_credentials(auth_type = nil, options = {})
@@ -89,14 +101,10 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   end
 
   def verify_api_credentials(options = {})
-    with_provider_connection(options) {}
-    true
-  rescue => err
-    miq_exception = translate_exception(err)
-    raise unless miq_exception
-
-    _log.error("Error Class=#{err.class.name}, Message=#{err.message}")
-    raise miq_exception
+    self.class.connection_rescue_block do
+      with_provider_connection(options) {}
+      true
+    end
   end
 
   def verify_amqp_credentials(_options = {})
