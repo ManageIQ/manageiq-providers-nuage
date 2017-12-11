@@ -73,6 +73,21 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
         expect { @ems.verify_credentials(:amqp) }.to raise_error(StandardError)
       end
     end
+
+    context 'credentials encoding' do
+      before do
+        creds = {}
+        creds[:amqp] = {:userid => "amqp_user@!$&", :password => "amqp_password@!$&"}
+        @ems.endpoints << Endpoint.create(:role => 'amqp', :hostname => 'amqp_hostname', :port => '5672')
+        @ems.update_authentication(creds, :save => false)
+      end
+
+      it 'encodes username and password' do
+        opts = @ems.event_monitor_options
+        hostname = opts[:urls].first
+        expect(hostname).to eq('amqp_user%40%21%24%26:amqp_password%40%21%24%26@amqp_hostname:5672')
+      end
+    end
   end
 
   context 'translate_exception' do
