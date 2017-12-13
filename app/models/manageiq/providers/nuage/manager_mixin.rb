@@ -20,7 +20,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     end
 
     def auth_url(protocol, server, port, version)
-      scheme = protocol == "ssl-with-validation" ? "https" : "http"
+      scheme = %w(ssl ssl-with-validation).include?(protocol) ? "https" : "http"
       URI::Generic.build(:scheme => scheme, :host => server, :port => port, :path => "/nuage/api/#{version}").to_s
     end
 
