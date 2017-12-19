@@ -17,6 +17,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner < ManageI
     event_monitor_handle.start do |event|
       event_monitor_running
       @queue.enq(event)
+      sleep_poll_normal
     end
   ensure
     stop_event_monitor
