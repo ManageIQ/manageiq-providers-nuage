@@ -90,7 +90,7 @@ module ManageIQ::Providers
     def get_list(url)
       response = @rest_call.get("#{@server}/#{url}")
       return unless response.code == 200
-      return if response.body.empty?
+      return [] if response.body.empty?
       JSON.parse(response.body)
     end
 
