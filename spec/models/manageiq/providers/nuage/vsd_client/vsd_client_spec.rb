@@ -15,17 +15,17 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     let(:response_empty)    { double('Response', :code => 200, :body => '') }
     let(:response_simplest) { double('Response', :code => 200, :body => '[]') }
 
-    it "response code not 200" do
+    it "response code not 200 should return nil" do
       response(response_404)
       expect(client.send(:get_list, 'some-url')).to be_nil
     end
 
-    it "response body empty" do
+    it "response body empty should return empty list" do
       response(response_empty)
-      expect(client.send(:get_list, 'some-url')).to be_nil
+      expect(client.send(:get_list, 'some-url')).to eq([])
     end
 
-    it "response body empty list" do
+    it "response body empty list should return empty list" do
       response(response_simplest)
       expect(client.send(:get_list, 'some-url')).to eq([])
     end
