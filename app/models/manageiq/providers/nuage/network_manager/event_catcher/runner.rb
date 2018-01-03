@@ -22,6 +22,15 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner < ManageI
     stop_event_monitor
   end
 
+  def do_work_loop
+    super if amqp?
+  end
+
+  def start_event_monitor
+    tid = super if amqp?
+    return tid unless tid.nil?
+  end
+
   def stop_event_monitor
     @event_monitor_handle.try!(:stop)
   ensure
@@ -31,5 +40,9 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner < ManageI
   def queue_event(event)
     event_hash = ManageIQ::Providers::Nuage::NetworkManager::EventParser.event_to_hash(event, @cfg[:ems_id])
     EmsEvent.add_queue('add', @cfg[:ems_id], event_hash)
+  end
+
+  def amqp?
+    @ems.event_monitor_options[:urls].any?
   end
 end

@@ -209,4 +209,17 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
                                      'amqp_user:amqp_pass@amqp_hostname2:5672')
     end
   end
+
+  context 'no amqp endpoints defined' do
+    before(:each) do
+      @ems = FactoryGirl.build(:ems_nuage_network, :hostname => "host", :ipaddress => "::1")
+      @creds = {:amqp => {:userid => "amqp_user", :password => "amqp_pass"}}
+      @ems.update_authentication(@creds, :save => false)
+    end
+
+    it 'options without amqp urls' do
+      opts = @ems.event_monitor_options
+      expect(opts).to have_attributes(:urls => [])
+    end
+  end
 end

@@ -53,7 +53,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   end
 
   def connect(options = {})
-    raise "no credentials defined" if self.missing_credentials?(options[:auth_type])
+    raise "no credentials defined" if missing_credentials?(options[:auth_type])
 
     username = options[:user] || authentication_userid(options[:auth_type])
     password = options[:pass] || authentication_password(options[:auth_type])
@@ -95,11 +95,15 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     amqp_endpoints = endpoints.select { |e| e.role == 'amqp' || e.role.start_with?('amqp_fallback') }
     amqp_auth      = authentications.detect { |a| a.authtype == 'amqp' }
 
-    amqp_endpoints.map do |e|
-      url = "#{e.hostname}:#{e.port}"
-      url = "#{ERB::Util.url_encode(amqp_auth.userid)}:#{ERB::Util.url_encode(amqp_auth.password)}@#{url}" if amqp_auth
-      url
+    amqp_urls = amqp_endpoints.map do |e|
+      amqp_endpoint_to_url(e, amqp_auth)
     end
+    amqp_urls.compact
+  end
+
+  def amqp_endpoint_to_url(endpoint, amqp_auth)
+    url = "#{endpoint.hostname}:#{endpoint.port}" if endpoint.hostname && endpoint.port
+    "#{ERB::Util.url_encode(amqp_auth.userid)}:#{ERB::Util.url_encode(amqp_auth.password)}@#{url}" if amqp_auth && url
   end
 
   def verify_api_credentials(options = {})
