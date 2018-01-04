@@ -97,7 +97,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
     amqp_endpoints.map do |e|
       url = "#{e.hostname}:#{e.port}"
-      url = "#{amqp_auth.userid}:#{amqp_auth.password}@#{url}" if amqp_auth
+      url = "#{ERB::Util.url_encode(amqp_auth.userid)}:#{ERB::Util.url_encode(amqp_auth.password)}@#{url}" if amqp_auth
       url
     end
   end
