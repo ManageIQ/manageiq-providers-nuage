@@ -54,7 +54,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     context 'AMQP connection' do
       before do
         @conn = double
-        allow(Qpid::Proton::Reactor::Container).to receive(:new).and_return(@conn)
+        allow(Qpid::Proton::Container).to receive(:new).and_return(@conn)
 
         creds = {}
         creds[:amqp] = {:userid => "amqp_user", :password => "amqp_password"}
@@ -71,21 +71,6 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
       it 'handles connection errors' do
         allow(@conn).to receive(:run).and_raise(StandardError, 'connection error')
         expect { @ems.verify_credentials(:amqp) }.to raise_error(StandardError)
-      end
-    end
-
-    context 'credentials encoding' do
-      before do
-        creds = {}
-        creds[:amqp] = {:userid => "amqp_user@!$&", :password => "amqp_password@!$&"}
-        @ems.endpoints << Endpoint.create(:role => 'amqp', :hostname => 'amqp_hostname', :port => '5672')
-        @ems.update_authentication(creds, :save => false)
-      end
-
-      it 'encodes username and password' do
-        opts = @ems.event_monitor_options
-        hostname = opts[:urls].first
-        expect(hostname).to eq('amqp_user%40%21%24%26:amqp_password%40%21%24%26@amqp_hostname:5672')
       end
     end
   end
@@ -195,7 +180,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     it 'returns options with a single endpoint' do
       opts = @ems.event_monitor_options
 
-      expect(opts).to have_attributes(:urls => ['amqp_user:amqp_pass@amqp_hostname:5672'])
+      expect(opts).to have_attributes(
+        :urls     => ['amqp_hostname:5672'],
+        :user     => 'amqp_user',
+        :password => 'amqp_pass'
+      )
     end
 
     it 'returns options with a fallback URLs' do
@@ -204,9 +193,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
 
       opts = @ems.event_monitor_options
 
-      expect(opts[:urls]).to include('amqp_user:amqp_pass@amqp_hostname:5672',
-                                     'amqp_user:amqp_pass@amqp_hostname1:5672',
-                                     'amqp_user:amqp_pass@amqp_hostname2:5672')
+      expect(opts[:urls]).to include('amqp_hostname:5672',
+                                     'amqp_hostname1:5672',
+                                     'amqp_hostname2:5672')
     end
   end
 end
