@@ -33,7 +33,11 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler
   end
 
   def on_message(event)
-    @message_handler_block.call(JSON.parse(event.message.body)) if @message_handler_block
+    @message_handler_block&.call(JSON.parse(event.message.body))
+
+    if event.receiver.queued.zero? && event.receiver.drained.zero?
+      event.connection.close
+    end
   end
 
   def stop
