@@ -8,7 +8,8 @@ module ManageIQ::Providers::Nuage::NetworkManager::EventParser
       :message    => event_type,
       :vm_ems_ref => nil,
       :full_data  => event.to_hash,
-      :ems_id     => ems_id
+      :ems_id     => ems_id,
+      :ems_ref    => event["requestID"].presence || "random-#{SecureRandom.uuid}"
     }
   end
 end
