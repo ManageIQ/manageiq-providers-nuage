@@ -79,6 +79,10 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     end
   end
 
+  def credentials_changed?
+    true
+  end
+
   def event_monitor_options
     @event_monitor_options ||= begin
       {
