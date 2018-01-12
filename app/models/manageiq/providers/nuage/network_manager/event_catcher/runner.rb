@@ -14,9 +14,9 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner < ManageI
 
   # Start monitoring for events. This method blocks forever until stop_event_monitor is called.
   def monitor_events
-    event_monitor_handle.start do |event|
+    event_monitor_handle.start_batch do |events|
       event_monitor_running
-      @queue.enq(event)
+      @queue.enq(events)
     end
   ensure
     stop_event_monitor
