@@ -22,3 +22,4 @@
       :event_catcher_nuage_network:
         :topics:
           - topic/CNAMessages
+        :amqp_connect_timeout: 5.seconds

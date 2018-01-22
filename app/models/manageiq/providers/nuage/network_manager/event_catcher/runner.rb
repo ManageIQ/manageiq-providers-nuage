@@ -3,6 +3,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner < ManageI
     unless @event_monitor_handle
       options = @ems.event_monitor_options
       options[:topics] = worker_settings[:topics]
+      options[:amqp_connect_timeout] = worker_settings[:amqp_connect_timeout]
       @event_monitor_handle = ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream.new(options)
     end
     @event_monitor_handle
@@ -23,7 +24,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner < ManageI
   end
 
   def stop_event_monitor
-    @event_monitor_handle.try!(:stop)
+    @event_monitor_handle&.stop
   ensure
     reset_event_monitor_handle
   end
