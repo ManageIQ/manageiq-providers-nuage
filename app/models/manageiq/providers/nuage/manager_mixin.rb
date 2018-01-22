@@ -81,10 +81,13 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
   def event_monitor_options
     @event_monitor_options ||= begin
+      amqp_auth = authentications.detect { |a| a.authtype == 'amqp' }
       {
         :ems                       => self,
         :urls                      => amqp_urls,
         :sasl_allow_insecure_mechs => true, # Only plain (insecure) mechanism currently supported
+        :user                      => amqp_auth.userid,
+        :password                  => amqp_auth.password
       }
     end
   end
@@ -93,12 +96,8 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
   def amqp_urls
     amqp_endpoints = endpoints.select { |e| e.role == 'amqp' || e.role.start_with?('amqp_fallback') }
-    amqp_auth      = authentications.detect { |a| a.authtype == 'amqp' }
-
     amqp_endpoints.map do |e|
-      url = "#{e.hostname}:#{e.port}"
-      url = "#{ERB::Util.url_encode(amqp_auth.userid)}:#{ERB::Util.url_encode(amqp_auth.password)}@#{url}" if amqp_auth
-      url
+      "#{e.hostname}:#{e.port}"
     end
   end
 
