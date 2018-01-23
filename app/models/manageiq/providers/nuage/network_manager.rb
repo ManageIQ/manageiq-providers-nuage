@@ -40,4 +40,8 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   def self.event_monitor_class
     ManageIQ::Providers::Nuage::NetworkManager::EventCatcher
   end
+
+  def name
+    self[:name]
+  end
 end

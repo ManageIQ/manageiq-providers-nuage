@@ -209,4 +209,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
                                      'amqp_user:amqp_pass@amqp_hostname2:5672')
     end
   end
+
+  it '.name' do
+    ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :name => 'nuage')
+    expect(ems.name).to eq('nuage')
+  end
 end
