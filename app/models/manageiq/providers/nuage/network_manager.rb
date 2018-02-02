@@ -44,4 +44,13 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   def name
     self[:name]
   end
+
+  def worker_wanted?(worker_class)
+    case worker_class
+    when event_monitor_class.name
+      connection_configurations.amqp&.endpoint&.hostname&.present?
+    else
+      true
+    end
+  end
 end
