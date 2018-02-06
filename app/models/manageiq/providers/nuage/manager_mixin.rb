@@ -111,4 +111,15 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   def verify_amqp_credentials(_options = {})
     ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream.test_amqp_connection(event_monitor_options)
   end
+
+  def stop_event_monitor_queue_on_change
+    if event_monitor_class && !new_record? && (authentications.detect(&:changed?) || endpoints.detect(&:changed?))
+      _log.info("EMS: [#{name}], Credentials or endpoints have changed, stopping Event Monitor. It will be restarted by the WorkerMonitor.")
+      stop_event_monitor_queue
+    end
+  end
+
+  def stop_event_monitor_queue_on_credential_change
+    stop_event_monitor_queue_on_change
+  end
 end
