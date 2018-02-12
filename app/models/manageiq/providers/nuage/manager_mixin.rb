@@ -12,7 +12,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
       api_version = endpoint_opts[:api_version] ? endpoint_opts[:api_version].strip : 'v5_0'
 
       url = auth_url(protocol, hostname, api_port, api_version)
-      _log.info("Connecting to Nuage VSD with url #{url}")
+      $nuage_log.info("Connecting to Nuage VSD with url #{url}")
 
       connection_rescue_block do
         ManageIQ::Providers::Nuage::NetworkManager::VsdClient.new(url, username, password)
@@ -47,7 +47,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     rescue => err
       miq_exception = translate_exception(err)
 
-      _log.error("Error Class=#{err.class.name}, Message=#{err.message}")
+      $nuage_log.error("Error Class=#{err.class.name}, Message=#{err.message}")
       raise miq_exception
     end
   end
@@ -114,7 +114,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
   def stop_event_monitor_queue_on_change
     if event_monitor_class && !new_record? && (authentications.detect(&:changed?) || endpoints.detect(&:changed?))
-      _log.info("EMS: [#{name}], Credentials or endpoints have changed, stopping Event Monitor. It will be restarted by the WorkerMonitor.")
+      $nuage_log.info("EMS: [#{name}], Credentials or endpoints have changed, stopping Event Monitor. It will be restarted by the WorkerMonitor.")
       stop_event_monitor_queue
     end
   end

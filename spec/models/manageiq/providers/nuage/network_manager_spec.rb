@@ -86,7 +86,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     it "preserves and logs message for unknown exceptions" do
       allow(@ems).to receive(:with_provider_connection).and_raise(StandardError, "unlikely")
 
-      expect($log).to receive(:error).with(/unlikely/)
+      expect($nuage_log).to receive(:error).with(/unlikely/)
       expect { @ems.verify_credentials }.to raise_error(MiqException::MiqEVMLoginError, /Unexpected.*unlikely/)
     end
 
