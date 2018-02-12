@@ -27,7 +27,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
   end
 
   def start(&message_handler_block)
-    _log.debug("#{self.class.log_prefix} Opening amqp connection using options #{@options}")
+    $nuage_log.debug("#{self.class.log_prefix} Opening amqp connection using options #{@options}")
     @options[:message_handler_block] = message_handler_block if message_handler_block
     with_fallback_urls(@options[:urls]) do
       connection.run
@@ -49,12 +49,12 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
   def with_fallback_urls(urls)
     urls.each_with_index do |url, idx|
       endpoint_str = "ActiveMQ endpoint #{idx + 1}/#{@options[:urls].count} (#{url})"
-      _log.info("#{self.class.log_prefix} Connecting to #{endpoint_str}")
+      $nuage_log.info("#{self.class.log_prefix} Connecting to #{endpoint_str}")
       begin
         @options[:url] = url
         yield
       rescue MiqException::MiqHostError, Errno::ECONNREFUSED, SocketError => err
-        _log.info("#{self.class.log_prefix} #{endpoint_str} errored: #{err}")
+        $nuage_log.info("#{self.class.log_prefix} #{endpoint_str} errored: #{err}")
         stop
         reset_connection
       end

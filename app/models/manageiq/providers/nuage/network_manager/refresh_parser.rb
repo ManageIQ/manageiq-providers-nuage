@@ -21,10 +21,10 @@ module ManageIQ::Providers
     def ems_inv_to_hashes
       log_header = "MIQ(#{self.class.name}.#{__method__}) Collecting data for EMS name: [#{@ems.name}] id: [#{@ems.id}]"
 
-      _log.info("#{log_header}...")
+      $nuage_log.info("#{log_header}...")
       get_enterprises
       get_policy_groups
-      _log.info(@data)
+      $nuage_log.info(@data)
       @data
     end
 
@@ -119,7 +119,7 @@ module ManageIQ::Providers
 
     def parse_policy_group(pg)
       uid = pg['ID']
-      _log.info(@domains[pg['parentID']][2])
+      $nuage_log.info(@domains[pg['parentID']][2])
       new_result = {
         :type          => self.class.security_group_type,
         :ems_ref       => uid,

@@ -14,7 +14,7 @@ module ManageIQ::Providers
         @enterprise_id = data
         return
       end
-      _log.error('VSD Authentication failed')
+      $nuage_log.error('VSD Authentication failed')
     end
 
     def get_enterprises
