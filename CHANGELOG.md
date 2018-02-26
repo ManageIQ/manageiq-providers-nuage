@@ -4,12 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+
+## Unreleased as of Sprint 79 ending 2018-02-12
+
+### Added
+- Redirect logs into log/nuage.log file [(#66)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/66)
+- Add `stop_event_monitor_queue_on_change` method [(#65)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/65)
+
 ## Gaprindashvili-1 - Released 2018-01-31
 
 ### Added
 - Implement graph inventory refresh for network manager [(#13)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/13)
 - Provide extensive unit tests for legacy refresher [(#12)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/12)
 - Install qpid_proton for Travis [(#11)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/11)
+- Assign :ems_ref to the event [(#59)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/59)
+- Upgrade qpid_proton related stuff to support v0.19.0 [(#58)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/58)
 
 ### Fixed
 - Fix exception handing for credential validation on raw_connect [(#40)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/40)
@@ -22,24 +31,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Fixed
 - Add name method [(#62)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/62)
-- Upgrade qpid_proton related stuff to support v0.19.0 [(#58)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/58)
-
-## Unreleased as of Sprint 77 ending 2018-01-15
-
-### Added
-- Assign :ems_ref to the event [(#59)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/59)
-
-## Unreleased as of Sprint 76 ending 2018-01-01
-
-### Fixed
-- Return empy list instead of nil for responses with empty bodies [(#53)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/53)
-- Fix protocol selection when adding a new nuage provider [(#45)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/45)
-- Human readable error when selecting wrong security protocol [(#43)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/43)
-
-## Unreleased as of Sprint 74 ending 2017-11-27
-
-### Fixed
-- Fix exception handing for credential validation on raw_connect [(#40)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/40)
 
 ## Unreleased as of Sprint 72 ending 2017-10-30
 
