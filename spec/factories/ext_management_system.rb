@@ -27,6 +27,7 @@ FactoryGirl.define do
     after :create do |x|
       x.authentications << FactoryGirl.create(:authentication)
       x.authentications << FactoryGirl.create(:authentication, :authtype => "amqp")
+      x.endpoints       << FactoryGirl.create(:endpoint, :role => "amqp")
     end
   end
 end
