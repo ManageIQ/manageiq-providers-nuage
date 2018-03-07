@@ -203,4 +203,21 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :name => 'nuage')
     expect(ems.name).to eq('nuage')
   end
+
+  describe 'worker_wanted?' do
+    let(:ems) { FactoryGirl.create(:ems_nuage_network) }
+
+    it 'without amqp' do
+      expect(ems.worker_wanted?(described_class::EventCatcher.name)).to be_falsey
+    end
+
+    it 'with amqp' do
+      ems.endpoints << Endpoint.create(:role => 'amqp', :hostname => 'hostname')
+      expect(ems.worker_wanted?(described_class::EventCatcher.name)).to be_truthy
+    end
+
+    it 'truthy for non-handled worker class' do
+      expect(ems.worker_wanted?('worker::class')).to be_truthy
+    end
+  end
 end
