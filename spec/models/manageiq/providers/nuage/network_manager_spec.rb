@@ -180,7 +180,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     it 'returns options with a single endpoint' do
       opts = @ems.event_monitor_options
 
-      expect(opts).to have_attributes(
+      expect(opts).to include(
         :urls     => ['amqp_hostname:5672'],
         :user     => 'amqp_user',
         :password => 'amqp_pass'
