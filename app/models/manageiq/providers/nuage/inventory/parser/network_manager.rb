@@ -9,7 +9,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
 
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
-      extra = map_extra_attributes(subnet['parentID'])
+      extra = map_extra_attributes(subnet['parentID']) || {}
       persister.cloud_subnets.find_or_build(subnet['ID']).assign_attributes(
         :name             => subnet['name'],
         :cidr             => to_cidr(subnet['address'], subnet['netmask']),
@@ -25,7 +25,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
   def security_groups
     collector.security_groups.each do |sg|
       domain_id = sg['parentID']
-      domain = collector.domain(domain_id)
+      domain = collector.domain(domain_id) || {}
 
       persister.security_groups.find_or_build(sg['ID']).assign_attributes(
         :name          => sg['name'],
@@ -45,10 +45,13 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
 
   def map_extra_attributes(zone_id)
     zone = collector.zone(zone_id)
+    return unless zone
     domain_id = zone['parentID']
     domain = collector.domain(domain_id)
+    return unless domain
     network_group_id = domain['parentID']
     network_group = collector.network_group(network_group_id)
+    return unless network_group
 
     {
       "enterprise_name" => network_group['name'],

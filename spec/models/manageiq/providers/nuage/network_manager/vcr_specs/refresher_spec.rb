@@ -50,18 +50,6 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(described_class.ems_type).to eq(:nuage_network)
   end
 
-  describe ".to_cidr" do
-    let(:parser) { ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager.new }
-
-    it "normal" do
-      expect(parser.send(:to_cidr, '192.168.0.0', '255.255.255.0')).to eq('192.168.0.0/24')
-    end
-
-    it "address and netmask nil" do
-      expect(parser.send(:to_cidr, nil, nil)).to be_nil
-    end
-  end
-
   describe "refresh" do
     let(:network_group_ref1) { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
     let(:network_group_ref2) { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
