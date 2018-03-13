@@ -41,7 +41,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
   def connection
     unless @connection
       @handler = ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler.new(@options.clone)
-      @connection = Qpid::Proton::Container.new(@handler)
+      @connection = ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::QpidContainer.new(@handler)
     end
     @connection
   end
