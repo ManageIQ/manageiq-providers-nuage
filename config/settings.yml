@@ -24,3 +24,4 @@
           - topic/CNAMessages
           - topic/CNAAlarms
         :amqp_connect_timeout: 5.seconds
+        :amqp_idle_timeout: 60.seconds

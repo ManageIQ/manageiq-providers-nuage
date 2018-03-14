@@ -4,6 +4,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner < ManageI
       options = @ems.event_monitor_options
       options[:topics] = worker_settings[:topics]
       options[:amqp_connect_timeout] = worker_settings[:amqp_connect_timeout]
+      options[:idle_timeout] = worker_settings[:amqp_idle_timeout]
       @event_monitor_handle = ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream.new(options)
     end
     @event_monitor_handle

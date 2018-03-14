@@ -17,7 +17,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
   end
 
   def self.log_prefix
-    "MIQ(#{self.class.name})"
+    "MIQ(#{self.name})"
   end
 
   def initialize(options = {})
@@ -30,7 +30,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
     $nuage_log.debug("#{self.class.log_prefix} Opening amqp connection using options #{@options}")
     @options[:message_handler_block] = message_handler_block if message_handler_block
     with_fallback_urls(@options[:urls]) do
-      connection.run
+      run_with_idle_timeout_ignored
     end
   end
 
@@ -60,6 +60,23 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
       end
     end
     false
+  end
+
+  # TODO: Don't ignore idle timeout error when following bug in qpid_proton is fixed:
+  # https://bugzilla.redhat.com/show_bug.cgi?id=1418026
+  # Until then, we don't want this error to keep restarting our event catcher in case there are no events emitted
+  # for 16 seconds.
+  def run_with_idle_timeout_ignored
+    loop do
+      begin
+        connection.run
+      rescue MiqException::MiqHostError => e
+        raise unless e.message.include?('local-idle-timeout expired')
+        $nuage_log.debug("#{self.class.log_prefix} Silently reconnect on 'local-idle-timeout expired'")
+        stop
+        reset_connection
+      end
+    end
   end
 
   def reset_connection
