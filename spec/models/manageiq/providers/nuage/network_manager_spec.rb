@@ -53,7 +53,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
 
     context 'AMQP connection' do
       before do
-        @conn = double
+        @conn = double('connection', :handler => handler)
         allow(Qpid::Proton::Container).to receive(:new).and_return(@conn)
 
         creds = {}
@@ -62,9 +62,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
         @ems.update_authentication(creds, :save => false)
       end
 
+      let(:handler) { double('handler') }
+
       it 'verifies AMQP credentials' do
         allow(@conn).to receive(:run).and_return(true)
-
+        expect(handler).to receive(:raise_for_error)
         expect(@ems.verify_credentials(:amqp)).to be_truthy
       end
 
