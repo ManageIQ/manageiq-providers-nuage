@@ -10,6 +10,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
     stream = new(options)
     ok = stream.with_fallback_urls(options[:urls]) do
       stream.connection.run
+      stream.connection.handler.raise_for_error
       return true
     end
     raise MiqException::MiqHostError, "Could not connect to any of the #{options[:urls].count} AMQP hostnames" unless ok
@@ -17,7 +18,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
   end
 
   def self.log_prefix
-    "MIQ(#{self.class.name})"
+    "MIQ(#{name})"
   end
 
   def initialize(options = {})
@@ -31,6 +32,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
     @options[:message_handler_block] = message_handler_block if message_handler_block
     with_fallback_urls(@options[:urls]) do
       connection.run
+      connection.handler.raise_for_error
     end
   end
 
@@ -53,7 +55,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream
       begin
         @options[:url] = url
         yield
-      rescue MiqException::MiqHostError, Errno::ECONNREFUSED, SocketError => err
+      rescue MiqException::Error => err
         $nuage_log.info("#{self.class.log_prefix} #{endpoint_str} errored: #{err}")
         stop
         reset_connection
