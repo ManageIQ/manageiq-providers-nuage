@@ -1,0 +1,38 @@
+{
+  "userName": null,
+  "enterpriseName": null,
+  "type": "DELETE",
+  "entityType": "alarm",
+  "eventReceivedTime": 1481064781892,
+  "entities": [
+    {
+      "children": null,
+      "parentType": "nsgateway",
+      "entityScope": "ENTERPRISE",
+      "lastUpdatedBy": "43f8868f-4bc1-472c-9d19-→533dcfcb1ee0",
+      "lastUpdatedDate": 1481064781000,
+      "creationDate": 1481064781000,
+      "name": "nsg[NSG-Ottawa:213.50.60.102] vsc[vsc1:100.100.100.21]",
+      "reason": "Gateway with system-id [213.50.60.102] is disconnected from controller [vsc1:100.100.100.21]",
+      "description": "Gateway with system-id [NSG-Ottawa] is disconnected from controller [213.50.60.102:vsc1]",
+      "alarmTimeStamp": 1481064781785,
+      "acknowledged": false,
+      "alarmId": "NSG-Ottawa:213.50.60.102:vsc1:100.100.100.21:DISCONNECTED",
+      "numberOfOccurances": 1,
+      "alarmedObjectType": "nsgateway",
+      "alarmedObjectId": "05117fac-eac2-4ed7-b421-e70fcb42daee",
+      "severity": "MAJOR",
+      "errorCondition": 4713,
+      "incrementNumberOfOccurances": false,
+      "enterpriseId": "40d29496-c5ef-41c6-aa6b-ef1cd8655457",
+      "owner": "43f8868f-4bc1-472c-9d19-533dcfcb1ee0",
+      "ID": "cfea6f5c-7dfb-4b0d-bf23-67e14bcfe067",
+      "parentID": "05117fac-eac2-4ed7-b421-e70fcb42daee",
+      "externalID": null
+    }
+  ],
+  "diffMap": null,
+  "ignoreDiffInMediationEvents": false,
+  "updateMechanism": "DEFAULT",
+  "writeToDb": true
+}
