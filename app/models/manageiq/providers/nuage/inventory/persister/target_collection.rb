@@ -1,36 +1,13 @@
 class ManageIQ::Providers::Nuage::Inventory::Persister::TargetCollection < ManageIQ::Providers::Nuage::Inventory::Persister
+  include ManageIQ::Providers::Nuage::Inventory::Persister::Shared::NetworkCollections
+
   def initialize_inventory_collections
-    add_inventory_collections_with_references(
-      network,
-      %i(cloud_tenants network_routers cloud_subnets security_groups),
-      :parent => manager
-    )
+    initialize_network_inventory_collections
   end
 
-  private
+  protected
 
-  def add_inventory_collections_with_references(inventory_collections_data, names, options = {})
-    names.each do |name|
-      add_inventory_collection_with_references(inventory_collections_data, name, references(name), options)
-    end
-  end
-
-  def add_inventory_collection_with_references(inventory_collections_data, name, manager_refs, options = {})
-    options = inventory_collections_data.send(
-      name,
-      :manager_uuids => manager_refs,
-      :strategy      => strategy,
-      :targeted      => true
-    ).merge(options)
-
-    add_inventory_collection(options)
-  end
-
-  def references(collection)
-    target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a) || []
-  end
-
-  def targeted
+  def targeted?
     true
   end
 

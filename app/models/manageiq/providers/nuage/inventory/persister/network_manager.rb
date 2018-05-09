@@ -1,8 +1,7 @@
 class ManageIQ::Providers::Nuage::Inventory::Persister::NetworkManager < ManageIQ::Providers::Nuage::Inventory::Persister
+  include ManageIQ::Providers::Nuage::Inventory::Persister::Shared::NetworkCollections
+
   def initialize_inventory_collections
-    add_inventory_collections(
-      network,
-      %i(cloud_tenants network_routers cloud_subnets security_groups)
-    )
+    initialize_network_inventory_collections
   end
 end
