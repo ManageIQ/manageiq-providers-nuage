@@ -1,12 +1,6 @@
 module ManageIQ::Providers::Nuage::Inventory::Persister::Shared::NetworkCollections
   extend ActiveSupport::Concern
 
-  # TODO: move to core
-  # Builder class for Network
-  def network
-    ::ManagerRefresh::InventoryCollection::Builder::NetworkManager
-  end
-
   def initialize_network_inventory_collections
     %i(cloud_subnets
        security_groups
