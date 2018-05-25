@@ -24,13 +24,13 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
 
     case event.full_data["entityType"]
     when 'enterprise'
-      add_targets(target_collection, :network_groups, event.full_data['entities'])
+      add_targets(target_collection, :cloud_tenants, event.full_data['entities'])
     when 'subnet'
       add_targets(target_collection, :cloud_subnets, event.full_data['entities'])
     when 'policygroup'
       add_targets(target_collection, :security_groups, event.full_data['entities'])
     when 'domain'
-      add_targets(target_collection, :network_groups, event.full_data['entities'], :key => 'enterpriseID')
+      add_targets(target_collection, :cloud_tenants, event.full_data['entities'], :key => 'enterpriseID')
     end
 
     target_collection.targets

@@ -9,9 +9,9 @@ class ManageIQ::Providers::Nuage::Inventory::Collector < ManagerRefresh::Invento
   end
 
   def initialize_inventory_sources
+    @cloud_tenants   = {}
     @cloud_subnets   = []
     @security_groups = []
-    @network_groups  = []
     @zones           = {}
     @domains         = {}
   end

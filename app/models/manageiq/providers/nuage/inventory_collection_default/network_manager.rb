@@ -13,7 +13,7 @@ class ManageIQ::Providers::Nuage::InventoryCollectionDefault::NetworkManager < M
           :gateway,
           :dhcp_enabled,
           :extra_attributes,
-          :network_group
+          :cloud_tenant
         ]
       }
 
@@ -28,26 +28,30 @@ class ManageIQ::Providers::Nuage::InventoryCollectionDefault::NetworkManager < M
           :ems_id,
           :ems_ref,
           :name,
-          :network_group
+          :cloud_tenant
         ]
       }
 
       super(attributes.merge!(extra_attributes))
     end
 
-    def network_groups(extra_attributes = {})
+    def cloud_tenants(extra_attributes = {})
       attributes = {
-        :model_class                 => ::ManageIQ::Providers::Nuage::NetworkManager::NetworkGroup,
+        :model_class                 => ::ManageIQ::Providers::Nuage::NetworkManager::CloudTenant,
+        :association                 => :cloud_tenants,
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.id },
+        },
         :inventory_object_attributes => [
           :type,
           :ems_id,
           :ems_ref,
           :name,
-          :status
+          :description
         ]
       }
 
-      super(attributes.merge!(extra_attributes))
+      attributes.merge!(extra_attributes)
     end
   end
 end

@@ -2,7 +2,7 @@ class ManageIQ::Providers::Nuage::Inventory::Persister::TargetCollection < Manag
   def initialize_inventory_collections
     add_inventory_collections_with_references(
       network,
-      %i(cloud_subnets security_groups network_groups),
+      %i(cloud_tenants cloud_subnets security_groups),
       :parent => manager
     )
   end

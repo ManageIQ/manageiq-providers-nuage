@@ -21,10 +21,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @security_groups_map.values.compact
   end
 
-  def network_groups
-    return [] if references(:network_groups).blank?
-    references(:network_groups).collect { |ems_ref| network_group(ems_ref) }
-    @network_groups_map.values.compact
+  def cloud_tenants
+    return [] if references(:cloud_tenants).blank?
+    references(:cloud_tenants).collect { |ems_ref| cloud_tenant(ems_ref) }
+    @cloud_tenant_map.values.compact
   end
 
   def cloud_subnet(ems_ref)
@@ -37,9 +37,9 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @security_groups_map[ems_ref] = safe_call { vsd_client.get_policy_group(ems_ref) }
   end
 
-  def network_group(ems_ref)
-    return @network_groups_map[ems_ref] if @network_groups_map.key?(ems_ref)
-    @network_groups_map[ems_ref] = safe_call { vsd_client.get_enterprise(ems_ref) }
+  def cloud_tenant(ems_ref)
+    return @cloud_tenant_map[ems_ref] if @cloud_tenant_map.key?(ems_ref)
+    @cloud_tenant_map[ems_ref] = safe_call { vsd_client.get_enterprise(ems_ref) }
   end
 
   def zone(ems_ref)
@@ -55,41 +55,41 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   private
 
   def initialize_cache
-    @cloud_subnets_map         = {}
-    @security_groups_map       = {}
-    @network_groups_map        = {}
-    @zones_map                 = {}
-    @domains_map               = {}
-    @domains_per_network_group = {}
+    @cloud_subnets_map   = {}
+    @security_groups_map = {}
+    @cloud_tenant_map    = {}
+    @zones_map           = {}
+    @domains_map         = {}
+    @domains_per_tenant  = {}
   end
 
-  def domains_for_network_group(network_group_ems_ref)
-    ems_ref = network_group_ems_ref
-    @domains_per_network_group[ems_ref] ||= safe_list { vsd_client.get_domains_for_enterprise(ems_ref) }
-    @domains_per_network_group[ems_ref].each { |d| @domains_map[d['ID']] = d }
-    @domains_per_network_group[ems_ref]
+  def domains_for_tenant(tenant_ems_ref)
+    ems_ref = tenant_ems_ref
+    @domains_per_tenant[ems_ref] ||= safe_list { vsd_client.get_domains_for_enterprise(ems_ref) }
+    @domains_per_tenant[ems_ref].each { |d| @domains_map[d['ID']] = d }
+    @domains_per_tenant[ems_ref]
   end
 
-  def cloud_subnets_for_network_group(network_group_ems_ref)
-    domains_for_network_group(network_group_ems_ref).each_with_object([]) do |d, arr|
+  def cloud_subnets_for_tenant(tenant_ems_ref)
+    domains_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
       arr.push(safe_list { vsd_client.get_subnets_for_domain(d['ID']) })
     end.flatten(1)
   end
 
-  def security_groups_for_network_group(network_group_ems_ref)
-    domains_for_network_group(network_group_ems_ref).each_with_object([]) do |d, arr|
+  def security_groups_for_tenant(tenant_ems_ref)
+    domains_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
       arr.push(safe_list { vsd_client.get_policy_groups_for_domain(d['ID']) })
     end.flatten(1)
   end
 
-  def network_group_ems_ref_for_cloud_subnet(cloud_subnet_ems_ref)
+  def tenant_ems_ref_for_cloud_subnet(cloud_subnet_ems_ref)
     cloud_subnet = cloud_subnet(cloud_subnet_ems_ref)
     return nil if cloud_subnet.nil?
     domain_ems_ref = zone(cloud_subnet['parentID'])['parentID']
     domain(domain_ems_ref)['parentID']
   end
 
-  def network_group_ems_ref_for_security_group(security_group_ems_ref)
+  def tenant_ems_ref_for_security_group(security_group_ems_ref)
     security_group = security_group(security_group_ems_ref)
     return nil if security_group.nil?
     domain(security_group['parentID'])['parentID']
@@ -106,8 +106,8 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
         add_simple_target!(:cloud_subnets, t.ems_ref)
       when SecurityGroup
         add_simple_target!(:security_groups, t.ems_ref)
-      when NetworkGroup
-        add_simple_target!(:network_groups, t.ems_ref)
+      when CloudTenant
+        add_simple_target!(:cloud_tenants, t.ems_ref)
       end
     end
   end
@@ -124,21 +124,21 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def infer_related_ems_refs_db!
-    if references(:network_groups).any?
-      network_groups = manager.network_groups.where(:ems_ref => references(:network_groups))
+    if references(:cloud_tenants).any?
+      tenants = manager.cloud_tenants.where(:ems_ref => references(:cloud_tenants))
                               .includes(:cloud_subnets, :security_groups)
-      network_groups.each do |ng|
-        ng.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
-        ng.security_groups.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:security_groups, ems_ref) }
+      tenants.each do |tenant|
+        tenant.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
+        tenant.security_groups.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:security_groups, ems_ref) }
       end
     end
 
     if references(:cloud_subnets).any?
       cloud_subnets = manager.cloud_subnets.where(:ems_ref => references(:cloud_subnets))
       cloud_subnets.each do |cloud_subnet|
-        next if cloud_subnet.network_group.nil?
-        add_simple_target!(:network_groups, cloud_subnet.network_group.ems_ref)
-        cloud_subnet.network_group.security_groups.each do |security_group|
+        next if cloud_subnet.cloud_tenant.nil?
+        add_simple_target!(:cloud_tenants, cloud_subnet.cloud_tenant.ems_ref)
+        cloud_subnet.cloud_tenant.security_groups.each do |security_group|
           add_simple_target!(:security_groups, security_group.ems_ref)
         end
       end
@@ -147,33 +147,33 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     if references(:security_groups).any?
       security_groups = manager.security_groups.where(:ems_ref => references(:security_groups))
       security_groups.each do |security_group|
-        add_simple_target!(:network_groups, security_group.network_group.ems_ref) unless security_group.network_group.nil?
+        add_simple_target!(:cloud_tenants, security_group.cloud_tenant.ems_ref) unless security_group.cloud_tenant.nil?
       end
     end
   end
 
   def infer_related_ems_refs_api!
-    references(:network_groups).each do |ng_ems_ref|
-      cloud_subnets_for_network_group(ng_ems_ref).each do |cloud_subnet|
+    references(:cloud_tenants).each do |tenant_ems_ref|
+      cloud_subnets_for_tenant(tenant_ems_ref).each do |cloud_subnet|
         add_simple_target!(:cloud_subnets, cloud_subnet['ID'])
       end
 
-      security_groups_for_network_group(ng_ems_ref).each do |policy_group|
+      security_groups_for_tenant(tenant_ems_ref).each do |policy_group|
         add_simple_target!(:security_groups, policy_group['ID'])
       end
     end
 
     references(:cloud_subnets).each do |cs_ems_ref|
-      ng_ems_ref = network_group_ems_ref_for_cloud_subnet(cs_ems_ref)
-      next if ng_ems_ref.nil?
-      add_simple_target!(:network_groups, ng_ems_ref)
-      security_groups_for_network_group(ng_ems_ref).each do |policy_group|
+      tenant_ems_ref = tenant_ems_ref_for_cloud_subnet(cs_ems_ref)
+      next if tenant_ems_ref.nil?
+      add_simple_target!(:cloud_tenants, tenant_ems_ref)
+      security_groups_for_tenant(tenant_ems_ref).each do |policy_group|
         add_simple_target!(:security_groups, policy_group['ID'])
       end
     end
 
     references(:security_groups).each do |sg_ems_ref|
-      add_simple_target!(:network_groups, network_group_ems_ref_for_security_group(sg_ems_ref))
+      add_simple_target!(:cloud_tenants, tenant_ems_ref_for_security_group(sg_ems_ref))
     end
   end
 
