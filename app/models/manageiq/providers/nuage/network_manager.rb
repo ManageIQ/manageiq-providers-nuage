@@ -2,7 +2,6 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   include SupportsFeatureMixin
   require_nested :EventCatcher
   require_nested :EventParser
-  require_nested :RefreshParser
   require_nested :RefreshWorker
   require_nested :Refresher
   require_nested :VsdClient
