@@ -6,6 +6,7 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :Refresher
   require_nested :VsdClient
   require_nested :CloudTenant
+  require_nested :NetworkRouter
   require_nested :CloudSubnet
   require_nested :SecurityGroup
 

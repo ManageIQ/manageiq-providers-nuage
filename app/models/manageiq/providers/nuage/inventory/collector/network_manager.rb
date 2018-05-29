@@ -3,6 +3,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     _cloud_tenants.values
   end
 
+  def network_routers
+    _network_routers.values
+  end
+
   def cloud_subnets
     return @cloud_subnets if @cloud_subnets.any?
     @cloud_subnets = vsd_client.get_subnets
@@ -17,10 +21,6 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     _zones.values
   end
 
-  def domains
-    _domains.values
-  end
-
   def security_group(ems_ref)
     security_groups.find { |sg| sg['ID'] == ems_ref }
   end
@@ -33,8 +33,8 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     _zones[ems_ref]
   end
 
-  def domain(ems_ref)
-    _domains[ems_ref]
+  def network_router(ems_ref)
+    _network_routers[ems_ref]
   end
 
   private
@@ -49,9 +49,9 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     @zones = hash_by_id(vsd_client.get_zones)
   end
 
-  def _domains
-    return @domains if @domains.any?
-    @domains = hash_by_id(vsd_client.get_domains)
+  def _network_routers
+    return @network_routers if @network_routers.any?
+    @network_routers = hash_by_id(vsd_client.get_domains)
   end
 
   def hash_by_id(list)

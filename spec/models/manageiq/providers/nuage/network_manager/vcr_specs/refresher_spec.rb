@@ -56,6 +56,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:security_group_ref) { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
     let(:cloud_subnet_ref1)  { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
     let(:cloud_subnet_ref2)  { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
+    let(:router_ref)         { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
 
     ALL_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -79,6 +80,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             assert_table_counts
             assert_ems
             assert_cloud_tenants
+            assert_network_routers
             assert_security_groups
             assert_cloud_subnets
           end
@@ -94,7 +96,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(CloudSubnet.count).to eq(2)
     expect(FloatingIp.count).to eq(0)
     expect(NetworkPort.count).to eq(0)
-    expect(NetworkRouter.count).to eq(0)
+    expect(NetworkRouter.count).to eq(1)
   end
 
   def assert_ems
@@ -137,6 +139,16 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       .to match_array([security_group_ref])
   end
 
+  def assert_network_routers
+    router = NetworkRouter.find_by(:ems_ref => router_ref)
+    expect(router).to have_attributes(
+      :name            => 'BaseL3',
+      :ems_id          => @ems.id,
+      :cloud_tenant_id => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
+      :type            => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkRouter'
+    )
+  end
+
   def assert_security_groups
     g1 = SecurityGroup.find_by(:ems_ref => security_group_ref)
     expect(g1).to have_attributes(
@@ -167,15 +179,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
       :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
-      :network_router_id              => nil,
+      :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "enterprise_name" => "XLAB",
-        "enterprise_id"   => tenant_ref2,
-        "domain_name"     => "BaseL3",
-        "domain_id"       => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name"       => "Zone 1",
-        "zone_id"         => "6256954b-9dd6-43ed-94ff-9daa683ab8b0"
+        "domain_id" => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name" => "Zone 1",
+        "zone_id"   => "6256954b-9dd6-43ed-94ff-9daa683ab8b0"
       }
     )
 
@@ -195,15 +204,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
       :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
-      :network_router_id              => nil,
+      :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "enterprise_name" => "XLAB",
-        "enterprise_id"   => tenant_ref2,
-        "domain_name"     => "BaseL3",
-        "domain_id"       => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name"       => "Zone 0",
-        "zone_id"         => "3b11a2d0-2082-42f1-92db-0b05264f372e"
+        "domain_id" => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name" => "Zone 0",
+        "zone_id"   => "3b11a2d0-2082-42f1-92db-0b05264f372e"
       }
     )
   end

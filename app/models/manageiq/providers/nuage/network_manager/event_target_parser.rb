@@ -30,7 +30,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
     when 'policygroup'
       add_targets(target_collection, :security_groups, event.full_data['entities'])
     when 'domain'
-      add_targets(target_collection, :cloud_tenants, event.full_data['entities'], :key => 'enterpriseID')
+      add_targets(target_collection, :network_routers, event.full_data['entities'])
     end
 
     target_collection.targets

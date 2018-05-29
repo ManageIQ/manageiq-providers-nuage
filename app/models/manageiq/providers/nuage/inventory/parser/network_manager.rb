@@ -1,6 +1,7 @@
 class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::Providers::Nuage::Inventory::Parser
   def parse
     cloud_tenants
+    network_routers
     cloud_subnets
     security_groups
   end
@@ -16,6 +17,15 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
     end
   end
 
+  def network_routers
+    collector.network_routers.each do |router|
+      persister.network_routers.find_or_build(router['ID']).assign_attributes(
+        :name         => router['name'],
+        :cloud_tenant => persister.cloud_tenants.lazy_find(router['parentID'])
+      )
+    end
+  end
+
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
       extra = map_extra_attributes(subnet['parentID']) || {}
@@ -26,41 +36,31 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
         :gateway          => subnet['gateway'],
         :dhcp_enabled     => false,
         :extra_attributes => extra,
-        :cloud_tenant     => persister.cloud_tenants.lazy_find(extra["enterprise_id"])
+        :cloud_tenant     => persister.network_routers.lazy_find(extra['domain_id'], :key => :cloud_tenant),
+        :network_router   => persister.network_routers.lazy_find(extra['domain_id']),
       )
     end
   end
 
   def security_groups
     collector.security_groups.each do |sg|
-      domain_id = sg['parentID']
-      domain = collector.domain(domain_id) || {}
-
       persister.security_groups.find_or_build(sg['ID']).assign_attributes(
         :name         => sg['name'],
-        :cloud_tenant => persister.cloud_tenants.lazy_find(domain['parentID'])
+        :cloud_tenant => persister.network_routers.lazy_find(sg['parentID'], :key => :cloud_tenant)
       )
     end
   end
 
   def map_extra_attributes(zone_id)
-    zone = collector.zone(zone_id)
-    return unless zone
-    domain_id = zone['parentID']
-    domain = collector.domain(domain_id)
-    return unless domain
-    tenant_id = domain['parentID']
-    tenant = collector.cloud_tenant(tenant_id)
-    return unless tenant
-
-    {
-      "enterprise_name" => tenant['name'],
-      "enterprise_id"   => domain['parentID'],
-      "domain_name"     => domain['name'],
-      "domain_id"       => domain_id,
-      "zone_name"       => zone['name'],
-      "zone_id"         => zone_id
-    }
+    if (zone = collector.zone(zone_id))
+      {
+        'domain_id' => zone['parentID'],
+        'zone_name' => zone['name'],
+        'zone_id'   => zone_id
+      }
+    else
+      {}
+    end
   end
 
   def to_cidr(address, netmask)

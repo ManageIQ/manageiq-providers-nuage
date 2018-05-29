@@ -13,7 +13,7 @@ class ManageIQ::Providers::Nuage::Inventory::Collector < ManagerRefresh::Invento
     @cloud_subnets   = []
     @security_groups = []
     @zones           = {}
-    @domains         = {}
+    @network_routers = {}
   end
 
   def vsd_client
