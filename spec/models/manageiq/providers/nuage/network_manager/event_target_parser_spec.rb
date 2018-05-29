@@ -11,7 +11,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser do
     it "entityType: enterprise" do
       assert_event_triggers_target(
         'enterprise_create.json',
-        [[:network_groups, {:ems_ref => 'fda58efc-7f7c-4a51-b6b4-24b32d755785'}]]
+        [[:cloud_tenants, {:ems_ref => 'fda58efc-7f7c-4a51-b6b4-24b32d755785'}]]
       )
     end
 
@@ -32,7 +32,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser do
     it "entityType: domain" do
       assert_event_triggers_target(
         'domain_create.json',
-        [[:network_groups, {:ems_ref => 'fda58efc-7f7c-4a51-b6b4-24b32d755785'}]]
+        [[:cloud_tenants, {:ems_ref => 'fda58efc-7f7c-4a51-b6b4-24b32d755785'}]]
       )
     end
   end

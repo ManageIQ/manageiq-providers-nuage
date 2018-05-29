@@ -51,7 +51,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   describe "targeted refresh" do
-    let(:network_group_ref)  { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
+    let(:tenant_ref)         { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
     let(:security_group_ref) { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
     let(:cloud_subnet_ref1)  { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
     let(:cloud_subnet_ref2)  { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
@@ -76,11 +76,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             end
           end
 
-          it "will refresh network_group" do
-            network_group = FactoryGirl.build(:network_group_nuage, :ems_ref => network_group_ref)
-            test_targeted_refresh([network_group], 'network_group') do
-              assert_network_group_counts
-              assert_specific_network_group
+          it "will refresh cloud tenant" do
+            tenant = FactoryGirl.build(:cloud_tenant_nuage, :ems_ref => tenant_ref)
+            test_targeted_refresh([tenant], 'cloud_tenant') do
+              assert_cloud_tenant_counts
+              assert_specific_cloud_tenant
             end
           end
 
@@ -95,23 +95,23 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
         describe "on populated database" do
           context "object updated on remote server" do
-            let!(:network_group) do
-              FactoryGirl.create(:network_group_nuage, :ems_id => @ems.id, :ems_ref => network_group_ref, :name => nil)
+            let!(:cloud_tenant) do
+              FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => tenant_ref, :name => nil)
             end
 
             let!(:cloud_subnet) do
               FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => cloud_subnet_ref1,
-                                 :network_group => network_group, :name => nil)
+                                 :cloud_tenant => cloud_tenant, :name => nil)
             end
 
             let!(:security_group) do
               FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => security_group_ref,
-                                 :network_group => network_group, :name => nil)
+                                 :cloud_tenant => cloud_tenant, :name => nil)
             end
 
-            it "network_group is updated" do
-              test_targeted_refresh([network_group], 'network_group_is_updated') do
-                assert_fetched(network_group)
+            it "cloud_tenant is updated" do
+              test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_updated') do
+                assert_fetched(cloud_tenant)
                 assert_fetched(cloud_subnet)
                 assert_fetched(security_group)
               end
@@ -119,7 +119,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
             it "cloud_subnet is updated" do
               test_targeted_refresh([cloud_subnet], 'cloud_subnet_is_updated') do
-                assert_fetched(network_group)
+                assert_fetched(cloud_tenant)
                 assert_fetched(cloud_subnet)
                 assert_fetched(security_group)
               end
@@ -127,7 +127,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
             it "security_group is updated" do
               test_targeted_refresh([security_group], 'security_group_is_updated') do
-                assert_fetched(network_group)
+                assert_fetched(cloud_tenant)
                 assert_not_fetched(cloud_subnet)
                 assert_fetched(security_group)
               end
@@ -135,33 +135,33 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
           end
 
           context "object no longer exists on remote server" do
-            it "unexisting network_group is deleted" do
-              network_group = FactoryGirl.create(:network_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref)
-              cloud_subnet = FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :network_group => network_group)
-              security_group = FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :network_group => network_group)
-              test_targeted_refresh([network_group], 'network_group_is_deleted', :repeat => 1) do
-                assert_deleted(network_group)
+            it "unexisting cloud_tenant is deleted" do
+              cloud_tenant = FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref)
+              cloud_subnet = FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant)
+              security_group = FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant)
+              test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_deleted', :repeat => 1) do
+                assert_deleted(cloud_tenant)
                 assert_deleted(cloud_subnet)
                 assert_deleted(security_group)
               end
             end
 
-            it "unexisting cloud_subnet is deleted, but related network_group and security_group updated" do
-              network_group = FactoryGirl.create(:network_group_nuage, :ems_id => @ems.id, :ems_ref => network_group_ref)
-              cloud_subnet = FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :network_group => network_group)
-              security_group = FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => security_group_ref, :network_group => network_group)
+            it "unexisting cloud_subnet is deleted, but related cloud_tenant and security_group updated" do
+              cloud_tenant = FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => tenant_ref)
+              cloud_subnet = FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant)
+              security_group = FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => security_group_ref, :cloud_tenant => cloud_tenant)
               test_targeted_refresh([cloud_subnet], 'cloud_subnet_is_deleted', :repeat => 1) do
-                assert_fetched(network_group)
+                assert_fetched(cloud_tenant)
                 assert_deleted(cloud_subnet)
                 assert_fetched(security_group)
               end
             end
 
-            it "unexisting security_group is deleted, but related network_group updated" do
-              network_group = FactoryGirl.create(:network_group_nuage, :ems_id => @ems.id, :ems_ref => network_group_ref)
-              security_group = FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :network_group => network_group)
+            it "unexisting security_group is deleted, but related cloud_tenant updated" do
+              cloud_tenant = FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => tenant_ref)
+              security_group = FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant)
               test_targeted_refresh([security_group], 'security_group_is_deleted', :repeat => 1) do
-                assert_fetched(network_group)
+                assert_fetched(cloud_tenant)
                 assert_deleted(security_group)
               end
             end
@@ -190,8 +190,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       case target
       when ManagerRefresh::Target
         return target
-      when NetworkGroup
-        association = :network_groups
+      when CloudTenant
+        association = :cloud_tenants
       when CloudSubnet
         association = :cloud_subnets
       when SecurityGroup
@@ -207,7 +207,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
   def assert_cloud_subnet_counts
     expect(ExtManagementSystem.count).to eq(1)
-    expect(NetworkGroup.count).to eq(1)
+    expect(CloudTenant.count).to eq(1)
     expect(SecurityGroup.count).to eq(1)
     expect(CloudSubnet.count).to eq(1)
     expect(FloatingIp.count).to eq(0)
@@ -227,17 +227,16 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dhcp_enabled                   => false,
       :gateway                        => "10.10.20.1",
       :network_protocol               => "ipv4",
-      :cloud_tenant_id                => nil,
+      :cloud_tenant_id                => CloudTenant.find_by(:ems_ref => tenant_ref).id,
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
       :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
       :network_router_id              => nil,
-      :network_group_id               => NetworkGroup.find_by(:ems_ref => network_group_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
         "enterprise_name" => "XLAB",
-        "enterprise_id"   => network_group_ref,
+        "enterprise_id"   => tenant_ref,
         "domain_name"     => "BaseL3",
         "domain_id"       => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
         "zone_name"       => "Zone 1",
@@ -246,9 +245,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     )
   end
 
-  def assert_network_group_counts
+  def assert_cloud_tenant_counts
     expect(ExtManagementSystem.count).to eq(1)
-    expect(NetworkGroup.count).to eq(1)
+    expect(CloudTenant.count).to eq(1)
     expect(SecurityGroup.count).to eq(1)
     expect(CloudSubnet.count).to eq(2)
     expect(FloatingIp.count).to eq(0)
@@ -256,16 +255,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(NetworkRouter.count).to eq(0)
   end
 
-  def assert_specific_network_group
-    g = NetworkGroup.find_by(:ems_ref => network_group_ref)
+  def assert_specific_cloud_tenant
+    g = CloudTenant.find_by(:ems_ref => tenant_ref)
     expect(g).to have_attributes(
-      :name                   => "XLAB",
-      :cidr                   => nil,
-      :status                 => "active",
-      :enabled                => nil,
-      :ems_id                 => @ems.id,
-      :orchestration_stack_id => nil,
-      :type                   => "ManageIQ::Providers::Nuage::NetworkManager::NetworkGroup"
+      :name   => "XLAB",
+      :ems_id => @ems.id,
+      :type   => "ManageIQ::Providers::Nuage::NetworkManager::CloudTenant"
     )
     expect(g.cloud_subnets.count).to eq(2)
     expect(g.security_groups.count).to eq(1)
@@ -278,7 +273,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
   def assert_security_group_counts
     expect(ExtManagementSystem.count).to eq(1)
-    expect(NetworkGroup.count).to eq(1)
+    expect(CloudTenant.count).to eq(1)
     expect(SecurityGroup.count).to eq(1)
     expect(CloudSubnet.count).to eq(0)
     expect(FloatingIp.count).to eq(0)
@@ -294,10 +289,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :type                   => "ManageIQ::Providers::Nuage::NetworkManager::SecurityGroup",
       :ems_id                 => @ems.id,
       :cloud_network_id       => nil,
-      :cloud_tenant_id        => nil,
+      :cloud_tenant_id        => CloudTenant.find_by(:ems_ref => tenant_ref).id,
       :orchestration_stack_id => nil
     )
-    expect(g1.network_group.ems_ref).to eq(network_group_ref)
   end
 
   def assert_fetched(instance)

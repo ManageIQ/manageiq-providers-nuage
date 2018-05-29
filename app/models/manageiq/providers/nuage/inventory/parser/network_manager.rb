@@ -1,11 +1,20 @@
 class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::Providers::Nuage::Inventory::Parser
   def parse
+    cloud_tenants
     cloud_subnets
     security_groups
-    network_groups
   end
 
   private
+
+  def cloud_tenants
+    collector.cloud_tenants.each do |enterprise|
+      persister.cloud_tenants.find_or_build(enterprise['ID']).assign_attributes(
+        :name        => enterprise['name'],
+        :description => enterprise['description']
+      )
+    end
+  end
 
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
@@ -17,7 +26,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
         :gateway          => subnet['gateway'],
         :dhcp_enabled     => false,
         :extra_attributes => extra,
-        :network_group    => persister.network_groups.lazy_find(extra["enterprise_id"])
+        :cloud_tenant     => persister.cloud_tenants.lazy_find(extra["enterprise_id"])
       )
     end
   end
@@ -28,17 +37,8 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
       domain = collector.domain(domain_id) || {}
 
       persister.security_groups.find_or_build(sg['ID']).assign_attributes(
-        :name          => sg['name'],
-        :network_group => persister.network_groups.lazy_find(domain['parentID'])
-      )
-    end
-  end
-
-  def network_groups
-    collector.network_groups.each do |ng|
-      persister.network_groups.find_or_build(ng['ID']).assign_attributes(
-        :name   => ng['name'],
-        :status => 'active'
+        :name         => sg['name'],
+        :cloud_tenant => persister.cloud_tenants.lazy_find(domain['parentID'])
       )
     end
   end
@@ -49,12 +49,12 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
     domain_id = zone['parentID']
     domain = collector.domain(domain_id)
     return unless domain
-    network_group_id = domain['parentID']
-    network_group = collector.network_group(network_group_id)
-    return unless network_group
+    tenant_id = domain['parentID']
+    tenant = collector.cloud_tenant(tenant_id)
+    return unless tenant
 
     {
-      "enterprise_name" => network_group['name'],
+      "enterprise_name" => tenant['name'],
       "enterprise_id"   => domain['parentID'],
       "domain_name"     => domain['name'],
       "domain_id"       => domain_id,

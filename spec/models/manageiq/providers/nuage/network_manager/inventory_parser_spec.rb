@@ -14,10 +14,10 @@ describe ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager do
       allow(subject).to receive(:collector).and_return(collector)
     end
 
-    let(:collector)     { double('collector', :zone => zone, :domain => domain, :network_group => network_group) }
-    let(:zone)          { {} }
-    let(:domain)        { {} }
-    let(:network_group) { {} }
+    let(:collector)    { double('collector', :zone => zone, :domain => domain, :cloud_tenant => cloud_tenant) }
+    let(:zone)         { {} }
+    let(:domain)       { {} }
+    let(:cloud_tenant) { {} }
 
     context 'when zone not found' do
       let(:zone) { nil }
@@ -34,19 +34,19 @@ describe ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager do
     end
 
     context 'when network group not found' do
-      let(:network_group) { nil }
+      let(:cloud_tenant) { nil }
       it 'invoke' do
         expect(subject.send(:map_extra_attributes, 'the-zone')).to eq(nil)
       end
     end
 
     context 'regular case' do
-      let(:zone)          { { 'name' => 'Zone Name', 'parentID' => 'domain-id' } }
-      let(:domain)        { { 'name' => 'Domain Name', 'parentID' => 'network-group-id' } }
-      let(:network_group) { { 'name' => 'Network Group Name' } }
+      let(:zone)         { { 'name' => 'Zone Name', 'parentID' => 'domain-id' } }
+      let(:domain)       { { 'name' => 'Domain Name', 'parentID' => 'network-group-id' } }
+      let(:cloud_tenant) { { 'name' => 'Tenant Name' } }
       it 'invoke' do
         expect(subject.send(:map_extra_attributes, 'the-zone')).to eq(
-          'enterprise_name' => 'Network Group Name',
+          'enterprise_name' => 'Tenant Name',
           'enterprise_id'   => 'network-group-id',
           'domain_name'     => 'Domain Name',
           'domain_id'       => 'domain-id',
@@ -69,7 +69,7 @@ describe ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager do
 
     it 'map_extra_attributes returns nothing' do
       expect(persister).to receive_message_chain(:cloud_subnets, :find_or_build, :assign_attributes).with(hash_including(:extra_attributes => {}))
-      expect(persister).to receive_message_chain(:network_groups, :lazy_find).with(nil)
+      expect(persister).to receive_message_chain(:cloud_tenants, :lazy_find).with(nil)
       subject.send(:cloud_subnets)
     end
   end
@@ -84,8 +84,8 @@ describe ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager do
     let(:collector) { double('collector', :domain => nil, :security_groups => [{}]) }
 
     it 'domain not found' do
-      expect(persister).to receive_message_chain(:security_groups, :find_or_build, :assign_attributes).with(hash_including(:network_group => nil))
-      expect(persister).to receive_message_chain(:network_groups, :lazy_find).with(nil)
+      expect(persister).to receive_message_chain(:security_groups, :find_or_build, :assign_attributes).with(hash_including(:cloud_tenant => nil))
+      expect(persister).to receive_message_chain(:cloud_tenants, :lazy_find).with(nil)
       subject.send(:security_groups)
     end
   end

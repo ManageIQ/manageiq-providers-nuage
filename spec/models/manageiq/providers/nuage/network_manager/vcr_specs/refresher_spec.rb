@@ -1,26 +1,26 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   ALL_REFRESH_SETTINGS = [
     {
-      :inventory_object_refresh => false
-    },
-    {
       :inventory_object_refresh => true,
       :inventory_collections    => {
         :saver_strategy => :default,
       },
-    }, {
+    },
+    {
       :inventory_object_refresh => true,
       :inventory_collections    => {
         :saver_strategy => :batch,
         :use_ar_object  => true,
       },
-    }, {
+    },
+    {
       :inventory_object_refresh => true,
       :inventory_collections    => {
         :saver_strategy => :batch,
         :use_ar_object  => false,
       },
-    }, {
+    },
+    {
       :inventory_object_saving_strategy => :recursive,
       :inventory_object_refresh         => true
     }
@@ -51,8 +51,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   describe "refresh" do
-    let(:network_group_ref1) { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
-    let(:network_group_ref2) { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
+    let(:tenant_ref1)        { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
+    let(:tenant_ref2)        { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
     let(:security_group_ref) { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
     let(:cloud_subnet_ref1)  { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
     let(:cloud_subnet_ref2)  { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
@@ -78,7 +78,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             @ems.reload
             assert_table_counts
             assert_ems
-            assert_network_groups
+            assert_cloud_tenants
             assert_security_groups
             assert_cloud_subnets
           end
@@ -89,7 +89,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
   def assert_table_counts
     expect(ExtManagementSystem.count).to eq(1)
-    expect(NetworkGroup.count).to eq(2)
+    expect(CloudTenant.count).to eq(2)
     expect(SecurityGroup.count).to eq(1)
     expect(CloudSubnet.count).to eq(2)
     expect(FloatingIp.count).to eq(0)
@@ -98,41 +98,35 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   def assert_ems
-    expect(@ems.network_groups.count).to eq(2)
+    expect(@ems.cloud_tenants.count).to eq(2)
     expect(@ems.security_groups.count).to eq(1)
     expect(@ems.cloud_subnets.count).to eq(2)
 
-    expect(@ems.network_groups.map(&:ems_ref))
-      .to match_array([network_group_ref1, network_group_ref2])
+    expect(@ems.cloud_tenants.map(&:ems_ref))
+      .to match_array([tenant_ref1, tenant_ref2])
     expect(@ems.security_groups.map(&:ems_ref))
       .to match_array([security_group_ref])
     expect(@ems.cloud_subnets.map(&:ems_ref))
       .to match_array([cloud_subnet_ref1, cloud_subnet_ref2])
   end
 
-  def assert_network_groups
-    g1 = NetworkGroup.find_by(:ems_ref => network_group_ref1)
+  def assert_cloud_tenants
+    g1 = CloudTenant.find_by(:ems_ref => tenant_ref1)
     expect(g1).to have_attributes(
-      :name                   => "Ansible-Test",
-      :cidr                   => nil,
-      :status                 => "active",
-      :enabled                => nil,
-      :ems_id                 => @ems.id,
-      :orchestration_stack_id => nil,
-      :type                   => "ManageIQ::Providers::Nuage::NetworkManager::NetworkGroup"
+      :name    => "Ansible-Test",
+      :enabled => nil,
+      :ems_id  => @ems.id,
+      :type    => "ManageIQ::Providers::Nuage::NetworkManager::CloudTenant"
     )
     expect(g1.cloud_subnets.count).to eq(0)
     expect(g1.security_groups.count).to eq(0)
 
-    g2 = NetworkGroup.find_by(:ems_ref => network_group_ref2)
+    g2 = CloudTenant.find_by(:ems_ref => tenant_ref2)
     expect(g2).to have_attributes(
-      :name                   => "XLAB",
-      :cidr                   => nil,
-      :status                 => "active",
-      :enabled                => nil,
-      :ems_id                 => @ems.id,
-      :orchestration_stack_id => nil,
-      :type                   => "ManageIQ::Providers::Nuage::NetworkManager::NetworkGroup"
+      :name    => "XLAB",
+      :enabled => nil,
+      :ems_id  => @ems.id,
+      :type    => "ManageIQ::Providers::Nuage::NetworkManager::CloudTenant"
     )
     expect(g2.cloud_subnets.count).to eq(2)
     expect(g2.security_groups.count).to eq(1)
@@ -151,10 +145,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :type                   => "ManageIQ::Providers::Nuage::NetworkManager::SecurityGroup",
       :ems_id                 => @ems.id,
       :cloud_network_id       => nil,
-      :cloud_tenant_id        => nil,
+      :cloud_tenant_id        => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
       :orchestration_stack_id => nil
     )
-    expect(g1.network_group.ems_ref).to eq(network_group_ref2)
   end
 
   def assert_cloud_subnets
@@ -169,17 +162,16 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dhcp_enabled                   => false,
       :gateway                        => "10.10.20.1",
       :network_protocol               => "ipv4",
-      :cloud_tenant_id                => nil,
+      :cloud_tenant_id                => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
       :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
       :network_router_id              => nil,
-      :network_group_id               => NetworkGroup.find_by(:ems_ref => network_group_ref2).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
         "enterprise_name" => "XLAB",
-        "enterprise_id"   => network_group_ref2,
+        "enterprise_id"   => tenant_ref2,
         "domain_name"     => "BaseL3",
         "domain_id"       => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
         "zone_name"       => "Zone 1",
@@ -198,17 +190,16 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dhcp_enabled                   => false,
       :gateway                        => "10.10.10.1",
       :network_protocol               => "ipv4",
-      :cloud_tenant_id                => nil,
+      :cloud_tenant_id                => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
       :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
       :network_router_id              => nil,
-      :network_group_id               => NetworkGroup.find_by(:ems_ref => network_group_ref2).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
         "enterprise_name" => "XLAB",
-        "enterprise_id"   => network_group_ref2,
+        "enterprise_id"   => tenant_ref2,
         "domain_name"     => "BaseL3",
         "domain_id"       => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
         "zone_name"       => "Zone 0",

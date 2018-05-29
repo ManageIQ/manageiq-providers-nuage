@@ -6,9 +6,9 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :RefreshWorker
   require_nested :Refresher
   require_nested :VsdClient
+  require_nested :CloudTenant
   require_nested :CloudSubnet
   require_nested :SecurityGroup
-  require_nested :NetworkGroup
 
   supports :ems_network_new
 
@@ -43,5 +43,9 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
 
   def name
     self[:name]
+  end
+
+  def cloud_tenants
+    ::CloudTenant.where(:ems_id => id)
   end
 end
