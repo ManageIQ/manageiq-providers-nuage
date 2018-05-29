@@ -10,6 +10,7 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :SecurityGroup
 
   supports :ems_network_new
+  supports :configure_events
 
   include Vmdb::Logging
   include ManageIQ::Providers::Nuage::ManagerMixin
