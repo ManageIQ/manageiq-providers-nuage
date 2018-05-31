@@ -3,6 +3,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
     cloud_tenants
     network_routers
     cloud_subnets
+    l2_cloud_subnets
     security_groups
   end
 
@@ -30,6 +31,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
     collector.cloud_subnets.each do |subnet|
       extra = map_extra_attributes(subnet['parentID']) || {}
       persister.cloud_subnets.find_or_build(subnet['ID']).assign_attributes(
+        :type             => collector.manager.class.l3_cloud_subnet_type,
         :name             => subnet['name'],
         :cidr             => to_cidr(subnet['address'], subnet['netmask']),
         :network_protocol => subnet['IPType'].downcase,
@@ -38,6 +40,18 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
         :extra_attributes => extra,
         :cloud_tenant     => persister.network_routers.lazy_find(extra['domain_id'], :key => :cloud_tenant),
         :network_router   => persister.network_routers.lazy_find(extra['domain_id']),
+      )
+    end
+  end
+
+  def l2_cloud_subnets
+    collector.l2_cloud_subnets.each do |subnet|
+      persister.cloud_subnets.find_or_build(subnet['ID']).assign_attributes(
+        :type             => collector.manager.class.l2_cloud_subnet_type,
+        :name             => subnet['name'],
+        :cidr             => to_cidr(subnet['address'], subnet['netmask']),
+        :network_protocol => subnet['IPType'].to_s.downcase,
+        :cloud_tenant     => persister.cloud_tenants.lazy_find(subnet['parentID'])
       )
     end
   end
