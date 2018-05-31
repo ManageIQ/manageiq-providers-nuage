@@ -27,6 +27,12 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @cloud_tenant_map.values.compact
   end
 
+  def network_routers
+    return [] if references(:network_routers).blank?
+    references(:network_routers).collect { |ems_ref| network_router(ems_ref) }
+    @network_routers_map.values.compact
+  end
+
   def cloud_subnet(ems_ref)
     return @cloud_subnets_map[ems_ref] if @cloud_subnets_map.key?(ems_ref)
     @cloud_subnets_map[ems_ref] = safe_call { vsd_client.get_subnet(ems_ref) }
@@ -47,9 +53,9 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @zones_map[ems_ref] = safe_call { vsd_client.get_zone(ems_ref) }
   end
 
-  def domain(ems_ref)
-    return @domains_map[ems_ref] if @domains_map.key?(ems_ref)
-    @domains_map[ems_ref] = safe_call { vsd_client.get_domain(ems_ref) }
+  def network_router(ems_ref)
+    return @network_routers_map[ems_ref] if @network_routers_map.key?(ems_ref)
+    @network_routers_map[ems_ref] = safe_call { vsd_client.get_domain(ems_ref) }
   end
 
   private
@@ -59,25 +65,25 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @security_groups_map = {}
     @cloud_tenant_map    = {}
     @zones_map           = {}
-    @domains_map         = {}
-    @domains_per_tenant  = {}
+    @network_routers_map = {}
+    @routers_per_tenant  = {}
   end
 
-  def domains_for_tenant(tenant_ems_ref)
+  def routers_for_tenant(tenant_ems_ref)
     ems_ref = tenant_ems_ref
-    @domains_per_tenant[ems_ref] ||= safe_list { vsd_client.get_domains_for_enterprise(ems_ref) }
-    @domains_per_tenant[ems_ref].each { |d| @domains_map[d['ID']] = d }
-    @domains_per_tenant[ems_ref]
+    @routers_per_tenant[ems_ref] ||= safe_list { vsd_client.get_domains_for_enterprise(ems_ref) }
+    @routers_per_tenant[ems_ref].each { |d| @network_routers_map[d['ID']] = d }
+    @routers_per_tenant[ems_ref]
   end
 
   def cloud_subnets_for_tenant(tenant_ems_ref)
-    domains_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
+    routers_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
       arr.push(safe_list { vsd_client.get_subnets_for_domain(d['ID']) })
     end.flatten(1)
   end
 
   def security_groups_for_tenant(tenant_ems_ref)
-    domains_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
+    routers_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
       arr.push(safe_list { vsd_client.get_policy_groups_for_domain(d['ID']) })
     end.flatten(1)
   end
@@ -85,14 +91,14 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   def tenant_ems_ref_for_cloud_subnet(cloud_subnet_ems_ref)
     cloud_subnet = cloud_subnet(cloud_subnet_ems_ref)
     return nil if cloud_subnet.nil?
-    domain_ems_ref = zone(cloud_subnet['parentID'])['parentID']
-    domain(domain_ems_ref)['parentID']
+    router_ems_ref = zone(cloud_subnet['parentID'])['parentID']
+    network_router(router_ems_ref)['parentID']
   end
 
   def tenant_ems_ref_for_security_group(security_group_ems_ref)
     security_group = security_group(security_group_ems_ref)
     return nil if security_group.nil?
-    domain(security_group['parentID'])['parentID']
+    network_router(security_group['parentID'])['parentID']
   end
 
   def references(collection)
@@ -108,6 +114,8 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
         add_simple_target!(:security_groups, t.ems_ref)
       when CloudTenant
         add_simple_target!(:cloud_tenants, t.ems_ref)
+      when NetworkRouter
+        add_simple_target!(:network_routers, t.ems_ref)
       end
     end
   end
@@ -128,6 +136,7 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
       tenants = manager.cloud_tenants.where(:ems_ref => references(:cloud_tenants))
                               .includes(:cloud_subnets, :security_groups)
       tenants.each do |tenant|
+        tenant.network_routers.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:network_routers, ems_ref) }
         tenant.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
         tenant.security_groups.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:security_groups, ems_ref) }
       end
@@ -136,6 +145,7 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     if references(:cloud_subnets).any?
       cloud_subnets = manager.cloud_subnets.where(:ems_ref => references(:cloud_subnets))
       cloud_subnets.each do |cloud_subnet|
+        add_simple_target!(:network_routers, cloud_subnet.network_router.ems_ref) if cloud_subnet.network_router
         next if cloud_subnet.cloud_tenant.nil?
         add_simple_target!(:cloud_tenants, cloud_subnet.cloud_tenant.ems_ref)
         cloud_subnet.cloud_tenant.security_groups.each do |security_group|
@@ -161,6 +171,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
       security_groups_for_tenant(tenant_ems_ref).each do |policy_group|
         add_simple_target!(:security_groups, policy_group['ID'])
       end
+
+      routers_for_tenant(tenant_ems_ref).each do |router|
+        add_simple_target!(:network_routers, router['ID'])
+      end
     end
 
     references(:cloud_subnets).each do |cs_ems_ref|
@@ -170,10 +184,20 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
       security_groups_for_tenant(tenant_ems_ref).each do |policy_group|
         add_simple_target!(:security_groups, policy_group['ID'])
       end
+
+      routers_for_tenant(tenant_ems_ref).each do |router|
+        add_simple_target!(:network_routers, router['ID'])
+      end
     end
 
     references(:security_groups).each do |sg_ems_ref|
-      add_simple_target!(:cloud_tenants, tenant_ems_ref_for_security_group(sg_ems_ref))
+      tenant_ems_ref = tenant_ems_ref_for_security_group(sg_ems_ref)
+      next if tenant_ems_ref.nil?
+      add_simple_target!(:cloud_tenants, tenant_ems_ref)
+
+      routers_for_tenant(tenant_ems_ref).each do |router|
+        add_simple_target!(:network_routers, router['ID'])
+      end
     end
   end
 

@@ -56,6 +56,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:cloud_subnet_ref1)  { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
     let(:cloud_subnet_ref2)  { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
     let(:unexisting_ref)     { "unexisting-ems-ref" }
+    let(:router_ref)         { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
 
     TARGET_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -178,7 +179,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       expect(MiqQueue.where(:method_name => 'refresh').count).to eq 1
       refresh_job = MiqQueue.where(:method_name => 'refresh').first
       VCR.use_cassette(described_class.name.underscore + "_targeted/" + cassette) do
-        refresh_job.deliver
+        status, msg, _ = refresh_job.deliver
+        expect(:status => status, :msg => msg).not_to include(:status => 'error')
       end
       @ems.reload
       yield
@@ -212,7 +214,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(CloudSubnet.count).to eq(1)
     expect(FloatingIp.count).to eq(0)
     expect(NetworkPort.count).to eq(0)
-    expect(NetworkRouter.count).to eq(0)
+    expect(NetworkRouter.count).to eq(1)
   end
 
   def assert_specific_cloud_subnet
@@ -232,15 +234,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
       :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
-      :network_router_id              => nil,
+      :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "enterprise_name" => "XLAB",
-        "enterprise_id"   => tenant_ref,
-        "domain_name"     => "BaseL3",
-        "domain_id"       => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name"       => "Zone 1",
-        "zone_id"         => "6256954b-9dd6-43ed-94ff-9daa683ab8b0"
+        "domain_id" => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name" => "Zone 1",
+        "zone_id"   => "6256954b-9dd6-43ed-94ff-9daa683ab8b0"
       }
     )
   end
@@ -252,7 +251,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(CloudSubnet.count).to eq(2)
     expect(FloatingIp.count).to eq(0)
     expect(NetworkPort.count).to eq(0)
-    expect(NetworkRouter.count).to eq(0)
+    expect(NetworkRouter.count).to eq(1)
   end
 
   def assert_specific_cloud_tenant
@@ -278,7 +277,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(CloudSubnet.count).to eq(0)
     expect(FloatingIp.count).to eq(0)
     expect(NetworkPort.count).to eq(0)
-    expect(NetworkRouter.count).to eq(0)
+    expect(NetworkRouter.count).to eq(1)
   end
 
   def assert_specific_security_group

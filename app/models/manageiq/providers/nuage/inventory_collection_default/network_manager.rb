@@ -13,7 +13,8 @@ class ManageIQ::Providers::Nuage::InventoryCollectionDefault::NetworkManager < M
           :gateway,
           :dhcp_enabled,
           :extra_attributes,
-          :cloud_tenant
+          :cloud_tenant,
+          :network_router
         ]
       }
 
@@ -48,6 +49,23 @@ class ManageIQ::Providers::Nuage::InventoryCollectionDefault::NetworkManager < M
           :ems_ref,
           :name,
           :description
+        ]
+      }
+
+      attributes.merge!(extra_attributes)
+    end
+
+    def network_routers(extra_attributes = {})
+      attributes = {
+        :model_class                 => ::ManageIQ::Providers::Nuage::NetworkManager::NetworkRouter,
+        :association                 => :network_routers,
+        :builder_params              => {
+          :ems_id => ->(persister) { persister.manager.id },
+        },
+        :inventory_object_attributes => [
+          :type,
+          :name,
+          :cloud_tenant
         ]
       }
 
