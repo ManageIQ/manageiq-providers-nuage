@@ -5,32 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Gaprindashvili-3 - Released 2018-05-15
+
+### Added
+- Add `stop_event_monitor_queue_on_change` method [(#65)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/65)
+- Redirect logs into log/nuage.log file [(#66)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/66)
+- Don't run EventCatcher when user opts-in for "None" [(#69)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/69)
+- Also connect to CNAAlarms AMQP topic [(#73)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/73)
+- Don't raise exceptions from within AMQP callbacks [(#78)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/78)
+
+### Fixed
+- Add name method [(#62)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/62)
+- Handle subnets with missing gateway/netmask [(#68)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/68)
+
 ## Unreleased as of Sprint 85 ending 2018-05-07
 
 ### Added
 - Prefix Nuage events with "nuage" [(#84)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/84)
 - Harden refresh parser [(#71)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/71)
-
-## Unreleased as of Sprint 83 ending 2018-04-09
-
-### Added
--Don't raise exceptions from within AMQP callbacks [(#78)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/78)
-
-## Unreleased as of Sprint 82 ending 2018-03-26
-
-### Added
-- Also connect to CNAAlarms AMQP topic [(#73)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/73)
-
-## Unreleased as of Sprint 81 ending 2018-03-12
-
-### Added
-- Don't run EventCatcher when user opts-in for "None" [(#69)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/69)
-
-## Unreleased as of Sprint 79 ending 2018-02-12
-
-### Added
-- Redirect logs into log/nuage.log file [(#66)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/66)
-- Add `stop_event_monitor_queue_on_change` method [(#65)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/65)
 
 ## Gaprindashvili-1 - Released 2018-01-31
 
@@ -47,11 +39,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix protocol selection when adding a new nuage provider [(#45)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/45)
 - Human readable error when selecting wrong security protocol [(#43)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/43)
 - Return empy list instead of nil for responses with empty bodies [(#53)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/53)
-
-## Unreleased as of Sprint 78 ending 2018-01-29
-
-### Fixed
-- Add name method [(#62)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/62)
 
 ## Unreleased as of Sprint 72 ending 2017-10-30
 
