@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 87 ending 2018-06-04
+
+### Added
+- Inventory L3 Domain (Nuage) into NetworkRouter (MIQ) [(#93)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/93)
+
 ## Gaprindashvili-3 - Released 2018-05-15
 
 ### Added
