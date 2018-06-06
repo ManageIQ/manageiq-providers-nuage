@@ -12,6 +12,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     @cloud_subnets = vsd_client.get_subnets
   end
 
+  def l2_cloud_subnets
+    return @l2_cloud_subnets if @l2_cloud_subnets.any?
+    @l2_cloud_subnets = vsd_client.get_l2_domains
+  end
+
   def security_groups
     return @security_groups if @security_groups.any?
     @security_groups = vsd_client.get_policy_groups

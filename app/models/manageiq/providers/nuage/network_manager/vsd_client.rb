@@ -78,6 +78,10 @@ module ManageIQ::Providers
       get_list("domains/#{domain_id}/policygroups")
     end
 
+    def get_l2_domains
+      get_list('l2domains')
+    end
+
     private
 
     # TODO(miha-plesko): Is this filter really supposed to be used here in client? Looks like debugging leftover,

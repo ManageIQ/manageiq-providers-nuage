@@ -9,11 +9,12 @@ class ManageIQ::Providers::Nuage::Inventory::Collector < ManagerRefresh::Invento
   end
 
   def initialize_inventory_sources
-    @cloud_tenants   = {}
-    @cloud_subnets   = []
-    @security_groups = []
-    @zones           = {}
-    @network_routers = {}
+    @cloud_tenants    = {}
+    @cloud_subnets    = []
+    @l2_cloud_subnets = []
+    @security_groups  = []
+    @zones            = {}
+    @network_routers  = {}
   end
 
   def vsd_client

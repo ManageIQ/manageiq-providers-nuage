@@ -8,6 +8,8 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :CloudTenant
   require_nested :NetworkRouter
   require_nested :CloudSubnet
+  require_nested :CloudSubnetL3
+  require_nested :CloudSubnetL2
   require_nested :SecurityGroup
 
   supports :ems_network_new
@@ -41,11 +43,27 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
     ManageIQ::Providers::Nuage::NetworkManager::EventCatcher
   end
 
+  def self.l2_cloud_subnet_type
+    'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2'
+  end
+
+  def self.l3_cloud_subnet_type
+    'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3'
+  end
+
   def name
     self[:name]
   end
 
   def cloud_tenants
     ::CloudTenant.where(:ems_id => id)
+  end
+
+  def l3_cloud_subnets
+    cloud_subnets.where(:type => self.class.l3_cloud_subnet_type)
+  end
+
+  def l2_cloud_subnets
+    cloud_subnets.where(:type => self.class.l2_cloud_subnet_type)
   end
 end

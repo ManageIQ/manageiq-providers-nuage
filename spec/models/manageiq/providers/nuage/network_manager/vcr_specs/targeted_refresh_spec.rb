@@ -233,7 +233,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
-      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
+      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3",
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {

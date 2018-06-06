@@ -566,4 +566,62 @@ http_interactions:
         DFKRxYmUKUs/nj4B8q6H7Q8CAAA=
     http_version: 
   recorded_at: Wed, 23 Aug 2017 15:27:31 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjowMGYyNjA5Yy02OWJkLTQ3MTItOGU5ZC1jM2JhODcwM2NmMDg=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 30-May-2018 13:50:10
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '4'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 31 May 2018 13:50:10 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1501769462000,"description":null,"name":"BridgeNet","gateway":null,"dynamicIpv6Address":true,"address":null,"netmask":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:48730","routeTarget":"65534:58582","vnId":10076398,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"7dcd3108-ce83-45a5-88db-4ad5f32e2eb4","parentID":"713d0ba0-dea8-44b4-8ac7-6cab9dc321a7","externalID":null,"DHCPManaged":false,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":null,"stretched":false,"templateID":"688a33dc-b5c3-47f6-b72b-687be70eb953","associatedSharedNetworkResourceID":null,"serviceID":834027956,"gatewayMACAddress":null,"uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"},{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1501769486000,"description":null,"name":"FlatNet","gateway":"10.99.99.1","dynamicIpv6Address":true,"address":"10.99.99.0","netmask":"255.255.255.0","maintenanceMode":"DISABLED","routeDistinguisher":"65534:29749","routeTarget":"65534:65409","vnId":4479255,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"3b733a41-774d-4aaa-8e64-588d5533a5c0","parentID":"713d0ba0-dea8-44b4-8ac7-6cab9dc321a7","externalID":null,"DHCPManaged":true,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":"IPV4","stretched":false,"templateID":"8e45727f-30d6-4d96-82f1-8c1ab60080d9","associatedSharedNetworkResourceID":null,"serviceID":529488222,"gatewayMACAddress":"68:54:ED:00:76:39","uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"},{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1507800660000,"description":null,"name":"L2Base","gateway":"10.99.99.1","dynamicIpv6Address":true,"address":"10.99.99.0","netmask":"255.255.255.0","maintenanceMode":"DISABLED","routeDistinguisher":"65534:49843","routeTarget":"65534:45277","vnId":13806772,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"03a955bc-add4-4346-abb5-85701477fa4e","parentID":"e0819464-e7fc-4a37-b29a-e72da7b5956c","externalID":null,"DHCPManaged":true,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":"IPV4","stretched":false,"templateID":"c43eece8-22d3-4365-b1c8-0b1b8639f2e2","associatedSharedNetworkResourceID":null,"serviceID":972881280,"gatewayMACAddress":"68:54:ED:00:A4:F6","uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"},{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1507800673000,"description":null,"name":"L2Un","gateway":null,"dynamicIpv6Address":true,"address":null,"netmask":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:61046","routeTarget":"65534:27352","vnId":1282841,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"8efc78b0-df2a-4c6f-964b-463a9d106bed","parentID":"e0819464-e7fc-4a37-b29a-e72da7b5956c","externalID":null,"DHCPManaged":false,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":null,"stretched":false,"templateID":"66b97ea1-c7c5-4d67-b606-37a0560d89f0","associatedSharedNetworkResourceID":null,"serviceID":217461762,"gatewayMACAddress":null,"uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"}]'
+    http_version: 
+  recorded_at: Thu, 31 May 2018 13:50:10 GMT
 recorded_with: VCR 3.0.3

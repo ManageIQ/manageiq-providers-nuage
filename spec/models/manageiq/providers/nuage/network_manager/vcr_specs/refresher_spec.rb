@@ -56,6 +56,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:security_group_ref) { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
     let(:cloud_subnet_ref1)  { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
     let(:cloud_subnet_ref2)  { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
+    let(:l2_subnet_ref1)     { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
+    let(:l2_subnet_ref2)     { "8efc78b0-df2a-4c6f-964b-463a9d106bed" }
     let(:router_ref)         { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
 
     ALL_REFRESH_SETTINGS.each do |settings|
@@ -83,6 +85,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             assert_network_routers
             assert_security_groups
             assert_cloud_subnets
+            assert_l2_cloud_subnets
           end
         end
       end
@@ -93,7 +96,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(ExtManagementSystem.count).to eq(1)
     expect(CloudTenant.count).to eq(2)
     expect(SecurityGroup.count).to eq(1)
-    expect(CloudSubnet.count).to eq(2)
+    expect(CloudSubnet.count).to eq(6)
     expect(FloatingIp.count).to eq(0)
     expect(NetworkPort.count).to eq(0)
     expect(NetworkRouter.count).to eq(1)
@@ -102,13 +105,15 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   def assert_ems
     expect(@ems.cloud_tenants.count).to eq(2)
     expect(@ems.security_groups.count).to eq(1)
-    expect(@ems.cloud_subnets.count).to eq(2)
+    expect(@ems.cloud_subnets.count).to eq(6)
+    expect(@ems.l3_cloud_subnets.count).to eq(2)
+    expect(@ems.l2_cloud_subnets.count).to eq(4)
 
     expect(@ems.cloud_tenants.map(&:ems_ref))
       .to match_array([tenant_ref1, tenant_ref2])
     expect(@ems.security_groups.map(&:ems_ref))
       .to match_array([security_group_ref])
-    expect(@ems.cloud_subnets.map(&:ems_ref))
+    expect(@ems.l3_cloud_subnets.map(&:ems_ref))
       .to match_array([cloud_subnet_ref1, cloud_subnet_ref2])
   end
 
@@ -120,7 +125,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :ems_id  => @ems.id,
       :type    => "ManageIQ::Providers::Nuage::NetworkManager::CloudTenant"
     )
-    expect(g1.cloud_subnets.count).to eq(0)
+    expect(g1.cloud_subnets.count).to eq(2)
+    expect(g1.l3_cloud_subnets.count).to eq(0)
+    expect(g1.l2_cloud_subnets.count).to eq(2)
     expect(g1.security_groups.count).to eq(0)
 
     g2 = CloudTenant.find_by(:ems_ref => tenant_ref2)
@@ -130,10 +137,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :ems_id  => @ems.id,
       :type    => "ManageIQ::Providers::Nuage::NetworkManager::CloudTenant"
     )
-    expect(g2.cloud_subnets.count).to eq(2)
+    expect(g2.cloud_subnets.count).to eq(4)
+    expect(g2.l3_cloud_subnets.count).to eq(2)
+    expect(g2.l2_cloud_subnets.count).to eq(2)
     expect(g2.security_groups.count).to eq(1)
 
-    expect(g2.cloud_subnets.map(&:ems_ref))
+    expect(g2.l3_cloud_subnets.map(&:ems_ref))
       .to match_array([cloud_subnet_ref1, cloud_subnet_ref2])
     expect(g2.security_groups.map(&:ems_ref))
       .to match_array([security_group_ref])
@@ -178,7 +187,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
-      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
+      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3",
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
@@ -203,7 +212,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
-      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet",
+      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3",
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
@@ -211,6 +220,28 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
         "zone_name" => "Zone 0",
         "zone_id"   => "3b11a2d0-2082-42f1-92db-0b05264f372e"
       }
+    )
+  end
+
+  def assert_l2_cloud_subnets
+    s1 = CloudSubnet.find_by(:ems_ref => l2_subnet_ref1)
+    expect(s1).to have_attributes(
+      :name              => 'FlatNet',
+      :cidr              => '10.99.99.0/24',
+      :network_protocol  => 'ipv4',
+      :cloud_tenant_id   => CloudTenant.find_by(:ems_ref => tenant_ref1).id,
+      :type              => 'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2',
+      :network_router_id => nil
+    )
+
+    s2 = CloudSubnet.find_by(:ems_ref => l2_subnet_ref2)
+    expect(s2).to have_attributes(
+      :name              => 'L2Un',
+      :cidr              => nil,
+      :network_protocol  => '',
+      :cloud_tenant_id   => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
+      :type              => 'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2',
+      :network_router_id => nil
     )
   end
 end

@@ -15,6 +15,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @cloud_subnets_map.values.compact
   end
 
+  def l2_cloud_subnets
+    [] # TODO(miha-plesko): targeted refresh for l2_cloud_subnets
+  end
+
   def security_groups
     return [] if references(:security_groups).blank?
     references(:security_groups).collect { |ems_ref| security_group(ems_ref) }
