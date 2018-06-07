@@ -5,6 +5,8 @@ module ManageIQ::Providers::Nuage::Inventory::Persister::Definitions::NetworkCol
     %i(cloud_tenants
        cloud_subnets
        security_groups
+       cloud_networks
+       floating_ips
        network_routers).each do |name|
 
       add_collection(network, name) do |builder|

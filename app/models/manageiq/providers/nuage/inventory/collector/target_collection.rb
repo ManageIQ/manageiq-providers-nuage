@@ -9,6 +9,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     target.manager_refs_by_association_reset
   end
 
+  def cloud_networks_floating
+    [] # TODO(miha-plesko): targeted refresh
+  end
+
   def cloud_subnets
     return [] if references(:cloud_subnets).blank?
     references(:cloud_subnets).collect { |ems_ref| cloud_subnet(ems_ref) }
@@ -35,6 +39,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     return [] if references(:network_routers).blank?
     references(:network_routers).collect { |ems_ref| network_router(ems_ref) }
     @network_routers_map.values.compact
+  end
+
+  def floating_ips
+    [] # TODO(miha-plesko): implement targeted refresh for floating ips
   end
 
   def cloud_subnet(ems_ref)
