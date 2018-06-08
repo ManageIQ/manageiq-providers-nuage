@@ -93,8 +93,11 @@ module ManageIQ::Providers
 
     def get_list(url)
       response = @rest_call.get("#{@server}/#{url}")
-      return unless response.code == 200
-      return [] if response.body.empty?
+
+      # Reset headers after call was performed or next API call will send them too.
+      @rest_call.reset_headers
+
+      return [] if response.body.empty? || response.code != 200
       JSON.parse(response.body)
     end
 

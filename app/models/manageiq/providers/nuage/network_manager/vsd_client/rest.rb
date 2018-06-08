@@ -5,7 +5,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest
     @user = user
     @password = password
     @api_key = ''
-    @headers = {'X-Nuage-Organization' => 'csp', "Content-Type" => "application/json; charset=UTF-8"}
+    reset_headers
   end
 
   def login
@@ -32,46 +32,40 @@ class ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest
     @headers[key] = value
   end
 
+  def reset_headers
+    @headers = {
+      'X-Nuage-Organization' => 'csp',
+      'Content-Type'         => 'application/json; charset=UTF-8'
+    }
+  end
+
   def get(url)
-    if @api_key == ''
-      login
-    end
-    $nuage_log.debug("GET for Nuage VSD url #{url}")
-    RestClient::Request.execute(:method => :get, :url => url, :user => @user, :password => @api_key,
-     :headers => @headers, :verify_ssl => false) do |response|
-      return response
-    end
+    request(url)
   end
 
   def delete(url)
-    if @api_key == ''
-      login
-    end
-    RestClient::Request.execute(:method => :delete, :url => url, :user => @user, :password => @api_key,
-    :headers => @headers, :verify_ssl => false) do |response|
-      return response
-    end
+    request(url, :method => :delete)
   end
 
   def put(url, data)
-    if @api_key == ''
-      login
-    end
-
-    RestClient::Request.execute(:method => :put, :data => data, :url => url, :user => @user, :password => @api_key,
-    :headers => @headers, :verify_ssl => false) do |response|
-      return response
-    end
+    request(url, :method => :put, :data => data)
   end
 
   def post(url, data)
-    if @api_key == ''
-      login
-    end
+    request(url, :method => :post, :data => data)
+  end
 
-    RestClient::Request.execute(:method => :post, :data => data, :url => url, :user => @user, :password => @api_key,
-    :headers => @headers, :verify_ssl => false) do |response|
-      return response
-    end
+  def request(url, method: :get, data: nil, verify_ssl: false)
+    $nuage_log.debug("Accessing Nuage VSD url #{method} #{url} with data '#{data}'")
+    login unless @api_key
+    RestClient::Request.execute(
+      :url        => url,
+      :method     => method,
+      :headers    => @headers,
+      :data       => data,
+      :user       => @user,
+      :password   => @api_key,
+      :verify_ssl => verify_ssl
+    ) { |response| response } # silence errors like 404
   end
 end
