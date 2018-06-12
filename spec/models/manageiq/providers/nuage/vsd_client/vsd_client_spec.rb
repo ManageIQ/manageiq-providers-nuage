@@ -3,7 +3,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     allow_any_instance_of(described_class).to receive(:initialize)
   end
 
-  let(:rest_call) { double('Rest') }
+  let(:rest_call) { double('Rest', :reset_headers => nil) }
   let(:client) do
     c = described_class.new
     c.instance_variable_set(:@rest_call, rest_call)
@@ -11,13 +11,19 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   end
 
   describe "get_list edge cases" do
-    let(:response_404)      { double('Response', :code => 404) }
+    let(:response_404)      { double('Response', :code => 404, :body => '') }
     let(:response_empty)    { double('Response', :code => 200, :body => '') }
     let(:response_simplest) { double('Response', :code => 200, :body => '[]') }
+    let(:response_204)      { double('Response', :code => 204, :body => '') }
 
     it "response code not 200 should return nil" do
       response(response_404)
-      expect(client.send(:get_list, 'some-url')).to be_nil
+      expect(client.send(:get_list, 'some-url')).to eq([])
+    end
+
+    it "response code 204 should return empty list" do
+      response(response_204)
+      expect(client.send(:get_list, 'some-url')).to eq([])
     end
 
     it "response body empty should return empty list" do
@@ -28,6 +34,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     it "response body empty list should return empty list" do
       response(response_simplest)
       expect(client.send(:get_list, 'some-url')).to eq([])
+    end
+
+    it "request should reset headers" do
+      response(response_empty)
+      expect(rest_call).to receive(:reset_headers)
+      client.send(:get_list, 'some-url')
     end
   end
 
