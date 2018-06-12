@@ -1,4 +1,4 @@
-module ManageIQ::Providers::Nuage::Inventory::Persister::Shared::NetworkCollections
+module ManageIQ::Providers::Nuage::Inventory::Persister::Definitions::NetworkCollections
   extend ActiveSupport::Concern
 
   def initialize_network_inventory_collections
