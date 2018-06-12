@@ -4,24 +4,20 @@ class ManageIQ::Providers::Nuage::Inventory::Persister < ManagerRefresh::Invento
 
   protected
 
-  def network
-    ManageIQ::Providers::Nuage::InventoryCollectionDefault::NetworkManager
-  end
-
-  def targeted
-    false
-  end
-
   def strategy
     nil
   end
 
-  def shared_options
-    settings_options = options[:inventory_collections].try(:to_hash) || {}
+  def parent
+    manager.presence
+  end
 
-    settings_options.merge(
+  # Shared properties for inventory collections
+  def shared_options
+    {
+      :parent   => parent,
       :strategy => strategy,
-      :targeted => targeted,
-    )
+      :targeted => targeted?,
+    }
   end
 end
