@@ -1,7 +1,5 @@
 module ManageIQ::Providers
   class Nuage::NetworkManager::Refresher < ManageIQ::Providers::BaseManager::ManagerRefresher
-    include ::EmsRefresh::Refreshers::EmsRefresherMixin
-
     def parse_legacy_inventory(_ems)
       raise NotImplementedError, 'legacy refresh is no longer supported'
     end
