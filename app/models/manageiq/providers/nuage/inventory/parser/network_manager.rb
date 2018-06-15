@@ -1,10 +1,12 @@
 class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::Providers::Nuage::Inventory::Parser
   def parse
     cloud_tenants
+    cloud_networks_floating
     network_routers
     cloud_subnets
     l2_cloud_subnets
     security_groups
+    floating_ips
   end
 
   private
@@ -14,6 +16,16 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
       persister.cloud_tenants.find_or_build(enterprise['ID']).assign_attributes(
         :name        => enterprise['name'],
         :description => enterprise['description']
+      )
+    end
+  end
+
+  def cloud_networks_floating
+    collector.cloud_networks_floating.each do |network|
+      persister.cloud_networks.find_or_build(network['ID']).assign_attributes(
+        :type => collector.manager.class.floating_cloud_network_type,
+        :name => network['name'],
+        :cidr => to_cidr(network['address'], network['netmask'])
       )
     end
   end
@@ -61,6 +73,18 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
       persister.security_groups.find_or_build(sg['ID']).assign_attributes(
         :name         => sg['name'],
         :cloud_tenant => persister.network_routers.lazy_find(sg['parentID'], :key => :cloud_tenant)
+      )
+    end
+  end
+
+  def floating_ips
+    collector.floating_ips.each do |ip|
+      persister.floating_ips.find_or_build(ip['ID']).assign_attributes(
+        :address        => ip['address'],
+        :cloud_network  => persister.cloud_networks.lazy_find(ip['associatedSharedNetworkResourceID']),
+        # TODO(miha-plesko): uncomment when https://github.com/ManageIQ/manageiq-schema/pull/217 is merged
+        # :network_router => persister.network_routers.lazy_find(ip['parentID']),
+        :cloud_tenant   => persister.network_routers.lazy_find(ip['parentID'], :key => :cloud_tenant)
       )
     end
   end

@@ -82,6 +82,14 @@ module ManageIQ::Providers
       get_list('l2domains')
     end
 
+    def get_floating_ips
+      get_list('floatingips')
+    end
+
+    def get_sharednetworkresources
+      get_list('sharednetworkresources')
+    end
+
     private
 
     # TODO(miha-plesko): Is this filter really supposed to be used here in client? Looks like debugging leftover,

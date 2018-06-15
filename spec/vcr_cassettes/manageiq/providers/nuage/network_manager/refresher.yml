@@ -624,4 +624,214 @@ http_interactions:
       string: '[{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1501769462000,"description":null,"name":"BridgeNet","gateway":null,"dynamicIpv6Address":true,"address":null,"netmask":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:48730","routeTarget":"65534:58582","vnId":10076398,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"7dcd3108-ce83-45a5-88db-4ad5f32e2eb4","parentID":"713d0ba0-dea8-44b4-8ac7-6cab9dc321a7","externalID":null,"DHCPManaged":false,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":null,"stretched":false,"templateID":"688a33dc-b5c3-47f6-b72b-687be70eb953","associatedSharedNetworkResourceID":null,"serviceID":834027956,"gatewayMACAddress":null,"uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"},{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1501769486000,"description":null,"name":"FlatNet","gateway":"10.99.99.1","dynamicIpv6Address":true,"address":"10.99.99.0","netmask":"255.255.255.0","maintenanceMode":"DISABLED","routeDistinguisher":"65534:29749","routeTarget":"65534:65409","vnId":4479255,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"3b733a41-774d-4aaa-8e64-588d5533a5c0","parentID":"713d0ba0-dea8-44b4-8ac7-6cab9dc321a7","externalID":null,"DHCPManaged":true,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":"IPV4","stretched":false,"templateID":"8e45727f-30d6-4d96-82f1-8c1ab60080d9","associatedSharedNetworkResourceID":null,"serviceID":529488222,"gatewayMACAddress":"68:54:ED:00:76:39","uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"},{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1507800660000,"description":null,"name":"L2Base","gateway":"10.99.99.1","dynamicIpv6Address":true,"address":"10.99.99.0","netmask":"255.255.255.0","maintenanceMode":"DISABLED","routeDistinguisher":"65534:49843","routeTarget":"65534:45277","vnId":13806772,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"03a955bc-add4-4346-abb5-85701477fa4e","parentID":"e0819464-e7fc-4a37-b29a-e72da7b5956c","externalID":null,"DHCPManaged":true,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":"IPV4","stretched":false,"templateID":"c43eece8-22d3-4365-b1c8-0b1b8639f2e2","associatedSharedNetworkResourceID":null,"serviceID":972881280,"gatewayMACAddress":"68:54:ED:00:A4:F6","uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"},{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1507800673000,"description":null,"name":"L2Un","gateway":null,"dynamicIpv6Address":true,"address":null,"netmask":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:61046","routeTarget":"65534:27352","vnId":1282841,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"8efc78b0-df2a-4c6f-964b-463a9d106bed","parentID":"e0819464-e7fc-4a37-b29a-e72da7b5956c","externalID":null,"DHCPManaged":false,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":null,"stretched":false,"templateID":"66b97ea1-c7c5-4d67-b606-37a0560d89f0","associatedSharedNetworkResourceID":null,"serviceID":217461762,"gatewayMACAddress":null,"uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"}]'
     http_version: 
   recorded_at: Thu, 31 May 2018 13:50:10 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/floatingips
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjoxMGU4M2JlYy1hYmI3LTQzNTgtODM3My1iMDMzNmMwMDE2Yzk=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Thu, 07-Jun-2018 06:55:48
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - address ASC
+      X-Nuage-Count:
+      - '3'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 08 Jun 2018 06:55:48 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+           {
+              "children":null,
+              "parentType":"domain",
+              "entityScope":"ENTERPRISE",
+              "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "lastUpdatedDate":1528394975000,
+              "creationDate":1528394676000,
+              "address":"10.85.92.109",
+              "assigned":true,
+              "assignedToObjectType":"vport",
+              "accessControl":false,
+              "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "ID":"3a00891b-29ba-4f60-8f35-033d84aa1083",
+              "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+              "externalID":null,
+              "associatedSharedNetworkResourceID":"17b305a7-eec9-4492-acb9-20a1d63a8ba1"
+           },
+           {
+              "children":null,
+              "parentType":"domain",
+              "entityScope":"ENTERPRISE",
+              "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "lastUpdatedDate":1528395214000,
+              "creationDate":1528394673000,
+              "address":"10.85.92.192",
+              "assigned":true,
+              "assignedToObjectType":"vport",
+              "accessControl":false,
+              "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "ID":"37c49c47-7737-4c94-ab80-7b5898f68f9b",
+              "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+              "externalID":null,
+              "associatedSharedNetworkResourceID":"17b305a7-eec9-4492-acb9-20a1d63a8ba1"
+           },
+           {
+              "children":null,
+              "parentType":"domain",
+              "entityScope":"ENTERPRISE",
+              "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "lastUpdatedDate":1528394679000,
+              "creationDate":1528394679000,
+              "address":"10.85.92.70",
+              "assigned":false,
+              "assignedToObjectType":null,
+              "accessControl":false,
+              "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "ID":"4c2d0aea-1140-4557-9156-e4691f70b1e1",
+              "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+              "externalID":null,
+              "associatedSharedNetworkResourceID":"17b305a7-eec9-4492-acb9-20a1d63a8ba1"
+           }
+        ]
+    http_version:
+  recorded_at: Fri, 08 Jun 2018 06:55:48 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/sharednetworkresources
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjoxY2M0MDJlOC1lZWViLTQzOGUtODQ3NC02NmY3MDJmOGM2Njk=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Mon, 11-Jun-2018 09:48:21
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Tue, 12 Jun 2018 09:48:20 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"zone",
+            "entityScope":"GLOBAL",
+            "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1523409573000,
+            "creationDate":1523409573000,
+            "name":"Subnet 0",
+            "description":null,
+            "address":"10.85.92.0",
+            "netmask":"255.255.255.0",
+            "gateway":null,
+            "type":"FLOATING",
+            "uplinkVPortName":null,
+            "uplinkInterfaceIP":null,
+            "uplinkInterfaceMAC":null,
+            "underlay":false,
+            "backHaulRouteDistinguisher":"65534:56886",
+            "backHaulRouteTarget":"65534:33586",
+            "backHaulVNID":4913208,
+            "vnID":9657713,
+            "subnetRouteDistinguisher":"65534:4177",
+            "subnetRouteTarget":"65534:8406",
+            "permittedActionType":null,
+            "accessRestrictionEnabled":false,
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"17b305a7-eec9-4492-acb9-20a1d63a8ba1",
+            "parentID":"5cc7da30-a3f2-448f-9a30-4ff205781511",
+            "externalID":null,
+            "domainRouteDistinguisher":"65534:17990",
+            "domainRouteTarget":"65534:35584",
+            "DHCPManaged":true,
+            "sharedResourceParentID":"5cc7da30-a3f2-448f-9a30-4ff205781511",
+            "uplinkGWVlanAttachmentID":null,
+            "ECMPCount":1,
+            "dynamicPATAllocationEnabled":false,
+            "associatedPATMapperID":null,
+            "useGlobalMAC":"DISABLED",
+            "gatewayMACAddress":"68:54:ED:00:DB:1B",
+            "enterpriseID":null
+          }
+        ]
+    http_version:
+  recorded_at: Tue, 12 Jun 2018 09:48:21 GMT
 recorded_with: VCR 3.0.3

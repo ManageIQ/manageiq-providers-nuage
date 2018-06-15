@@ -7,6 +7,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     _network_routers.values
   end
 
+  def cloud_networks_floating
+    @cloud_networks_floating ||= _shared_resources.select { |res| res['type'] == 'FLOATING' }
+  end
+
   def cloud_subnets
     return @cloud_subnets if @cloud_subnets.any?
     @cloud_subnets = vsd_client.get_subnets
@@ -20,6 +24,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
   def security_groups
     return @security_groups if @security_groups.any?
     @security_groups = vsd_client.get_policy_groups
+  end
+
+  def floating_ips
+    return @floating_ips if @floating_ips.any?
+    @floating_ips = vsd_client.get_floating_ips
   end
 
   def zones
@@ -57,6 +66,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
   def _network_routers
     return @network_routers if @network_routers.any?
     @network_routers = hash_by_id(vsd_client.get_domains)
+  end
+
+  def _shared_resources
+    return @shared_resources if @shared_resources.any?
+    @shared_resources = vsd_client.get_sharednetworkresources
   end
 
   def hash_by_id(list)

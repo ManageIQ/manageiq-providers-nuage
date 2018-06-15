@@ -59,6 +59,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:l2_subnet_ref1)     { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
     let(:l2_subnet_ref2)     { "8efc78b0-df2a-4c6f-964b-463a9d106bed" }
     let(:router_ref)         { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
+    let(:floating_ip_ref)    { "3a00891b-29ba-4f60-8f35-033d84aa1083" }
+    let(:network_ref)        { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
 
     ALL_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -86,6 +88,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             assert_security_groups
             assert_cloud_subnets
             assert_l2_cloud_subnets
+            assert_floating_ips
+            assert_cloud_networks
           end
         end
       end
@@ -95,9 +99,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   def assert_table_counts
     expect(ExtManagementSystem.count).to eq(1)
     expect(CloudTenant.count).to eq(2)
+    expect(CloudNetwork.count).to eq(1)
     expect(SecurityGroup.count).to eq(1)
     expect(CloudSubnet.count).to eq(6)
-    expect(FloatingIp.count).to eq(0)
+    expect(FloatingIp.count).to eq(3)
     expect(NetworkPort.count).to eq(0)
     expect(NetworkRouter.count).to eq(1)
   end
@@ -243,5 +248,26 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :type              => 'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2',
       :network_router_id => nil
     )
+  end
+
+  def assert_floating_ips
+    ip = FloatingIp.find_by(:ems_ref => floating_ip_ref)
+    expect(ip).to have_attributes(
+      :address         => '10.85.92.109',
+      :cloud_tenant_id => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
+      :type            => 'ManageIQ::Providers::Nuage::NetworkManager::FloatingIp'
+    )
+    # TODO(miha-plesko): uncomment when https://github.com/ManageIQ/manageiq-schema/pull/217 is merged
+    # expect(NetworkRouter.find_by(:ems_ref => router_ref).floating_ips).to include(ip)
+  end
+
+  def assert_cloud_networks
+    net = CloudNetwork.find_by(:ems_ref => network_ref)
+    expect(net).to have_attributes(
+      :name => 'Subnet 0',
+      :cidr => '10.85.92.0/24',
+      :type => 'ManageIQ::Providers::Nuage::NetworkManager::CloudNetwork::Floating'
+    )
+    expect(net.floating_ips).to include(FloatingIp.find_by(:ems_ref => floating_ip_ref))
   end
 end

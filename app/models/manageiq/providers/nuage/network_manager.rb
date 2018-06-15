@@ -7,10 +7,12 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :VsdClient
   require_nested :CloudTenant
   require_nested :NetworkRouter
+  require_nested :CloudNetwork
   require_nested :CloudSubnet
   require_nested :CloudSubnetL3
   require_nested :CloudSubnetL2
   require_nested :SecurityGroup
+  require_nested :FloatingIp
 
   supports :ems_network_new
 
@@ -49,6 +51,10 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
 
   def self.l3_cloud_subnet_type
     'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3'
+  end
+
+  def self.floating_cloud_network_type
+    'ManageIQ::Providers::Nuage::NetworkManager::CloudNetwork::Floating'
   end
 
   def name
