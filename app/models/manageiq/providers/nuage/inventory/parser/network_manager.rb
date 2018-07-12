@@ -7,6 +7,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
     l2_cloud_subnets
     security_groups
     floating_ips
+    network_ports
   end
 
   private
@@ -89,6 +90,45 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
     end
   end
 
+  def network_ports
+    collector.network_ports.each do |port|
+      network_port = persister.network_ports.find_or_build(port['ID']).assign_attributes(
+        :name            => port['name'],
+        :floating_ip     => persister.floating_ips.lazy_find(port['associatedFloatingIPID']),
+        :security_groups => collector.security_groups_for_network_port(port['ID']).map { |sg| persister.security_groups.lazy_find(sg['ID']) },
+        :cloud_tenant    => persister.cloud_subnets.lazy_find(port['parentID'], :key => :cloud_tenant)
+      )
+
+      # Type-specific properties.
+      case port['type'].to_s.upcase
+      when 'BRIDGE'
+        network_port_type = collector.manager.class.bridge_network_port_type
+        address           = nil
+      when 'CONTAINER'
+        network_port_type = collector.manager.class.container_network_port_type
+        address           = first_ip_address(collector.container_interfaces_for_network_port(port['ID']))
+      when 'HOST'
+        network_port_type = collector.manager.class.host_network_port_type
+        address           = first_ip_address(collector.host_interfaces_for_network_port(port['ID']))
+      when 'VM'
+        network_port_type = collector.manager.class.vm_network_port_type
+        address           = first_ip_address(collector.vm_interfaces_for_network_port(port['ID']))
+      else
+        network_port_type = 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort'
+        address           = nil
+      end
+
+      network_port.type = network_port_type
+      network_port.cloud_subnet_network_ports = [
+        persister.cloud_subnet_network_ports.find_or_build_by(
+          :cloud_subnet => persister.cloud_subnets.lazy_find(port['parentID']),
+          :address      => address,
+          :network_port => network_port
+        )
+      ]
+    end
+  end
+
   def map_extra_attributes(zone_id)
     if (zone = collector.zone(zone_id))
       {
@@ -104,5 +144,9 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
   def to_cidr(address, netmask)
     return unless address && netmask
     address.to_s + '/' + netmask.to_s.split(".").map { |e| e.to_i.to_s(2).rjust(8, "0") }.join.count("1").to_s
+  end
+
+  def first_ip_address(interfaces)
+    (interfaces.first || {}).dig('IPAddress')
   end
 end

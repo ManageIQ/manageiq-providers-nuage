@@ -7,11 +7,20 @@ module ManageIQ::Providers::Nuage::Inventory::Persister::Definitions::NetworkCol
        security_groups
        cloud_networks
        floating_ips
+       network_ports
        network_routers).each do |name|
 
       add_collection(network, name) do |builder|
         builder.add_properties(:parent => manager) # including targeted
       end
+    end
+
+    add_cloud_subnet_network_ports
+  end
+
+  def add_cloud_subnet_network_ports(extra_properties = {})
+    add_collection(network, :cloud_subnet_network_ports, extra_properties) do |builder|
+      builder.add_properties(:parent => manager, :parent_inventory_collections => %i(network_ports))
     end
   end
 end

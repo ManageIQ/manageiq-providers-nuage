@@ -35,6 +35,29 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     _zones.values
   end
 
+  def network_ports
+    return @network_ports if @network_ports.any?
+    @network_ports.concat(network_routers.each_with_object([]) { |domain, res| res.concat(vsd_client.get_vports_for_domain(domain['ID'])) })
+    @network_ports.concat(l2_cloud_subnets.each_with_object([]) { |l2_domain, res| res.concat(vsd_client.get_vports_for_l2_domain(l2_domain['ID'])) })
+    @network_ports
+  end
+
+  def security_groups_for_network_port(port_ems_ref)
+    @security_groups_per_port[port_ems_ref] ||= vsd_client.get_policy_groups_for_vport(port_ems_ref)
+  end
+
+  def vm_interfaces_for_network_port(port_ems_ref)
+    @vm_interfaces_per_port[port_ems_ref] ||= vsd_client.get_vm_interfaces_for_vport(port_ems_ref)
+  end
+
+  def container_interfaces_for_network_port(port_ems_ref)
+    @container_interfaces_per_port[port_ems_ref] ||= vsd_client.get_container_interfaces_for_vport(port_ems_ref)
+  end
+
+  def host_interfaces_for_network_port(port_ems_ref)
+    @host_interfaces_per_port[port_ems_ref] ||= vsd_client.get_host_interfaces_for_vport(port_ems_ref)
+  end
+
   def security_group(ems_ref)
     security_groups.find { |sg| sg['ID'] == ems_ref }
   end

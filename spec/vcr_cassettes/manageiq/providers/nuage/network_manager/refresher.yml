@@ -834,4 +834,1924 @@ http_interactions:
         ]
     http_version:
   recorded_at: Tue, 12 Jun 2018 09:48:21 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/7dcd3108-ce83-45a5-88db-4ad5f32e2eb4/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/7dcd3108-ce83-45a5-88db-4ad5f32e2eb4/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/domains/75ad8ee8-726c-4950-94bc-6a5aab64631d/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"subnet",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "lastUpdatedDate":1528371984000,
+            "creationDate":1528371984000,
+            "name":"Container VPort 1ea3d199",
+            "gatewayMACMoveRole":null,
+            "trunkRole":null,
+            "type":"CONTAINER",
+            "subType":"NONE",
+            "description":null,
+            "systemType":"SOFTWARE",
+            "addressSpoofing":"INHERITED",
+            "active":false,
+            "operationalState":"INIT",
+            "peerOperationalState":null,
+            "segmentationType":null,
+            "owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "ID":"dd9a4d57-2e24-427b-8aef-4d2925df47b2",
+            "parentID":"d60d316a-c1ac-4412-813c-9652bdbc4e41",
+            "externalID":null,
+            "assocEntityID":"adbfcb81-e0ab-4b7e-9e51-1b6c5e862bb9",
+            "domainID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+            "zoneID":"3b11a2d0-2082-42f1-92db-0b05264f372e",
+            "multiNICVPortID":null,
+            "VLANID":null,
+            "associatedFloatingIPID":null,
+            "hasAttachedInterfaces":false,
+            "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null,
+            "DPI":"INHERITED",
+            "associatedSendMulticastChannelMapID":null,
+            "associatedTrunkID":null,
+            "segmentationID":null,
+            "associatedSSID":null
+          },
+          {
+            "children":null,
+            "parentType":"subnet",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "lastUpdatedDate":1528371978000,
+            "creationDate":1528371978000,
+            "name":"VM VPort 70e41192",
+            "gatewayMACMoveRole":null,
+            "trunkRole":null,
+            "type":"VM",
+            "subType":"NONE",
+            "description":null,
+            "systemType":"SOFTWARE",
+            "addressSpoofing":"INHERITED",
+            "active":false,
+            "operationalState":"INIT",
+            "peerOperationalState":null,
+            "segmentationType":null,
+            "owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "ID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "parentID":"d60d316a-c1ac-4412-813c-9652bdbc4e41",
+            "externalID":null,
+            "assocEntityID":"adbfcb81-e0ab-4b7e-9e51-1b6c5e862bb9",
+            "domainID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+            "zoneID":"3b11a2d0-2082-42f1-92db-0b05264f372e",
+            "multiNICVPortID":null,
+            "VLANID":null,
+            "associatedFloatingIPID":null,
+            "hasAttachedInterfaces":false,
+            "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null,
+            "DPI":"INHERITED",
+            "associatedSendMulticastChannelMapID":null,
+            "associatedTrunkID":null,
+            "segmentationID":null,
+            "associatedSSID":null
+          },
+          {
+            "children":null,
+            "parentType":"subnet",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"43f8868f-4bc1-472c-9d19-533dcfcb1ee0",
+            "lastUpdatedDate":1528394448000,
+            "creationDate":1528394447000,
+            "name":"Bridge VPort ad817d5a",
+            "gatewayMACMoveRole":"TERTIARY",
+            "trunkRole":null,
+            "type":"BRIDGE",
+            "subType":"NONE",
+            "description":null,
+            "systemType":"HARDWARE",
+            "addressSpoofing":"ENABLED",
+            "active":false,
+            "operationalState":"INIT",
+            "peerOperationalState":null,
+            "segmentationType":null,
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"43b7faad-2c76-4945-9412-66a04bde7b6a",
+            "parentID":"d60d316a-c1ac-4412-813c-9652bdbc4e41",
+            "externalID":null,
+            "assocEntityID":"5c23e830-308d-4611-97f5-50262d43fc33",
+            "domainID":"8010cb8a-e40f-4f68-b27b-503e8befb570",
+            "zoneID":"54a37c02-b5e7-4e46-bb4e-ca4090bb31da",
+            "multiNICVPortID":null,
+            "VLANID":"a9c1a7ab-46ac-49ec-86a8-3eecc297ee40",
+            "associatedFloatingIPID":null,
+            "hasAttachedInterfaces":true,
+            "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null,
+            "DPI":"INHERITED",
+            "associatedSendMulticastChannelMapID":null,
+            "associatedTrunkID":null,
+            "segmentationID":null,
+            "associatedSSID":null
+          },
+          {
+            "children":null,
+            "parentType":"subnet",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"43f8868f-4bc1-472c-9d19-533dcfcb1ee0",
+            "lastUpdatedDate":1528395214000,
+            "creationDate":1528395175000,
+            "name":"Host VPort 25772231",
+            "gatewayMACMoveRole":null,
+            "trunkRole":null,
+            "type":"HOST",
+            "subType":"NONE",
+            "description":null,
+            "systemType":"SOFTWARE",
+            "addressSpoofing":"INHERITED",
+            "active":false,
+            "operationalState":"INIT",
+            "peerOperationalState":null,
+            "segmentationType":null,
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"b19075d3-a797-4dcd-93be-de52b4247e46",
+            "parentID":"d60d316a-c1ac-4412-813c-9652bdbc4e41",
+            "externalID":null,
+            "assocEntityID":"b443568c-c67f-4ab8-bd9c-a9a1be11464d",
+            "domainID":"8010cb8a-e40f-4f68-b27b-503e8befb570",
+            "zoneID":"505a46cc-979b-4565-8f64-6e73dc9c8bd0",
+            "multiNICVPortID":null,
+            "VLANID":"776239dc-6b52-4a25-b971-dca4a85bfba8",
+            "associatedFloatingIPID":"3a00891b-29ba-4f60-8f35-033d84aa1083",
+            "hasAttachedInterfaces":true,
+            "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null,
+            "DPI":"INHERITED",
+            "associatedSendMulticastChannelMapID":null,
+            "associatedTrunkID":null,
+            "segmentationID":null,
+            "associatedSSID":null
+          }
+        ]
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/domains/75ad8ee8-726c-4950-94bc-6a5aab64631d/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"subnet",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "lastUpdatedDate":1528371984000,
+            "creationDate":1528371984000,
+            "name":"Container VPort 1ea3d199",
+            "gatewayMACMoveRole":null,
+            "trunkRole":null,
+            "type":"CONTAINER",
+            "subType":"NONE",
+            "description":null,
+            "systemType":"SOFTWARE",
+            "addressSpoofing":"INHERITED",
+            "active":false,
+            "operationalState":"INIT",
+            "peerOperationalState":null,
+            "segmentationType":null,
+            "owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "ID":"dd9a4d57-2e24-427b-8aef-4d2925df47b2",
+            "parentID":"adbfcb81-e0ab-4b7e-9e51-1b6c5e862bb9",
+            "externalID":null,
+            "assocEntityID":"adbfcb81-e0ab-4b7e-9e51-1b6c5e862bb9",
+            "domainID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+            "zoneID":"3b11a2d0-2082-42f1-92db-0b05264f372e",
+            "multiNICVPortID":null,
+            "VLANID":null,
+            "associatedFloatingIPID":null,
+            "hasAttachedInterfaces":false,
+            "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null,
+            "DPI":"INHERITED",
+            "associatedSendMulticastChannelMapID":null,
+            "associatedTrunkID":null,
+            "segmentationID":null,
+            "associatedSSID":null
+          },
+          {
+            "children":null,
+            "parentType":"subnet",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "lastUpdatedDate":1528371978000,
+            "creationDate":1528371978000,
+            "name":"VM VPort 70e41192",
+            "gatewayMACMoveRole":null,
+            "trunkRole":null,
+            "type":"VM",
+            "subType":"NONE",
+            "description":null,
+            "systemType":"SOFTWARE",
+            "addressSpoofing":"INHERITED",
+            "active":false,
+            "operationalState":"INIT",
+            "peerOperationalState":null,
+            "segmentationType":null,
+            "owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "ID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "parentID":"adbfcb81-e0ab-4b7e-9e51-1b6c5e862bb9",
+            "externalID":null,
+            "assocEntityID":"adbfcb81-e0ab-4b7e-9e51-1b6c5e862bb9",
+            "domainID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+            "zoneID":"3b11a2d0-2082-42f1-92db-0b05264f372e",
+            "multiNICVPortID":null,
+            "VLANID":null,
+            "associatedFloatingIPID":null,
+            "hasAttachedInterfaces":false,
+            "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null,
+            "DPI":"INHERITED",
+            "associatedSendMulticastChannelMapID":null,
+            "associatedTrunkID":null,
+            "segmentationID":null,
+            "associatedSSID":null
+          }
+        ]
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/3b733a41-774d-4aaa-8e64-588d5533a5c0/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/3b733a41-774d-4aaa-8e64-588d5533a5c0/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/03a955bc-add4-4346-abb5-85701477fa4e/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/03a955bc-add4-4346-abb5-85701477fa4e/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/8efc78b0-df2a-4c6f-964b-463a9d106bed/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/l2domains/8efc78b0-df2a-4c6f-964b-463a9d106bed/vports
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZTYyM2ExNS0yZWQ3LTQ4OGUtODAxZi1hMGFlOTViZmZhMjE=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Tue, 10-Jul-2018 06:35:06
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Wed, 11 Jul 2018 06:35:06 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+  recorded_at: Wed, 11 Jul 2018 06:35:06 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/dd9a4d57-2e24-427b-8aef-4d2925df47b2/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 12 Jul 2018 07:12:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+             "children":null,
+             "parentType":"domain",
+             "entityScope":"ENTERPRISE",
+             "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "lastUpdatedDate":1531303445000,
+             "creationDate":1513023412000,
+             "name":"Test Policy Group",
+             "description":null,
+             "type":"SOFTWARE",
+             "external":false,
+             "entityState":null,
+             "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+             "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+             "externalID":null,
+             "EVPNCommunityTag":null,
+             "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "policyGroupID":1987103703
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/dd9a4d57-2e24-427b-8aef-4d2925df47b2/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 12 Jul 2018 07:12:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+             "children":null,
+             "parentType":"domain",
+             "entityScope":"ENTERPRISE",
+             "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "lastUpdatedDate":1531303445000,
+             "creationDate":1513023412000,
+             "name":"Test Policy Group",
+             "description":null,
+             "type":"SOFTWARE",
+             "external":false,
+             "entityState":null,
+             "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+             "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+             "externalID":null,
+             "EVPNCommunityTag":null,
+             "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "policyGroupID":1987103703
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/dd9a4d57-2e24-427b-8aef-4d2925df47b2/containerinterfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:01 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"vport",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "lastUpdatedDate":1528395206000,
+            "creationDate":1528395192000,
+            "name":"Demo Container Interface",
+            "policyDecisionID":null,
+            "domainName":"Some Domain Name",
+            "zoneName":"HOST zone",
+            "attachedNetworkType":"SUBNET",
+            "netmask":"255.255.255.0",
+            "gateway":"10.98.80.1",
+            "networkName":"VmNet",
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "parentID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "externalID":null,
+            "IPAddress":"10.98.80.100",
+            "IPv6Address":null,
+            "MAC":"00:05:06:07:00:11",
+            "domainID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "attachedNetworkID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "zoneID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "VPortID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "tierID":null,
+            "IPv6Gateway":null,
+            "VPortName":"VM VPort Demo"
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/dd9a4d57-2e24-427b-8aef-4d2925df47b2/containerinterfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:01 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"vport",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "lastUpdatedDate":1528395206000,
+            "creationDate":1528395192000,
+            "name":"Demo Container Interface",
+            "policyDecisionID":null,
+            "domainName":"Some Domain Name",
+            "zoneName":"HOST zone",
+            "attachedNetworkType":"SUBNET",
+            "netmask":"255.255.255.0",
+            "gateway":"10.98.80.1",
+            "networkName":"VmNet",
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "parentID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "externalID":null,
+            "IPAddress":"10.98.80.100",
+            "IPv6Address":null,
+            "MAC":"00:05:06:07:00:11",
+            "domainID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "attachedNetworkID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "zoneID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "VPortID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "tierID":null,
+            "IPv6Gateway":null,
+            "VPortName":"VM VPort Demo"
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/15d1369e-9553-4e83-8bb9-3a6c269f81ae/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '2'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 12 Jul 2018 07:12:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+       [
+         {
+            "children":null,
+            "parentType":"domain",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "lastUpdatedDate":1531303445000,
+            "creationDate":1513023412000,
+            "name":"Test Policy Group",
+            "description":null,
+            "type":"SOFTWARE",
+            "external":false,
+            "entityState":null,
+            "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+            "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+            "externalID":null,
+            "EVPNCommunityTag":null,
+            "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "policyGroupID":1987103703
+         }
+       ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/15d1369e-9553-4e83-8bb9-3a6c269f81ae/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '2'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 12 Jul 2018 07:12:01 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+       [
+         {
+            "children":null,
+            "parentType":"domain",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "lastUpdatedDate":1531303445000,
+            "creationDate":1513023412000,
+            "name":"Test Policy Group",
+            "description":null,
+            "type":"SOFTWARE",
+            "external":false,
+            "entityState":null,
+            "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+            "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+            "externalID":null,
+            "EVPNCommunityTag":null,
+            "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "policyGroupID":1987103703
+         }
+       ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/15d1369e-9553-4e83-8bb9-3a6c269f81ae/vminterfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"vport",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1528395206000,
+            "creationDate":1528395192000,
+            "name":"Demo VM Interface",
+            "policyDecisionID":null,
+            "domainName":"Some Domain Name",
+            "zoneName":"HOST zone",
+            "attachedNetworkType":"SUBNET",
+            "netmask":"255.255.255.0",
+            "gateway":"10.98.78.1",
+            "networkName":"VmNet",
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "parentID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "externalID":null,
+            "IPAddress":"10.98.78.179",
+            "IPv6Address":null,
+            "MAC":"00:05:06:07:08:99",
+            "domainID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "attachedNetworkID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "zoneID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "VPortID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "tierID":null,
+            "IPv6Gateway":null,
+            "VPortName":"VM VPort Demo"
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/15d1369e-9553-4e83-8bb9-3a6c269f81ae/vminterfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"vport",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1528395206000,
+            "creationDate":1528395192000,
+            "name":"Demo VM Interface",
+            "policyDecisionID":null,
+            "domainName":"Some Domain Name",
+            "zoneName":"HOST zone",
+            "attachedNetworkType":"SUBNET",
+            "netmask":"255.255.255.0",
+            "gateway":"10.98.78.1",
+            "networkName":"VmNet",
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "parentID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "externalID":null,
+            "IPAddress":"10.98.78.179",
+            "IPv6Address":null,
+            "MAC":"00:05:06:07:08:99",
+            "domainID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "attachedNetworkID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "zoneID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "VPortID":"15d1369e-9553-4e83-8bb9-3a6c269f81ae",
+            "tierID":null,
+            "IPv6Gateway":null,
+            "VPortName":"VM VPort Demo"
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/43b7faad-2c76-4945-9412-66a04bde7b6a/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+             "children":null,
+             "parentType":"domain",
+             "entityScope":"ENTERPRISE",
+             "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "lastUpdatedDate":1531303445000,
+             "creationDate":1513023412000,
+             "name":"Test Policy Group",
+             "description":null,
+             "type":"SOFTWARE",
+             "external":false,
+             "entityState":null,
+             "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+             "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+             "externalID":null,
+             "EVPNCommunityTag":null,
+             "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "policyGroupID":1987103703
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/43b7faad-2c76-4945-9412-66a04bde7b6a/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+             "children":null,
+             "parentType":"domain",
+             "entityScope":"ENTERPRISE",
+             "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "lastUpdatedDate":1531303445000,
+             "creationDate":1513023412000,
+             "name":"Test Policy Group",
+             "description":null,
+             "type":"SOFTWARE",
+             "external":false,
+             "entityState":null,
+             "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+             "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+             "externalID":null,
+             "EVPNCommunityTag":null,
+             "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "policyGroupID":1987103703
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/b19075d3-a797-4dcd-93be-de52b4247e46/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+             "children":null,
+             "parentType":"domain",
+             "entityScope":"ENTERPRISE",
+             "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "lastUpdatedDate":1531303445000,
+             "creationDate":1513023412000,
+             "name":"Test Policy Group",
+             "description":null,
+             "type":"SOFTWARE",
+             "external":false,
+             "entityState":null,
+             "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+             "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+             "externalID":null,
+             "EVPNCommunityTag":null,
+             "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "policyGroupID":1987103703
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/b19075d3-a797-4dcd-93be-de52b4247e46/policygroups
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:02
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+             "children":null,
+             "parentType":"domain",
+             "entityScope":"ENTERPRISE",
+             "lastUpdatedBy":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "lastUpdatedDate":1531303445000,
+             "creationDate":1513023412000,
+             "name":"Test Policy Group",
+             "description":null,
+             "type":"SOFTWARE",
+             "external":false,
+             "entityState":null,
+             "owner":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+             "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+             "externalID":null,
+             "EVPNCommunityTag":null,
+             "templateID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+             "policyGroupID":1987103703
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:02 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/b19075d3-a797-4dcd-93be-de52b4247e46/hostinterfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:03
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - ID ASC
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"vport",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1528395206000,
+            "creationDate":1528395192000,
+            "name":"Host interface 2",
+            "policyDecisionID":null,
+            "domainName":"BRIDGE-HOST-Example",
+            "zoneName":"HOST zone",
+            "attachedNetworkType":"SUBNET",
+            "netmask":"255.255.255.0",
+            "gateway":"10.98.77.1",
+            "networkName":"HostNet",
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"fd0fe9cc-170c-492a-9e18-68ad0c281413",
+            "parentID":"b19075d3-a797-4dcd-93be-de52b4247e46",
+            "externalID":null,
+            "IPAddress":"10.98.77.179",
+            "IPv6Address":null,
+            "MAC":"00:05:06:07:08:09",
+            "domainID":"8010cb8a-e40f-4f68-b27b-503e8befb570",
+            "attachedNetworkID":"b443568c-c67f-4ab8-bd9c-a9a1be11464d",
+            "zoneID":"505a46cc-979b-4565-8f64-6e73dc9c8bd0",
+            "VPortID":"b19075d3-a797-4dcd-93be-de52b4247e46",
+            "tierID":null,
+            "IPv6Gateway":null,
+            "VPortName":"Host VPort 25772231"
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:03 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/b19075d3-a797-4dcd-93be-de52b4247e46/hostinterfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpkMTQ2ZmRhYi1jODcwLTQ2MGUtODNjYS1kNjZmMzQ1Yjk4Y2M=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 11-Jul-2018 07:12:03
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - ID ASC
+      X-Nuage-Count:
+      - '1'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 12 Jul 2018 07:12:02 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+            "children":null,
+            "parentType":"vport",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1528395206000,
+            "creationDate":1528395192000,
+            "name":"Host interface 2",
+            "policyDecisionID":null,
+            "domainName":"BRIDGE-HOST-Example",
+            "zoneName":"HOST zone",
+            "attachedNetworkType":"SUBNET",
+            "netmask":"255.255.255.0",
+            "gateway":"10.98.77.1",
+            "networkName":"HostNet",
+            "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID":"fd0fe9cc-170c-492a-9e18-68ad0c281413",
+            "parentID":"b19075d3-a797-4dcd-93be-de52b4247e46",
+            "externalID":null,
+            "IPAddress":"10.98.77.179",
+            "IPv6Address":null,
+            "MAC":"00:05:06:07:08:09",
+            "domainID":"8010cb8a-e40f-4f68-b27b-503e8befb570",
+            "attachedNetworkID":"b443568c-c67f-4ab8-bd9c-a9a1be11464d",
+            "zoneID":"505a46cc-979b-4565-8f64-6e73dc9c8bd0",
+            "VPortID":"b19075d3-a797-4dcd-93be-de52b4247e46",
+            "tierID":null,
+            "IPv6Gateway":null,
+            "VPortName":"Host VPort 25772231"
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 12 Jul 2018 07:12:03 GMT
 recorded_with: VCR 3.0.3
