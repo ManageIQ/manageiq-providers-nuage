@@ -61,6 +61,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:router_ref)         { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
     let(:floating_ip_ref)    { "3a00891b-29ba-4f60-8f35-033d84aa1083" }
     let(:network_ref)        { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
+    let(:cont_port_ref)      { "dd9a4d57-2e24-427b-8aef-4d2925df47b2" }
+    let(:vm_port_ref)        { "15d1369e-9553-4e83-8bb9-3a6c269f81ae" }
+    let(:bridge_port_ref)    { "43b7faad-2c76-4945-9412-66a04bde7b6a" }
+    let(:host_port_ref)      { "b19075d3-a797-4dcd-93be-de52b4247e46" }
 
     ALL_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -90,6 +94,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             assert_l2_cloud_subnets
             assert_floating_ips
             assert_cloud_networks
+            assert_network_ports
           end
         end
       end
@@ -103,7 +108,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(SecurityGroup.count).to eq(1)
     expect(CloudSubnet.count).to eq(6)
     expect(FloatingIp.count).to eq(3)
-    expect(NetworkPort.count).to eq(0)
+    expect(NetworkPort.count).to eq(4)
     expect(NetworkRouter.count).to eq(1)
   end
 
@@ -269,5 +274,67 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :type => 'ManageIQ::Providers::Nuage::NetworkManager::CloudNetwork::Floating'
     )
     expect(net.floating_ips).to include(FloatingIp.find_by(:ems_ref => floating_ip_ref))
+  end
+
+  def assert_network_ports
+    container_port = NetworkPort.find_by(:ems_ref => cont_port_ref)
+    expect(container_port).to have_attributes(
+      :name            => 'Container VPort 1ea3d199',
+      :type            => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Container',
+      :floating_ip     => nil,
+      :security_groups => [SecurityGroup.find_by(:ems_ref => security_group_ref)],
+      :cloud_tenant    => CloudTenant.find_by(:ems_ref => tenant_ref2)
+    )
+    expect(container_port.cloud_subnet_network_ports.size).to eq(1)
+    expect(container_port.cloud_subnet_network_ports.first).to have_attributes(
+      :cloud_subnet => CloudSubnet.find_by(:ems_ref => cloud_subnet_ref1),
+      :network_port => container_port,
+      :address      => '10.98.80.100'
+    )
+
+    vm_port = NetworkPort.find_by(:ems_ref => vm_port_ref)
+    expect(vm_port).to have_attributes(
+      :name            => 'VM VPort 70e41192',
+      :type            => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Vm',
+      :floating_ip     => nil,
+      :security_groups => [SecurityGroup.find_by(:ems_ref => security_group_ref)],
+      :cloud_tenant    => CloudTenant.find_by(:ems_ref => tenant_ref2)
+    )
+    expect(vm_port.cloud_subnet_network_ports.size).to eq(1)
+    expect(vm_port.cloud_subnet_network_ports.first).to have_attributes(
+      :cloud_subnet => CloudSubnet.find_by(:ems_ref => cloud_subnet_ref1),
+      :network_port => vm_port,
+      :address      => '10.98.78.179'
+    )
+
+    bridge_port = NetworkPort.find_by(:ems_ref => bridge_port_ref)
+    expect(bridge_port).to have_attributes(
+      :name            => 'Bridge VPort ad817d5a',
+      :type            => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Bridge',
+      :floating_ip     => nil,
+      :security_groups => [SecurityGroup.find_by(:ems_ref => security_group_ref)],
+      :cloud_tenant    => CloudTenant.find_by(:ems_ref => tenant_ref2)
+    )
+    expect(bridge_port.cloud_subnet_network_ports.size).to eq(1)
+    expect(bridge_port.cloud_subnet_network_ports.first).to have_attributes(
+      :cloud_subnet => CloudSubnet.find_by(:ems_ref => cloud_subnet_ref1),
+      :network_port => bridge_port,
+      :address      => nil
+    )
+
+    host_port = NetworkPort.find_by(:ems_ref => host_port_ref)
+    expect(host_port).to have_attributes(
+      :name            => 'Host VPort 25772231',
+      :type            => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Host',
+      :floating_ip     => FloatingIp.find_by(:ems_ref => floating_ip_ref),
+      :security_groups => [SecurityGroup.find_by(:ems_ref => security_group_ref)],
+      :cloud_tenant    => CloudTenant.find_by(:ems_ref => tenant_ref2)
+    )
+    expect(host_port.cloud_subnet_network_ports.size).to eq(1)
+    expect(host_port.cloud_subnet_network_ports.first).to have_attributes(
+      :cloud_subnet => CloudSubnet.find_by(:ems_ref => cloud_subnet_ref1),
+      :network_port => host_port,
+      :address      => '10.98.77.179'
+    )
   end
 end

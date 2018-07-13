@@ -78,6 +78,22 @@ module ManageIQ::Providers
       get_list("domains/#{domain_id}/policygroups")
     end
 
+    def get_policy_groups_for_vport(vport_id)
+      get_list("vports/#{vport_id}/policygroups")
+    end
+
+    def get_vm_interfaces_for_vport(vport_id)
+      get_list("vports/#{vport_id}/vminterfaces")
+    end
+
+    def get_container_interfaces_for_vport(vport_id)
+      get_list("vports/#{vport_id}/containerinterfaces")
+    end
+
+    def get_host_interfaces_for_vport(vport_id)
+      get_list("vports/#{vport_id}/hostinterfaces")
+    end
+
     def get_l2_domains
       get_list('l2domains')
     end
@@ -88,6 +104,14 @@ module ManageIQ::Providers
 
     def get_sharednetworkresources
       get_list('sharednetworkresources')
+    end
+
+    def get_vports_for_domain(domain_id)
+      get_list("domains/#{domain_id}/vports")
+    end
+
+    def get_vports_for_l2_domain(l2_domain_id)
+      get_list("l2domains/#{l2_domain_id}/vports")
     end
 
     private

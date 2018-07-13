@@ -45,6 +45,14 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     [] # TODO(miha-plesko): implement targeted refresh for floating ips
   end
 
+  def network_ports
+    [] # TODO(miha-plesko): implement targeted refresh for network_ports
+  end
+
+  def security_groups_for_network_port(_port_ems_ref)
+    [] # TODO(miha-plesko): implement targeted refresh for network_ports
+  end
+
   def cloud_subnet(ems_ref)
     return @cloud_subnets_map[ems_ref] if @cloud_subnets_map.key?(ems_ref)
     @cloud_subnets_map[ems_ref] = safe_call { vsd_client.get_subnet(ems_ref) }

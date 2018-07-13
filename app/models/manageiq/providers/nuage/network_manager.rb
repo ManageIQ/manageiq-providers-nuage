@@ -13,6 +13,7 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :CloudSubnetL2
   require_nested :SecurityGroup
   require_nested :FloatingIp
+  require_nested :NetworkPort
 
   supports :ems_network_new
 
@@ -41,20 +42,38 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
     supported_auth_types.include?(authtype.to_s)
   end
 
-  def self.event_monitor_class
-    ManageIQ::Providers::Nuage::NetworkManager::EventCatcher
-  end
+  class << self
+    def event_monitor_class
+      ManageIQ::Providers::Nuage::NetworkManager::EventCatcher
+    end
 
-  def self.l2_cloud_subnet_type
-    'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2'
-  end
+    def l2_cloud_subnet_type
+      'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2'
+    end
 
-  def self.l3_cloud_subnet_type
-    'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3'
-  end
+    def l3_cloud_subnet_type
+      'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3'
+    end
 
-  def self.floating_cloud_network_type
-    'ManageIQ::Providers::Nuage::NetworkManager::CloudNetwork::Floating'
+    def floating_cloud_network_type
+      'ManageIQ::Providers::Nuage::NetworkManager::CloudNetwork::Floating'
+    end
+
+    def bridge_network_port_type
+      'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Bridge'
+    end
+
+    def container_network_port_type
+      'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Container'
+    end
+
+    def host_network_port_type
+      'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Host'
+    end
+
+    def vm_network_port_type
+      'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Vm'
+    end
   end
 
   def name
