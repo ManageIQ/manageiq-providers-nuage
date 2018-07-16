@@ -1,0 +1,25 @@
+---
+# Playbook Inputs:
+# domain_id (string) domain to connect the new subnet to
+# subnet_attributes (hash) desired subnet attributes
+
+- name: Create Subnet
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - include_role:
+        name: create_child_entity
+      vars:
+        entity_type: Zone
+        parent_type: Domain
+        parent_id: '{{ domain_id }}'
+        attributes:
+          name: 'CloudForms Subnets'
+    - include_role:
+        name: create_child_entity
+      vars:
+        entity_type: Subnet
+        parent_type: Zone
+        parent_id: '{{ result.id }}'
+        attributes: '{{ subnet_attributes }}'

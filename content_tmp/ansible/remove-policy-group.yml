@@ -1,0 +1,12 @@
+---
+# Playbook Inputs:
+# id (string) policy group id
+
+- name: Remove Policy Group
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    entity_type: PolicyGroup
+  roles:
+    - remove_entity

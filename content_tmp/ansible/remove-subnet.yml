@@ -1,0 +1,12 @@
+---
+# Playbook Inputs:
+# id (string) subnet id
+
+- name: Remove Subnet
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    entity_type: Subnet
+  roles:
+    - remove_entity
