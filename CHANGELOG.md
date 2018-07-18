@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 90 ending 2018-07-16
+
+### Added
+- Temporarily remove many-to-many from NetworkRouter [(#102)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/102)
+- Inventory vPort entities (Nuage) into NetworkPort model (MIQ) [(#101)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/101)
+
 ## Unreleased as of Sprint 87 ending 2018-06-04
 
 ### Added
