@@ -9,8 +9,6 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :NetworkRouter
   require_nested :CloudNetwork
   require_nested :CloudSubnet
-  require_nested :CloudSubnetL3
-  require_nested :CloudSubnetL2
   require_nested :SecurityGroup
   require_nested :FloatingIp
   require_nested :NetworkPort
@@ -48,11 +46,11 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
     end
 
     def l2_cloud_subnet_type
-      'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2'
+      'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L2'
     end
 
     def l3_cloud_subnet_type
-      'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3'
+      'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L3'
     end
 
     def floating_cloud_network_type
