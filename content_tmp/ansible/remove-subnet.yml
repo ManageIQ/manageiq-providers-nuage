@@ -1,0 +1,14 @@
+---
+# Playbook Inputs:
+# - id (string) entity id
+# - kind (string) 'L2' for L2 subnets and 'L3' for L3 subnets (default)
+
+- name: Remove Subnet
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    kind: L3
+    entity_type: "{{ 'L2Domain' if kind == 'L2' else 'Subnet' }}"
+  roles:
+  - xlab_si.nuage_remove_entity

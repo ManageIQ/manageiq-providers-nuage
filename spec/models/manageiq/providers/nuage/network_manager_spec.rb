@@ -153,6 +153,24 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     end
   end
 
+  context '.base_url' do
+    it 'builds insecure URL' do
+      expect(described_class.base_url(nil, 'hostname', 8443)).to eq('http://hostname:8443')
+    end
+
+    it 'builds insecure ssl URL' do
+      expect(described_class.base_url('ssl', 'hostname', 8443)).to eq('https://hostname:8443')
+    end
+
+    it 'builds secure URL' do
+      expect(described_class.base_url('ssl-with-validation', 'hostname', 8443)).to eq('https://hostname:8443')
+    end
+
+    it 'builds correct IPv6 URL' do
+      expect(described_class.base_url('ssl-with-validation', '::1', 8443)).to eq('https://[::1]:8443')
+    end
+  end
+
   context '.auth_url' do
     it 'builds insecure URL' do
       expect(described_class.auth_url(nil, 'hostname', 8443, 'v5')).to eq('http://hostname:8443/nuage/api/v5')
@@ -204,5 +222,55 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
   it '.name' do
     ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :name => 'nuage')
     expect(ems.name).to eq('nuage')
+  end
+
+  describe 'ansible' do
+    let(:ems) do
+      ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0')
+      ems.default_authentication.userid = 'user'
+      ems.default_authentication.password = 'pass'
+      ems.default_endpoint.security_protocol = 'ssl'
+      ems.default_endpoint.hostname = 'nuage.demo'
+      ems
+    end
+
+    it '.ansible_env_vars' do
+      expect(ems.ansible_env_vars).to eq({})
+    end
+
+    describe '.ansible_extra_vars' do
+      let(:extra_vars) { ems.ansible_extra_vars(params) }
+      let(:params)     { {} }
+      let(:nuage_auth) { extra_vars[:nuage_auth] }
+
+      it 'default vars' do
+        expect(extra_vars.keys).to eq([:nuage_auth])
+        expect(nuage_auth).to eq(
+          :api_username   => 'user',
+          :api_password   => 'pass',
+          :api_enterprise => 'csp',
+          :api_version    => 'v5_0',
+          :api_url        => 'https://nuage.demo'
+        )
+      end
+
+      context 'with custom vars' do
+        let(:params) { { :test => 'test', :demo => 'demo' } }
+
+        it do
+          expect(extra_vars.keys).to eq(%i(nuage_auth test demo))
+          expect(extra_vars[:test]).to eq('test')
+          expect(extra_vars[:demo]).to eq('demo')
+        end
+      end
+    end
+
+    it '.ansible_root' do
+      expect(ems.ansible_root.to_s).to end_with('/manageiq-providers-nuage/content_tmp/ansible')
+    end
+
+    it '.playbook' do
+      expect(ems.playbook('play.yaml').to_s).to end_with('/manageiq-providers-nuage/content_tmp/ansible/play.yaml')
+    end
   end
 end
