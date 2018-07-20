@@ -106,6 +106,10 @@ module ManageIQ::Providers
       get_list('sharednetworkresources')
     end
 
+    def get_sharednetworkresource(id)
+      get_first("sharednetworkresources/#{id}")
+    end
+
     def get_vports_for_domain(domain_id)
       get_list("domains/#{domain_id}/vports")
     end

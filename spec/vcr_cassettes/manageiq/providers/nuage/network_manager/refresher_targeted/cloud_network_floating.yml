@@ -1,0 +1,112 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/me
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic NUAGE_NETWORK_AUTHORIZATION
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Thu, 19-Jul-2018 08:24:28
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 20 Jul 2018 08:24:27 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"firstName":"XLAB","lastName":"User","userName":"NUAGE_NETWORK_USERID","email":"NUAGE_NETWORK_USERID@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"vssStatsInterval":30,"aarFlowStatsInterval":30,"aarProbeStatsInterval":30,"entityScope":null,"externalId":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"bf046400-8432-4ed3-b547-0fe66be0aea0","APIKeyExpiry":1532076344056,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
+    http_version: 
+  recorded_at: Fri, 20 Jul 2018 08:24:28 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/sharednetworkresources/17b305a7-eec9-4492-acb9-20a1d63a8ba1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjpiZjA0NjQwMC04NDMyLTRlZDMtYjU0Ny0wZmU2NmJlMGFlYTA=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Thu, 19-Jul-2018 08:24:28
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 20 Jul 2018 08:24:27 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"children":null,"parentType":"zone","entityScope":"GLOBAL","lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1523409573000,"creationDate":1523409573000,"name":"Subnet
+        0","description":null,"address":"10.85.92.0","netmask":"255.255.255.0","gateway":null,"type":"FLOATING","uplinkVPortName":null,"uplinkInterfaceIP":null,"uplinkInterfaceMAC":null,"underlay":false,"backHaulRouteDistinguisher":"65534:56886","backHaulRouteTarget":"65534:33586","backHaulVNID":4913208,"vnID":9657713,"subnetRouteDistinguisher":"65534:4177","subnetRouteTarget":"65534:8406","permittedActionType":null,"accessRestrictionEnabled":false,"owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"17b305a7-eec9-4492-acb9-20a1d63a8ba1","parentID":"5cc7da30-a3f2-448f-9a30-4ff205781511","externalID":null,"domainRouteDistinguisher":"65534:17990","domainRouteTarget":"65534:35584","DHCPManaged":true,"sharedResourceParentID":"5cc7da30-a3f2-448f-9a30-4ff205781511","uplinkGWVlanAttachmentID":null,"ECMPCount":1,"dynamicPATAllocationEnabled":false,"associatedPATMapperID":null,"useGlobalMAC":"DISABLED","gatewayMACAddress":"68:54:ED:00:DB:1B","enterpriseID":null}]'
+    http_version: 
+  recorded_at: Fri, 20 Jul 2018 08:24:28 GMT
+recorded_with: VCR 3.0.3

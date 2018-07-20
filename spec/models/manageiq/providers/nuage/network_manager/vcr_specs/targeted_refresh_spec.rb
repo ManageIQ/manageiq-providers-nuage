@@ -51,12 +51,13 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   describe "targeted refresh" do
-    let(:tenant_ref)         { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
-    let(:security_group_ref) { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
-    let(:cloud_subnet_ref1)  { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
-    let(:cloud_subnet_ref2)  { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
-    let(:unexisting_ref)     { "unexisting-ems-ref" }
-    let(:router_ref)         { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
+    let(:tenant_ref)           { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
+    let(:security_group_ref)   { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
+    let(:cloud_subnet_ref1)    { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
+    let(:cloud_subnet_ref2)    { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
+    let(:unexisting_ref)       { "unexisting-ems-ref" }
+    let(:router_ref)           { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
+    let(:network_floating_ref) { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
 
     TARGET_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -92,6 +93,13 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
               assert_specific_security_group
             end
           end
+
+          it "will refresh cloud_network_floating" do
+            network_floating = FactoryGirl.build(:cloud_network_floating_nuage, :ems_ref => network_floating_ref)
+            test_targeted_refresh([network_floating], 'cloud_network_floating') do
+              assert_specific_cloud_network_floating
+            end
+          end
         end
 
         describe "on populated database" do
@@ -108,6 +116,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             let!(:security_group) do
               FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => security_group_ref,
                                  :cloud_tenant => cloud_tenant, :name => nil)
+            end
+
+            let!(:network_floating) do
+              FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => network_floating_ref,
+                                 :name => nil)
             end
 
             it "cloud_tenant is updated" do
@@ -127,12 +140,19 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_fetched(security_group)
               end
             end
+
+            it "cloud_network_floating is updated" do
+              test_targeted_refresh([network_floating], 'cloud_network_floating_is_updated') do
+                assert_fetched(network_floating)
+              end
+            end
           end
 
           context "object no longer exists on remote server" do
-            let(:cloud_tenant)   { FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
-            let(:cloud_subnet)   { FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
-            let(:security_group) { FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:cloud_tenant)     { FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
+            let(:cloud_subnet)     { FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:security_group)   { FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:network_floating) { FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
 
             it "unexisting cloud_tenant is deleted" do
               test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_deleted', :repeat => 1) do
@@ -149,6 +169,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             it "unexisting security_group is deleted, but related cloud_tenant updated" do
               test_targeted_refresh([security_group], 'security_group_is_deleted', :repeat => 1) do
                 assert_deleted(security_group)
+              end
+            end
+
+            it "unexisting cloud_network_floating is deleted" do
+              test_targeted_refresh([network_floating], 'cloud_network_floating_is_deleted', :repeat => 1) do
+                assert_deleted(network_floating)
               end
             end
           end
@@ -183,6 +209,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
         association = :cloud_subnets
       when SecurityGroup
         association = :security_groups
+      when CloudNetwork
+        association = :cloud_networks
       end
       ManagerRefresh::Target.new(
         :manager     => @ems,
@@ -270,6 +298,16 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :cloud_network_id       => nil,
       :cloud_tenant_id        => nil,
       :orchestration_stack_id => nil
+    )
+  end
+
+  def assert_specific_cloud_network_floating
+    n = CloudNetwork.find_by(:ems_ref => network_floating_ref)
+    expect(n).to have_attributes(
+      :name   => "Subnet 0",
+      :type   => "ManageIQ::Providers::Nuage::NetworkManager::CloudNetwork::Floating",
+      :ems_id => @ems.id,
+      :cidr   => '10.85.92.0/24'
     )
   end
 
