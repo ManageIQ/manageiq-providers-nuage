@@ -197,7 +197,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
-      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3",
+      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L3",
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
@@ -222,7 +222,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :dns_nameservers                => nil,
       :ipv6_router_advertisement_mode => nil,
       :ipv6_address_mode              => nil,
-      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL3",
+      :type                           => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L3",
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
@@ -240,7 +240,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :cidr              => '10.99.99.0/24',
       :network_protocol  => 'ipv4',
       :cloud_tenant_id   => CloudTenant.find_by(:ems_ref => tenant_ref1).id,
-      :type              => 'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2',
+      :type              => 'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L2',
       :network_router_id => nil
     )
 
@@ -250,7 +250,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :cidr              => nil,
       :network_protocol  => '',
       :cloud_tenant_id   => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
-      :type              => 'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnetL2',
+      :type              => 'ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L2',
       :network_router_id => nil
     )
   end
