@@ -59,6 +59,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:router_ref)           { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
     let(:network_floating_ref) { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
     let(:l2_cloud_subnet_ref)  { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
+    let(:floating_ip_ref)      { "74d35a65-7fd0-454d-b78a-f58bf609f6b1" }
 
     TARGET_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -108,6 +109,13 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
               assert_specific_l2_cloud_subnet
             end
           end
+
+          it "will refresh floating_ip" do
+            floating_ip = FactoryGirl.build(:floating_ip_nuage, :ems_ref => floating_ip_ref)
+            test_targeted_refresh([floating_ip], 'floating_ip') do
+              assert_specific_floating_ip
+            end
+          end
         end
 
         describe "on populated database" do
@@ -134,6 +142,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             let!(:l2_cloud_subnet) do
               FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => l2_cloud_subnet_ref,
                                  :name => nil)
+            end
+
+            let!(:floating_ip) do
+              FactoryGirl.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => floating_ip_ref,
+                                 :address => nil)
             end
 
             it "cloud_tenant is updated" do
@@ -165,6 +178,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_fetched(l2_cloud_subnet)
               end
             end
+
+            it "floating_ip is updated" do
+              test_targeted_refresh([floating_ip], 'floating_ip_is_updated') do
+                assert_fetched(floating_ip, :attribute => :address)
+              end
+            end
           end
 
           context "object no longer exists on remote server" do
@@ -173,6 +192,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             let(:security_group)   { FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
             let(:network_floating) { FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
             let(:l2_cloud_subnet)  { FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:floating_ip)      { FactoryGirl.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
 
             it "unexisting cloud_tenant is deleted" do
               test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_deleted', :repeat => 1) do
@@ -203,6 +223,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_deleted(l2_cloud_subnet)
               end
             end
+
+            it "unexisting floating_ip is deleted" do
+              test_targeted_refresh([floating_ip], 'floating_ip_is_deleted', :repeat => 1) do
+                assert_deleted(floating_ip)
+              end
+            end
           end
         end
       end
@@ -215,7 +241,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       EmsRefresh.queue_refresh(targets)
       expect(MiqQueue.where(:method_name => 'refresh').count).to eq 1
       refresh_job = MiqQueue.where(:method_name => 'refresh').first
-      VCR.use_cassette(described_class.name.underscore + "_targeted/" + cassette, :allow_unused_http_interactions => true) do
+      VCR.use_cassette(described_class.name.underscore + "_targeted/" + cassette) do
         status, msg, _ = refresh_job.deliver
         expect(:status => status, :msg => msg).not_to include(:status => 'error')
       end
@@ -243,6 +269,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
         options     = {}
       when CloudNetwork
         association = :cloud_networks
+        options     = {}
+      when FloatingIp
+        association = :floating_ips
         options     = {}
       end
       ManagerRefresh::Target.new(
@@ -359,9 +388,17 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     )
   end
 
-  def assert_fetched(instance)
+  def assert_specific_floating_ip
+    s = FloatingIp.find_by(:ems_ref => floating_ip_ref)
+    expect(s).to have_attributes(
+      :address => '10.85.92.128',
+      :ems_id  => @ems.id
+    )
+  end
+
+  def assert_fetched(instance, attribute: :name)
     instance.reload
-    expect(instance.name.to_s).not_to be_empty
+    expect(instance.try(attribute).to_s).not_to be_empty
   end
 
   def assert_not_fetched(instance)

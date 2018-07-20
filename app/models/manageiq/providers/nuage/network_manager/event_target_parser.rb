@@ -35,6 +35,8 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
       add_targets(target_collection, :network_routers, event.full_data['entities'])
     when 'sharednetworkresource'
       add_targets(target_collection, :cloud_networks, event.full_data['entities'])
+    when 'floatingip'
+      add_targets(target_collection, :floating_ips, event.full_data['entities'])
     end
 
     target_collection.targets

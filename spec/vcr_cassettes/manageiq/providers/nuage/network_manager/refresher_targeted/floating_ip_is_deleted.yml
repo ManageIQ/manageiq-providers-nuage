@@ -1,0 +1,113 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/me
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic NUAGE_NETWORK_AUTHORIZATION
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Thu, 19-Jul-2018 12:40:22
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 20 Jul 2018 12:40:22 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"firstName":"XLAB","lastName":"User","userName":"NUAGE_NETWORK_USERID","email":"NUAGE_NETWORK_USERID@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"vssStatsInterval":30,"aarFlowStatsInterval":30,"aarProbeStatsInterval":30,"entityScope":null,"externalId":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"357c861e-69b1-4daa-b482-7583ee1307a7","APIKeyExpiry":1532162751659,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
+    http_version: 
+  recorded_at: Fri, 20 Jul 2018 12:40:22 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/floatingips/unexisting-ems-ref
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.3p205
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic eGxhYjozNTdjODYxZS02OWIxLTRkYWEtYjQ4Mi03NTgzZWUxMzA3YTc=
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 01:00:00 CET
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Thu, 19-Jul-2018 12:40:22
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 20 Jul 2018 12:40:22 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"description":"Cannot find floatingip with ID unexisting-ems-ref","title":"floatingip
+        not found","errors":[{"property":"","descriptions":[{"title":"floatingip not
+        found","description":"Cannot find floatingip with ID unexisting-ems-ref"}]}]}'
+    http_version: 
+  recorded_at: Fri, 20 Jul 2018 12:40:22 GMT
+recorded_with: VCR 3.0.3

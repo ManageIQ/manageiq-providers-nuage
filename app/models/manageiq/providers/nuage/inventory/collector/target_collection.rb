@@ -44,7 +44,8 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def floating_ips
-    [] # TODO(miha-plesko): implement targeted refresh for floating ips
+    return [] if (refs = references(:floating_ips)).blank?
+    refs.map { |ems_ref| floating_ip(ems_ref) }.compact
   end
 
   def network_ports
@@ -88,6 +89,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   def network_router(ems_ref)
     return @network_routers_map[ems_ref] if @network_routers_map.key?(ems_ref)
     @network_routers_map[ems_ref] = safe_call { vsd_client.get_domain(ems_ref) }
+  end
+
+  def floating_ip(ems_ref)
+    safe_call { vsd_client.get_floating_ip(ems_ref) }
   end
 
   private
