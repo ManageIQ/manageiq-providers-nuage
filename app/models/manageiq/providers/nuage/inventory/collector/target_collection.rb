@@ -152,73 +152,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def infer_related_ems_refs_db!
-    if references(:cloud_tenants).any?
-      tenants = manager.cloud_tenants.where(:ems_ref => references(:cloud_tenants))
-                              .includes(:cloud_subnets, :security_groups)
-      tenants.each do |tenant|
-        tenant.network_routers.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:network_routers, ems_ref) }
-        tenant.cloud_subnets.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:cloud_subnets, ems_ref) }
-        tenant.security_groups.collect(&:ems_ref).compact.each { |ems_ref| add_simple_target!(:security_groups, ems_ref) }
-      end
-    end
-
-    if references(:cloud_subnets).any?
-      cloud_subnets = manager.cloud_subnets.where(:ems_ref => references(:cloud_subnets))
-      cloud_subnets.each do |cloud_subnet|
-        add_simple_target!(:network_routers, cloud_subnet.network_router.ems_ref) if cloud_subnet.network_router
-        next if cloud_subnet.cloud_tenant.nil?
-        add_simple_target!(:cloud_tenants, cloud_subnet.cloud_tenant.ems_ref)
-        cloud_subnet.cloud_tenant.security_groups.each do |security_group|
-          add_simple_target!(:security_groups, security_group.ems_ref)
-        end
-      end
-    end
-
-    if references(:security_groups).any?
-      security_groups = manager.security_groups.where(:ems_ref => references(:security_groups))
-      security_groups.each do |security_group|
-        add_simple_target!(:cloud_tenants, security_group.cloud_tenant.ems_ref) unless security_group.cloud_tenant.nil?
-      end
-    end
+    # infer related entities based on VMDB here if needed
   end
 
   def infer_related_ems_refs_api!
-    references(:cloud_tenants).each do |tenant_ems_ref|
-      cloud_subnets_for_tenant(tenant_ems_ref).each do |cloud_subnet|
-        add_simple_target!(:cloud_subnets, cloud_subnet['ID'])
-      end
-
-      security_groups_for_tenant(tenant_ems_ref).each do |policy_group|
-        add_simple_target!(:security_groups, policy_group['ID'])
-      end
-
-      routers_for_tenant(tenant_ems_ref).each do |router|
-        add_simple_target!(:network_routers, router['ID'])
-      end
-    end
-
-    references(:cloud_subnets).each do |cs_ems_ref|
-      tenant_ems_ref = tenant_ems_ref_for_cloud_subnet(cs_ems_ref)
-      next if tenant_ems_ref.nil?
-      add_simple_target!(:cloud_tenants, tenant_ems_ref)
-      security_groups_for_tenant(tenant_ems_ref).each do |policy_group|
-        add_simple_target!(:security_groups, policy_group['ID'])
-      end
-
-      routers_for_tenant(tenant_ems_ref).each do |router|
-        add_simple_target!(:network_routers, router['ID'])
-      end
-    end
-
-    references(:security_groups).each do |sg_ems_ref|
-      tenant_ems_ref = tenant_ems_ref_for_security_group(sg_ems_ref)
-      next if tenant_ems_ref.nil?
-      add_simple_target!(:cloud_tenants, tenant_ems_ref)
-
-      routers_for_tenant(tenant_ems_ref).each do |router|
-        add_simple_target!(:network_routers, router['ID'])
-      end
-    end
+    # infer related entities based on Nuage API here if needed
   end
 
   def safe_call
