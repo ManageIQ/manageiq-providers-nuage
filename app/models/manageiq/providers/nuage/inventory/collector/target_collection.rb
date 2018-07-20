@@ -10,7 +10,9 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def cloud_networks_floating
-    [] # TODO(miha-plesko): targeted refresh
+    return [] if references(:cloud_networks).blank?
+    references(:cloud_networks).collect { |ems_ref| shared_resource(ems_ref) }
+    @shared_resources_map.values.compact.select { |res| res['type'] == 'FLOATING' }
   end
 
   def cloud_subnets
@@ -58,6 +60,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @cloud_subnets_map[ems_ref] = safe_call { vsd_client.get_subnet(ems_ref) }
   end
 
+  def shared_resource(ems_ref)
+    return @shared_resources_map[ems_ref] if @shared_resources_map.key?(ems_ref)
+    @shared_resources_map[ems_ref] = safe_call { vsd_client.get_sharednetworkresource(ems_ref) }
+  end
+
   def security_group(ems_ref)
     return @security_groups_map[ems_ref] if @security_groups_map.key?(ems_ref)
     @security_groups_map[ems_ref] = safe_call { vsd_client.get_policy_group(ems_ref) }
@@ -81,12 +88,13 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   private
 
   def initialize_cache
-    @cloud_subnets_map   = {}
-    @security_groups_map = {}
-    @cloud_tenant_map    = {}
-    @zones_map           = {}
-    @network_routers_map = {}
-    @routers_per_tenant  = {}
+    @cloud_subnets_map    = {}
+    @security_groups_map  = {}
+    @cloud_tenant_map     = {}
+    @zones_map            = {}
+    @network_routers_map  = {}
+    @routers_per_tenant   = {}
+    @shared_resources_map = {}
   end
 
   def routers_for_tenant(tenant_ems_ref)
