@@ -16,13 +16,13 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def cloud_subnets
-    return [] if references(:cloud_subnets).blank?
-    references(:cloud_subnets).collect { |ems_ref| cloud_subnet(ems_ref) }
-    @cloud_subnets_map.values.compact
+    return [] if (refs = references_with_kind(:cloud_subnets, 'L3')).blank?
+    refs.map { |ems_ref| cloud_subnet(ems_ref) }.compact
   end
 
   def l2_cloud_subnets
-    [] # TODO(miha-plesko): targeted refresh for l2_cloud_subnets
+    return [] if (refs = references_with_kind(:cloud_subnets, 'L2')).blank?
+    refs.map { |ems_ref| l2_cloud_subnet(ems_ref) }.compact
   end
 
   def security_groups
@@ -60,6 +60,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @cloud_subnets_map[ems_ref] = safe_call { vsd_client.get_subnet(ems_ref) }
   end
 
+  def l2_cloud_subnet(ems_ref)
+    return @l2_cloud_subnets_map[ems_ref] if @l2_cloud_subnets_map.key?(ems_ref)
+    @l2_cloud_subnets_map[ems_ref] = safe_call { vsd_client.get_l2_domain(ems_ref) }
+  end
+
   def shared_resource(ems_ref)
     return @shared_resources_map[ems_ref] if @shared_resources_map.key?(ems_ref)
     @shared_resources_map[ems_ref] = safe_call { vsd_client.get_sharednetworkresource(ems_ref) }
@@ -95,6 +100,7 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @network_routers_map  = {}
     @routers_per_tenant   = {}
     @shared_resources_map = {}
+    @l2_cloud_subnets_map = {}
   end
 
   def routers_for_tenant(tenant_ems_ref)
@@ -180,5 +186,9 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
 
   def safe_list(&block)
     safe_call(&block) || []
+  end
+
+  def references_with_kind(association, kind)
+    target.targets.select { |t| t.association == association && t.options[:kind] == kind }.map { |t| t.manager_ref[:ems_ref] }
   end
 end
