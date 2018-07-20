@@ -58,6 +58,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:unexisting_ref)       { "unexisting-ems-ref" }
     let(:router_ref)           { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
     let(:network_floating_ref) { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
+    let(:l2_cloud_subnet_ref)  { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
 
     TARGET_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -71,7 +72,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
         describe "on empty database" do
           it "will refresh cloud_subnet" do
-            cloud_subnet = FactoryGirl.build(:cloud_subnet_nuage, :ems_ref => cloud_subnet_ref1)
+            cloud_subnet = FactoryGirl.build(:cloud_subnet_l3_nuage, :ems_ref => cloud_subnet_ref1)
             test_targeted_refresh([cloud_subnet], 'cloud_subnet') do
               assert_cloud_subnet_counts
               assert_specific_cloud_subnet
@@ -100,6 +101,13 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
               assert_specific_cloud_network_floating
             end
           end
+
+          it "will refresh l2_cloud_subnets" do
+            l2_cloud_subnet = FactoryGirl.build(:cloud_subnet_l2_nuage, :ems_ref => l2_cloud_subnet_ref)
+            test_targeted_refresh([l2_cloud_subnet], 'l2_cloud_subnet') do
+              assert_specific_l2_cloud_subnet
+            end
+          end
         end
 
         describe "on populated database" do
@@ -109,7 +117,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             end
 
             let!(:cloud_subnet) do
-              FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => cloud_subnet_ref1,
+              FactoryGirl.create(:cloud_subnet_l3_nuage, :ems_id => @ems.id, :ems_ref => cloud_subnet_ref1,
                                  :cloud_tenant => cloud_tenant, :name => nil)
             end
 
@@ -120,6 +128,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
             let!(:network_floating) do
               FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => network_floating_ref,
+                                 :name => nil)
+            end
+
+            let!(:l2_cloud_subnet) do
+              FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => l2_cloud_subnet_ref,
                                  :name => nil)
             end
 
@@ -146,13 +159,20 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_fetched(network_floating)
               end
             end
+
+            it "l2_cloud_subnet is updated" do
+              test_targeted_refresh([l2_cloud_subnet], 'l2_cloud_subnet_is_updated') do
+                assert_fetched(l2_cloud_subnet)
+              end
+            end
           end
 
           context "object no longer exists on remote server" do
             let(:cloud_tenant)     { FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
-            let(:cloud_subnet)     { FactoryGirl.create(:cloud_subnet_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:cloud_subnet)     { FactoryGirl.create(:cloud_subnet_l3_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
             let(:security_group)   { FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
             let(:network_floating) { FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
+            let(:l2_cloud_subnet)  { FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
 
             it "unexisting cloud_tenant is deleted" do
               test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_deleted', :repeat => 1) do
@@ -177,6 +197,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_deleted(network_floating)
               end
             end
+
+            it "unexisting l2_cloud_subnet is deleted" do
+              test_targeted_refresh([l2_cloud_subnet], 'l2_cloud_subnet_is_deleted', :repeat => 1) do
+                assert_deleted(l2_cloud_subnet)
+              end
+            end
           end
         end
       end
@@ -189,7 +215,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       EmsRefresh.queue_refresh(targets)
       expect(MiqQueue.where(:method_name => 'refresh').count).to eq 1
       refresh_job = MiqQueue.where(:method_name => 'refresh').first
-      VCR.use_cassette(described_class.name.underscore + "_targeted/" + cassette) do
+      VCR.use_cassette(described_class.name.underscore + "_targeted/" + cassette, :allow_unused_http_interactions => true) do
         status, msg, _ = refresh_job.deliver
         expect(:status => status, :msg => msg).not_to include(:status => 'error')
       end
@@ -205,17 +231,25 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
         return target
       when CloudTenant
         association = :cloud_tenants
-      when CloudSubnet
+        options     = {}
+      when ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L3
         association = :cloud_subnets
+        options     = { :kind => 'L3' }
+      when ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L2
+        association = :cloud_subnets
+        options     = { :kind => 'L2' }
       when SecurityGroup
         association = :security_groups
+        options     = {}
       when CloudNetwork
         association = :cloud_networks
+        options     = {}
       end
       ManagerRefresh::Target.new(
         :manager     => @ems,
         :association => association,
-        :manager_ref => {:ems_ref => target.ems_ref}
+        :manager_ref => {:ems_ref => target.ems_ref},
+        :options     => options
       )
     end
   end
@@ -308,6 +342,20 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :type   => "ManageIQ::Providers::Nuage::NetworkManager::CloudNetwork::Floating",
       :ems_id => @ems.id,
       :cidr   => '10.85.92.0/24'
+    )
+  end
+
+  def assert_specific_l2_cloud_subnet
+    s = CloudSubnet.find_by(:ems_ref => l2_cloud_subnet_ref)
+    expect(s).to have_attributes(
+      :name             => "FlatNet",
+      :ems_id           => @ems.id,
+      :cidr             => "10.99.99.0/24",
+      :gateway          => nil,
+      :network_protocol => "ipv4",
+      :cloud_tenant_id  => nil,
+      :type             => "ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L2",
+      :extra_attributes => nil
     )
   end
 

@@ -26,7 +26,9 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
     when 'enterprise'
       add_targets(target_collection, :cloud_tenants, event.full_data['entities'])
     when 'subnet'
-      add_targets(target_collection, :cloud_subnets, event.full_data['entities'])
+      add_targets(target_collection, :cloud_subnets, event.full_data['entities'], :options => { :kind => 'L3' })
+    when 'l2domain'
+      add_targets(target_collection, :cloud_subnets, event.full_data['entities'], :options => { :kind => 'L2' })
     when 'policygroup'
       add_targets(target_collection, :security_groups, event.full_data['entities'])
     when 'domain'
@@ -38,11 +40,11 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
     target_collection.targets
   end
 
-  def add_targets(target_collection, association, entities, key: 'ID')
+  def add_targets(target_collection, association, entities, key: 'ID', options: {})
     return unless entities.respond_to?(:each)
     entities.each do |obj|
       next if obj[key].to_s.empty?
-      target_collection.add_target(:association => association, :manager_ref => {:ems_ref => obj[key]})
+      target_collection.add_target(:association => association, :manager_ref => {:ems_ref => obj[key]}, :options => options)
     end
   end
 end

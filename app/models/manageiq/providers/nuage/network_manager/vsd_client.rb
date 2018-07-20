@@ -98,6 +98,10 @@ module ManageIQ::Providers
       get_list('l2domains')
     end
 
+    def get_l2_domain(id)
+      get_first("l2domains/#{id}")
+    end
+
     def get_floating_ips
       get_list('floatingips')
     end
