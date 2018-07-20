@@ -126,6 +126,10 @@ module ManageIQ::Providers
       get_list("l2domains/#{l2_domain_id}/vports")
     end
 
+    def get_vport(id)
+      get_first("vports/#{id}")
+    end
+
     private
 
     # TODO(miha-plesko): Is this filter really supposed to be used here in client? Looks like debugging leftover,

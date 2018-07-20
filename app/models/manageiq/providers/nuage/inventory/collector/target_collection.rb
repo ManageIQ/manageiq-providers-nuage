@@ -49,11 +49,24 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def network_ports
-    [] # TODO(miha-plesko): implement targeted refresh for network_ports
+    return [] if (refs = references(:network_ports)).blank?
+    refs.map { |ems_ref| network_port(ems_ref) }.compact
   end
 
-  def security_groups_for_network_port(_port_ems_ref)
-    [] # TODO(miha-plesko): implement targeted refresh for network_ports
+  def security_groups_for_network_port(port_ems_ref)
+    safe_call { vsd_client.get_policy_groups_for_vport(port_ems_ref) }
+  end
+
+  def vm_interfaces_for_network_port(port_ems_ref)
+    safe_call { vsd_client.get_vm_interfaces_for_vport(port_ems_ref) }
+  end
+
+  def container_interfaces_for_network_port(port_ems_ref)
+    safe_call { vsd_client.get_container_interfaces_for_vport(port_ems_ref) }
+  end
+
+  def host_interfaces_for_network_port(port_ems_ref)
+    safe_call { vsd_client.get_host_interfaces_for_vport(port_ems_ref) }
   end
 
   def cloud_subnet(ems_ref)
@@ -93,6 +106,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
 
   def floating_ip(ems_ref)
     safe_call { vsd_client.get_floating_ip(ems_ref) }
+  end
+
+  def network_port(ems_ref)
+    safe_call { vsd_client.get_vport(ems_ref) }
   end
 
   private
