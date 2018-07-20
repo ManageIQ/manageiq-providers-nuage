@@ -89,4 +89,53 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   def l2_cloud_subnets
     cloud_subnets.where(:type => self.class.l2_cloud_subnet_type)
   end
+
+  def ansible_env_vars
+    {}
+  end
+
+  def ansible_extra_vars(extra)
+    {
+      :nuage_auth => {
+        :api_username   => default_authentication.userid,
+        :api_password   => default_authentication.password,
+        :api_enterprise => 'csp',
+        :api_version    => api_version.sub('.', '_'),
+        :api_url        => self.class.base_url(
+          default_endpoint.security_protocol,
+          default_endpoint.hostname,
+          default_endpoint.port
+        )
+      }
+    }.merge(extra)
+  end
+
+  def ansible_root
+    ManageIQ::Providers::Nuage::Engine.root.join("content_tmp/ansible")
+  end
+
+  def playbook(name)
+    ansible_root.join(name)
+  end
+
+  def create_cloud_subnet_queue(userid, options = {})
+    task_opts = {
+      :action => "creating Cloud Subnet for user #{userid}",
+      :userid => userid
+    }
+    queue_opts = {
+      :class_name  => self.class.name,
+      :method_name => 'create_cloud_subnet',
+      :instance_id => id,
+      :priority    => MiqQueue::HIGH_PRIORITY,
+      :role        => 'ems_operations',
+      :zone        => my_zone,
+      :args        => [options]
+    }
+    MiqTask.generic_action_with_callback(task_opts, queue_opts)
+  end
+
+  def create_cloud_subnet(options)
+    CloudSubnet.raw_create_cloud_subnet(self, options)
+  end
 end

@@ -1,0 +1,11 @@
+---
+- debug: msg="Removing entity..."
+- local_action:
+    module: nuage_vspk
+    auth: '{{ nuage_auth }}'
+    type: '{{ entity_type }}'
+    id: '{{ id }}'
+    state: absent
+  register: result
+- debug: var=result
+- debug: msg="Done removing entity."
