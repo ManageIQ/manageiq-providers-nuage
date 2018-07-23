@@ -60,6 +60,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:network_floating_ref) { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
     let(:l2_cloud_subnet_ref)  { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
     let(:floating_ip_ref)      { "74d35a65-7fd0-454d-b78a-f58bf609f6b1" }
+    let(:cont_port_ref)        { "dd9a4d57-2e24-427b-8aef-4d2925df47b2" }
+    let(:vm_port_ref)          { "15d1369e-9553-4e83-8bb9-3a6c269f81ae" }
+    let(:bridge_port_ref)      { "43b7faad-2c76-4945-9412-66a04bde7b6a" }
+    let(:host_port_ref)        { "b19075d3-a797-4dcd-93be-de52b4247e46" }
+    let(:vports_parent_ref)    { "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" }
 
     TARGET_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -116,6 +121,40 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
               assert_specific_floating_ip
             end
           end
+
+          describe "will refresh network_port" do
+            before do
+              FactoryGirl.create(:cloud_subnet_l3_nuage, :ems_ref => vports_parent_ref, :ems_id => @ems.id)
+            end
+
+            it "bridge" do
+              port = FactoryGirl.build(:network_port_bridge_nuage, :ems_ref => bridge_port_ref)
+              test_targeted_refresh([port], 'network_port_bridge') do
+                assert_specific_network_port_bridge
+              end
+            end
+
+            it "container" do
+              port = FactoryGirl.build(:network_port_container_nuage, :ems_ref => cont_port_ref)
+              test_targeted_refresh([port], 'network_port_container') do
+                assert_specific_network_port_container
+              end
+            end
+
+            it "host" do
+              port = FactoryGirl.build(:network_port_host_nuage, :ems_ref => host_port_ref)
+              test_targeted_refresh([port], 'network_port_host') do
+                assert_specific_network_port_host
+              end
+            end
+
+            it "vm" do
+              port = FactoryGirl.build(:network_port_vm_nuage, :ems_ref => vm_port_ref)
+              test_targeted_refresh([port], 'network_port_vm') do
+                assert_specific_network_port_vm
+              end
+            end
+          end
         end
 
         describe "on populated database" do
@@ -147,6 +186,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             let!(:floating_ip) do
               FactoryGirl.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => floating_ip_ref,
                                  :address => nil)
+            end
+
+            let!(:network_port) do
+              FactoryGirl.create(:network_port_bridge_nuage, :ems_id => @ems.id, :ems_ref => bridge_port_ref,
+                                 :name => nil)
             end
 
             it "cloud_tenant is updated" do
@@ -184,6 +228,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_fetched(floating_ip, :attribute => :address)
               end
             end
+
+            it "network_port is updated" do
+              test_targeted_refresh([network_port], 'network_port_is_updated') do
+                assert_fetched(network_port)
+              end
+            end
           end
 
           context "object no longer exists on remote server" do
@@ -193,6 +243,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             let(:network_floating) { FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
             let(:l2_cloud_subnet)  { FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
             let(:floating_ip)      { FactoryGirl.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:network_port)     { FactoryGirl.create(:network_port_bridge_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
 
             it "unexisting cloud_tenant is deleted" do
               test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_deleted', :repeat => 1) do
@@ -227,6 +278,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             it "unexisting floating_ip is deleted" do
               test_targeted_refresh([floating_ip], 'floating_ip_is_deleted', :repeat => 1) do
                 assert_deleted(floating_ip)
+              end
+            end
+
+            it "unexisting network_port is deleted" do
+              test_targeted_refresh([network_port], 'network_port_is_deleted', :repeat => 1) do
+                assert_deleted(network_port)
               end
             end
           end
@@ -272,6 +329,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
         options     = {}
       when FloatingIp
         association = :floating_ips
+        options     = {}
+      when NetworkPort
+        association = :network_ports
         options     = {}
       end
       ManagerRefresh::Target.new(
@@ -393,6 +453,42 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(s).to have_attributes(
       :address => '10.85.92.128',
       :ems_id  => @ems.id
+    )
+  end
+
+  def assert_specific_network_port_bridge
+    port = NetworkPort.find_by(:ems_ref => bridge_port_ref)
+    expect(port).to have_attributes(
+      :name   => 'Bridge VPort ad817d5a',
+      :ems_id => @ems.id,
+      :type   => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Bridge'
+    )
+  end
+
+  def assert_specific_network_port_container
+    port = NetworkPort.find_by(:ems_ref => cont_port_ref)
+    expect(port).to have_attributes(
+      :name   => 'Container VPort 1ea3d199',
+      :ems_id => @ems.id,
+      :type   => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Container'
+    )
+  end
+
+  def assert_specific_network_port_host
+    port = NetworkPort.find_by(:ems_ref => host_port_ref)
+    expect(port).to have_attributes(
+      :name   => 'Host VPort 25772231',
+      :ems_id => @ems.id,
+      :type   => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Host'
+    )
+  end
+
+  def assert_specific_network_port_vm
+    port = NetworkPort.find_by(:ems_ref => vm_port_ref)
+    expect(port).to have_attributes(
+      :name   => 'VM VPort 70e41192',
+      :ems_id => @ems.id,
+      :type   => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Vm'
     )
   end
 
