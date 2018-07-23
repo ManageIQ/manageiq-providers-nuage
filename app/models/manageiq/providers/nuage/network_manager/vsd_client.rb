@@ -106,6 +106,10 @@ module ManageIQ::Providers
       get_list('floatingips')
     end
 
+    def get_floating_ip(id)
+      get_first("floatingips/#{id}")
+    end
+
     def get_sharednetworkresources
       get_list('sharednetworkresources')
     end
