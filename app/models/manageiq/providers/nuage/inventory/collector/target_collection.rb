@@ -26,21 +26,18 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def security_groups
-    return [] if references(:security_groups).blank?
-    references(:security_groups).collect { |ems_ref| security_group(ems_ref) }
-    @security_groups_map.values.compact
+    return [] if (refs = references(:security_groups)).blank?
+    refs.map { |ems_ref| security_group(ems_ref) }.compact
   end
 
   def cloud_tenants
-    return [] if references(:cloud_tenants).blank?
-    references(:cloud_tenants).collect { |ems_ref| cloud_tenant(ems_ref) }
-    @cloud_tenant_map.values.compact
+    return [] if (refs = references(:cloud_tenants)).blank?
+    refs.map { |ems_ref| cloud_tenant(ems_ref) }.compact
   end
 
   def network_routers
-    return [] if references(:network_routers).blank?
-    references(:network_routers).collect { |ems_ref| network_router(ems_ref) }
-    @network_routers_map.values.compact
+    return [] if (refs = references(:network_routers)).blank?
+    refs.map { |ems_ref| network_router(ems_ref) }.compact
   end
 
   def floating_ips
@@ -70,13 +67,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def cloud_subnet(ems_ref)
-    return @cloud_subnets_map[ems_ref] if @cloud_subnets_map.key?(ems_ref)
-    @cloud_subnets_map[ems_ref] = safe_call { vsd_client.get_subnet(ems_ref) }
+    safe_call { vsd_client.get_subnet(ems_ref) }
   end
 
   def l2_cloud_subnet(ems_ref)
-    return @l2_cloud_subnets_map[ems_ref] if @l2_cloud_subnets_map.key?(ems_ref)
-    @l2_cloud_subnets_map[ems_ref] = safe_call { vsd_client.get_l2_domain(ems_ref) }
+    safe_call { vsd_client.get_l2_domain(ems_ref) }
   end
 
   def shared_resource(ems_ref)
@@ -85,23 +80,19 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def security_group(ems_ref)
-    return @security_groups_map[ems_ref] if @security_groups_map.key?(ems_ref)
-    @security_groups_map[ems_ref] = safe_call { vsd_client.get_policy_group(ems_ref) }
+    safe_call { vsd_client.get_policy_group(ems_ref) }
   end
 
   def cloud_tenant(ems_ref)
-    return @cloud_tenant_map[ems_ref] if @cloud_tenant_map.key?(ems_ref)
-    @cloud_tenant_map[ems_ref] = safe_call { vsd_client.get_enterprise(ems_ref) }
+    safe_call { vsd_client.get_enterprise(ems_ref) }
   end
 
   def zone(ems_ref)
-    return @zones_map[ems_ref] if @zones_map.key?(ems_ref)
-    @zones_map[ems_ref] = safe_call { vsd_client.get_zone(ems_ref) }
+    safe_call { vsd_client.get_zone(ems_ref) }
   end
 
   def network_router(ems_ref)
-    return @network_routers_map[ems_ref] if @network_routers_map.key?(ems_ref)
-    @network_routers_map[ems_ref] = safe_call { vsd_client.get_domain(ems_ref) }
+    safe_call { vsd_client.get_domain(ems_ref) }
   end
 
   def floating_ip(ems_ref)
@@ -115,21 +106,11 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   private
 
   def initialize_cache
-    @cloud_subnets_map    = {}
-    @security_groups_map  = {}
-    @cloud_tenant_map     = {}
-    @zones_map            = {}
-    @network_routers_map  = {}
-    @routers_per_tenant   = {}
     @shared_resources_map = {}
-    @l2_cloud_subnets_map = {}
   end
 
   def routers_for_tenant(tenant_ems_ref)
-    ems_ref = tenant_ems_ref
-    @routers_per_tenant[ems_ref] ||= safe_list { vsd_client.get_domains_for_enterprise(ems_ref) }
-    @routers_per_tenant[ems_ref].each { |d| @network_routers_map[d['ID']] = d }
-    @routers_per_tenant[ems_ref]
+    safe_list { vsd_client.get_domains_for_enterprise(tenant_ems_ref) }
   end
 
   def cloud_subnets_for_tenant(tenant_ems_ref)
