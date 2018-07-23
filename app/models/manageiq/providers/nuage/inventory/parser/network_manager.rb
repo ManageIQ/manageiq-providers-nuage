@@ -83,8 +83,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
       persister.floating_ips.find_or_build(ip['ID']).assign_attributes(
         :address        => ip['address'],
         :cloud_network  => persister.cloud_networks.lazy_find(ip['associatedSharedNetworkResourceID']),
-        # TODO(miha-plesko): uncomment when https://github.com/ManageIQ/manageiq-schema/pull/217 is merged
-        # :network_router => persister.network_routers.lazy_find(ip['parentID']),
+        :network_router => persister.network_routers.lazy_find(ip['parentID']),
         :cloud_tenant   => persister.network_routers.lazy_find(ip['parentID'], :key => :cloud_tenant)
       )
     end

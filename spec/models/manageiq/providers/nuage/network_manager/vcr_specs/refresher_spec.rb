@@ -262,8 +262,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :cloud_tenant_id => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
       :type            => 'ManageIQ::Providers::Nuage::NetworkManager::FloatingIp'
     )
-    # TODO(miha-plesko): uncomment when https://github.com/ManageIQ/manageiq-schema/pull/217 is merged
-    # expect(NetworkRouter.find_by(:ems_ref => router_ref).floating_ips).to include(ip)
+    router = NetworkRouter.find_by(:ems_ref => router_ref)
+    expect(ip.network_router).to eq(router)
+    expect(router.floating_ips).to include(ip)
   end
 
   def assert_cloud_networks
