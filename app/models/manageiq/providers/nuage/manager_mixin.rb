@@ -19,9 +19,13 @@ module ManageIQ::Providers::Nuage::ManagerMixin
       end
     end
 
-    def auth_url(protocol, server, port, version)
+    def base_url(protocol, server, port)
       scheme = %w(ssl ssl-with-validation).include?(protocol) ? "https" : "http"
-      URI::Generic.build(:scheme => scheme, :host => server, :port => port, :path => "/nuage/api/#{version}").to_s
+      URI::Generic.build(:scheme => scheme, :host => server, :port => port).to_s
+    end
+
+    def auth_url(protocol, server, port, version)
+      URI(base_url(protocol, server, port)).tap { |url| url.path = "/nuage/api/#{version}" }.to_s
     end
 
     def translate_exception(err)

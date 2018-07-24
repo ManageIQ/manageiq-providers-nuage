@@ -89,4 +89,32 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   def l2_cloud_subnets
     cloud_subnets.where(:type => self.class.l2_cloud_subnet_type)
   end
+
+  def ansible_env_vars
+    {}
+  end
+
+  def ansible_extra_vars(extra = {})
+    {
+      :nuage_auth => {
+        :api_username   => default_authentication.userid,
+        :api_password   => default_authentication.password,
+        :api_enterprise => 'csp', # TODO(miha-plesko): can this really be hard-coded?
+        :api_version    => api_version.to_s.sub('.', '_'),
+        :api_url        => self.class.base_url(
+          default_endpoint.security_protocol,
+          default_endpoint.hostname,
+          default_endpoint.port
+        )
+      }
+    }.merge(extra)
+  end
+
+  def ansible_root
+    ManageIQ::Providers::Nuage::Engine.root.join("content_tmp/ansible")
+  end
+
+  def playbook(name)
+    ansible_root.join(name)
+  end
 end

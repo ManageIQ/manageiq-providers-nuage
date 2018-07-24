@@ -1,0 +1,12 @@
+---
+# Playbook Inputs:
+# id (string) floating ip id
+
+- name: Remove Floating Ip
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    entity_type: FloatingIp
+  roles:
+  - xlab_si.nuage_remove_entity

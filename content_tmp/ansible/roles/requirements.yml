@@ -1,0 +1,3 @@
+---
+- src: xlab_si.nuage_remove_entity
+  version: v0.1.0
