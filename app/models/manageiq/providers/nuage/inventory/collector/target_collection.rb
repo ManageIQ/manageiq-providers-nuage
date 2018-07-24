@@ -157,10 +157,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     end
   end
 
-  def add_simple_target!(association, ems_ref)
+  def add_simple_target!(association, ems_ref, options: {})
     return if ems_ref.blank?
 
-    target.add_target(:association => association, :manager_ref => {:ems_ref => ems_ref})
+    target.add_target(:association => association, :manager_ref => {:ems_ref => ems_ref}, :options => options)
   end
 
   def infer_related_ems_refs!
@@ -173,7 +173,14 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def infer_related_ems_refs_api!
-    # infer related entities based on Nuage API here if needed
+    references(:network_ports).each do |port|
+      case port['parentType']
+      when 'subnet'
+        add_simple_target!(:cloud_subnets, port['parentID'], :options => { :kind => 'L3' })
+      when 'l2domain'
+        add_simple_target!(:cloud_subnets, port['parentID'], :options => { :kind => 'L2' })
+      end
+    end
   end
 
   def safe_call

@@ -20,6 +20,7 @@ module ManageIQ::Providers::Nuage::Inventory::Persister::Definitions::NetworkCol
 
   def add_cloud_subnet_network_ports(extra_properties = {})
     add_collection(network, :cloud_subnet_network_ports, extra_properties) do |builder|
+      builder.add_properties(:manager_ref_allowed_nil => %i(cloud_subnet))
       builder.add_properties(:parent => manager, :parent_inventory_collections => %i(network_ports))
     end
   end
