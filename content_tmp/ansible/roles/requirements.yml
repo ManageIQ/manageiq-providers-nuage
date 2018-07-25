@@ -1,3 +1,5 @@
 ---
 - src: xlab_si.nuage_remove_entity
   version: v0.1.0
+- src: xlab_si.nuage_create_entity
+  version: v0.1.0

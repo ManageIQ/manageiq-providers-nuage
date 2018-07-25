@@ -1,6 +1,10 @@
 class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
+  include AnsibleCrudMixin
+
   before_destroy :remove_network_ports, :prepend => true
+
   supports :delete
+  supports :create
 
   def remove_network_ports
     network_ports.each(&:destroy)
@@ -40,5 +44,30 @@ class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
 
   def kind
     'L3'
+  end
+
+  def self.raw_create_cloud_subnet(ext_management_system, options)
+    $nuage_log.info("Create Cloud Subnet (options = #{options})")
+    response = Ansible::Runner.run(
+      ext_management_system.ansible_env_vars,
+      ext_management_system.ansible_extra_vars(
+        :domain_id         => options[:router_ref],
+        :subnet_attributes => {
+          :name    => options[:name],
+          :address => options[:address],
+          :netmask => options[:netmask],
+          :gateway => options[:gateway]
+        }
+      ),
+      ext_management_system.playbook('create-subnet.yml')
+    )
+    ansible_raise_for_status(response)
+    $nuage_log.info('Done creating Cloud Subnet')
+
+    subnet = ansible_stats(response, 'created_entity', 'entities', 0)
+    {:ems_ref => subnet['ID'], :name => subnet['name']}
+  rescue StandardError => e
+    $nuage_log.error("Error creating Cloud Subnet: #{e}")
+    raise MiqException::MiqCloudSubnetCreateError
   end
 end
