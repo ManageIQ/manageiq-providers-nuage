@@ -7,9 +7,25 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     expect(described_class.description).to eq('Nuage Network Manager')
   end
 
+  describe '.api_version_valid?' do
+    [
+      { :version => 'v5_0', :valid => true },
+      { :version => 'v5.0', :valid => true },
+      { :version => 'v3_2', :valid => true },
+      { :version => 'invalid', :valid => false },
+      { :version => '', :valid => false },
+      { :version => nil, :valid => false },
+      { :version => '? string:v2 ?', :valid => false }
+    ].each do |args|
+      it "#{args[:version]}, #{args[:valid]}" do
+        expect(described_class.api_version_valid?(args[:version])).to eq(args[:valid])
+      end
+    end
+  end
+
   context '.raw_connect' do
     before do
-      @ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :hostname => 'host', :port => 8000)
+      @ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :hostname => 'host', :port => 8000, :api_version => 'v5_0')
     end
 
     it 'connects over insecure channel' do
@@ -33,6 +49,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
       @ems.api_version = 'v4_0'
       expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient).to receive(:new).with("http://host:8000/nuage/api/v4_0", "testuser", "secret")
       @ems.connect
+    end
+
+    it 'raises error for invalid API version' do
+      params = { :protocol => '', :hostname => '', :api_version => 'invalid'}
+      expect { described_class.raw_connect('user', 'pass', params) }.to raise_error(MiqException::MiqInvalidCredentialsError)
     end
   end
 

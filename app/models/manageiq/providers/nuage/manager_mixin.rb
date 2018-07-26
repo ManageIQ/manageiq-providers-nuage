@@ -8,11 +8,13 @@ module ManageIQ::Providers::Nuage::ManagerMixin
       api_port    = endpoint_opts[:api_port]
       # In case API port is represented as a string, ensure it has no whitespaces.
       api_port.strip! if api_port.kind_of?(String)
-      # v5_0 is the default API version unless it is given in the opts.
-      api_version = endpoint_opts[:api_version] ? endpoint_opts[:api_version].strip : 'v5_0'
+      api_version = endpoint_opts[:api_version].to_s.strip
+
+      # TODO(miha-plesko): Update UI to never pass in invalid version string like '? string:v2 ?'
+      raise MiqException::MiqInvalidCredentialsError, 'Invalid API Version' unless api_version_valid?(api_version)
 
       url = auth_url(protocol, hostname, api_port, api_version)
-      $nuage_log.info("Connecting to Nuage VSD with url #{url}")
+      $nuage_log.debug("Connecting to Nuage VSD with url #{url}")
 
       connection_rescue_block do
         ManageIQ::Providers::Nuage::NetworkManager::VsdClient.new(url, username, password)
@@ -53,6 +55,10 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
       $nuage_log.error("Error Class=#{err.class.name}, Message=#{err.message}")
       raise miq_exception
+    end
+
+    def api_version_valid?(value)
+      !!(value =~ /^v\d+[_.]\d+/) # e.g. 'v5_0' or 'v5.0'
     end
   end
 
