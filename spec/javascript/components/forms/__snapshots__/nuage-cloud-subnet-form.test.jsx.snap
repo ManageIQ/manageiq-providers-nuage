@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NuageCloudSubnetForm renders form 1`] = `
+<Form
+  bsClass="form"
+  componentClass="form"
+  horizontal={true}
+  inline={false}
+>
+  <FormSpy
+    onChange={[Function]}
+  />
+  <Grid
+    bsClass="container"
+    componentClass="div"
+    fluid={true}
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        xs={12}
+      >
+        <Field
+          component={[Function]}
+          format={[Function]}
+          label="_Name_"
+          name="name"
+          parse={[Function]}
+          placeholder="Subnet Name"
+          validate={[Function]}
+        />
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        xs={12}
+      >
+        <Field
+          component={[Function]}
+          format={[Function]}
+          label="_Address_"
+          name="address"
+          parse={[Function]}
+          placeholder="100.100.100.0"
+          validate={[Function]}
+        />
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        xs={12}
+      >
+        <Field
+          component={[Function]}
+          format={[Function]}
+          label="_Netmask_"
+          name="netmask"
+          parse={[Function]}
+          placeholder="255.255.255.0"
+          validate={[Function]}
+        />
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        xs={12}
+      >
+        <Field
+          component={[Function]}
+          format={[Function]}
+          label="_Gateway_"
+          name="gateway"
+          parse={[Function]}
+          placeholder="100.100.100.1"
+          validate={[Function]}
+        />
+      </Col>
+      <hr />
+    </Row>
+  </Grid>
+</Form>
+`;
+
+exports[`NuageCloudSubnetForm renders spinner 1`] = `
+<div
+  className="spinner spinner-lg"
+/>
+`;
