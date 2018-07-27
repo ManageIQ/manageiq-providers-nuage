@@ -1,5 +1,10 @@
 class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
+  before_destroy :remove_network_ports, :prepend => true
   supports :delete
+
+  def remove_network_ports
+    network_ports.each(&:destroy)
+  end
 
   def delete_cloud_subnet_queue(userid)
     task_opts = {
