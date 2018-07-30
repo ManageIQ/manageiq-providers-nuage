@@ -44,6 +44,39 @@ describe ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet do
       end
       subject.delete_cloud_subnet
     end
+
+    describe '.create_cloud_subnet' do
+      let(:response_ok)  { double('ansible_response', :return_code => 0, :parsed_stdout => []) }
+      let(:response_bad) { double('ansible_response', :return_code => 2, :parsed_stdout => []) }
+      let(:options) do
+        {
+          :name       => 'Subnet',
+          :address    => '128.128.130.0',
+          :netmask    => 'netmask',
+          :gateway    => '128.128.130.1',
+          :router_ref => 'router_ref'
+        }
+      end
+
+      it 'happy path' do
+        expect(Ansible::Runner).to receive(:run) do |env, vars, playbook|
+          expect(env).to be_empty
+          expect(vars.keys).to eq(%i(nuage_auth domain_id subnet_attributes))
+          expect(vars[:domain_id]).to eq('router_ref')
+          expect(vars[:subnet_attributes].keys).to eq(%i(name address netmask gateway))
+          expect(playbook.to_s).to end_with("/create-subnet.yml")
+          expect(File).to exist(playbook.to_s)
+
+          response_ok
+        end
+        ems.create_cloud_subnet(options)
+      end
+
+      it 'bad playbook status' do
+        expect(Ansible::Runner).to receive(:run).and_return(response_bad)
+        expect { ems.create_cloud_subnet(options) }.to raise_error(MiqException::Error)
+      end
+    end
   end
 
   context 'L2 subnet' do
