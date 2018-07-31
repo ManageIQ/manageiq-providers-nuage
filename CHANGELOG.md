@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 91 ending 2018-07-30
+
+### Added
+- Implement CREATE operation for CloudSubnet [(#117)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/117)
+- Check for invalid api_version string [(#116)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/116)
+- Destroy dependent entities when parent is deleted [(#115)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/115)
+- Infer related CloudSubnet in case of NetworkPort refresh [(#114)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/114)
+- Relate FloatingIp to NetworkRouter [(#113)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/113)
+- Reduce memoization in targeted refresh [(#112)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/112)
+- Targeted refresh for NetworkPorts [(#111)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/111)
+- Targeted refresh for FloatingIp [(#110)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/110)
+- Targeted refresh for L2 and L3 CloudSubnets [(#109)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/109)
+- Targeted refresh for CloudNetwork::Floating [(#108)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/108)
+- Narrow down focus of targeted refresh [(#107)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/107)
+- Properly subclass CloudSubnet [(#105)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/105)
+- Support DELETE operations powered by AnsibleRunner [(#104)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/104)
+
 ## Unreleased as of Sprint 90 ending 2018-07-16
 
 ### Added
