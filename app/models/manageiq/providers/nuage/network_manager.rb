@@ -111,7 +111,7 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   end
 
   def ansible_root
-    ManageIQ::Providers::Nuage::Engine.root.join("content_tmp/ansible")
+    ManageIQ::Providers::Nuage::Engine.root.join("content/ansible_runner")
   end
 
   def playbook(name)
