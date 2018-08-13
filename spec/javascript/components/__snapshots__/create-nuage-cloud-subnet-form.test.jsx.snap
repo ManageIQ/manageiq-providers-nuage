@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateNuageCloudSubnetForm componentDidMount router fetch fails 1`] = `
+<p>
+  MSG
+</p>
+`;
+
+exports[`CreateNuageCloudSubnetForm componentDidMount router fetch succeeds 1`] = `
+<NuageCloudSubnetForm
+  loading={false}
+  updateFormState={[Function]}
+/>
+`;
