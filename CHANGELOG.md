@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 92 ending 2018-08-13
+
+### Added
+- Setup React component [(#121)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/121)
+- React component for creating Nuage subnet [(#118)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/118)
+
 ## Unreleased as of Sprint 91 ending 2018-07-30
 
 ### Added
