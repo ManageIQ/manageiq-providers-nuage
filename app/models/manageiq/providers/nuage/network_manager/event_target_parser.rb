@@ -22,6 +22,13 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
   def parse_ems_event_targets(event)
     target_collection = ManagerRefresh::TargetCollection.new(:manager => event.ext_management_system, :event => event)
 
+    $nuage_log.debug(
+      [
+        'target:', event.full_data['entityType'], '-', event.full_data['type'], '-',
+        event.full_data['entities'][0]['name'], '-', event.full_data['entities'][0]['ID']
+      ].join(' ')
+    )
+
     case event.full_data["entityType"]
     when 'enterprise'
       add_targets(target_collection, :cloud_tenants, event.full_data['entities'])
