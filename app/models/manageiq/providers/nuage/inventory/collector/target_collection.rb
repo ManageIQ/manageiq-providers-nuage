@@ -109,6 +109,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     @shared_resources_map = {}
   end
 
+  def cloud_subnets_for_router(router_ref)
+    safe_list { vsd_client.get_subnets_for_domain(router_ref) }
+  end
+
   def routers_for_tenant(tenant_ems_ref)
     safe_list { vsd_client.get_domains_for_enterprise(tenant_ems_ref) }
   end
@@ -173,6 +177,17 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def infer_related_ems_refs_api!
+    # Overcome Nuage glitch upon router template instantiation.
+    # GLITCH: even if template contains subnets, no "subnet create" event is emitted hence targeted
+    # refresh isn't triggered for those.
+    # SOLUTION: manually infer all subnets for such router.
+    references_with_options(:network_routers).each do |router|
+      next unless router[:operation] == 'CREATE'
+      cloud_subnets_for_router(router[:ems_ref]).each do |subnet|
+        add_simple_target!(:cloud_subnets, subnet['ID'], :options => { :kind => 'L3' })
+      end
+    end
+
     references(:network_ports).each do |port|
       case port['parentType']
       when 'subnet'
@@ -200,5 +215,9 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
 
   def references_with_kind(association, kind)
     target.targets.select { |t| t.association == association && t.options[:kind] == kind }.map { |t| t.manager_ref[:ems_ref] }
+  end
+
+  def references_with_options(association)
+    target.targets.select { |t| t.association == association }.map { |t| t.options.merge(:ems_ref => t.manager_ref[:ems_ref]) }
   end
 end

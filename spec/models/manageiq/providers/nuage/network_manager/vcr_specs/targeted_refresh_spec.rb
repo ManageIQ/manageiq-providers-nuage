@@ -65,6 +65,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:bridge_port_ref)      { "43b7faad-2c76-4945-9412-66a04bde7b6a" }
     let(:host_port_ref)        { "b19075d3-a797-4dcd-93be-de52b4247e46" }
     let(:vports_parent_ref)    { "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" }
+    let(:network_router_ref)   { "b0edd930-2b74-44c4-8ea8-00f711cee619" }
 
     TARGET_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -119,6 +120,13 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             floating_ip = FactoryGirl.build(:floating_ip_nuage, :ems_ref => floating_ip_ref)
             test_targeted_refresh([floating_ip], 'floating_ip') do
               assert_specific_floating_ip
+            end
+          end
+
+          it "will refresh network_router" do
+            network_router = FactoryGirl.build(:network_router_nuage, :ems_ref => network_router_ref)
+            test_targeted_refresh([network_router], 'network_router', :options => { :operation => 'CREATE' }) do
+              assert_specific_network_router
             end
           end
 
@@ -193,6 +201,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                                  :name => nil)
             end
 
+            let!(:network_router) do
+              FactoryGirl.create(:network_router_nuage, :ems_id => @ems.id, :ems_ref => network_router_ref,
+                                 :name => nil)
+            end
+
             it "cloud_tenant is updated" do
               test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_updated') do
                 assert_fetched(cloud_tenant)
@@ -234,6 +247,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_fetched(network_port)
               end
             end
+
+            it "network_router is updated" do
+              test_targeted_refresh([network_router], 'network_router_is_updated') do
+                assert_fetched(network_router)
+              end
+            end
           end
 
           context "object no longer exists on remote server" do
@@ -244,6 +263,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
             let(:l2_cloud_subnet)  { FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
             let(:floating_ip)      { FactoryGirl.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
             let(:network_port)     { FactoryGirl.create(:network_port_bridge_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:network_router)   { FactoryGirl.create(:network_router_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
 
             it "unexisting cloud_tenant is deleted" do
               test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_deleted', :repeat => 1) do
@@ -286,14 +306,20 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_deleted(network_port)
               end
             end
+
+            it "unexisting network_router is deleted" do
+              test_targeted_refresh([network_router], 'network_router_is_deleted', :repeat => 1) do
+                assert_deleted(network_router)
+              end
+            end
           end
         end
       end
     end
   end
 
-  def test_targeted_refresh(targets, cassette, repeat: 2)
-    targets = active_records_to_targets(targets)
+  def test_targeted_refresh(targets, cassette, repeat: 2, options: {})
+    targets = active_records_to_targets(targets, :options => options)
     repeat.times do # Run twice to verify that a second run with existing data does not change anything
       EmsRefresh.queue_refresh(targets)
       expect(MiqQueue.where(:method_name => 'refresh').count).to eq 1
@@ -307,32 +333,29 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     end
   end
 
-  def active_records_to_targets(targets)
+  def active_records_to_targets(targets, options: {})
     targets.map do |target|
       case target
       when ManagerRefresh::Target
         return target
       when CloudTenant
         association = :cloud_tenants
-        options     = {}
       when ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L3
         association = :cloud_subnets
-        options     = { :kind => 'L3' }
+        options     = options.merge(:kind => 'L3')
       when ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet::L2
         association = :cloud_subnets
-        options     = { :kind => 'L2' }
+        options     = options.merge(:kind => 'L2')
       when SecurityGroup
         association = :security_groups
-        options     = {}
       when CloudNetwork
         association = :cloud_networks
-        options     = {}
       when FloatingIp
         association = :floating_ips
-        options     = {}
       when NetworkPort
         association = :network_ports
-        options     = {}
+      when NetworkRouter
+        association = :network_routers
       end
       ManagerRefresh::Target.new(
         :manager     => @ems,
@@ -490,6 +513,18 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :ems_id => @ems.id,
       :type   => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Vm'
     )
+  end
+
+  def assert_specific_network_router
+    router = NetworkRouter.find_by(:ems_ref => network_router_ref)
+    expect(router).to have_attributes(
+      :name   => 'Routy',
+      :ems_id => @ems.id,
+      :type   => 'ManageIQ::Providers::Nuage::NetworkManager::NetworkRouter'
+    )
+    # Verify that we've fetched subnets as well upon router creation because
+    # there is a glitch in Nuage that no extra events are emitted for those.
+    expect(router.cloud_subnets.size).to eq(3)
   end
 
   def assert_fetched(instance, attribute: :name)
