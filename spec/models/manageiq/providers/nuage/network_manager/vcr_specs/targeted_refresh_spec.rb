@@ -312,6 +312,15 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_deleted(network_router)
               end
             end
+
+            it "unexisting network_router is deleted (with security_group)" do
+              cloud_tenant.security_groups = [security_group]
+              test_targeted_refresh([network_router], 'network_router_with_security_groups_is_deleted',
+                                    :repeat => 1, :options => { :operation => 'DELETE' }) do
+                assert_deleted(network_router)
+                assert_deleted(security_group)
+              end
+            end
           end
         end
       end
