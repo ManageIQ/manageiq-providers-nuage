@@ -43,6 +43,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
   def cloud_subnets
     collector.cloud_subnets.each do |subnet|
       extra = map_extra_attributes(subnet['parentID']) || {}
+      extra['template_id'] = subnet['templateID']
       persister.cloud_subnets.find_or_build(subnet['ID']).assign_attributes(
         :type             => collector.manager.class.l3_cloud_subnet_type,
         :name             => subnet['name'],

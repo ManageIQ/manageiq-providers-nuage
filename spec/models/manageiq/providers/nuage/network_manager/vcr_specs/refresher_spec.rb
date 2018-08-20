@@ -51,20 +51,21 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   describe "refresh" do
-    let(:tenant_ref1)        { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
-    let(:tenant_ref2)        { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
-    let(:security_group_ref) { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
-    let(:cloud_subnet_ref1)  { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
-    let(:cloud_subnet_ref2)  { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
-    let(:l2_subnet_ref1)     { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
-    let(:l2_subnet_ref2)     { "8efc78b0-df2a-4c6f-964b-463a9d106bed" }
-    let(:router_ref)         { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
-    let(:floating_ip_ref)    { "3a00891b-29ba-4f60-8f35-033d84aa1083" }
-    let(:network_ref)        { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
-    let(:cont_port_ref)      { "dd9a4d57-2e24-427b-8aef-4d2925df47b2" }
-    let(:vm_port_ref)        { "15d1369e-9553-4e83-8bb9-3a6c269f81ae" }
-    let(:bridge_port_ref)    { "43b7faad-2c76-4945-9412-66a04bde7b6a" }
-    let(:host_port_ref)      { "b19075d3-a797-4dcd-93be-de52b4247e46" }
+    let(:tenant_ref1)         { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
+    let(:tenant_ref2)         { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
+    let(:security_group_ref)  { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
+    let(:cloud_subnet_ref1)   { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
+    let(:cloud_subnet_ref2)   { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
+    let(:l2_subnet_ref1)      { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
+    let(:l2_subnet_ref2)      { "8efc78b0-df2a-4c6f-964b-463a9d106bed" }
+    let(:router_ref)          { "75ad8ee8-726c-4950-94bc-6a5aab64631d" }
+    let(:floating_ip_ref)     { "3a00891b-29ba-4f60-8f35-033d84aa1083" }
+    let(:network_ref)         { "17b305a7-eec9-4492-acb9-20a1d63a8ba1" }
+    let(:cont_port_ref)       { "dd9a4d57-2e24-427b-8aef-4d2925df47b2" }
+    let(:vm_port_ref)         { "15d1369e-9553-4e83-8bb9-3a6c269f81ae" }
+    let(:bridge_port_ref)     { "43b7faad-2c76-4945-9412-66a04bde7b6a" }
+    let(:host_port_ref)       { "b19075d3-a797-4dcd-93be-de52b4247e46" }
+    let(:subnet_template_ref) { "aaaaaaaa-aaaa-bbbb-bbbb-cccccccccccc" }
 
     ALL_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -201,9 +202,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "domain_id" => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name" => "Zone 1",
-        "zone_id"   => "6256954b-9dd6-43ed-94ff-9daa683ab8b0"
+        "domain_id"   => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name"   => "Zone 1",
+        "zone_id"     => "6256954b-9dd6-43ed-94ff-9daa683ab8b0",
+        "template_id" => nil
       }
     )
 
@@ -226,9 +228,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "domain_id" => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name" => "Zone 0",
-        "zone_id"   => "3b11a2d0-2082-42f1-92db-0b05264f372e"
+        "domain_id"   => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name"   => "Zone 0",
+        "zone_id"     => "3b11a2d0-2082-42f1-92db-0b05264f372e",
+        "template_id" => "aaaaaaaa-aaaa-bbbb-bbbb-cccccccccccc"
       }
     )
   end

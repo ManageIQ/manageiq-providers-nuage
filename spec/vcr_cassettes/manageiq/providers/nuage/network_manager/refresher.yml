@@ -369,32 +369,36 @@ http_interactions:
       - application/json
       Transfer-Encoding:
       - chunked
-      Content-Encoding:
-      - gzip
       Vary:
       - Accept-Encoding
       Date:
       - Wed, 23 Aug 2017 15:27:30 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAOVV226bQBD9lWqfvdHeWXhzYpQgNZFlu32p+rDsLjEKBgRL
-        Ulr137vg4NhReonUSq0qARJzZubMzgyHD1+A3uaFaWwJorIrihmolX9xm762
-        IAKfq9KCGfCG3PVrXY3G+GYTr5arZB17qFCte1cb5aw57z0olciQJQgqZlLI
-        ZCChMpLBUGuBAy604fY0bOEfIMIc4UCEPCQIoRnQjVUur8oTkNFgBJXxBbet
-        Z8PobH8hn7O0bqfaO28mnJ9N94io3VD4uku9z5vBYnpvy3VS34v5lM01nZ2B
-        W8/4oPrj5HgIsK1u8nqoaerUTuWls6Uqtb2uzECwSNbz87fxwvs3VefsIm9d
-        Xt52ebu1jccF55RFAmMcTi4b1dxad8AwQoR47L5MDPCeXFDCZqArjW0K1cel
-        SgvrEZDcXMWrZDNyTSiIMlW09jAvNzZvX2xbF7nbN+DITTf945FOElYP5Vjv
-        Lw4zWXhfY9M0zKSEGeEEMk0RDBUOoBHKUim4pYKDab3GCJpirIhBkCDpI0iG
-        YUg8D0oRJ4JlNCDj8n1ytilVMcTsz5Isj6Y2mR43Nlm+Z2DvcjlN8rEDtrnP
-        tR3SYEE5lUHA8WHe1/OLQ0ogZMRZFC8ihCJBo3jIuJxvXu5+XRW57i/9NOsx
-        t+QcozBEgYe61GOHfju7qwtP93QS1baVzoevYL31jTE31j1Uzd3KtlXX6CPH
-        xdXFcmX9jIehdu3prtVN9amfr5YHol1XuFz7T+xZqU9015PHxVaVpS2uVX1E
-        tkyeb1hrL4sqVYVv0zH319nfJiAC4R8ICKMvCgh5nYDgVwkI+e0CQnhA5XcE
-        hAlKD/qBkcSYsn9EQAQyFAsFNVYaMoYJlJhqGApOUpNqZhk+FRBBuP9jsBSG
-        xgjIqDUwZFnmX5USkqpUpugPCYhEofQixfnPBeR8Hs3JawQEE8JDyUL0PwjI
-        x2835wL9gwgAAA==
+      string: |
+        [
+          {
+            "children":null, "parentType":"zone", "entityScope":"ENTERPRISE", "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1501769592000, "creationDate":1501769437000, "address":"10.10.10.0", "netmask":"255.255.255.0", "name":"Subnet 0",
+            "dynamicIpv6Address":true, "gateway":"10.10.10.1", "description":null, "maintenanceMode":"DISABLED", "routeDistinguisher":"65534:61119",
+            "routeTarget":"65534:10022", "vnId":6156324, "underlayEnabled":"INHERITED", "underlay":false, "entityState":null, "splitSubnet":false,
+            "encryption":"INHERITED", "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e", "ID":"debb9f88-f252-4c30-9a17-d6ae3865e365",
+            "parentID":"3b11a2d0-2082-42f1-92db-0b05264f372e", "externalID":null, "IPv6Address":null, "IPType":"IPV4", "IPv6Gateway":null,
+            "serviceID":1635387751, "gatewayMACAddress":"68:54:ED:00:63:E4", "PATEnabled":"INHERITED", "policyGroupID":1855109907, "public":false,
+            "templateID":"aaaaaaaa-aaaa-bbbb-bbbb-cccccccccccc", "associatedSharedNetworkResourceID":null, "DHCPRelayStatus":"DISABLED",
+            "proxyARP":false, "multicast":"INHERITED", "associatedMulticastChannelMapID":null, "DPI":"INHERITED", "useGlobalMAC":"DISABLED"},
+          {
+            "children":null, "parentType":"zone", "entityScope":"ENTERPRISE", "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1501769601000, "creationDate":1501769443000, "address":"10.10.20.0", "netmask":"255.255.255.0", "name":"Subnet 1",
+            "dynamicIpv6Address":true, "gateway":"10.10.20.1", "description":null, "maintenanceMode":"DISABLED", "routeDistinguisher":"65534:25738",
+            "routeTarget":"65534:4633", "vnId":10811344, "underlayEnabled":"INHERITED", "underlay":false, "entityState":null, "splitSubnet":false,
+            "encryption":"INHERITED", "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e", "ID":"d60d316a-c1ac-4412-813c-9652bdbc4e41",
+            "parentID":"6256954b-9dd6-43ed-94ff-9daa683ab8b0", "externalID":null, "IPv6Address":null, "IPType":"IPV4", "IPv6Gateway":null,
+            "serviceID":1809852655, "gatewayMACAddress":"68:54:ED:00:BA:A2", "PATEnabled":"INHERITED", "policyGroupID":1122598490, "public":false,
+            "templateID":null, "associatedSharedNetworkResourceID":null, "DHCPRelayStatus":"DISABLED", "proxyARP":false, "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null, "DPI":"INHERITED", "useGlobalMAC":"DISABLED"
+          }
+        ]
     http_version: 
   recorded_at: Wed, 23 Aug 2017 15:27:30 GMT
 - request:
@@ -458,32 +462,36 @@ http_interactions:
       - application/json
       Transfer-Encoding:
       - chunked
-      Content-Encoding:
-      - gzip
       Vary:
       - Accept-Encoding
       Date:
       - Wed, 23 Aug 2017 15:27:30 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAOVV226bQBD9lWqfvdHeWXhzYpQgNZFlu32p+rDsLjEKBgRL
-        Ulr137vg4NhReonUSq0qARJzZubMzgyHD1+A3uaFaWwJorIrihmolX9xm762
-        IAKfq9KCGfCG3PVrXY3G+GYTr5arZB17qFCte1cb5aw57z0olciQJQgqZlLI
-        ZCChMpLBUGuBAy604fY0bOEfIMIc4UCEPCQIoRnQjVUur8oTkNFgBJXxBbet
-        Z8PobH8hn7O0bqfaO28mnJ9N94io3VD4uku9z5vBYnpvy3VS34v5lM01nZ2B
-        W8/4oPrj5HgIsK1u8nqoaerUTuWls6Uqtb2uzECwSNbz87fxwvs3VefsIm9d
-        Xt52ebu1jccF55RFAmMcTi4b1dxad8AwQoR47L5MDPCeXFDCZqArjW0K1cel
-        SgvrEZDcXMWrZDNyTSiIMlW09jAvNzZvX2xbF7nbN+DITTf945FOElYP5Vjv
-        Lw4zWXhfY9M0zKSEGeEEMk0RDBUOoBHKUim4pYKDab3GCJpirIhBkCDpI0iG
-        YUg8D0oRJ4JlNCDj8n1ytilVMcTsz5Isj6Y2mR43Nlm+Z2DvcjlN8rEDtrnP
-        tR3SYEE5lUHA8WHe1/OLQ0ogZMRZFC8ihCJBo3jIuJxvXu5+XRW57i/9NOsx
-        t+QcozBEgYe61GOHfju7qwtP93QS1baVzoevYL31jTE31j1Uzd3KtlXX6CPH
-        xdXFcmX9jIehdu3prtVN9amfr5YHol1XuFz7T+xZqU9015PHxVaVpS2uVX1E
-        tkyeb1hrL4sqVYVv0zH319nfJiAC4R8ICKMvCgh5nYDgVwkI+e0CQnhA5XcE
-        hAlKD/qBkcSYsn9EQAQyFAsFNVYaMoYJlJhqGApOUpNqZhk+FRBBuP9jsBSG
-        xgjIqDUwZFnmX5USkqpUpugPCYhEofQixfnPBeR8Hs3JawQEE8JDyUL0PwjI
-        x2835wL9gwgAAA==
+      string: |
+        [
+          {
+            "children":null, "parentType":"zone", "entityScope":"ENTERPRISE", "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1501769592000, "creationDate":1501769437000, "address":"10.10.10.0", "netmask":"255.255.255.0", "name":"Subnet 0",
+            "dynamicIpv6Address":true, "gateway":"10.10.10.1", "description":null, "maintenanceMode":"DISABLED", "routeDistinguisher":"65534:61119",
+            "routeTarget":"65534:10022", "vnId":6156324, "underlayEnabled":"INHERITED", "underlay":false, "entityState":null, "splitSubnet":false,
+            "encryption":"INHERITED", "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e", "ID":"debb9f88-f252-4c30-9a17-d6ae3865e365",
+            "parentID":"3b11a2d0-2082-42f1-92db-0b05264f372e", "externalID":null, "IPv6Address":null, "IPType":"IPV4", "IPv6Gateway":null,
+            "serviceID":1635387751, "gatewayMACAddress":"68:54:ED:00:63:E4", "PATEnabled":"INHERITED", "policyGroupID":1855109907, "public":false,
+            "templateID":"aaaaaaaa-aaaa-bbbb-bbbb-cccccccccccc", "associatedSharedNetworkResourceID":null, "DHCPRelayStatus":"DISABLED",
+            "proxyARP":false, "multicast":"INHERITED", "associatedMulticastChannelMapID":null, "DPI":"INHERITED", "useGlobalMAC":"DISABLED"},
+          {
+            "children":null, "parentType":"zone", "entityScope":"ENTERPRISE", "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate":1501769601000, "creationDate":1501769443000, "address":"10.10.20.0", "netmask":"255.255.255.0", "name":"Subnet 1",
+            "dynamicIpv6Address":true, "gateway":"10.10.20.1", "description":null, "maintenanceMode":"DISABLED", "routeDistinguisher":"65534:25738",
+            "routeTarget":"65534:4633", "vnId":10811344, "underlayEnabled":"INHERITED", "underlay":false, "entityState":null, "splitSubnet":false,
+            "encryption":"INHERITED", "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e", "ID":"d60d316a-c1ac-4412-813c-9652bdbc4e41",
+            "parentID":"6256954b-9dd6-43ed-94ff-9daa683ab8b0", "externalID":null, "IPv6Address":null, "IPType":"IPV4", "IPv6Gateway":null,
+            "serviceID":1809852655, "gatewayMACAddress":"68:54:ED:00:BA:A2", "PATEnabled":"INHERITED", "policyGroupID":1122598490, "public":false,
+            "templateID":null, "associatedSharedNetworkResourceID":null, "DHCPRelayStatus":"DISABLED", "proxyARP":false, "multicast":"INHERITED",
+            "associatedMulticastChannelMapID":null, "DPI":"INHERITED", "useGlobalMAC":"DISABLED"
+          }
+        ]
     http_version: 
   recorded_at: Wed, 23 Aug 2017 15:27:31 GMT
 - request:

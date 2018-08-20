@@ -90,6 +90,10 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
     cloud_subnets.where(:type => self.class.l2_cloud_subnet_type)
   end
 
+  def cloud_subnets_by_extra_attr(key, value)
+    cloud_subnets.where('extra_attributes ~* ?', "#{key}: #{value}\n")
+  end
+
   def ansible_env_vars
     {}
   end
