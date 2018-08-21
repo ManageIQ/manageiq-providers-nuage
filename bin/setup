@@ -6,8 +6,10 @@ gem_root = Pathname.new(__dir__).join("..")
 unless gem_root.join("spec/manageiq").exist?
   puts "== Cloning manageiq sample app =="
   system "git clone https://github.com/ManageIQ/manageiq.git --branch master --depth 1 spec/manageiq"
-  Dir.mkdir("spec/manageiq/log")
 end
+
+# Ensure a log dir always exists.
+gem_root.join("spec/manageiq/log").mkpath
 
 require gem_root.join("spec/manageiq/lib/manageiq/environment").to_s
 ManageIQ::Environment.manageiq_plugin_setup(gem_root)
