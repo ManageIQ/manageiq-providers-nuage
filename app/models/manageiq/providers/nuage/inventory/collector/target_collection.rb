@@ -173,7 +173,15 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def infer_related_ems_refs_db!
-    # infer related entities based on VMDB here if needed
+    # Delete related security groups upon router deletion.
+    # TODO(miha-plesko): when we have relation "security group belongs to network router" modelled, we can use
+    # dependent: destroy instead inferring here.
+    references_with_options(:network_routers).each do |router|
+      next unless router[:operation] == 'DELETE'
+      if (router = manager.network_routers.find_by(:ems_ref => router[:ems_ref]))
+        router.cloud_tenant.security_groups.each { |group| add_simple_target!(:security_groups, group.ems_ref) }
+      end
+    end
   end
 
   def infer_related_ems_refs_api!
