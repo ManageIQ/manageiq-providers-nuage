@@ -179,6 +179,20 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
         add_simple_target!(:cloud_subnets, subnet.ems_ref, :options => { :kind => 'L3', :deleted => true })
       end
     end
+
+    references_with_options(:zone_templates).each do |template|
+      next unless template[:operation] == 'DELETE'
+      manager.cloud_subnets_by_extra_attr('zone_template_id', template[:ems_ref]).each do |subnet|
+        add_simple_target!(:cloud_subnets, subnet.ems_ref, :options => { :kind => 'L3', :deleted => true })
+      end
+    end
+
+    references_with_options(:zones).each do |zone|
+      next unless zone[:operation] == 'DELETE'
+      manager.cloud_subnets_by_extra_attr('zone_id', zone[:ems_ref]).each do |subnet|
+        add_simple_target!(:cloud_subnets, subnet.ems_ref, :options => { :kind => 'L3', :deleted => true })
+      end
+    end
   end
 
   def infer_related_ems_refs_api!

@@ -25,12 +25,13 @@ describe ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager do
     end
 
     context 'regular case' do
-      let(:zone) { { 'name' => 'Zone Name', 'parentID' => 'domain-id' } }
+      let(:zone) { { 'name' => 'Zone Name', 'parentID' => 'domain-id', 'templateID' => 'template-id' } }
       it 'invoke' do
         expect(subject.send(:map_extra_attributes, 'the-zone')).to eq(
-          'domain_id'       => 'domain-id',
-          'zone_name'       => 'Zone Name',
-          'zone_id'         => 'the-zone'
+          'domain_id'        => 'domain-id',
+          'zone_name'        => 'Zone Name',
+          'zone_id'          => 'the-zone',
+          'zone_template_id' => 'template-id'
         )
       end
     end

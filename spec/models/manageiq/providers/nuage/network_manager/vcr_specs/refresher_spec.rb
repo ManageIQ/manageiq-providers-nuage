@@ -65,7 +65,6 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:vm_port_ref)         { "15d1369e-9553-4e83-8bb9-3a6c269f81ae" }
     let(:bridge_port_ref)     { "43b7faad-2c76-4945-9412-66a04bde7b6a" }
     let(:host_port_ref)       { "b19075d3-a797-4dcd-93be-de52b4247e46" }
-    let(:subnet_template_ref) { "aaaaaaaa-aaaa-bbbb-bbbb-cccccccccccc" }
 
     ALL_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -202,10 +201,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "domain_id"   => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name"   => "Zone 1",
-        "zone_id"     => "6256954b-9dd6-43ed-94ff-9daa683ab8b0",
-        "template_id" => nil
+        "domain_id"        => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name"        => "Zone 1",
+        "zone_id"          => "6256954b-9dd6-43ed-94ff-9daa683ab8b0",
+        "template_id"      => nil,
+        "zone_template_id" => nil
       }
     )
 
@@ -228,10 +228,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :network_router_id              => NetworkRouter.find_by(:ems_ref => router_ref).id,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "domain_id"   => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name"   => "Zone 0",
-        "zone_id"     => "3b11a2d0-2082-42f1-92db-0b05264f372e",
-        "template_id" => "aaaaaaaa-aaaa-bbbb-bbbb-cccccccccccc"
+        "domain_id"        => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name"        => "Zone 0",
+        "zone_id"          => "3b11a2d0-2082-42f1-92db-0b05264f372e",
+        "template_id"      => "aaaaaaaa-aaaa-bbbb-bbbb-cccccccccccc",
+        "zone_template_id" => "abababab-abab-abab-abab-abababababab"
       }
     )
   end

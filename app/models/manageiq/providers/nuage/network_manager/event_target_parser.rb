@@ -50,6 +50,12 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
     when 'subnettemplate'
       add_targets(target_collection, :cloud_subnet_templates, event.full_data['entities'],
                   :options => { :operation => event_operation(event) })
+    when 'zonetemplate'
+      add_targets(target_collection, :zone_templates, event.full_data['entities'],
+                  :options => { :operation => event_operation(event) })
+    when 'zone'
+      add_targets(target_collection, :zones, event.full_data['entities'],
+                  :options => { :operation => event_operation(event) })
     end
 
     target_collection.targets
