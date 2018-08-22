@@ -66,6 +66,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:host_port_ref)        { "b19075d3-a797-4dcd-93be-de52b4247e46" }
     let(:vports_parent_ref)    { "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" }
     let(:network_router_ref)   { "b0edd930-2b74-44c4-8ea8-00f711cee619" }
+    let(:subnet_template_ref)  { "bbbbbbbb-cccc-dddd-eeee-eeeeeeeeeeee" }
 
     TARGET_REFRESH_SETTINGS.each do |settings|
       context "with settings #{settings}" do
@@ -312,6 +313,19 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_deleted(network_router)
               end
             end
+
+            it "cloud_subnet is deleted when its template is deleted" do
+              cloud_subnet.tap { |subnet| subnet.extra_attributes = { 'template_id' => subnet_template_ref } }.save
+              subnet_template = ManagerRefresh::Target.new(
+                :manager     => @ems,
+                :association => :cloud_subnet_templates,
+                :manager_ref => { :ems_ref => subnet_template_ref },
+                :options     => { :operation => 'DELETE' }
+              )
+              test_targeted_refresh([subnet_template], 'no_api_interaction', :repeat => 1) do
+                assert_deleted(cloud_subnet)
+              end
+            end
           end
         end
       end
@@ -396,9 +410,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :network_router_id              => nil,
       :parent_cloud_subnet_id         => nil,
       :extra_attributes               => {
-        "domain_id" => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
-        "zone_name" => "Zone 1",
-        "zone_id"   => "6256954b-9dd6-43ed-94ff-9daa683ab8b0"
+        "domain_id"   => "75ad8ee8-726c-4950-94bc-6a5aab64631d",
+        "zone_name"   => "Zone 1",
+        "zone_id"     => "6256954b-9dd6-43ed-94ff-9daa683ab8b0",
+        "template_id" => nil
       }
     )
   end

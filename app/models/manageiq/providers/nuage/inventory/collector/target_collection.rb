@@ -17,12 +17,12 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
 
   def cloud_subnets
     return [] if (refs = references_with_kind(:cloud_subnets, 'L3')).blank?
-    refs.map { |ems_ref| cloud_subnet(ems_ref) }.compact
+    refs.map { |subnet| cloud_subnet(subnet[:ems_ref]) }.compact
   end
 
   def l2_cloud_subnets
     return [] if (refs = references_with_kind(:cloud_subnets, 'L2')).blank?
-    refs.map { |ems_ref| l2_cloud_subnet(ems_ref) }.compact
+    refs.map { |subnet| l2_cloud_subnet(subnet[:ems_ref]) }.compact
   end
 
   def security_groups
@@ -173,7 +173,12 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def infer_related_ems_refs_db!
-    # infer related entities based on VMDB here if needed
+    references_with_options(:cloud_subnet_templates).each do |template|
+      next unless template[:operation] == 'DELETE'
+      manager.cloud_subnets_by_extra_attr('template_id', template[:ems_ref]).each do |subnet|
+        add_simple_target!(:cloud_subnets, subnet.ems_ref, :options => { :kind => 'L3', :deleted => true })
+      end
+    end
   end
 
   def infer_related_ems_refs_api!
@@ -214,10 +219,13 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
   end
 
   def references_with_kind(association, kind)
-    target.targets.select { |t| t.association == association && t.options[:kind] == kind }.map { |t| t.manager_ref[:ems_ref] }
+    references_with_options(association).select { |t| t[:kind] == kind }
   end
 
   def references_with_options(association)
-    target.targets.select { |t| t.association == association }.map { |t| t.options.merge(:ems_ref => t.manager_ref[:ems_ref]) }
+    target.targets
+          .select { |t| t.association == association }
+          .map    { |t| t.options.merge(:ems_ref => t.manager_ref[:ems_ref]) }
+          .reject { |t| t[:deleted] } # Sometimes we know it is deleted, so we spare an API call for performance reasons.
   end
 end

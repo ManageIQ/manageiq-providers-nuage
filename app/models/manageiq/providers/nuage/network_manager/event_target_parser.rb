@@ -40,13 +40,16 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
       add_targets(target_collection, :security_groups, event.full_data['entities'])
     when 'domain'
       add_targets(target_collection, :network_routers, event.full_data['entities'],
-                  :options => { :operation => event.full_data['type'].to_s.upcase })
+                  :options => { :operation => event_operation(event) })
     when 'sharednetworkresource'
       add_targets(target_collection, :cloud_networks, event.full_data['entities'])
     when 'floatingip'
       add_targets(target_collection, :floating_ips, event.full_data['entities'])
     when 'vport'
       add_targets(target_collection, :network_ports, event.full_data['entities'])
+    when 'subnettemplate'
+      add_targets(target_collection, :cloud_subnet_templates, event.full_data['entities'],
+                  :options => { :operation => event_operation(event) })
     end
 
     target_collection.targets
@@ -58,5 +61,9 @@ class ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser
       next if obj[key].to_s.empty?
       target_collection.add_target(:association => association, :manager_ref => {:ems_ref => obj[key]}, :options => options)
     end
+  end
+
+  def event_operation(event)
+    event.full_data['type'].to_s.upcase
   end
 end
