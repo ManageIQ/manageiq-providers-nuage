@@ -132,9 +132,10 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
   def map_extra_attributes(zone_id)
     if (zone = collector.zone(zone_id))
       {
-        'domain_id' => zone['parentID'],
-        'zone_name' => zone['name'],
-        'zone_id'   => zone_id
+        'domain_id'        => zone['parentID'],
+        'zone_name'        => zone['name'],
+        'zone_id'          => zone_id,
+        'zone_template_id' => zone['templateID']
       }
     else
       {}

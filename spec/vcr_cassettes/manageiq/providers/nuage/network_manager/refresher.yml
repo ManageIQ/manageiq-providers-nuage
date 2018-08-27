@@ -286,26 +286,71 @@ http_interactions:
       - application/json
       Transfer-Encoding:
       - chunked
-      Content-Encoding:
-      - gzip
       Vary:
       - Accept-Encoding
       Date:
       - Wed, 23 Aug 2017 15:27:29 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAANVTTY/TMBD9K8jnWnIS20l626URa4kuVVs4gDiMP6KNSJwo
-        cYAI8d8Zd7esCgiBxIG9RPLMvOfxey/vvhBz17R2dJ6s/dy2KzIAHsJxGRxZ
-        E9t30HiyIlhqwnIw/alc3R6r/W6vDhW2WpjC68FCcPZ6wWYBsmYuZRS41ZQX
-        eUHBFpyWxsgkF9JY4S5hG/yQdSJYksuSZwljbEXM6CA0vf9lEyyuPE3nnb0L
-        HUwfvh+hi1u+7b17xvAqu2ClMWr4KK8ugdZNZmyGeM+5FB8cnAdv3La3kWej
-        DlfXL6sNMg2zbhsTicm6hnZyURkzLg8MRN3eVHt1PM32n7wb/1wPtcHZTCcJ
-        pJbRlBUp5Wmd0DJFFNNMpJLXWZ7G2XuPTohcIJlzBc1TaSgvBaMl14ZKEABa
-        cpklNvr3ObjRQxsx9+9Uu5/UULsH29XuDUeQnzvtxlf1TT+FSfnDrFFonEYD
-        guuGFp155Bt6VGZ5MfbzEItJXhasEDy61c1taAz6/YNCME29aWICtueJ53fg
-        vWu3MDwyb3bqAvh19T+mNvtdarO/TG3ypFIrUyFLwTUtrZWUZ85iBusajwCy
-        yEAXmj2R1JZCMM7w7/v3qX3/DYzOjy9tBQAA
+      string: |
+        [
+           {
+              "children":null,
+              "parentType":"domain",
+              "entityScope":"ENTERPRISE",
+              "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "lastUpdatedDate":1501769431000,
+              "creationDate":1501769431000,
+              "address":null,
+              "netmask":null,
+              "name":"Zone 0",
+              "dynamicIpv6Address":null,
+              "description":null,
+              "maintenanceMode":"DISABLED",
+              "publicZone":false,
+              "encryption":"INHERITED",
+              "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "ID":"3b11a2d0-2082-42f1-92db-0b05264f372e",
+              "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+              "externalID":null,
+              "IPv6Address":null,
+              "IPType":"IPV4",
+              "numberOfHostsInSubnets":0,
+              "templateID":"abababab-abab-abab-abab-abababababab",
+              "policyGroupID":1798085400,
+              "multicast":"INHERITED",
+              "associatedMulticastChannelMapID":null,
+              "DPI":"INHERITED"
+           },
+           {
+              "children":null,
+              "parentType":"domain",
+              "entityScope":"ENTERPRISE",
+              "lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "lastUpdatedDate":1501769433000,
+              "creationDate":1501769433000,
+              "address":null,
+              "netmask":null,
+              "name":"Zone 1",
+              "dynamicIpv6Address":null,
+              "description":null,
+              "maintenanceMode":"DISABLED",
+              "publicZone":false,
+              "encryption":"INHERITED",
+              "owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "ID":"6256954b-9dd6-43ed-94ff-9daa683ab8b0",
+              "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+              "externalID":null,
+              "IPv6Address":null,
+              "IPType":"IPV4",
+              "numberOfHostsInSubnets":0,
+              "templateID":null,
+              "policyGroupID":1955040208,
+              "multicast":"INHERITED",
+              "associatedMulticastChannelMapID":null,
+              "DPI":"INHERITED"
+           }
+        ]
     http_version: 
   recorded_at: Wed, 23 Aug 2017 15:27:30 GMT
 - request:
