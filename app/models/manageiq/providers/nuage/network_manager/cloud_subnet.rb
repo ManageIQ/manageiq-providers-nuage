@@ -1,4 +1,6 @@
 class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
+  has_many :security_groups, :dependent => :destroy
+
   include AnsibleCrudMixin
 
   before_destroy :remove_network_ports, :prepend => true

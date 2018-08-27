@@ -54,6 +54,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     let(:tenant_ref1)         { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
     let(:tenant_ref2)         { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
     let(:security_group_ref)  { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
+    let(:security_group_ref2) { "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" }
     let(:cloud_subnet_ref1)   { "d60d316a-c1ac-4412-813c-9652bdbc4e41" }
     let(:cloud_subnet_ref2)   { "debb9f88-f252-4c30-9a17-d6ae3865e365" }
     let(:l2_subnet_ref1)      { "3b733a41-774d-4aaa-8e64-588d5533a5c0" }
@@ -105,7 +106,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(ExtManagementSystem.count).to eq(1)
     expect(CloudTenant.count).to eq(2)
     expect(CloudNetwork.count).to eq(1)
-    expect(SecurityGroup.count).to eq(1)
+    expect(SecurityGroup.count).to eq(2)
     expect(CloudSubnet.count).to eq(6)
     expect(FloatingIp.count).to eq(3)
     expect(NetworkPort.count).to eq(4)
@@ -114,7 +115,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
   def assert_ems
     expect(@ems.cloud_tenants.count).to eq(2)
-    expect(@ems.security_groups.count).to eq(1)
+    expect(@ems.security_groups.count).to eq(2)
     expect(@ems.cloud_subnets.count).to eq(6)
     expect(@ems.l3_cloud_subnets.count).to eq(2)
     expect(@ems.l2_cloud_subnets.count).to eq(4)
@@ -122,7 +123,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(@ems.cloud_tenants.map(&:ems_ref))
       .to match_array([tenant_ref1, tenant_ref2])
     expect(@ems.security_groups.map(&:ems_ref))
-      .to match_array([security_group_ref])
+      .to match_array([security_group_ref, security_group_ref2])
     expect(@ems.l3_cloud_subnets.map(&:ems_ref))
       .to match_array([cloud_subnet_ref1, cloud_subnet_ref2])
   end
@@ -150,12 +151,12 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(g2.cloud_subnets.count).to eq(4)
     expect(g2.l3_cloud_subnets.count).to eq(2)
     expect(g2.l2_cloud_subnets.count).to eq(2)
-    expect(g2.security_groups.count).to eq(1)
+    expect(g2.security_groups.count).to eq(2)
 
     expect(g2.l3_cloud_subnets.map(&:ems_ref))
       .to match_array([cloud_subnet_ref1, cloud_subnet_ref2])
     expect(g2.security_groups.map(&:ems_ref))
-      .to match_array([security_group_ref])
+      .to match_array([security_group_ref, security_group_ref2])
   end
 
   def assert_network_routers
@@ -177,7 +178,22 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :ems_id                 => @ems.id,
       :cloud_network_id       => nil,
       :cloud_tenant_id        => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
-      :orchestration_stack_id => nil
+      :orchestration_stack_id => nil,
+      :network_router         => NetworkRouter.find_by(:ems_ref => router_ref),
+      :cloud_subnet           => nil
+    )
+
+    g2 = SecurityGroup.find_by(:ems_ref => security_group_ref2)
+    expect(g2).to have_attributes(
+      :name                   => "Policy Group on L2",
+      :description            => nil,
+      :type                   => "ManageIQ::Providers::Nuage::NetworkManager::SecurityGroup",
+      :ems_id                 => @ems.id,
+      :cloud_network_id       => nil,
+      :cloud_tenant_id        => CloudTenant.find_by(:ems_ref => tenant_ref2).id,
+      :orchestration_stack_id => nil,
+      :network_router         => nil,
+      :cloud_subnet           => CloudSubnet.find_by(:ems_ref => l2_subnet_ref2)
     )
   end
 
