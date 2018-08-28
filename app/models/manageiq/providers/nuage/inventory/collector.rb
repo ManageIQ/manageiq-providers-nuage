@@ -1,4 +1,4 @@
-class ManageIQ::Providers::Nuage::Inventory::Collector < ManagerRefresh::Inventory::Collector
+class ManageIQ::Providers::Nuage::Inventory::Collector < ManageIQ::Providers::Inventory::Collector
   require_nested :NetworkManager
   require_nested :TargetCollection
 
