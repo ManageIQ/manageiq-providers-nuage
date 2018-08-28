@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 93 ending 2018-08-27
+
+### Added
+- Targeted refresh: remove subnet when zone is removed [(#134)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/134)
+- Remove CloudSubnet when corresponding subnet template is deleted [(#128)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/128)
+- Debug log when targeted refresh takes place [(#126)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/126)
+- Overcome missing event glitch of Nuage server (targeted refresh) [(#125)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/125)
+- Assign Nuage event types to timeline categories [(#119)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/119)
+
 ## Unreleased as of Sprint 92 ending 2018-08-13
 
 ### Added
