@@ -94,6 +94,10 @@ module ManageIQ::Providers
       get_list("vports/#{vport_id}/hostinterfaces")
     end
 
+    def get_vms_for_vport(vport_id)
+      get_list("vports/#{vport_id}/vms")
+    end
+
     def get_l2_domains
       get_list('l2domains')
     end

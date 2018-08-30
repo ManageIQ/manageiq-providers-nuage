@@ -66,6 +66,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     safe_call { vsd_client.get_host_interfaces_for_vport(port_ems_ref) }
   end
 
+  def vms_for_network_port(port_ems_ref)
+    safe_call { vsd_client.get_vms_for_vport(port_ems_ref) }
+  end
+
   def cloud_subnet(ems_ref)
     safe_call { vsd_client.get_subnet(ems_ref) }
   end
