@@ -72,10 +72,17 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
 
   def security_groups
     collector.security_groups.each do |sg|
-      persister.security_groups.find_or_build(sg['ID']).assign_attributes(
-        :name         => sg['name'],
-        :cloud_tenant => persister.network_routers.lazy_find(sg['parentID'], :key => :cloud_tenant)
+      group = persister.security_groups.find_or_build(sg['ID']).assign_attributes(
+        :name => sg['name']
       )
+
+      if sg['parentType'] == 'domain' # Security group on L3 domain.
+        group.network_router = persister.network_routers.lazy_find(sg['parentID'])
+        group.cloud_tenant = persister.network_routers.lazy_find(sg['parentID'], :key => :cloud_tenant)
+      else # Security group on L2 domain.
+        group.cloud_subnet = persister.cloud_subnets.lazy_find(sg['parentID'])
+        group.cloud_tenant = persister.cloud_subnets.lazy_find(sg['parentID'], :key => :cloud_tenant)
+      end
     end
   end
 

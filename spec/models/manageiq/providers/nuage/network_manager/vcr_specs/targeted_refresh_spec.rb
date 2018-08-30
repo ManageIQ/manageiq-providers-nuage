@@ -354,6 +354,22 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
                 assert_deleted(cloud_subnet)
               end
             end
+
+            it "security_group is deleted if its network_router is deleted" do
+              security_group.tap { |group| group.network_router = network_router }.save
+              test_targeted_refresh([network_router], 'network_router_is_deleted', :repeat => 1) do
+                assert_deleted(network_router)
+                assert_deleted(security_group)
+              end
+            end
+
+            it "security_group is deleted if its cloud_subnet is deleted" do
+              security_group.tap { |group| group.cloud_subnet = cloud_subnet }.save
+              test_targeted_refresh([cloud_subnet], 'cloud_subnet_is_deleted', :repeat => 1) do
+                assert_deleted(cloud_subnet)
+                assert_deleted(security_group)
+              end
+            end
           end
         end
       end

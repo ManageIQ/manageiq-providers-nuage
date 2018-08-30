@@ -600,23 +600,55 @@ http_interactions:
       - application/json
       Transfer-Encoding:
       - chunked
-      Content-Encoding:
-      - gzip
       Vary:
       - Accept-Encoding
       Date:
       - Wed, 23 Aug 2017 15:27:30 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAI1QzU+DMBz9V5aeadJCP4CbOjS7zGVDPRgPpf2hJKUQ6KLE
-        +L9bWNSZePDSpO+jfe89viP90lgzgEO5O1oboV6Fiy+nHlCOTNeqxqEIBajx
-        00F3C1xsy2K/228ORaCsGv1db5QHczkFkhutZS1iLCtGMKMyw5WpaxyLqoY0
-        g4rE7LdtHQ6UU04SwmlGE0JIhPQAyjed+5N0qp1zlDD61a6zjZ5WN0N37MO7
-        BkY9NP1snZO2vZ9W51iE/Knb4fa6fLjYzxXgzcPglEV5rewI33X98vdpl+7V
-        wfD/ept10JIYiIyhxlplPGgFwykXBid1TaWsMk0Tjb4mXxySK5MCpFjGQmOW
-        cYIzVmksFFeqEkwk1JwFnj2neMX9bnvVte3RheClev7CPbS9DTV+lP2y1zLX
-        DFKRxYmUKUs/nj4B8q6H7Q8CAAA=
+      string: |
+        [
+           {
+              "children":null,
+              "parentType":"domain",
+              "entityScope":"ENTERPRISE",
+              "lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+              "lastUpdatedDate":1503051913000,
+              "creationDate":1503051913000,
+              "name":"Test Policy Group",
+              "description":"Empty description",
+              "type":"SOFTWARE",
+              "external":false,
+              "entityState":null,
+              "owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+              "ID":"02e072ef-ca95-4164-856d-3ff177b9c13c",
+              "parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d",
+              "externalID":null,
+              "EVPNCommunityTag":null,
+              "templateID":null,
+              "policyGroupID":1692377848
+           },
+          {
+            "children":null,
+            "parentType":"l2domain",
+            "entityScope":"ENTERPRISE",
+            "lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "lastUpdatedDate":1503051913000,
+            "creationDate":1503051913000,
+            "name":"Policy Group on L2",
+            "description":"Empty description",
+            "type":"SOFTWARE",
+            "external":false,
+            "entityState":null,
+            "owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024",
+            "ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+            "parentID":"8efc78b0-df2a-4c6f-964b-463a9d106bed",
+            "externalID":null,
+            "EVPNCommunityTag":null,
+            "templateID":null,
+            "policyGroupID":123456
+          }
+        ]
     http_version: 
   recorded_at: Wed, 23 Aug 2017 15:27:31 GMT
 - request:
