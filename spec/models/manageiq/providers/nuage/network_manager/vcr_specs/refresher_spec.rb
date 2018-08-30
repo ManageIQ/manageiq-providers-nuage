@@ -51,6 +51,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   describe "refresh" do
+    let(:ems_amazon)          { FactoryGirl.create(:ems_amazon) }
+    let!(:vm_amazon)          { FactoryGirl.create(:vm_amazon, :ems_id => ems_amazon.id, :ems_ref => 'ref-amazon-vm') }
     let(:tenant_ref1)         { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
     let(:tenant_ref2)         { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
     let(:security_group_ref)  { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
@@ -102,7 +104,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   def assert_table_counts
-    expect(ExtManagementSystem.count).to eq(1)
+    expect(ExtManagementSystem.count).to eq(1 + 3) # nuage + 3*amazon (cloud, network, storage manager)
     expect(CloudTenant.count).to eq(2)
     expect(CloudNetwork.count).to eq(1)
     expect(SecurityGroup.count).to eq(1)
@@ -110,6 +112,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     expect(FloatingIp.count).to eq(3)
     expect(NetworkPort.count).to eq(4)
     expect(NetworkRouter.count).to eq(1)
+    expect(Vm.count).to eq(1) # artificial Amazon VM
   end
 
   def assert_ems
@@ -311,6 +314,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       :network_port => vm_port,
       :address      => '10.98.78.179'
     )
+
+    # Check VM was cross-provider connected
+    expect(vm_port.device).to eq(vm_amazon)
 
     bridge_port = NetworkPort.find_by(:ems_ref => bridge_port_ref)
     expect(bridge_port).to have_attributes(

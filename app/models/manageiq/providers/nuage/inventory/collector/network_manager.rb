@@ -50,6 +50,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::NetworkManager < ManageI
     @vm_interfaces_per_port[port_ems_ref] ||= vsd_client.get_vm_interfaces_for_vport(port_ems_ref)
   end
 
+  def vms_for_network_port(port_ems_ref)
+    vsd_client.get_vms_for_vport(port_ems_ref)
+  end
+
   def container_interfaces_for_network_port(port_ems_ref)
     @container_interfaces_per_port[port_ems_ref] ||= vsd_client.get_container_interfaces_for_vport(port_ems_ref)
   end

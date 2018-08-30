@@ -104,21 +104,27 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
       when 'BRIDGE'
         network_port_type = collector.manager.class.bridge_network_port_type
         address           = nil
+        vm_ref            = nil
       when 'CONTAINER'
         network_port_type = collector.manager.class.container_network_port_type
         address           = first_ip_address(collector.container_interfaces_for_network_port(port['ID']))
+        vm_ref            = nil
       when 'HOST'
         network_port_type = collector.manager.class.host_network_port_type
         address           = first_ip_address(collector.host_interfaces_for_network_port(port['ID']))
+        vm_ref            = nil
       when 'VM'
         network_port_type = collector.manager.class.vm_network_port_type
         address           = first_ip_address(collector.vm_interfaces_for_network_port(port['ID']))
+        vm_ref            = first_vm_uuid(collector.vms_for_network_port(port['ID']))
       else
         network_port_type = 'ManageIQ::Providers::Nuage::NetworkManager::NetworkPort'
         address           = nil
+        vm_ref            = nil
       end
 
       network_port.type = network_port_type
+      network_port.device = persister.vms.lazy_find(vm_ref)
       network_port.cloud_subnet_network_ports = [
         persister.cloud_subnet_network_ports.find_or_build_by(
           :cloud_subnet => persister.cloud_subnets.lazy_find(port['parentID']),
@@ -149,5 +155,9 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
 
   def first_ip_address(interfaces)
     (interfaces.first || {}).dig('IPAddress')
+  end
+
+  def first_vm_uuid(vms)
+    (vms.first || {}).dig('UUID')
   end
 end

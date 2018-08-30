@@ -221,4 +221,146 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Fri, 20 Jul 2018 14:24:39 GMT
+- request:
+    method: get
+    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/15d1369e-9553-4e83-8bb9-3a6c269f81ae/vms
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.4p296
+      X-Nuage-Organization:
+      - csp
+      Content-Type:
+      - application/json; charset=UTF-8
+      Authorization:
+      - Basic YWRtaW46MzU0NDM4YWEtYzcyMy00NDkxLTkwMTQtYmJmNDliYzJhNmEy
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - No-cache
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Wed, 31 Dec 1969 16:00:00 PST
+      Set-Cookie:
+      - rememberMe=deleteMe; Path=/nuage; Max-Age=0; Expires=Wed, 29-Aug-2018 09:21:46
+        GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Nuage-Orderby:
+      - name ASC
+      X-Nuage-Count:
+      - '0'
+      Access-Control-Expose-Headers:
+      - X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType,
+        X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom,
+        X-Nuage-ClientType
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 30 Aug 2018 09:21:45 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        [
+          {
+            "children": null,
+            "parentType": null,
+            "entityScope": "GLOBAL",
+            "lastUpdatedBy": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "lastUpdatedDate": 1528394957000,
+            "creationDate": 1528394957000,
+            "name": "VM",
+            "interfaces": [
+                {
+                  "children": null,
+                  "parentType": "vm",
+                  "entityScope": "GLOBAL",
+                  "lastUpdatedBy": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+                  "lastUpdatedDate": 1528394957000,
+                  "creationDate": 1528394957000,
+                  "name": "VM-vm-interface-0",
+                  "multiNICVPortName": null,
+                  "policyDecisionID": null,
+                  "domainName": "BRIDGE-HOST-Example",
+                  "zoneName": "VM Zone",
+                  "attachedNetworkType": "SUBNET",
+                  "netmask": "255.255.255.0",
+                  "gateway": "10.28.96.1",
+                  "networkName": "VMNet",
+                  "owner": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+                  "ID": "a9e00f77-fdca-4d3a-a702-8e008c4e1fad",
+                  "parentID": "4d2c2b5d-5c15-4462-a376-53540ddba69c",
+                  "externalID": null,
+                  "IPAddress": "10.28.96.124",
+                  "IPv6Address": null,
+                  "MAC": "00:02:04:08:10:12",
+                  "VMUUID": "63012d71-2f59-452f-9ac1-35000926dafc",
+                  "domainID": "8010cb8a-e40f-4f68-b27b-503e8befb570",
+                  "attachedNetworkID": "3ac16c9f-3fc0-416d-89cf-bb39d10438c1",
+                  "zoneID": "646bd2fa-f30a-4ff3-b53b-06a7d1aa3b86",
+                  "VPortID": "58bd8977-f5ef-45a8-93e5-2d5cdd91af0b",
+                  "tierID": null,
+                  "IPv6Gateway": null,
+                  "VPortName": "VM-vPort-0"
+                }
+            ],
+            "enterpriseName": "XLAB",
+            "userName": "csproot",
+            "deleteMode": null,
+            "deleteExpiry": 0,
+            "computeProvisioned": true,
+            "resyncInfo": {
+              "children": null,
+              "parentType": "vm",
+              "entityScope": "GLOBAL",
+              "lastUpdatedBy": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "lastUpdatedDate": 1528394957000,
+              "creationDate": 1528394957000,
+              "lastTimeResyncInitiated": 0,
+              "status": "SUCCESS",
+              "lastRequestTimestamp": 1528394957333,
+              "owner": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+              "ID": "fe52afe3-395a-4a44-a0e8-9e7cf344cbf7",
+              "parentID": "4d2c2b5d-5c15-4462-a376-53540ddba69c",
+              "externalID": null
+            },
+            "owner": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "ID": "4d2c2b5d-5c15-4462-a376-53540ddba69c",
+            "parentID": null,
+            "externalID": null,
+            "UUID": "ref-amazon-vm",
+            "status": "INIT",
+            "reasonType": null,
+            "hypervisorIP": "FFFFFF",
+            "siteIdentifier": null,
+            "enterpriseID": "e0819464-e7fc-4a37-b29a-e72da7b5956c",
+            "userID": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+            "domainIDs": [
+              "8010cb8a-e40f-4f68-b27b-503e8befb570"
+            ],
+            "l2DomainIDs": [],
+            "zoneIDs": [
+              "646bd2fa-f30a-4ff3-b53b-06a7d1aa3b86"
+            ],
+            "subnetIDs": [
+              "3ac16c9f-3fc0-416d-89cf-bb39d10438c1"
+            ],
+            "VRSID": null,
+            "orchestrationID": null
+          }
+        ]
+    http_version:
+  recorded_at: Thu, 30 Aug 2018 09:21:46 GMT
 recorded_with: VCR 3.0.3
