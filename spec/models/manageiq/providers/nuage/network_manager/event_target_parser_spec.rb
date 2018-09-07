@@ -58,7 +58,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventTargetParser do
   end
 
   def response(path)
-    JSON.parse(File.read(File.join(File.dirname(__FILE__), "/event_catcher/#{path}")))
+    JSON.parse(File.read(File.join(File.dirname(__FILE__), "/event_catcher/events/#{path}")))
   end
 
   def create_ems_event(path)

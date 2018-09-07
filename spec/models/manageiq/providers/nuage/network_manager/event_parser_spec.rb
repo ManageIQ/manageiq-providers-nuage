@@ -9,7 +9,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
     [
       {
         :name     => 'with requestID',
-        :fixture  => '/event_catcher/subnet_create.json',
+        :fixture  => '/event_catcher/events/subnet_create.json',
         :expected => {
           :event_type => 'nuage_subnet_create',
           :message    => 'Audit-Subnet (4e08bf9c-b679-4c82-a6f7-b298a3901d25)',
@@ -18,7 +18,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
       },
       {
         :name     => 'with null requestID',
-        :fixture  => '/event_catcher/alarm_delete.json',
+        :fixture  => '/event_catcher/events/alarm_delete.json',
         :expected => {
           :event_type => 'nuage_alarm_nsgateway_delete_4707',
           :message    => 'MAJOR: Gateway with system-id [201.26.92.41] is disconnected',
@@ -27,7 +27,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
       },
       {
         :name     => 'with empty requestID',
-        :fixture  => '/event_catcher/alarm_create.json',
+        :fixture  => '/event_catcher/events/alarm_create.json',
         :expected => {
           :event_type => 'nuage_alarm_nsgateway_create_4707',
           :message    => 'MAJOR: Gateway with system-id [213.50.60.102] is disconnected',
@@ -36,7 +36,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
       },
       {
         :name     => 'alarm 4713',
-        :fixture  => '/event_catcher/alarm_4713.json',
+        :fixture  => '/event_catcher/events/alarm_4713.json',
         :expected => {
           :event_type => 'nuage_alarm_nsgateway_delete_4713',
           :message    => 'MAJOR: Gateway with system-id [213.50.60.102] is disconnected from controller [vsc1:100.100.100.21]',
