@@ -9,20 +9,10 @@ class ManageIQ::Providers::Nuage::Inventory::Collector < ManageIQ::Providers::In
   end
 
   def initialize_inventory_sources
-    @cloud_tenants                 = {}
-    @cloud_subnets                 = []
-    @l2_cloud_subnets              = []
-    @security_groups               = []
-    @floating_ips                  = []
-    @zones                         = {}
-    @network_routers               = {}
-    @shared_resources              = []
-    @cloud_networks_floating       = nil
-    @network_ports                 = []
-    @security_groups_per_port      = {}
-    @vm_interfaces_per_port        = {}
-    @container_interfaces_per_port = {}
-    @host_interfaces_per_port      = {}
+    @l2_cloud_subnets = []
+    @zones            = {}
+    @network_routers  = {}
+    @shared_resources = []
   end
 
   def vsd_client

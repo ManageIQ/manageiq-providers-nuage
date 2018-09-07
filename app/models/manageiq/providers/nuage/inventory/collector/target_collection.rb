@@ -117,52 +117,12 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     safe_list { vsd_client.get_subnets_for_domain(router_ref) }
   end
 
-  def routers_for_tenant(tenant_ems_ref)
-    safe_list { vsd_client.get_domains_for_enterprise(tenant_ems_ref) }
-  end
-
-  def cloud_subnets_for_tenant(tenant_ems_ref)
-    routers_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
-      arr.push(safe_list { vsd_client.get_subnets_for_domain(d['ID']) })
-    end.flatten(1)
-  end
-
-  def security_groups_for_tenant(tenant_ems_ref)
-    routers_for_tenant(tenant_ems_ref).each_with_object([]) do |d, arr|
-      arr.push(safe_list { vsd_client.get_policy_groups_for_domain(d['ID']) })
-    end.flatten(1)
-  end
-
-  def tenant_ems_ref_for_cloud_subnet(cloud_subnet_ems_ref)
-    cloud_subnet = cloud_subnet(cloud_subnet_ems_ref)
-    return nil if cloud_subnet.nil?
-    router_ems_ref = zone(cloud_subnet['parentID'])['parentID']
-    network_router(router_ems_ref)['parentID']
-  end
-
-  def tenant_ems_ref_for_security_group(security_group_ems_ref)
-    security_group = security_group(security_group_ems_ref)
-    return nil if security_group.nil?
-    network_router(security_group['parentID'])['parentID']
-  end
-
   def references(collection)
     target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a) || []
   end
 
   def parse_targets!
-    target.targets.each do |t|
-      case t
-      when CloudSubnet
-        add_simple_target!(:cloud_subnets, t.ems_ref)
-      when SecurityGroup
-        add_simple_target!(:security_groups, t.ems_ref)
-      when CloudTenant
-        add_simple_target!(:cloud_tenants, t.ems_ref)
-      when NetworkRouter
-        add_simple_target!(:network_routers, t.ems_ref)
-      end
-    end
+    # parse native targets (e.g. CloudSubnet::L3) here in case we support manual triggering targeted refresh for them.
   end
 
   def add_simple_target!(association, ems_ref, options: {})
@@ -208,15 +168,6 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
       next unless router[:operation] == 'CREATE'
       cloud_subnets_for_router(router[:ems_ref]).each do |subnet|
         add_simple_target!(:cloud_subnets, subnet['ID'], :options => { :kind => 'L3' })
-      end
-    end
-
-    references(:network_ports).each do |port|
-      case port['parentType']
-      when 'subnet'
-        add_simple_target!(:cloud_subnets, port['parentID'], :options => { :kind => 'L3' })
-      when 'l2domain'
-        add_simple_target!(:cloud_subnets, port['parentID'], :options => { :kind => 'L2' })
       end
     end
   end
