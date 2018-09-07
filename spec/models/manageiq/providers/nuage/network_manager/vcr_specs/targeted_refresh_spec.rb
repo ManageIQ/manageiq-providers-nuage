@@ -318,7 +318,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
             it "cloud_subnet is deleted when its template is deleted" do
               cloud_subnet.tap { |subnet| subnet.extra_attributes = { 'template_id' => subnet_template_ref } }.save
-              subnet_template = ManagerRefresh::Target.new(
+              subnet_template = InventoryRefresh::Target.new(
                 :manager     => @ems,
                 :association => :cloud_subnet_templates,
                 :manager_ref => { :ems_ref => subnet_template_ref },
@@ -331,7 +331,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
             it "cloud_subnet is deleted when its zone template is deleted" do
               cloud_subnet.tap { |subnet| subnet.extra_attributes = { 'zone_template_id' => zone_template_ref } }.save
-              zone_template = ManagerRefresh::Target.new(
+              zone_template = InventoryRefresh::Target.new(
                 :manager     => @ems,
                 :association => :zone_templates,
                 :manager_ref => { :ems_ref => zone_template_ref },
@@ -344,7 +344,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
             it "cloud_subnet is deleted when its zone is deleted" do
               cloud_subnet.tap { |subnet| subnet.extra_attributes = { 'zone_id' => zone_ref } }.save
-              zone = ManagerRefresh::Target.new(
+              zone = InventoryRefresh::Target.new(
                 :manager     => @ems,
                 :association => :zones,
                 :manager_ref => { :ems_ref => zone_ref },
@@ -394,7 +394,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   def active_records_to_targets(targets, options: {})
     targets.map do |target|
       case target
-      when ManagerRefresh::Target
+      when InventoryRefresh::Target
         return target
       when CloudTenant
         association = :cloud_tenants
@@ -415,7 +415,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       when NetworkRouter
         association = :network_routers
       end
-      ManagerRefresh::Target.new(
+      InventoryRefresh::Target.new(
         :manager     => @ems,
         :association => association,
         :manager_ref => {:ems_ref => target.ems_ref},
