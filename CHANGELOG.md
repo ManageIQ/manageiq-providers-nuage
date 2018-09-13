@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
+## Unreleased as of Sprint 94 ending 2018-09-10
+
+### Added
+- Cross-provider connect NetworkPort to Vm [(#138)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/138)
+- Connect SecurityGroup to NetworkRouter/CloudSubnet [(#136)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/136)
+- Add plugin display name [(#135)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/135)
+
+### Fixed
+- Revert "Add missing log file before running tests" [(#133)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/133)
+
 ## Unreleased as of Sprint 93 ending 2018-08-27
 
 ### Added
