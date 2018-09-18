@@ -24,13 +24,17 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
 
   def security_groups
     collector.security_groups.each do |sg|
-      domain_id = sg['parentID']
-      domain = collector.domain(domain_id)
-
-      persister.security_groups.find_or_build(sg['ID']).assign_attributes(
-        :name          => sg['name'],
-        :network_group => persister.network_groups.lazy_find(domain['parentID'])
+      sec_group = persister.security_groups.find_or_build(sg['ID']).assign_attributes(
+        :name => sg['name']
       )
+
+      # On G-branch we're only able to inventory domains ('L3 domains') so we cannot
+      # fetch parent if it's of any other type (like 'L2 domain') in order to inventory
+      # 'SecurityGroup belongs to NetworkGroup' relation. The issue is fixed on H-branch,
+      # but is not ported to G since NetworkGroup model has been replaced with CloudTenant.
+      if sg['parentType'] == 'domain' && (domain = collector.domain(sg['parentID']))
+        sec_group.network_group = persister.network_groups.lazy_find(domain['parentID'])
+      end
     end
   end
 
