@@ -5,34 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Unreleased as of Sprint 94 ending 2018-09-10
+## Hammer Beta-1
 
 ### Added
 - Cross-provider connect NetworkPort to Vm [(#138)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/138)
 - Connect SecurityGroup to NetworkRouter/CloudSubnet [(#136)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/136)
 - Add plugin display name [(#135)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/135)
-
-### Fixed
-- Revert "Add missing log file before running tests" [(#133)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/133)
-
-## Unreleased as of Sprint 93 ending 2018-08-27
-
-### Added
 - Targeted refresh: remove subnet when zone is removed [(#134)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/134)
 - Remove CloudSubnet when corresponding subnet template is deleted [(#128)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/128)
 - Debug log when targeted refresh takes place [(#126)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/126)
 - Overcome missing event glitch of Nuage server (targeted refresh) [(#125)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/125)
 - Assign Nuage event types to timeline categories [(#119)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/119)
-
-## Unreleased as of Sprint 92 ending 2018-08-13
-
-### Added
 - Setup React component [(#121)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/121)
 - React component for creating Nuage subnet [(#118)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/118)
-
-## Unreleased as of Sprint 91 ending 2018-07-30
-
-### Added
 - Implement CREATE operation for CloudSubnet [(#117)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/117)
 - Check for invalid api_version string [(#116)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/116)
 - Destroy dependent entities when parent is deleted [(#115)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/115)
@@ -46,17 +31,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Narrow down focus of targeted refresh [(#107)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/107)
 - Properly subclass CloudSubnet [(#105)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/105)
 - Support DELETE operations powered by AnsibleRunner [(#104)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/104)
-
-## Unreleased as of Sprint 90 ending 2018-07-16
-
-### Added
 - Temporarily remove many-to-many from NetworkRouter [(#102)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/102)
 - Inventory vPort entities (Nuage) into NetworkPort model (MIQ) [(#101)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/101)
-
-## Unreleased as of Sprint 87 ending 2018-06-04
-
-### Added
 - Inventory L3 Domain (Nuage) into NetworkRouter (MIQ) [(#93)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/93)
+- Prefix Nuage events with "nuage" [(#84)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/84)
+- Harden refresh parser [(#71)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/71)
+- Enable Nuage network manager [(#33)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/33)
+- Update raw_connect to simplify validation from UI [(#32)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/32)
+- Use AMQP fallback endpoints when available [(#30)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/30)
+- Connect events to targeted refresh [(#28)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/28)
+- Implement targeted refresh for NetworkManager [(#20)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/20)
+
+### Fixed
+- Revert "Add missing log file before running tests" [(#133)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/133)
 
 ## Gaprindashvili-3 - Released 2018-05-15
 
@@ -70,12 +57,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### Fixed
 - Add name method [(#62)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/62)
 - Handle subnets with missing gateway/netmask [(#68)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/68)
-
-## Unreleased as of Sprint 85 ending 2018-05-07
-
-### Added
-- Prefix Nuage events with "nuage" [(#84)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/84)
-- Harden refresh parser [(#71)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/71)
 
 ## Gaprindashvili-1 - Released 2018-01-31
 
@@ -91,13 +72,3 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Fix a problem when no policy groups exist [(#4)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/4)
 - Fix protocol selection when adding a new nuage provider [(#45)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/45)
 - Human readable error when selecting wrong security protocol [(#43)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/43)
-- Return empy list instead of nil for responses with empty bodies [(#53)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/53)
-
-## Unreleased as of Sprint 72 ending 2017-10-30
-
-### Added
-- Enable Nuage network manager [(#33)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/33)
-- Update raw_connect to simplify validation from UI [(#32)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/32)
-- Use AMQP fallback endpoints when available [(#30)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/30)
-- Connect events to targeted refresh [(#28)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/28)
-- Implement targeted refresh for NetworkManager [(#20)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/20)
