@@ -131,7 +131,7 @@ class ManageIQ::Providers::Nuage::Inventory::Parser::NetworkManager < ManageIQ::
       end
 
       network_port.type = network_port_type
-      network_port.device = persister.vms.lazy_find(vm_ref)
+      network_port.device = persister.vms.lazy_find({ :uid_ems => vm_ref }, { :ref => :by_uid_ems }) if vm_ref
       network_port.cloud_subnet_network_ports = [
         persister.cloud_subnet_network_ports.find_or_build_by(
           :cloud_subnet => persister.cloud_subnets.lazy_find(port['parentID']),

@@ -340,7 +340,7 @@ http_interactions:
             "ID": "4d2c2b5d-5c15-4462-a376-53540ddba69c",
             "parentID": null,
             "externalID": null,
-            "UUID": "ref-amazon-vm",
+            "UUID": "ref-vmware-vm",
             "status": "INIT",
             "reasonType": null,
             "hypervisorIP": "FFFFFF",
