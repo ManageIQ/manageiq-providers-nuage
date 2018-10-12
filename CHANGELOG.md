@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Hammer Beta-1
+## Hammer Beta-1 - Released 2018-10-12
 
 ### Added
 - Cross-provider connect NetworkPort to Vm [(#138)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/138)
@@ -41,6 +41,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Use AMQP fallback endpoints when available [(#30)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/30)
 - Connect events to targeted refresh [(#28)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/28)
 - Implement targeted refresh for NetworkManager [(#20)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/20)
+- Cross-connect NetworkPorts by `vm.uid_ems` [(#150)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/150)
+- Update i18n catalog for hammer [(#151)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/151)
 
 ### Fixed
 - Revert "Add missing log file before running tests" [(#133)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/133)
