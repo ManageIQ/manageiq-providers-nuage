@@ -10,7 +10,7 @@ env:
   - RUBY_GC_HEAP_GROWTH_FACTOR=1.25
   - BUNDLE_WITH=qpid_proton
 addons:
-  postgresql: '9.4'
+  postgresql: '9.5'
 before_install: bin/qpid_install.sh
 install: bin/setup
 after_script: bundle exec codeclimate-test-reporter
