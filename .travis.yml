@@ -20,7 +20,7 @@ matrix:
   - rvm: 2.3.6
     env: TEST_SUITE=yarn:test
 addons:
-  postgresql: '9.4'
+  postgresql: '9.5'
 before_install: bin/qpid_install.sh
 install:
 - bin/setup
