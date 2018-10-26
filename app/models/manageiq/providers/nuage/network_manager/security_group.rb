@@ -1,4 +1,6 @@
 class ManageIQ::Providers::Nuage::NetworkManager::SecurityGroup < ::SecurityGroup
+  include ManageIQ::Providers::Nuage::AnsibleCrudMixin
+
   supports :delete
 
   def delete_security_group_queue(userid)
@@ -26,11 +28,12 @@ class ManageIQ::Providers::Nuage::NetworkManager::SecurityGroup < ::SecurityGrou
   def raw_delete_security_group
     $nuage_log.info("Deleting Security Group (ems_ref = #{ems_ref})")
 
-    Ansible::Runner.run(
+    response = Ansible::Runner.run(
       ext_management_system.ansible_env_vars,
       ext_management_system.ansible_extra_vars(:id => ems_ref),
       ext_management_system.playbook('remove-policy-group.yml')
     )
+    self.class.ansible_raise_for_status(response)
 
     $nuage_log.info("Done deleting Security Group (ems_ref = #{ems_ref})")
   rescue StandardError => e

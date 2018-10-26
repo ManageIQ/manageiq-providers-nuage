@@ -1,4 +1,6 @@
 class ManageIQ::Providers::Nuage::NetworkManager::FloatingIp < ::FloatingIp
+  include ManageIQ::Providers::Nuage::AnsibleCrudMixin
+
   supports :delete
 
   def delete_floating_ip_queue(userid)
@@ -26,11 +28,12 @@ class ManageIQ::Providers::Nuage::NetworkManager::FloatingIp < ::FloatingIp
   def raw_delete_floating_ip
     $nuage_log.info("Deleting Floating Ip (ems_ref = #{ems_ref})")
 
-    Ansible::Runner.run(
+    response = Ansible::Runner.run(
       ext_management_system.ansible_env_vars,
       ext_management_system.ansible_extra_vars(:id => ems_ref),
       ext_management_system.playbook('remove-floating-ip.yml')
     )
+    self.class.ansible_raise_for_status(response)
 
     $nuage_log.info("Done deleting Floating Ip (ems_ref = #{ems_ref})")
   rescue StandardError => e
