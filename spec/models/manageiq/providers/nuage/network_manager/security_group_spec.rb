@@ -1,7 +1,9 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::SecurityGroup do
-  let(:ems)  { FactoryGirl.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0') }
-  let(:user) { 123 }
-  let(:job)  { MiqQueue.find_by(:method_name => 'delete_security_group') }
+  let(:ems)          { FactoryGirl.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0') }
+  let(:user)         { 123 }
+  let(:job)          { MiqQueue.find_by(:method_name => 'delete_security_group') }
+  let(:response_ok)  { double('ansible_response', :return_code => 0, :parsed_stdout => []) }
+  let(:response_bad) { double('ansible_response', :return_code => 2, :parsed_stdout => []) }
 
   subject do
     FactoryGirl.create(
@@ -25,14 +27,22 @@ describe ManageIQ::Providers::Nuage::NetworkManager::SecurityGroup do
     )
   end
 
-  it '.delete_security_group' do
-    expect(Ansible::Runner).to receive(:run) do |env, vars, playbook|
-      expect(env).to be_empty
-      expect(vars.keys).to eq(%i(nuage_auth id))
-      expect(vars[:id]).to eq(subject.ems_ref)
-      expect(playbook.to_s).to end_with("/remove-policy-group.yml")
-      expect(File).to exist(playbook.to_s)
+  describe '.delete_security_group' do
+    it 'happy path' do
+      expect(Ansible::Runner).to receive(:run) do |env, vars, playbook|
+        expect(env).to be_empty
+        expect(vars.keys).to eq(%i(nuage_auth id))
+        expect(vars[:id]).to eq(subject.ems_ref)
+        expect(playbook.to_s).to end_with("/remove-policy-group.yml")
+        expect(File).to exist(playbook.to_s)
+
+        response_ok
+      end
+      subject.delete_security_group
     end
-    subject.delete_security_group
+
+    it 'bad playbook status' do
+      raises_upon_errored_playbook { subject.delete_security_group }
+    end
   end
 end
