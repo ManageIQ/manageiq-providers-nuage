@@ -1,8 +1,10 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet do
-  let(:ems)     { FactoryGirl.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0') }
-  let(:user)    { 123 }
-  let(:job)     { MiqQueue.find_by(:method_name => 'delete_cloud_subnet') }
-  let(:fixture) { :cloud_subnet_nuage }
+  let(:ems)          { FactoryGirl.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0') }
+  let(:user)         { 123 }
+  let(:job)          { MiqQueue.find_by(:method_name => 'delete_cloud_subnet') }
+  let(:fixture)      { :cloud_subnet_nuage }
+  let(:response_ok)  { double('ansible_response', :return_code => 0, :parsed_stdout => []) }
+  let(:response_bad) { double('ansible_response', :return_code => 2, :parsed_stdout => []) }
 
   subject do
     FactoryGirl.create(
@@ -33,21 +35,27 @@ describe ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet do
       expect(subject.kind).to eq('L3')
     end
 
-    it '.delete_cloud_subnet' do
-      expect(Ansible::Runner).to receive(:run) do |env, vars, playbook|
-        expect(env).to be_empty
-        expect(vars.keys).to eq(%i(nuage_auth id kind))
-        expect(vars[:id]).to eq(subject.ems_ref)
-        expect(vars[:kind]).to eq('L3')
-        expect(playbook.to_s).to end_with("/remove-subnet.yml")
-        expect(File).to exist(playbook.to_s)
+    describe '.delete_cloud_subnet' do
+      it 'happy path' do
+        expect(Ansible::Runner).to receive(:run) do |env, vars, playbook|
+          expect(env).to be_empty
+          expect(vars.keys).to eq(%i(nuage_auth id kind))
+          expect(vars[:id]).to eq(subject.ems_ref)
+          expect(vars[:kind]).to eq('L3')
+          expect(playbook.to_s).to end_with("/remove-subnet.yml")
+          expect(File).to exist(playbook.to_s)
+
+          response_ok
+        end
+        subject.delete_cloud_subnet
       end
-      subject.delete_cloud_subnet
+
+      it 'bad playbook status' do
+        raises_upon_errored_playbook { subject.delete_cloud_subnet }
+      end
     end
 
     describe '.create_cloud_subnet' do
-      let(:response_ok)  { double('ansible_response', :return_code => 0, :parsed_stdout => []) }
-      let(:response_bad) { double('ansible_response', :return_code => 2, :parsed_stdout => []) }
       let(:options) do
         {
           :name       => 'Subnet',
@@ -73,8 +81,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet do
       end
 
       it 'bad playbook status' do
-        expect(Ansible::Runner).to receive(:run).and_return(response_bad)
-        expect { ems.create_cloud_subnet(options) }.to raise_error(MiqException::Error)
+        raises_upon_errored_playbook { ems.create_cloud_subnet(options) }
       end
     end
   end
@@ -86,16 +93,24 @@ describe ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet do
       expect(subject.kind).to eq('L2')
     end
 
-    it '.delete_cloud_subnet' do
-      expect(Ansible::Runner).to receive(:run) do |env, vars, playbook|
-        expect(env).to be_empty
-        expect(vars.keys).to eq(%i(nuage_auth id kind))
-        expect(vars[:id]).to eq(subject.ems_ref)
-        expect(vars[:kind]).to eq('L2')
-        expect(playbook.to_s).to end_with("/remove-subnet.yml")
-        expect(File).to exist(playbook.to_s)
+    describe '.delete_cloud_subnet' do
+      it 'happy path' do
+        expect(Ansible::Runner).to receive(:run) do |env, vars, playbook|
+          expect(env).to be_empty
+          expect(vars.keys).to eq(%i(nuage_auth id kind))
+          expect(vars[:id]).to eq(subject.ems_ref)
+          expect(vars[:kind]).to eq('L2')
+          expect(playbook.to_s).to end_with("/remove-subnet.yml")
+          expect(File).to exist(playbook.to_s)
+
+          response_ok
+        end
+        subject.delete_cloud_subnet
       end
-      subject.delete_cloud_subnet
+
+      it 'bad playbook status' do
+        raises_upon_errored_playbook { subject.delete_cloud_subnet }
+      end
     end
   end
 end

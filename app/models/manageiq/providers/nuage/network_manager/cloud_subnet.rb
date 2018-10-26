@@ -1,7 +1,7 @@
 class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
   has_many :security_groups, :dependent => :destroy
 
-  include AnsibleCrudMixin
+  include ManageIQ::Providers::Nuage::AnsibleCrudMixin
 
   before_destroy :remove_network_ports, :prepend => true
 
@@ -32,11 +32,12 @@ class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
   def raw_delete_cloud_subnet
     $nuage_log.info("Deleting Cloud Subnet (ems_ref = #{ems_ref})")
 
-    Ansible::Runner.run(
+    response = Ansible::Runner.run(
       ext_management_system.ansible_env_vars,
       ext_management_system.ansible_extra_vars(:id => ems_ref, :kind => kind),
       ext_management_system.playbook('remove-subnet.yml')
     )
+    self.class.ansible_raise_for_status(response)
 
     $nuage_log.info("Done deleting Cloud Subnet (ems_ref = #{ems_ref})")
   rescue StandardError => e
