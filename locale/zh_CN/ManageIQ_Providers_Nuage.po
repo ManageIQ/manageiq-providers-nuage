@@ -1,36 +1,40 @@
-# Chinese translations for ManageIQ_Providers_Nuage package.
-# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the ManageIQ_Providers_Nuage package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
-#
+# puger dog <ella.cheng.sh@linguitronics.com>, 2018. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: ManageIQ_Providers_Nuage 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-10-03 15:33+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Chinese\n"
-"Language: zh_CN\n"
+"POT-Creation-Date: 2018-10-03 15:33+0200\n"
+"PO-Revision-Date: 2018-10-23 07:41+0000\n"
+"Last-Translator: puger dog <ella.cheng.sh@linguitronics.com>\n"
+"Language-Team: Chinese (Simplified, China)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"\n"
+"Language: zh_Hans_CN\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Zanata 4.6.2\n"
 
+#: ../app/helpers/manageiq/providers/nuage/toolbar_overrides/network_router_center.rb:18
+#: ../app/helpers/manageiq/providers/nuage/toolbar_overrides/network_router_center.rb:23
 msgid "Create L3 Cloud Subnet"
-msgstr ""
+msgstr "创建 L3 云子网"
 
+#: ../app/helpers/manageiq/providers/nuage/toolbar_overrides/network_router_center.rb:12
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
+#: ../app/javascript/utils/validators.js:4
 msgid "Must be IPv4 address"
-msgstr ""
+msgstr "必须为 IPv4 地址"
 
+#: ../app/javascript/utils/validators.js:11
 msgid "Must be netmask"
-msgstr ""
+msgstr "必须为掩码"
 
+#: ../lib/manageiq/providers/nuage/engine.rb:8
 msgid "Nuage Provider"
-msgstr ""
+msgstr "Nuage 供应商"
 
+#: ../app/javascript/utils/api.js:12
 msgid "Unknown API error"
-msgstr ""
+msgstr "未知的 API 错误"
