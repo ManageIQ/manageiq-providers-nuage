@@ -1,36 +1,40 @@
-# Spanish translations for ManageIQ_Providers_Nuage package.
-# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the ManageIQ_Providers_Nuage package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
-#
+# Translator <tr.rh02@oceantranslations.com>, 2018. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: ManageIQ_Providers_Nuage 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-10-03 15:33+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2018-10-03 15:33+0200\n"
+"PO-Revision-Date: 2018-10-19 04:42+0000\n"
+"Last-Translator: Translator <tr.rh02@oceantranslations.com>\n"
 "Language-Team: Spanish\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Zanata 4.6.2\n"
 
+#: ../app/helpers/manageiq/providers/nuage/toolbar_overrides/network_router_center.rb:18
+#: ../app/helpers/manageiq/providers/nuage/toolbar_overrides/network_router_center.rb:23
 msgid "Create L3 Cloud Subnet"
-msgstr ""
+msgstr "Crear subred de nube L3"
 
+#: ../app/helpers/manageiq/providers/nuage/toolbar_overrides/network_router_center.rb:12
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
+#: ../app/javascript/utils/validators.js:4
 msgid "Must be IPv4 address"
-msgstr ""
+msgstr "Debe ser una dirección IPv4"
 
+#: ../app/javascript/utils/validators.js:11
 msgid "Must be netmask"
-msgstr ""
+msgstr "Debe ser una mascara de red"
 
+#: ../lib/manageiq/providers/nuage/engine.rb:8
 msgid "Nuage Provider"
-msgstr ""
+msgstr "Proveedor de Nuage"
 
+#: ../app/javascript/utils/api.js:12
 msgid "Unknown API error"
-msgstr ""
+msgstr "Error desconocido de API"
