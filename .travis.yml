@@ -1,7 +1,7 @@
 language: ruby
 rvm:
 - 2.4.4
-- 2.3.6
+- 2.3.8
 sudo: required
 cache:
   bundler: true
@@ -24,7 +24,7 @@ addons:
 before_install: bin/qpid_install.sh
 install:
 - bin/setup
-- "bundle exec rake yarn:install"
+- bundle exec rake yarn:install
 script: bundle exec rake $TEST_SUITE
 after_script: bundle exec codeclimate-test-reporter
 notifications:
