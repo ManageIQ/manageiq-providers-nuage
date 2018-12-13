@@ -1,7 +1,7 @@
 # manageiq-providers-nuage
 
 [![Gem Version](https://badge.fury.io/rb/manageiq-providers-nuage.svg)](http://badge.fury.io/rb/manageiq-providers-nuage)
-[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-nuage.svg)](https://travis-ci.org/ManageIQ/manageiq-providers-nuage)
+[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-nuage.svg?branch=master)](https://travis-ci.org/ManageIQ/manageiq-providers-nuage)
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage)
 [![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage/coverage)
 [![Dependency Status](https://gemnasium.com/ManageIQ/manageiq-providers-nuage.svg)](https://gemnasium.com/ManageIQ/manageiq-providers-nuage)
