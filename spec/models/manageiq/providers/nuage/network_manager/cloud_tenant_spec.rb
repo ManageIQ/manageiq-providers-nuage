@@ -1,12 +1,12 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::CloudTenant do
-  let(:ems)    { FactoryGirl.create(:ems_nuage_network_with_authentication) }
-  let(:tenant) { FactoryGirl.create(:cloud_tenant_nuage, :ems_id => ems.id) }
-  let(:router) { FactoryGirl.create(:network_router_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id) }
-  let(:subnet) { FactoryGirl.create(:cloud_subnet_l3_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id, :network_router_id => router.id) }
-  let(:ip)     { FactoryGirl.create(:floating_ip_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id, :network_router_id => router.id) }
-  let(:group)  { FactoryGirl.create(:security_group_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id) }
+  let(:ems)    { FactoryBot.create(:ems_nuage_network_with_authentication) }
+  let(:tenant) { FactoryBot.create(:cloud_tenant_nuage, :ems_id => ems.id) }
+  let(:router) { FactoryBot.create(:network_router_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id) }
+  let(:subnet) { FactoryBot.create(:cloud_subnet_l3_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id, :network_router_id => router.id) }
+  let(:ip)     { FactoryBot.create(:floating_ip_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id, :network_router_id => router.id) }
+  let(:group)  { FactoryBot.create(:security_group_nuage, :ems_id => ems.id, :cloud_tenant_id => tenant.id) }
   let(:port) do
-    FactoryGirl.create(
+    FactoryBot.create(
       :network_port_bridge_nuage,
       :ems_id          => ems.id,
       :cloud_tenant_id => tenant.id,

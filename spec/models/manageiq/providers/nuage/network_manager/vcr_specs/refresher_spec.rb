@@ -27,7 +27,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   ].freeze
 
   before(:each) do
-    @ems = FactoryGirl.create(:ems_nuage_with_vcr_authentication, :port => 8443, :api_version => "v5_0", :security_protocol => "ssl-with-validation")
+    @ems = FactoryBot.create(:ems_nuage_with_vcr_authentication, :port => 8443, :api_version => "v5_0", :security_protocol => "ssl-with-validation")
   end
 
   before(:each) do
@@ -51,8 +51,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   describe "refresh" do
-    let(:ems_vmware)          { FactoryGirl.create(:ems_vmware) }
-    let!(:vm_vmware)          { FactoryGirl.create(:vm_vmware, :ems_id => ems_vmware.id, :uid_ems => 'ref-vmware-vm') }
+    let(:ems_vmware)          { FactoryBot.create(:ems_vmware) }
+    let!(:vm_vmware)          { FactoryBot.create(:vm_vmware, :ems_id => ems_vmware.id, :uid_ems => 'ref-vmware-vm') }
     let(:tenant_ref1)         { "713d0ba0-dea8-44b4-8ac7-6cab9dc321a7" }
     let(:tenant_ref2)         { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
     let(:security_group_ref)  { "02e072ef-ca95-4164-856d-3ff177b9c13c" }

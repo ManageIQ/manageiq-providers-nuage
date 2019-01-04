@@ -1,12 +1,12 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::FloatingIp do
-  let(:ems)          { FactoryGirl.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0') }
+  let(:ems)          { FactoryBot.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0') }
   let(:user)         { 123 }
   let(:job)          { MiqQueue.find_by(:method_name => 'delete_floating_ip') }
   let(:response_ok)  { double('ansible_response', :return_code => 0, :parsed_stdout => []) }
   let(:response_bad) { double('ansible_response', :return_code => 2, :parsed_stdout => []) }
 
   subject do
-    FactoryGirl.create(
+    FactoryBot.create(
       :floating_ip_nuage,
       :ext_management_system => ems,
       :name                  => 'test',

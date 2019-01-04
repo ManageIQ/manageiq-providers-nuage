@@ -5,7 +5,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner do
     subject.instance_variable_set(:@ems, ems)
   end
 
-  let(:ems)    { FactoryGirl.create(:ems_nuage_network_with_authentication) }
+  let(:ems)    { FactoryBot.create(:ems_nuage_network_with_authentication) }
   let(:handle) { double('handle', :start => nil) }
 
   it '.event_monitor_handle' do
