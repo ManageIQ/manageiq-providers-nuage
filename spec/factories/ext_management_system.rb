@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :ems_nuage_with_vcr_authentication, :parent => :ems_nuage_network do
     zone do
       _guid, _server, zone = EvmSpecHelper.create_guid_miq_server_zone
@@ -18,16 +18,16 @@ FactoryGirl.define do
         :password => password
       }
 
-      ems.authentications << FactoryGirl.create(:authentication, cred)
+      ems.authentications << FactoryBot.create(:authentication, cred)
     end
   end
 
   factory :ems_nuage_network_with_authentication,
           :parent => :ems_nuage_network do
     after :create do |x|
-      x.authentications << FactoryGirl.create(:authentication)
-      x.authentications << FactoryGirl.create(:authentication, :authtype => "amqp")
-      x.endpoints       << FactoryGirl.create(:endpoint, :role => "amqp")
+      x.authentications << FactoryBot.create(:authentication)
+      x.authentications << FactoryBot.create(:authentication, :authtype => "amqp")
+      x.endpoints       << FactoryBot.create(:endpoint, :role => "amqp")
     end
   end
 end

@@ -31,7 +31,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   ].freeze
 
   before(:each) do
-    @ems = FactoryGirl.create(:ems_nuage_with_vcr_authentication, :port => 8443, :api_version => "v5_0", :security_protocol => "ssl-with-validation")
+    @ems = FactoryBot.create(:ems_nuage_with_vcr_authentication, :port => 8443, :api_version => "v5_0", :security_protocol => "ssl-with-validation")
   end
 
   before(:each) do
@@ -82,7 +82,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
         describe "on empty database" do
           it "will refresh cloud_subnet" do
-            cloud_subnet = FactoryGirl.build(:cloud_subnet_l3_nuage, :ems_ref => cloud_subnet_ref1)
+            cloud_subnet = FactoryBot.build(:cloud_subnet_l3_nuage, :ems_ref => cloud_subnet_ref1)
             test_targeted_refresh([cloud_subnet], 'cloud_subnet') do
               assert_cloud_subnet_counts
               assert_specific_cloud_subnet
@@ -90,7 +90,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
           end
 
           it "will refresh cloud tenant" do
-            tenant = FactoryGirl.build(:cloud_tenant_nuage, :ems_ref => tenant_ref)
+            tenant = FactoryBot.build(:cloud_tenant_nuage, :ems_ref => tenant_ref)
             test_targeted_refresh([tenant], 'cloud_tenant') do
               assert_cloud_tenant_counts
               assert_specific_cloud_tenant
@@ -98,7 +98,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
           end
 
           it "will refresh security_group" do
-            security_group = FactoryGirl.build(:security_group_nuage, :ems_ref => security_group_ref)
+            security_group = FactoryBot.build(:security_group_nuage, :ems_ref => security_group_ref)
             test_targeted_refresh([security_group], 'security_group') do
               assert_security_group_counts
               assert_specific_security_group
@@ -106,28 +106,28 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
           end
 
           it "will refresh cloud_network_floating" do
-            network_floating = FactoryGirl.build(:cloud_network_floating_nuage, :ems_ref => network_floating_ref)
+            network_floating = FactoryBot.build(:cloud_network_floating_nuage, :ems_ref => network_floating_ref)
             test_targeted_refresh([network_floating], 'cloud_network_floating') do
               assert_specific_cloud_network_floating
             end
           end
 
           it "will refresh l2_cloud_subnets" do
-            l2_cloud_subnet = FactoryGirl.build(:cloud_subnet_l2_nuage, :ems_ref => l2_cloud_subnet_ref)
+            l2_cloud_subnet = FactoryBot.build(:cloud_subnet_l2_nuage, :ems_ref => l2_cloud_subnet_ref)
             test_targeted_refresh([l2_cloud_subnet], 'l2_cloud_subnet') do
               assert_specific_l2_cloud_subnet
             end
           end
 
           it "will refresh floating_ip" do
-            floating_ip = FactoryGirl.build(:floating_ip_nuage, :ems_ref => floating_ip_ref)
+            floating_ip = FactoryBot.build(:floating_ip_nuage, :ems_ref => floating_ip_ref)
             test_targeted_refresh([floating_ip], 'floating_ip') do
               assert_specific_floating_ip
             end
           end
 
           it "will refresh network_router" do
-            network_router = FactoryGirl.build(:network_router_nuage, :ems_ref => network_router_ref)
+            network_router = FactoryBot.build(:network_router_nuage, :ems_ref => network_router_ref)
             test_targeted_refresh([network_router], 'network_router', :options => { :operation => 'CREATE' }) do
               assert_specific_network_router
             end
@@ -135,32 +135,32 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
 
           describe "will refresh network_port" do
             before do
-              FactoryGirl.create(:cloud_subnet_l3_nuage, :ems_ref => vports_parent_ref, :ems_id => @ems.id)
+              FactoryBot.create(:cloud_subnet_l3_nuage, :ems_ref => vports_parent_ref, :ems_id => @ems.id)
             end
 
             it "bridge" do
-              port = FactoryGirl.build(:network_port_bridge_nuage, :ems_ref => bridge_port_ref)
+              port = FactoryBot.build(:network_port_bridge_nuage, :ems_ref => bridge_port_ref)
               test_targeted_refresh([port], 'network_port_bridge') do
                 assert_specific_network_port_bridge
               end
             end
 
             it "container" do
-              port = FactoryGirl.build(:network_port_container_nuage, :ems_ref => cont_port_ref)
+              port = FactoryBot.build(:network_port_container_nuage, :ems_ref => cont_port_ref)
               test_targeted_refresh([port], 'network_port_container') do
                 assert_specific_network_port_container
               end
             end
 
             it "host" do
-              port = FactoryGirl.build(:network_port_host_nuage, :ems_ref => host_port_ref)
+              port = FactoryBot.build(:network_port_host_nuage, :ems_ref => host_port_ref)
               test_targeted_refresh([port], 'network_port_host') do
                 assert_specific_network_port_host
               end
             end
 
             it "vm" do
-              port = FactoryGirl.build(:network_port_vm_nuage, :ems_ref => vm_port_ref)
+              port = FactoryBot.build(:network_port_vm_nuage, :ems_ref => vm_port_ref)
               test_targeted_refresh([port], 'network_port_vm') do
                 assert_specific_network_port_vm
               end
@@ -171,41 +171,41 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
         describe "on populated database" do
           context "object updated on remote server" do
             let!(:cloud_tenant) do
-              FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => tenant_ref, :name => nil)
+              FactoryBot.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => tenant_ref, :name => nil)
             end
 
             let!(:cloud_subnet) do
-              FactoryGirl.create(:cloud_subnet_l3_nuage, :ems_id => @ems.id, :ems_ref => cloud_subnet_ref1,
+              FactoryBot.create(:cloud_subnet_l3_nuage, :ems_id => @ems.id, :ems_ref => cloud_subnet_ref1,
                                  :cloud_tenant => cloud_tenant, :name => nil)
             end
 
             let!(:security_group) do
-              FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => security_group_ref,
+              FactoryBot.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => security_group_ref,
                                  :cloud_tenant => cloud_tenant, :name => nil)
             end
 
             let!(:network_floating) do
-              FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => network_floating_ref,
+              FactoryBot.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => network_floating_ref,
                                  :name => nil)
             end
 
             let!(:l2_cloud_subnet) do
-              FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => l2_cloud_subnet_ref,
+              FactoryBot.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => l2_cloud_subnet_ref,
                                  :name => nil)
             end
 
             let!(:floating_ip) do
-              FactoryGirl.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => floating_ip_ref,
+              FactoryBot.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => floating_ip_ref,
                                  :address => nil)
             end
 
             let!(:network_port) do
-              FactoryGirl.create(:network_port_bridge_nuage, :ems_id => @ems.id, :ems_ref => bridge_port_ref,
+              FactoryBot.create(:network_port_bridge_nuage, :ems_id => @ems.id, :ems_ref => bridge_port_ref,
                                  :name => nil)
             end
 
             let!(:network_router) do
-              FactoryGirl.create(:network_router_nuage, :ems_id => @ems.id, :ems_ref => network_router_ref,
+              FactoryBot.create(:network_router_nuage, :ems_id => @ems.id, :ems_ref => network_router_ref,
                                  :name => nil)
             end
 
@@ -259,14 +259,14 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
           end
 
           context "object no longer exists on remote server" do
-            let(:cloud_tenant)     { FactoryGirl.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
-            let(:cloud_subnet)     { FactoryGirl.create(:cloud_subnet_l3_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
-            let(:security_group)   { FactoryGirl.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
-            let(:network_floating) { FactoryGirl.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
-            let(:l2_cloud_subnet)  { FactoryGirl.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
-            let(:floating_ip)      { FactoryGirl.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
-            let(:network_port)     { FactoryGirl.create(:network_port_bridge_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
-            let(:network_router)   { FactoryGirl.create(:network_router_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:cloud_tenant)     { FactoryBot.create(:cloud_tenant_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
+            let(:cloud_subnet)     { FactoryBot.create(:cloud_subnet_l3_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:security_group)   { FactoryBot.create(:security_group_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:network_floating) { FactoryBot.create(:cloud_network_floating_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref) }
+            let(:l2_cloud_subnet)  { FactoryBot.create(:cloud_subnet_l2_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:floating_ip)      { FactoryBot.create(:floating_ip_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:network_port)     { FactoryBot.create(:network_port_bridge_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
+            let(:network_router)   { FactoryBot.create(:network_router_nuage, :ems_id => @ems.id, :ems_ref => unexisting_ref, :cloud_tenant => cloud_tenant) }
 
             it "unexisting cloud_tenant is deleted" do
               test_targeted_refresh([cloud_tenant], 'cloud_tenant_is_deleted', :repeat => 1) do

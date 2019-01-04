@@ -3,7 +3,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
     allow(SecureRandom).to receive(:uuid).and_return('11111111-2222-3333-4444-555555555555')
   end
 
-  let(:ems) { FactoryGirl.create(:ems_nuage_network) }
+  let(:ems) { FactoryBot.create(:ems_nuage_network) }
 
   context ".event_to_hash" do
     [

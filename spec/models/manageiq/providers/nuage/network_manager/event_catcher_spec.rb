@@ -8,10 +8,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher do
   end
 
   describe '#all_valid_ems_in_zone' do
-    let(:ems_without_amqp) { FactoryGirl.create(:ems_nuage_network) }
-    let(:ems_with_amqp)    { FactoryGirl.create(:ems_nuage_network_with_authentication) }
+    let(:ems_without_amqp) { FactoryBot.create(:ems_nuage_network) }
+    let(:ems_with_amqp)    { FactoryBot.create(:ems_nuage_network_with_authentication) }
     let(:ems_with_empty_amqp) do
-      ems = FactoryGirl.create(:ems_nuage_network_with_authentication)
+      ems = FactoryBot.create(:ems_nuage_network_with_authentication)
       ems.endpoints.detect { |h| h.role == 'amqp' }.update(:hostname => '')
       ems
     end

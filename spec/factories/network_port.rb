@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :network_port_bridge_nuage,
           :class  => "ManageIQ::Providers::Nuage::NetworkManager::NetworkPort::Bridge",
           :parent => :network_port

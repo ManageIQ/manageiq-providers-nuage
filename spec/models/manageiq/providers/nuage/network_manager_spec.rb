@@ -25,7 +25,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
 
   context '.raw_connect' do
     before do
-      @ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :hostname => 'host', :port => 8000, :api_version => 'v5_0')
+      @ems = FactoryBot.create(:ems_nuage_network_with_authentication, :hostname => 'host', :port => 8000, :api_version => 'v5_0')
     end
 
     it 'connects over insecure channel' do
@@ -59,7 +59,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
 
   context 'validation' do
     before do
-      @ems = FactoryGirl.create(:ems_nuage_network_with_authentication)
+      @ems = FactoryBot.create(:ems_nuage_network_with_authentication)
     end
 
     it 'raises error for unsupported auth type' do
@@ -100,7 +100,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
 
   context 'translate_exception' do
     before do
-      @ems = FactoryGirl.build(:ems_nuage_network, :hostname => "host", :ipaddress => "::1")
+      @ems = FactoryBot.build(:ems_nuage_network, :hostname => "host", :ipaddress => "::1")
 
       creds = {:default => {:userid => "fake_user", :password => "fake_password"}}
       @ems.update_authentication(creds, :save => false)
@@ -152,7 +152,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
 
   context '#authentications_to_validate' do
     it 'only :default is validated by default' do
-      ems = FactoryGirl.build(:ems_nuage_network, :hostname => "host", :ipaddress => "::1")
+      ems = FactoryBot.build(:ems_nuage_network, :hostname => "host", :ipaddress => "::1")
       creds = {:default => {:userid => "user", :password => "password"}}
       ems.update_authentication(creds, :save => false)
 
@@ -160,7 +160,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     end
 
     it 'validates :default and :amqp when both auths are given' do
-      ems = FactoryGirl.build(:ems_nuage_network_with_authentication, :hostname => "host", :ipaddress => "::1")
+      ems = FactoryBot.build(:ems_nuage_network_with_authentication, :hostname => "host", :ipaddress => "::1")
       creds = {:amqp => {:userid => "amqp_user", :password => "amqp_password"}}
       ems.update_authentication(creds, :save => false)
 
@@ -212,7 +212,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
 
   context '#event_monitor_options' do
     before(:each) do
-      @ems = FactoryGirl.build(:ems_nuage_network, :hostname => "host", :ipaddress => "::1")
+      @ems = FactoryBot.build(:ems_nuage_network, :hostname => "host", :ipaddress => "::1")
       @creds = {:amqp => {:userid => "amqp_user", :password => "amqp_pass"}}
       @ems.endpoints << Endpoint.create(:role => 'amqp', :hostname => 'amqp_hostname', :port => '5672')
       @ems.update_authentication(@creds, :save => false)
@@ -241,13 +241,13 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
   end
 
   it '.name' do
-    ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :name => 'nuage')
+    ems = FactoryBot.create(:ems_nuage_network_with_authentication, :name => 'nuage')
     expect(ems.name).to eq('nuage')
   end
 
   describe 'ansible' do
     let(:ems) do
-      ems = FactoryGirl.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0')
+      ems = FactoryBot.create(:ems_nuage_network_with_authentication, :api_version => 'v5.0')
       ems.default_authentication.userid = 'user'
       ems.default_authentication.password = 'pass'
       ems.default_endpoint.security_protocol = 'ssl'
