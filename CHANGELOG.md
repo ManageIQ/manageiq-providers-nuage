@@ -5,12 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 
-## Hammer RC-1
-
-### Fixed
-- Raise error when built-in CRUD playbook fails [(#154)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/154)
-
-## Hammer Beta-1 - Released 2018-10-12
+## Hammer-1
 
 ### Added
 - Cross-provider connect NetworkPort to Vm [(#138)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/138)
@@ -50,6 +45,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Update i18n catalog for hammer [(#151)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/151)
 
 ### Fixed
+- Raise error when built-in CRUD playbook fails [(#154)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/154)
 - Revert "Add missing log file before running tests" [(#133)](https://github.com/ManageIQ/manageiq-providers-nuage/pull/133)
 
 ## Gaprindashvili-3 - Released 2018-05-15
