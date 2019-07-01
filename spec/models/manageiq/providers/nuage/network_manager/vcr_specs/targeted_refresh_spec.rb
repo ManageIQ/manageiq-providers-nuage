@@ -425,7 +425,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   def assert_cloud_subnet_counts
-    expect(ExtManagementSystem.count).to eq(1)
+    expect(ExtManagementSystem.count).to eq(2)
     expect(CloudTenant.count).to eq(0)
     expect(SecurityGroup.count).to eq(0)
     expect(CloudSubnet.count).to eq(1)
@@ -464,7 +464,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   def assert_cloud_tenant_counts
-    expect(ExtManagementSystem.count).to eq(1)
+    expect(ExtManagementSystem.count).to eq(2)
     expect(CloudTenant.count).to eq(1)
     expect(SecurityGroup.count).to eq(0)
     expect(CloudSubnet.count).to eq(0)
@@ -485,7 +485,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   def assert_security_group_counts
-    expect(ExtManagementSystem.count).to eq(1)
+    expect(ExtManagementSystem.count).to eq(2)
     expect(CloudTenant.count).to eq(0)
     expect(SecurityGroup.count).to eq(1)
     expect(CloudSubnet.count).to eq(0)
