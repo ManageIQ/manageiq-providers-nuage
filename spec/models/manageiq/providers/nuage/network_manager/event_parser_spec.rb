@@ -1,8 +1,4 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
-  before do
-    allow(SecureRandom).to receive(:uuid).and_return('11111111-2222-3333-4444-555555555555')
-  end
-
   let(:ems) { FactoryBot.create(:ems_nuage_network) }
 
   context ".event_to_hash" do
@@ -21,8 +17,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
         :fixture  => '/event_catcher/events/alarm_delete.json',
         :expected => {
           :event_type => 'nuage_alarm_nsgateway_delete_4707',
-          :message    => 'MAJOR: Gateway with system-id [201.26.92.41] is disconnected',
-          :ems_ref    => 'random-11111111-2222-3333-4444-555555555555'
+          :message    => 'MAJOR: Gateway with system-id [201.26.92.41] is disconnected'
         }
       },
       {
@@ -30,8 +25,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
         :fixture  => '/event_catcher/events/alarm_create.json',
         :expected => {
           :event_type => 'nuage_alarm_nsgateway_create_4707',
-          :message    => 'MAJOR: Gateway with system-id [213.50.60.102] is disconnected',
-          :ems_ref    => 'random-11111111-2222-3333-4444-555555555555'
+          :message    => 'MAJOR: Gateway with system-id [213.50.60.102] is disconnected'
         }
       },
       {
@@ -39,8 +33,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventParser do
         :fixture  => '/event_catcher/events/alarm_4713.json',
         :expected => {
           :event_type => 'nuage_alarm_nsgateway_delete_4713',
-          :message    => 'MAJOR: Gateway with system-id [213.50.60.102] is disconnected from controller [vsc1:100.100.100.21]',
-          :ems_ref    => 'random-11111111-2222-3333-4444-555555555555'
+          :message    => 'MAJOR: Gateway with system-id [213.50.60.102] is disconnected from controller [vsc1:100.100.100.21]'
         }
       }
     ].each do |example|
