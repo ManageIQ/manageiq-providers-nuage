@@ -294,4 +294,31 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
       expect(ems.playbook('play.yaml').to_s).to end_with('/manageiq-providers-nuage/content/ansible_runner/play.yaml')
     end
   end
+
+  describe 'delegates that usually point to cloud manager' do
+    %i[
+      flavors
+      cloud_resource_quotas
+      cloud_volumes
+      cloud_volume_snapshots
+      cloud_object_store_containers
+      cloud_object_store_objects
+      key_pairs
+      orchestration_stacks
+      orchestration_stacks_resources
+      direct_orchestration_stacks
+      resource_groups
+      vms
+      total_vms
+      vms_and_templates
+      total_vms_and_templates
+      miq_templates
+      total_miq_templates
+      hosts
+    ].each do |rel|
+      it "##{rel}" do
+        expect(subject.send(rel).count).to eq(0)
+      end
+    end
+  end
 end

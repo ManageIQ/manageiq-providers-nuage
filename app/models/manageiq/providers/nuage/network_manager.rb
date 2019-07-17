@@ -17,6 +17,7 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
 
   include Vmdb::Logging
   include ManageIQ::Providers::Nuage::ManagerMixin
+  include ManageIQ::Providers::Nuage::CloudDelegatesMixin
 
   def self.ems_type
     @ems_type ||= "nuage_network".freeze
