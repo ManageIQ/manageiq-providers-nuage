@@ -21,7 +21,7 @@ module ManageIQ
                                'function-data' => {:controller     => 'provider_dialogs',
                                                    :button         => :nuage_create_cloud_subnet,
                                                    :modal_title    => N_('Create L3 Cloud Subnet'),
-                                                   :component_name => 'CreateNuageCloudSubnetForm'}.to_json},
+                                                   :component_name => 'CreateNuageCloudSubnetForm'}},
                     :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck
                   ),
                 ]
