@@ -2,6 +2,80 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   extend ActiveSupport::Concern
 
   module ClassMethods
+    def params_for_create
+      @params_for_create ||= {
+        :title  => "Configure Nuage",
+        :fields => [
+          {
+            :component  => "text-field",
+            :name       => "endpoints.default.server",
+            :label      => "Server Hostname/IP Address",
+            :isRequired => true,
+            :validate   => [{:type => "required-validator"}]
+          },
+          {
+            :component  => "text-field",
+            :name       => "endpoints.default.username",
+            :label      => "Username",
+            :isRequired => true,
+            :validate   => [{:type => "required-validator"}]
+          },
+          {
+            :component  => "text-field",
+            :name       => "endpoints.default.password",
+            :label      => "Password",
+            :type       => "password",
+            :isRequired => true,
+            :validate   => [{:type => "required-validator"}]
+          },
+          {
+            :component  => "text-field",
+            :name       => "endpoints.default.port",
+            :label      => "Port",
+            :type       => "number",
+            :isRequired => true,
+            :validate   => [{:type => "required-validator"}]
+          },
+          {
+            :component    => "text-field",
+            :name         => "endpoints.default.protocol",
+            :label        => "Security Protocol",
+            :initialValue => "ssl-no-validation", # TODO: This should be a dropdown
+            :isRequired   => true,
+            :validate     => [{:type => "required-validator"}]
+          }
+        ]
+      }.freeze
+    end
+
+    # Verify Credentials
+    #
+    # args: {
+    #   "endpoints" => {
+    #     "default" => {
+    #       "username" => String,
+    #       "password" => String,
+    #       "server" => String,
+    #       "port" => Integer,
+    #       "protocol" => String
+    #     }
+    #   }
+    def verify_credentials(args)
+      default_endpoint = args.dig("endpoints", "default")
+
+      username, password, server, port, protocol = default_endpoint&.values_at(
+        "username", "password", "server", "port", "protocol"
+      )
+
+      endpoint_opts = {
+        :protocol => protocol,
+        :hostname => server,
+        :api_port => port
+      }
+
+      !!raw_connect(username, password, endpoint_opts)
+    end
+
     def raw_connect(username, password, endpoint_opts)
       protocol    = endpoint_opts[:protocol].strip if endpoint_opts[:protocol]
       hostname    = endpoint_opts[:hostname].strip
