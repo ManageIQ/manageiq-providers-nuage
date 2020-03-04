@@ -24,7 +24,6 @@
     :user:
 :ems_refresh:
   :nuage_network:
-    :inventory_object_refresh: true
     :allow_targeted_refresh: true
 :workers:
   :worker_base:
