@@ -95,7 +95,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                   },
                   {
                     :component              => 'validate-provider-credentials',
-                    :name                   => 'endpoints.amqp.valid',
+                    :name                   => 'endpoints.events.valid',
                     :validationDependencies => %w[type event_stream_selection],
                     :condition              => {
                       :when => 'event_stream_selection',
@@ -104,14 +104,14 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                     :fields                 => [
                       {
                         :component  => "text-field",
-                        :name       => "endpoints.amqp.hostname",
+                        :name       => "endpoints.events.hostname",
                         :label      => _("Hostname (or IPv4 or IPv6 address)"),
                         :isRequired => true,
                         :validate   => [{:type => "required-validator"}],
                       },
                       {
                         :component    => "text-field",
-                        :name         => "endpoints.amqp.port",
+                        :name         => "endpoints.events.port",
                         :label        => _("API Port"),
                         :type         => "number",
                         :isRequired   => true,
@@ -120,14 +120,14 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       },
                       {
                         :component  => "text-field",
-                        :name       => "authentications.amqp.userid",
+                        :name       => "authentications.events.userid",
                         :label      => "Username",
                         :isRequired => true,
                         :validate   => [{:type => "required-validator"}],
                       },
                       {
                         :component  => "text-field",
-                        :name       => "authentications.amqp.password",
+                        :name       => "authentications.events.password",
                         :label      => "Password",
                         :type       => "password",
                         :isRequired => true,
@@ -155,8 +155,8 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     #       "default_security_protocol" => String,
     #       "password" => String,
     #     },
-    #     "amqp" => {
-    #       "amqp_hostname" => String,
+    #     "events" => {
+    #       "hostname" => String,
     #       "amqp_userid" => String,
     #       "amqp_api_port" => String,
     #       "password" => String,
