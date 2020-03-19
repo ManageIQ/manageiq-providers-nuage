@@ -4,45 +4,140 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   module ClassMethods
     def params_for_create
       @params_for_create ||= {
-        :title  => "Configure Nuage",
         :fields => [
           {
-            :component  => "text-field",
-            :name       => "endpoints.default.server",
-            :label      => "Server Hostname/IP Address",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component  => "text-field",
-            :name       => "endpoints.default.username",
-            :label      => "Username",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component  => "text-field",
-            :name       => "endpoints.default.password",
-            :label      => "Password",
-            :type       => "password",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component  => "text-field",
-            :name       => "endpoints.default.port",
-            :label      => "Port",
-            :type       => "number",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component    => "text-field",
-            :name         => "endpoints.default.protocol",
-            :label        => "Security Protocol",
-            :initialValue => "ssl-no-validation", # TODO: This should be a dropdown
-            :isRequired   => true,
-            :validate     => [{:type => "required-validator"}]
+            :component => 'sub-form',
+            :name      => 'endpoints',
+            :title     => _('Endpoints'),
+            :fields    => [
+              {
+                :component => 'tab-item',
+                :name      => 'default',
+                :title     => _('Default'),
+                :fields    => [
+                  {
+                    :component              => 'validate-provider-credentials',
+                    :name                   => 'endpoints.default.valid',
+                    :validationDependencies => %w[name type],
+                    :fields                 => [
+                      {
+                        :component  => "select-field",
+                        :name       => "endpoints.default.default_security_protocol",
+                        :label      => _("Security Protocol"),
+                        :isRequired => true,
+                        :validate   => [{:type => "required-validator"}],
+                        :options    => [
+                          {
+                            :label => _("SSL without validation"),
+                            :value => "ssl-no-validation"
+                          },
+                          {
+                            :label => _("SSL"),
+                            :value => "ssl-with-validation"
+                          },
+                          {
+                            :label => _("Non-SSL"),
+                            :value => "non-ssl"
+                          }
+                        ]
+                      },
+                      {
+                        :component  => "text-field",
+                        :name       => "endpoints.default.default_hostname",
+                        :label      => _("Hostname (or IPv4 or IPv6 address)"),
+                        :isRequired => true,
+                        :validate   => [{:type => "required-validator"}],
+                      },
+                      {
+                        :component    => "text-field",
+                        :name         => "endpoints.default.port",
+                        :label        => _("API Port"),
+                        :type         => "number",
+                        :initialValue => 443,
+                        :isRequired   => true,
+                        :validate     => [{:type => "required-validator"}],
+                      },
+                      {
+                        :component  => "text-field",
+                        :name       => "authentications.default.userid",
+                        :label      => "Username",
+                        :isRequired => true,
+                        :validate   => [{:type => "required-validator"}],
+                      },
+                      {
+                        :component  => "text-field",
+                        :name       => "authentications.default.password",
+                        :label      => "Password",
+                        :type       => "password",
+                        :isRequired => true,
+                        :validate   => [{:type => "required-validator"}],
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                :component => 'tab-item',
+                :name      => 'events',
+                :title     => _('Events'),
+                :fields    => [
+                  {
+                    :component    => 'select-field',
+                    :name         => 'event_stream_selection',
+                    :initialValue => 'amqp',
+                    :label        => _('Type'),
+                    :options      => [
+                      {
+                        :label => _("AMQP"),
+                        :value => "amqp"
+                      }
+                    ]
+                  },
+                  {
+                    :component              => 'validate-provider-credentials',
+                    :name                   => 'endpoints.amqp.valid',
+                    :validationDependencies => %w[type event_stream_selection],
+                    :condition              => {
+                      :when => 'event_stream_selection',
+                      :is   => 'amqp',
+                    },
+                    :fields                 => [
+                      {
+                        :component  => "text-field",
+                        :name       => "endpoints.amqp.hostname",
+                        :label      => _("Hostname (or IPv4 or IPv6 address)"),
+                        :isRequired => true,
+                        :validate   => [{:type => "required-validator"}],
+                      },
+                      {
+                        :component    => "text-field",
+                        :name         => "endpoints.amqp.port",
+                        :label        => _("API Port"),
+                        :type         => "number",
+                        :isRequired   => true,
+                        :initialValue => 5672,
+                        :validate     => [{:type => "required-validator"}],
+                      },
+                      {
+                        :component  => "text-field",
+                        :name       => "authentications.amqp.userid",
+                        :label      => "Username",
+                        :isRequired => true,
+                        :validate   => [{:type => "required-validator"}],
+                      },
+                      {
+                        :component  => "text-field",
+                        :name       => "authentications.amqp.password",
+                        :label      => "Password",
+                        :type       => "password",
+                        :isRequired => true,
+                        :validate   => [{:type => "required-validator"}],
+                      },
+                    ],
+                  },
+                ],
+              }
+            ]
           }
         ]
       }.freeze
@@ -51,20 +146,28 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     # Verify Credentials
     #
     # args: {
+    #   "name" => String,
     #   "endpoints" => {
     #     "default" => {
-    #       "username" => String,
+    #       "default_userid" => String,
+    #       "default_hostname" => String,
+    #       "default_api_port" => Integer,
+    #       "default_security_protocol" => String,
     #       "password" => String,
-    #       "server" => String,
-    #       "port" => Integer,
-    #       "protocol" => String
-    #     }
-    #   }
+    #     },
+    #     "amqp" => {
+    #       "amqp_hostname" => String,
+    #       "amqp_userid" => String,
+    #       "amqp_api_port" => String,
+    #       "password" => String,
+    #     },
+    #   },
+    # }
     def verify_credentials(args)
       default_endpoint = args.dig("endpoints", "default")
 
       username, password, server, port, protocol = default_endpoint&.values_at(
-        "username", "password", "server", "port", "protocol"
+        "default_userid", "password", "default_hostname", "default_api_port", "default_security_protocol"
       )
 
       endpoint_opts = {
