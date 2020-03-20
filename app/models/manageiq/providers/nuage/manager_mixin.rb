@@ -90,6 +90,10 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       {
                         :label => _("AMQP"),
                         :value => "amqp"
+                      },
+                      {
+                        :label => _("None"),
+                        :value => nil
                       }
                     ]
                   },
