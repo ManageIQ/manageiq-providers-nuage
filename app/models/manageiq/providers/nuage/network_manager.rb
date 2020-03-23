@@ -36,10 +36,6 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
     %w(default amqp)
   end
 
-  def inventory_object_refresh?
-    true
-  end
-
   def supports_authentication?(authtype)
     supported_auth_types.include?(authtype.to_s)
   end

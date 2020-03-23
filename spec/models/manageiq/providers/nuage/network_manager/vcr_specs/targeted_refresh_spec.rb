@@ -1,14 +1,12 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   TARGET_REFRESH_SETTINGS = [
     {
-      :inventory_object_refresh => true,
       :allow_targeted_refresh   => true,
       :inventory_collections    => {
         :saver_strategy => :default,
       },
     },
     {
-      :inventory_object_refresh => true,
       :allow_targeted_refresh   => true,
       :inventory_collections    => {
         :saver_strategy => :batch,
@@ -16,7 +14,6 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
       },
     },
     {
-      :inventory_object_refresh => true,
       :allow_targeted_refresh   => true,
       :inventory_collections    => {
         :saver_strategy => :batch,
@@ -25,7 +22,6 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     },
     {
       :inventory_object_saving_strategy => :recursive,
-      :inventory_object_refresh         => true,
       :allow_targeted_refresh           => true,
     }
   ].freeze
