@@ -1,4 +1,5 @@
 #!/bin/bash
+set -v
 
 # Install the dev dependencies for building Qpid proton system library.
 sudo apt-get install -y gcc cmake cmake-curses-gui uuid-dev
@@ -20,3 +21,6 @@ make all
 
 # Install system libraries
 sudo make install
+
+cd $TRAVIS_BUILD_DIR
+set +v
