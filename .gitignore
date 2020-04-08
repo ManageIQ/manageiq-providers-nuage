@@ -6,6 +6,7 @@
 /coverage/
 /doc/
 /pkg/
+/qpid-proton/
 /spec/reports/
 /tmp/
 
