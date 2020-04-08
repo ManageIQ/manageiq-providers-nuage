@@ -23,7 +23,8 @@ matrix:
     env: TEST_SUITE=yarn:test
 addons:
   postgresql: '10'
-before_install: bin/qpid_install.sh
+before_install:
+- source ${TRAVIS_BUILD_DIR}/tools/ci/before_install.sh
 install:
 - bin/setup
 - bundle exec rake yarn:install
