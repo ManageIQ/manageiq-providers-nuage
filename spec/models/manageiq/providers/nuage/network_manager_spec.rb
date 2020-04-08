@@ -287,11 +287,11 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
     end
 
     it '.ansible_root' do
-      expect(ems.ansible_root.to_s).to end_with('content/ansible_runner')
+      expect(ems.ansible_root.to_s).to end_with('/content/ansible_runner')
     end
 
     it '.playbook' do
-      expect(ems.playbook('play.yaml').to_s).to end_with('content/ansible_runner/play.yaml')
+      expect(ems.playbook('play.yaml').to_s).to end_with('/content/ansible_runner/play.yaml')
     end
   end
 end
