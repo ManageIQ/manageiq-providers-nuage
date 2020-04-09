@@ -58,14 +58,21 @@ class ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest
   def request(url, method: :get, data: nil, verify_ssl: false)
     $nuage_log.debug("Accessing Nuage VSD url #{method} #{url} with data '#{data}'")
     login unless @api_key
-    RestClient::Request.execute(
+
+    options = {
       :url        => url,
       :method     => method,
       :headers    => @headers,
-      :data       => data,
       :user       => @user,
       :password   => @api_key,
       :verify_ssl => verify_ssl
-    ) { |response| response } # silence errors like 404
+    }
+
+    proxy = VMDB::Util.http_proxy_uri(:nuage) || VMDB::Util.http_proxy_uri(:default)
+
+    options[:payload] = data if data
+    options[:proxy] = proxy if proxy
+
+    RestClient::Request.execute(options) { |response| response } # silence errors like 404
   end
 end
