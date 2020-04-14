@@ -23,5 +23,8 @@ make all
 # Install system libraries
 sudo make install
 
+# Enable the qpid_proton bundler group
+[ -z "$BUNDLE_WITH" ] && bundle config with qpid_proton
+
 popd
 set +v
