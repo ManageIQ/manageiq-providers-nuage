@@ -3,7 +3,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   let(:rest_call) { double(rest, :reset_headers => nil) }
 
   let(:client) do
-    described_class.new.tap do |c|
+    described_class.new('server', 'username', 'password').tap do |c|
       c.instance_variable_set(:@rest_call, rest_call)
     end
   end
