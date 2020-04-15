@@ -1,13 +1,14 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
-  before(:each) do
-    allow_any_instance_of(described_class).to receive(:initialize)
+  let(:rest_call) { instance_double(ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest, :reset_headers => nil) }
+
+  let(:client) do
+    described_class.new('server', 'username', 'password').tap do |c|
+      c.instance_variable_set(:@rest_call, rest_call)
+    end
   end
 
-  let(:rest_call) { double('Rest', :reset_headers => nil) }
-  let(:client) do
-    c = described_class.new
-    c.instance_variable_set(:@rest_call, rest_call)
-    c
+  before do
+    expect_any_instance_of(ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest).to receive(:login)
   end
 
   describe "get_list edge cases" do
