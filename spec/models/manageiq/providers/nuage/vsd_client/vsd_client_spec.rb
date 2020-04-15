@@ -1,6 +1,5 @@
 describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
-  let(:rest) { class_double("#{described_class}::Rest" ).as_stubbed_const }
-  let(:rest_call) { double(rest, :reset_headers => nil) }
+  let(:rest_call) { instance_double(ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest, :reset_headers => nil) }
 
   let(:client) do
     described_class.new('server', 'username', 'password').tap do |c|
@@ -9,7 +8,6 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   end
 
   before do
-    expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest).to receive(:new).with('server', 'username', 'password').and_call_original
     expect_any_instance_of(ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest).to receive(:login)
   end
 
