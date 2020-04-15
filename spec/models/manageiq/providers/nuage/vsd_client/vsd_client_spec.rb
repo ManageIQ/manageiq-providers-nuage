@@ -9,7 +9,8 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   end
 
   before do
-    allow_any_instance_of(described_class).to receive(:initialize)
+    expect(ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest).to receive(:new).with('server', 'username', 'password').and_call_original
+    expect_any_instance_of(ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest).to receive(:login)
   end
 
   describe "get_list edge cases" do
