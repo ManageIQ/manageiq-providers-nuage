@@ -14,7 +14,6 @@
   },
   "homepage": "https://github.com/ManageIQ/manageiq#readme",
   "dependencies": {
-    "@manageiq/react-ui-components": "~0.9.5",
     "prop-types": "^15.6.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
@@ -48,6 +47,8 @@
   "jest": {
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "<rootDir>/spec/javascript/setup.js",
-    "roots": ["<rootDir>/spec/javascript"]
+    "roots": [
+      "<rootDir>/spec/javascript"
+    ]
   }
 }
