@@ -4,7 +4,6 @@
 [![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-nuage.svg?branch=master)](https://travis-ci.com/ManageIQ/manageiq-providers-nuage)
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage)
 [![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage/coverage)
-[![Dependency Status](https://gemnasium.com/ManageIQ/manageiq-providers-nuage.svg)](https://gemnasium.com/ManageIQ/manageiq-providers-nuage)
 [![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-nuage/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-nuage/master)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-nuage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
