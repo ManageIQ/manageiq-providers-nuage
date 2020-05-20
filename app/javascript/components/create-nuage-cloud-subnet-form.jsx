@@ -1,50 +1,58 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import NuageCloudSubnetForm from './forms/nuage-cloud-subnet-form'
-import { handleApiError, createSubnet, fetchRouter } from '../utils/api.js'
+import MiqFormRenderer from '@@ddf';
 
-class CreateNuageCloudSubnetForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleFormStateUpdate = this.handleFormStateUpdate.bind(this);
-    this.state = {
-      loading: true
-    }
-  }
+import createSchema from './create-nuage-cloud-subnet-form.schema';
 
-  componentDidMount() {
-    this.props.dispatch({
+const CreateNuageCloudSubnetForm = ({ dispatch }) => {
+  useEffect(() => {
+    dispatch({
       type: 'FormButtons.init',
       payload: {
         newRecord: true,
         pristine: true,
-        addClicked: () => createSubnet(this.state.values, this.state.emsId, this.state.routerRef)
-      }
+      },
     });
-    fetchRouter(ManageIQ.record.recordId).then(router => {
-      this.setState({emsId: router.ems_id, routerRef: router.ems_ref, loading: false});
-    }, handleApiError(this));
-  }
+  }, []);
 
-  handleFormStateUpdate(formState) {
-    this.props.dispatch({ type: 'FormButtons.saveable', payload: formState.valid });
-    this.props.dispatch({ type: 'FormButtons.pristine', payload: formState.pristine });
-    this.setState({ values: formState.values });
-  }
+  const submitValues = (values) => {
+    API.get(`/api/network_routers/${ManageIQ.record.recordId}?attributes=ems_ref,name,ems_id`).then(({ ems_ref: router_ref, ems_id }) =>
+      API.post(`/api/providers/${ems_id}/cloud_subnets`, {
+        action: "create",
+        resource: { ...values, router_ref },
+      }).then(({ results }) =>
+        results.forEach((res) => window.add_flash(res.message, res.success ? "success" : "error"))
+      )
+    ).catch((err) => {
+      window.add_flash(err.data && err.data.error && err.data.error.message || __('Unknown API error'), "error");
+    });
+  };
 
-  render() {
-    if(this.state.error) {
-      return <p>{this.state.error}</p>
-    }
-    return (
-      <NuageCloudSubnetForm
-        updateFormState={this.handleFormStateUpdate}
-        loading={this.state.loading}
-      />
-    );
-  }
-}
+  const handleFormStateUpdate = (formState) => {
+    dispatch({
+      type: 'FormButtons.saveable',
+      payload: formState.valid,
+    });
+    dispatch({
+      type: 'FormButtons.pristine',
+      payload: formState.pristine,
+    });
+    dispatch({
+      type: 'FormButtons.callbacks',
+      payload: { addClicked: () => submitValues(formState.values) },
+    });
+  };
+
+  return (
+    <MiqFormRenderer
+      schema={createSchema()}
+      onSubmit={submitValues}
+      showFormControls={false}
+      onStateUpdate={handleFormStateUpdate}
+    />
+  )
+};
 
 CreateNuageCloudSubnetForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
