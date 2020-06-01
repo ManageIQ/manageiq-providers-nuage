@@ -101,7 +101,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
   end
 
   def assert_table_counts
-    expect(ExtManagementSystem.count).to eq(3) # nuage + vmware infra
+    expect(ExtManagementSystem.count).to eq(2) # nuage + vmware infra
     expect(CloudTenant.count).to eq(2)
     expect(CloudNetwork.count).to eq(1)
     expect(SecurityGroup.count).to eq(2)
