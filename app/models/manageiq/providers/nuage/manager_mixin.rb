@@ -4,46 +4,187 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   module ClassMethods
     def params_for_create
       @params_for_create ||= {
-        :title  => "Configure Nuage",
         :fields => [
           {
-            :component  => "text-field",
-            :name       => "endpoints.default.server",
-            :label      => "Server Hostname/IP Address",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component  => "text-field",
-            :name       => "endpoints.default.username",
-            :label      => "Username",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component  => "text-field",
-            :name       => "endpoints.default.password",
-            :label      => "Password",
-            :type       => "password",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component  => "text-field",
-            :name       => "endpoints.default.port",
-            :label      => "Port",
-            :type       => "number",
-            :isRequired => true,
-            :validate   => [{:type => "required-validator"}]
-          },
-          {
-            :component    => "text-field",
-            :name         => "endpoints.default.protocol",
-            :label        => "Security Protocol",
-            :initialValue => "ssl-no-validation", # TODO: This should be a dropdown
+            :component    => "select-field",
+            :name         => "api_version",
+            :label        => _("API Version"),
+            :initialValue => 'v3',
             :isRequired   => true,
-            :validate     => [{:type => "required-validator"}]
-          }
+            :validate     => [{:type => "required-validator"}],
+            :options      => [
+              {
+                :label => _('Version 3.2'),
+                :value => 'v3_2',
+              },
+              {
+                :label => _('Version 4.0'),
+                :value => 'v4_0',
+              },
+              {
+                :label => _('Version 5.0'),
+                :value => 'v5_0',
+              },
+            ],
+          },
+          {
+            :component => 'sub-form',
+            :name      => 'endpoints-subform',
+            :title     => _('Endpoints'),
+            :fields    => [
+              :component => 'tabs',
+              :name      => 'tabs',
+              :fields    => [
+                {
+                  :component => 'tab-item',
+                  :name      => 'default-tab',
+                  :title     => _('Default'),
+                  :fields    => [
+                    {
+                      :component              => 'validate-provider-credentials',
+                      :name                   => 'authentications.default.valid',
+                      :skipSubmit             => true,
+                      :validationDependencies => %w[type api_version],
+                      :fields                 => [
+                        {
+                          :component  => "select-field",
+                          :name       => "endpoints.default.security_protocol",
+                          :label      => _("Security Protocol"),
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                          :options    => [
+                            {
+                              :label => _("SSL without validation"),
+                              :value => "ssl-no-validation"
+                            },
+                            {
+                              :label => _("SSL"),
+                              :value => "ssl-with-validation"
+                            },
+                            {
+                              :label => _("Non-SSL"),
+                              :value => "non-ssl"
+                            }
+                          ]
+                        },
+                        {
+                          :component  => "text-field",
+                          :name       => "endpoints.default.hostname",
+                          :label      => _("Hostname (or IPv4 or IPv6 address)"),
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                        },
+                        {
+                          :component  => "text-field",
+                          :name       => "endpoints.default.port",
+                          :label      => _("API Port"),
+                          :type       => "number",
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                        },
+                        {
+                          :component  => "text-field",
+                          :name       => "authentications.default.userid",
+                          :label      => "Username",
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                        },
+                        {
+                          :component  => "password-field",
+                          :name       => "authentications.default.password",
+                          :label      => "Password",
+                          :type       => "password",
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                        },
+                      ]
+                    },
+                  ]
+                },
+                {
+                  :component => 'tab-item',
+                  :name      => 'events-tab',
+                  :title     => _('Events'),
+                  :fields    => [
+                    {
+                      :component    => 'protocol-selector',
+                      :name         => 'event_stream_selection',
+                      :skipSubmit   => true,
+                      :initialValue => 'none',
+                      :label        => _('Type'),
+                      :options      => [
+                        {
+                          :label => _('None'),
+                          :value => 'none',
+                        },
+                        {
+                          :label => _('AMQP'),
+                          :value => _('amqp'),
+                          :pivot => 'endpoints.amqp.hostname',
+                        },
+                      ],
+                    },
+                    {
+                      :component              => 'validate-provider-credentials',
+                      :name                   => 'endpoints.amqp.valid',
+                      :skipSubmit             => true,
+                      :validationDependencies => %w[type event_stream_selection],
+                      :condition              => {
+                        :when => 'event_stream_selection',
+                        :is   => 'amqp',
+                      },
+                      :fields                 => [
+                        {
+                          :component  => "text-field",
+                          :name       => "endpoints.amqp.hostname",
+                          :label      => _("Hostname (or IPv4 or IPv6 address)"),
+                          :helperText => _("Used to authenticate with Nuage AMQP Messaging Bus for event handling."),
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                        },
+                        {
+                          :component   => "text-field",
+                          :name        => "endpoints.amqp_fallback1.hostname",
+                          :placeholder => _("Hostname (or IPv4 or IPv6 address)"),
+                          :label       => _("Fallback Hostname 1"),
+                        },
+                        {
+                          :component   => "text-field",
+                          :name        => "endpoints.amqp_fallback2.hostname",
+                          :placeholder => _("Hostname (or IPv4 or IPv6 address)"),
+                          :label       => _("Fallback Hostname 2"),
+                        },
+                        {
+                          :component    => "text-field",
+                          :name         => "endpoints.amqp.port",
+                          :label        => _("API Port"),
+                          :type         => "number",
+                          :isRequired   => true,
+                          :initialValue => 5672,
+                          :validate     => [{:type => "required-validator"}],
+                        },
+                        {
+                          :component  => "text-field",
+                          :name       => "authentications.amqp.userid",
+                          :label      => "Username",
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                        },
+                        {
+                          :component  => "password-field",
+                          :name       => "authentications.amqp.password",
+                          :label      => "Password",
+                          :type       => "password",
+                          :isRequired => true,
+                          :validate   => [{:type => "required-validator"}],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
         ]
       }.freeze
     end
@@ -51,29 +192,64 @@ module ManageIQ::Providers::Nuage::ManagerMixin
     # Verify Credentials
     #
     # args: {
+    #   "api_version" => String,
     #   "endpoints" => {
     #     "default" => {
-    #       "username" => String,
-    #       "password" => String,
-    #       "server" => String,
+    #       "hostname" => String,
     #       "port" => Integer,
-    #       "protocol" => String
+    #       "security_protocol" => String,
+    #     },
+    #     "amqp" => {
+    #       "hostname" => String,
+    #       "port" => String,
+    #     },
+    #     "amqp_fallback1" => {
+    #       "hostname" => String,
+    #     },
+    #     "amqp_fallback2" => {
+    #       "hostname" => String,
+    #     },
+    #   },
+    #   "authentications" => {
+    #     "default" =>
+    #       "userid" => String,
+    #       "password" => String,
+    #     }
+    #     "amqp" => {
+    #       "userid" => String,
+    #       "password" => String,
     #     }
     #   }
+    # }
     def verify_credentials(args)
-      default_endpoint = args.dig("endpoints", "default")
+      endpoint_name = args.dig("endpoints").keys.first
+      endpoint = args.dig("endpoints", endpoint_name)
+      authentication = args.dig("authentications", endpoint_name)
 
-      username, password, server, port, protocol = default_endpoint&.values_at(
-        "username", "password", "server", "port", "protocol"
-      )
+      userid, password = authentication&.values_at('userid', 'password')
+      password = MiqPassword.try_decrypt(password)
+      password ||= find(args["id"]).authentication_password(endpoint_name) if args["id"]
 
-      endpoint_opts = {
-        :protocol => protocol,
-        :hostname => server,
-        :api_port => port
-      }
+      hostname, port, security_protocol = endpoint&.values_at('hostname', 'port', 'security_protocol')
 
-      !!raw_connect(username, password, endpoint_opts)
+      if endpoint_name == 'default'
+        endpoint_opts = {
+          :protocol => security_protocol,
+          :hostname => hostname,
+          :api_port => port
+        }
+
+        !!raw_connect(userid, password, endpoint_opts)
+      else
+        amqp_hosts = [hostname] + (1..2).map { |i| args.dig("endpoints", "amqp_fallback#{i}", "hostname") }.compact
+
+        ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream.test_amqp_connection(
+          :urls                      => amqp_hosts.map { |host| [host, port].join(':') },
+          :sasl_allow_insecure_mechs => true, # Only plain (insecure) mechanism currently supported
+          :user                      => userid,
+          :password                  => password
+        )
+      end
     end
 
     def raw_connect(username, password, endpoint_opts)
