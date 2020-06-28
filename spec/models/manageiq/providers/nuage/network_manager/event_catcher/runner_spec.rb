@@ -13,6 +13,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner do
   end
 
   it '.monitor_events' do
+    allow(subject).to receive(:event_monitor_running)
     allow(subject).to receive(:event_monitor_handle).and_return(handle)
     expect { subject.monitor_events }.not_to raise_error
   end
