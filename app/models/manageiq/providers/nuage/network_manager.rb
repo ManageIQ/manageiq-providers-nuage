@@ -31,6 +31,10 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
     @description ||= "Nuage Network Manager".freeze
   end
 
+  def queue_name_for_ems_refresh
+    queue_name
+  end
+
   def authentications_to_validate
     at = [:default]
     at << :amqp if has_authentication_type?(:amqp)
