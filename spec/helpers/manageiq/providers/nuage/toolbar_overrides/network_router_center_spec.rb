@@ -1,5 +1,5 @@
 describe ManageIQ::Providers::Nuage::ToolbarOverrides::NetworkRouterCenter do
-  let(:button_group)  { described_class.definition['nuage_network_router'] }
+  let(:button_group)  { described_class.definition["#{described_class.name}.nuage_network_router"] }
   let(:group_items)   { button_group.buttons }
   let(:dropdown_edit) { group_items.first }
 
