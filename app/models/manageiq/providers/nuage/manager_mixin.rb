@@ -6,12 +6,12 @@ module ManageIQ::Providers::Nuage::ManagerMixin
       @params_for_create ||= {
         :fields => [
           {
-            :component    => "select-field",
+            :component    => "select",
             :name         => "api_version",
             :label        => _("API Version"),
             :initialValue => 'v3',
             :isRequired   => true,
-            :validate     => [{:type => "required-validator"}],
+            :validate     => [{:type => "required"}],
             :options      => [
               {
                 :label => _('Version 3.2'),
@@ -47,11 +47,11 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       :validationDependencies => %w[type api_version],
                       :fields                 => [
                         {
-                          :component  => "select-field",
+                          :component  => "select",
                           :name       => "endpoints.default.security_protocol",
                           :label      => _("Security Protocol"),
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                           :options    => [
                             {
                               :label => _("SSL without validation"),
@@ -72,7 +72,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :name       => "endpoints.default.hostname",
                           :label      => _("Hostname (or IPv4 or IPv6 address)"),
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                         },
                         {
                           :component  => "text-field",
@@ -80,14 +80,14 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :label      => _("API Port"),
                           :type       => "number",
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                         },
                         {
                           :component  => "text-field",
                           :name       => "authentications.default.userid",
                           :label      => "Username",
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                         },
                         {
                           :component  => "password-field",
@@ -95,7 +95,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :label      => "Password",
                           :type       => "password",
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                         },
                       ]
                     },
@@ -140,7 +140,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :label      => _("Hostname (or IPv4 or IPv6 address)"),
                           :helperText => _("Used to authenticate with Nuage AMQP Messaging Bus for event handling."),
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                         },
                         {
                           :component   => "text-field",
@@ -161,14 +161,14 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :type         => "number",
                           :isRequired   => true,
                           :initialValue => 5672,
-                          :validate     => [{:type => "required-validator"}],
+                          :validate     => [{:type => "required"}],
                         },
                         {
                           :component  => "text-field",
                           :name       => "authentications.amqp.userid",
                           :label      => "Username",
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                         },
                         {
                           :component  => "password-field",
@@ -176,7 +176,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :label      => "Password",
                           :type       => "password",
                           :isRequired => true,
-                          :validate   => [{:type => "required-validator"}],
+                          :validate   => [{:type => "required"}],
                         },
                       ],
                     },

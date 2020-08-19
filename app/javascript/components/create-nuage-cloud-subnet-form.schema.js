@@ -28,7 +28,7 @@ const createSchema = () => ({
           message: __('Required'),
         },
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: IPv4,
           message: __('Must be a valid IPv4 address'),
         }
@@ -46,7 +46,7 @@ const createSchema = () => ({
           message: __('Required'),
         },
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: mask,
           message: __('Must be a valid netmask'),
         }
@@ -64,7 +64,7 @@ const createSchema = () => ({
           message: __('Required'),
         },
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: IPv4,
           message: __('Must be a valid IPv4 address'),
         }
