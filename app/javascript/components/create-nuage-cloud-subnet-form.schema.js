@@ -7,6 +7,7 @@ const createSchema = () => ({
   fields: [
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'name',
       name: 'name',
       label: __('Name'),
       placeholder: __('Subnet Name'),
@@ -18,6 +19,7 @@ const createSchema = () => ({
     },
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'address',
       name: 'address',
       label: __('Address'),
       placeholder: '100.100.100.0',
@@ -36,6 +38,7 @@ const createSchema = () => ({
     },
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'netmask',
       name: 'netmask',
       label: __('Netmask'),
       placeholder: '255.255.255.0',
@@ -54,6 +57,7 @@ const createSchema = () => ({
     },
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'gateway',
       name: 'gateway',
       label: __('Gateway'),
       placeholder: '100.100.100.1',

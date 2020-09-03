@@ -7,6 +7,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
         :fields => [
           {
             :component    => "select",
+            :id           => "api_version",
             :name         => "api_version",
             :label        => _("API Version"),
             :initialValue => 'v3',
@@ -29,6 +30,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
           },
           {
             :component => 'sub-form',
+            :id        => 'endpoints-subform',
             :name      => 'endpoints-subform',
             :title     => _('Endpoints'),
             :fields    => [
@@ -37,17 +39,20 @@ module ManageIQ::Providers::Nuage::ManagerMixin
               :fields    => [
                 {
                   :component => 'tab-item',
+                  :id        => 'default-tab',
                   :name      => 'default-tab',
                   :title     => _('Default'),
                   :fields    => [
                     {
                       :component              => 'validate-provider-credentials',
+                      :id                     => 'authentications.default.valid',
                       :name                   => 'authentications.default.valid',
                       :skipSubmit             => true,
                       :validationDependencies => %w[type api_version],
                       :fields                 => [
                         {
                           :component  => "select",
+                          :id         => "endpoints.default.security_protocol",
                           :name       => "endpoints.default.security_protocol",
                           :label      => _("Security Protocol"),
                           :isRequired => true,
@@ -69,6 +74,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                         },
                         {
                           :component  => "text-field",
+                          :id         => "endpoints.default.hostname",
                           :name       => "endpoints.default.hostname",
                           :label      => _("Hostname (or IPv4 or IPv6 address)"),
                           :isRequired => true,
@@ -76,6 +82,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                         },
                         {
                           :component  => "text-field",
+                          :id         => "endpoints.default.port",
                           :name       => "endpoints.default.port",
                           :label      => _("API Port"),
                           :type       => "number",
@@ -84,6 +91,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                         },
                         {
                           :component  => "text-field",
+                          :id         => "authentications.default.userid",
                           :name       => "authentications.default.userid",
                           :label      => "Username",
                           :isRequired => true,
@@ -91,6 +99,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                         },
                         {
                           :component  => "password-field",
+                          :id         => "authentications.default.password",
                           :name       => "authentications.default.password",
                           :label      => "Password",
                           :type       => "password",
@@ -103,11 +112,13 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                 },
                 {
                   :component => 'tab-item',
+                  :id        => 'events-tab',
                   :name      => 'events-tab',
                   :title     => _('Events'),
                   :fields    => [
                     {
                       :component    => 'protocol-selector',
+                      :id           => 'event_stream_selection',
                       :name         => 'event_stream_selection',
                       :skipSubmit   => true,
                       :initialValue => 'none',
@@ -126,6 +137,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                     },
                     {
                       :component              => 'validate-provider-credentials',
+                      :id                     => 'endpoints.amqp.valid',
                       :name                   => 'endpoints.amqp.valid',
                       :skipSubmit             => true,
                       :validationDependencies => %w[type event_stream_selection],
@@ -136,6 +148,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       :fields                 => [
                         {
                           :component  => "text-field",
+                          :id         => "endpoints.amqp.hostname",
                           :name       => "endpoints.amqp.hostname",
                           :label      => _("Hostname (or IPv4 or IPv6 address)"),
                           :helperText => _("Used to authenticate with Nuage AMQP Messaging Bus for event handling."),
@@ -144,18 +157,21 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                         },
                         {
                           :component   => "text-field",
+                          :id          => "endpoints.amqp_fallback1.hostname",
                           :name        => "endpoints.amqp_fallback1.hostname",
                           :placeholder => _("Hostname (or IPv4 or IPv6 address)"),
                           :label       => _("Fallback Hostname 1"),
                         },
                         {
                           :component   => "text-field",
+                          :id          => "endpoints.amqp_fallback2.hostname",
                           :name        => "endpoints.amqp_fallback2.hostname",
                           :placeholder => _("Hostname (or IPv4 or IPv6 address)"),
                           :label       => _("Fallback Hostname 2"),
                         },
                         {
                           :component    => "text-field",
+                          :id           => "endpoints.amqp.port",
                           :name         => "endpoints.amqp.port",
                           :label        => _("API Port"),
                           :type         => "number",
@@ -165,6 +181,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                         },
                         {
                           :component  => "text-field",
+                          :id         => "authentications.amqp.userid",
                           :name       => "authentications.amqp.userid",
                           :label      => "Username",
                           :isRequired => true,
@@ -172,6 +189,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                         },
                         {
                           :component  => "password-field",
+                          :id         => "authentications.amqp.password",
                           :name       => "authentications.amqp.password",
                           :label      => "Password",
                           :type       => "password",
