@@ -52,7 +52,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"firstName":"XLAB","lastName":"User","userName":"NUAGE_NETWORK_USERID","email":"NUAGE_NETWORK_USERID@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"vssStatsInterval":30,"aarFlowStatsInterval":30,"aarProbeStatsInterval":30,"entityScope":null,"externalId":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"a8e460c5-09e9-4834-89bf-f3fae30f1c4f","APIKeyExpiry":1534574372606,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:46 GMT
 - request:
     method: get
@@ -124,7 +124,7 @@ http_interactions:
       string: '[{"children":null,"parentType":"zone","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509152000,"creationDate":1534509152000,"address":"10.10.20.0","netmask":"255.255.255.0","name":"DBNet
         123","dynamicIpv6Address":true,"gateway":"10.10.20.1","description":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:12304","routeTarget":"65534:41799","vnId":3084076,"underlayEnabled":"INHERITED","underlay":false,"resourceType":"STANDARD","entityState":null,"advertise":true,"accessRestrictionEnabled":false,"splitSubnet":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"27ebffb3-b031-474f-856c-793aae602a28","parentID":"fa6db23a-c707-4627-8e6f-99ded9f84fbb","externalID":null,"IPv6Address":null,"IPType":"IPV4","IPv6Gateway":null,"serviceID":1647193300,"gatewayMACAddress":"68:54:ED:00:1E:E5","PATEnabled":"INHERITED","policyGroupID":1536113319,"public":false,"templateID":"0f9781f0-110f-4669-8cb2-4ad65624982f","associatedSharedNetworkResourceID":null,"DHCPRelayStatus":"DISABLED","multiHomeEnabled":false,"proxyARP":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","useGlobalMAC":"DISABLED"},{"children":null,"parentType":"zone","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509153000,"creationDate":1534509153000,"address":"10.10.30.0","netmask":"255.255.255.0","name":"FrontNet","dynamicIpv6Address":true,"gateway":"10.10.30.1","description":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:28728","routeTarget":"65534:3538","vnId":16280280,"underlayEnabled":"INHERITED","underlay":false,"resourceType":"STANDARD","entityState":null,"advertise":true,"accessRestrictionEnabled":false,"splitSubnet":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"9f191c42-a369-4ba5-9d83-4dc5ec79090b","parentID":"8d829c54-5c9a-46f5-94cf-8a4d83261c36","externalID":null,"IPv6Address":null,"IPType":"IPV4","IPv6Gateway":null,"serviceID":1059443199,"gatewayMACAddress":"68:54:ED:00:72:87","PATEnabled":"INHERITED","policyGroupID":251859332,"public":false,"templateID":"a35f0f7d-2c7a-4f4c-865c-427e3e503e3d","associatedSharedNetworkResourceID":null,"DHCPRelayStatus":"DISABLED","multiHomeEnabled":false,"proxyARP":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","useGlobalMAC":"DISABLED"},{"children":null,"parentType":"zone","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509152000,"creationDate":1534509152000,"address":"10.87.44.0","netmask":"255.255.255.0","name":"Subnety
         123","dynamicIpv6Address":true,"gateway":"10.87.44.1","description":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:30384","routeTarget":"65534:20610","vnId":4664187,"underlayEnabled":"INHERITED","underlay":false,"resourceType":"STANDARD","entityState":null,"advertise":true,"accessRestrictionEnabled":false,"splitSubnet":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"e9e53819-b6d5-43c9-af4d-2eff7f431595","parentID":"65011ed6-1328-4dc8-8e00-5c459ae1c34d","externalID":null,"IPv6Address":null,"IPType":"IPV4","IPv6Gateway":null,"serviceID":703830143,"gatewayMACAddress":"68:54:ED:00:1B:0E","PATEnabled":"INHERITED","policyGroupID":1483446366,"public":false,"templateID":"dd756f21-cb92-4343-9b42-5c08152d291d","associatedSharedNetworkResourceID":null,"DHCPRelayStatus":"DISABLED","multiHomeEnabled":false,"proxyARP":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","useGlobalMAC":"DISABLED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:46 GMT
 - request:
     method: get
@@ -178,7 +178,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"enterprise","entityScope":"ENTERPRISE","lastUpdatedBy":"43f8868f-4bc1-472c-9d19-533dcfcb1ee0","lastUpdatedDate":1534509153000,"creationDate":1534509152000,"routeDistinguisher":"65534:62938","routeTarget":"65534:24479","name":"Routy","description":null,"maintenanceMode":"DISABLED","dhcpServerAddresses":null,"underlayEnabled":"DISABLED","policyChangeStatus":null,"backHaulRouteDistinguisher":"65534:51116","backHaulRouteTarget":"65534:12727","backHaulVNID":729419,"advertiseCriteria":null,"importRouteTarget":"65534:24479","exportRouteTarget":"65534:24479","encryption":"DISABLED","localAS":null,"owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"b0edd930-2b74-44c4-8ea8-00f711cee619","parentID":"d4e6f09e-0b49-4074-a0a6-057c08c0d4b6","externalID":null,"serviceID":568720715,"customerID":1664909765,"DHCPBehavior":"CONSUME","DHCPServerAddress":null,"secondaryDHCPServerAddress":null,"labelID":1524,"multicast":"DISABLED","PATEnabled":"DISABLED","associatedPATMapperID":null,"associatedSharedPATMapperID":null,"associatedMulticastChannelMapID":null,"stretched":false,"tunnelType":"VXLAN","FIPUnderlay":false,"ECMPCount":1,"templateID":"41ba7d79-44b6-41ed-890c-1fc795f0c322","backHaulServiceID":57698639,"enterpriseID":"d4e6f09e-0b49-4074-a0a6-057c08c0d4b6","uplinkPreference":"PRIMARY_SECONDARY","globalRoutingEnabled":false,"leakingEnabled":false,"DPI":"DISABLED","permittedAction":null,"associatedBGPProfileID":null,"BGPEnabled":false,"domainID":686750,"domainVLANID":0,"associatedUnderlayID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:47 GMT
 - request:
     method: get
@@ -241,7 +241,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"zone","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509152000,"creationDate":1534509152000,"address":"10.10.20.0","netmask":"255.255.255.0","name":"DBNet
         123","dynamicIpv6Address":true,"gateway":"10.10.20.1","description":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:12304","routeTarget":"65534:41799","vnId":3084076,"underlayEnabled":"INHERITED","underlay":false,"resourceType":"STANDARD","entityState":null,"advertise":true,"accessRestrictionEnabled":false,"splitSubnet":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"27ebffb3-b031-474f-856c-793aae602a28","parentID":"fa6db23a-c707-4627-8e6f-99ded9f84fbb","externalID":null,"IPv6Address":null,"IPType":"IPV4","IPv6Gateway":null,"serviceID":1647193300,"gatewayMACAddress":"68:54:ED:00:1E:E5","PATEnabled":"INHERITED","policyGroupID":1536113319,"public":false,"templateID":"0f9781f0-110f-4669-8cb2-4ad65624982f","associatedSharedNetworkResourceID":null,"DHCPRelayStatus":"DISABLED","multiHomeEnabled":false,"proxyARP":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","useGlobalMAC":"DISABLED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:47 GMT
 - request:
     method: get
@@ -303,7 +303,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"zone","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509153000,"creationDate":1534509153000,"address":"10.10.30.0","netmask":"255.255.255.0","name":"FrontNet","dynamicIpv6Address":true,"gateway":"10.10.30.1","description":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:28728","routeTarget":"65534:3538","vnId":16280280,"underlayEnabled":"INHERITED","underlay":false,"resourceType":"STANDARD","entityState":null,"advertise":true,"accessRestrictionEnabled":false,"splitSubnet":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"9f191c42-a369-4ba5-9d83-4dc5ec79090b","parentID":"8d829c54-5c9a-46f5-94cf-8a4d83261c36","externalID":null,"IPv6Address":null,"IPType":"IPV4","IPv6Gateway":null,"serviceID":1059443199,"gatewayMACAddress":"68:54:ED:00:72:87","PATEnabled":"INHERITED","policyGroupID":251859332,"public":false,"templateID":"a35f0f7d-2c7a-4f4c-865c-427e3e503e3d","associatedSharedNetworkResourceID":null,"DHCPRelayStatus":"DISABLED","multiHomeEnabled":false,"proxyARP":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","useGlobalMAC":"DISABLED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:47 GMT
 - request:
     method: get
@@ -366,7 +366,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"zone","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509152000,"creationDate":1534509152000,"address":"10.87.44.0","netmask":"255.255.255.0","name":"Subnety
         123","dynamicIpv6Address":true,"gateway":"10.87.44.1","description":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:30384","routeTarget":"65534:20610","vnId":4664187,"underlayEnabled":"INHERITED","underlay":false,"resourceType":"STANDARD","entityState":null,"advertise":true,"accessRestrictionEnabled":false,"splitSubnet":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"e9e53819-b6d5-43c9-af4d-2eff7f431595","parentID":"65011ed6-1328-4dc8-8e00-5c459ae1c34d","externalID":null,"IPv6Address":null,"IPType":"IPV4","IPv6Gateway":null,"serviceID":703830143,"gatewayMACAddress":"68:54:ED:00:1B:0E","PATEnabled":"INHERITED","policyGroupID":1483446366,"public":false,"templateID":"dd756f21-cb92-4343-9b42-5c08152d291d","associatedSharedNetworkResourceID":null,"DHCPRelayStatus":"DISABLED","multiHomeEnabled":false,"proxyARP":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","useGlobalMAC":"DISABLED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:47 GMT
 - request:
     method: get
@@ -428,7 +428,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509152000,"creationDate":1534509152000,"address":null,"netmask":null,"name":"DBZone","dynamicIpv6Address":null,"description":null,"maintenanceMode":"DISABLED","publicZone":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"fa6db23a-c707-4627-8e6f-99ded9f84fbb","parentID":"b0edd930-2b74-44c4-8ea8-00f711cee619","externalID":null,"IPv6Address":null,"IPType":"IPV4","numberOfHostsInSubnets":0,"templateID":"aa756903-47ef-4220-a266-c646f420a110","policyGroupID":1988177132,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:47 GMT
 - request:
     method: get
@@ -490,7 +490,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509153000,"creationDate":1534509153000,"address":null,"netmask":null,"name":"FrontZone","dynamicIpv6Address":null,"description":null,"maintenanceMode":"DISABLED","publicZone":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"8d829c54-5c9a-46f5-94cf-8a4d83261c36","parentID":"b0edd930-2b74-44c4-8ea8-00f711cee619","externalID":null,"IPv6Address":null,"IPType":"IPV4","numberOfHostsInSubnets":0,"templateID":"16039714-308f-4178-abd2-8ff6819a5b52","policyGroupID":2041742842,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:47 GMT
 - request:
     method: get
@@ -552,6 +552,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1534509152000,"creationDate":1534509152000,"address":null,"netmask":null,"name":"AppZone","dynamicIpv6Address":null,"description":null,"maintenanceMode":"DISABLED","publicZone":false,"encryption":"INHERITED","owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"65011ed6-1328-4dc8-8e00-5c459ae1c34d","parentID":"b0edd930-2b74-44c4-8ea8-00f711cee619","externalID":null,"IPv6Address":null,"IPType":"IPV4","numberOfHostsInSubnets":0,"templateID":"94654558-4801-42f8-8953-07ce7870048a","policyGroupID":386557350,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:44:47 GMT
 recorded_with: VCR 3.0.3

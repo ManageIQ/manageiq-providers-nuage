@@ -52,7 +52,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"firstName":"XLAB","lastName":"User","userName":"NUAGE_NETWORK_USERID","email":"NUAGE_NETWORK_USERID@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"vssStatsInterval":30,"aarFlowStatsInterval":30,"aarProbeStatsInterval":30,"entityScope":null,"externalId":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"357c861e-69b1-4daa-b482-7583ee1307a7","APIKeyExpiry":1532162751659,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:17:49 GMT
 - request:
     method: get
@@ -107,7 +107,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"subnet","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1531746306000,"creationDate":1528371984000,"name":"Container
         VPort 1ea3d199","gatewayMACMoveRole":null,"trunkRole":null,"type":"CONTAINER","subType":"NONE","description":null,"systemType":"SOFTWARE","addressSpoofing":"INHERITED","active":false,"operationalState":null,"peerOperationalState":null,"segmentationType":null,"owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"dd9a4d57-2e24-427b-8aef-4d2925df47b2","parentID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee","externalID":null,"assocEntityID":"adbfcb81-e0ab-4b7e-9e51-1b6c5e862bb9","domainID":"75ad8ee8-726c-4950-94bc-6a5aab64631d","zoneID":"3b11a2d0-2082-42f1-92db-0b05264f372e","multiNICVPortID":null,"VLANID":null,"associatedFloatingIPID":"74e5f0d4-e792-401f-b75a-0019832c80fd","hasAttachedInterfaces":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","associatedSendMulticastChannelMapID":null,"associatedTrunkID":null,"segmentationID":null,"associatedSSID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:17:50 GMT
 - request:
     method: get
@@ -165,7 +165,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1531303445000,"creationDate":1513023412000,"name":"test4","description":null,"type":"SOFTWARE","external":false,"entityState":null,"owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"6884f9d2-addb-432f-a94b-308e59ec22b2","parentID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee","externalID":null,"EVPNCommunityTag":null,"templateID":"5ea17355-939b-4879-a02b-d45fcbaecd97","policyGroupID":1987103703}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:17:50 GMT
 - request:
     method: get
@@ -219,6 +219,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:17:50 GMT
 recorded_with: VCR 3.0.3

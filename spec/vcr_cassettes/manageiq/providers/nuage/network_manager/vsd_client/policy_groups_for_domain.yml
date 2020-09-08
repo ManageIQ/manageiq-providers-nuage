@@ -57,15 +57,7 @@ http_interactions:
       - Mon, 23 Oct 2017 12:11:47 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAI2QUUvDMBSF/0ueF0jbtEn7Nm2VoWyjq9uDiGTJjRbStHQZ
-        WsT/brqyqeCDLxdyzz33ni+PH0i+1kb1YFFmj8bMUCf8w1VDByhDqm1EbdEM
-        +Vbtho1sT+1iWRXlulxsCi8ZcXAPnRIO1NXgRS4STSAkWFC1x5QzjoXiFKdS
-        JgGLE6li+G3LfUFZEBMWhoTGESFkhmQPwtWt/VO0ohlz5MWWBM+7VXl3v5rn
-        fqmCg+zrbvSdedxEslndVLt5OQaGdwe9FQZlWpgDXODc6dLkat8s9P+HWeR+
-        VgulSCq9qEFgmoDEPKIhZpEO9olfoBlF5w8+ORSRUcioxFHKvCNgEeYpD/Be
-        q1CnKWgukx+BR88Ur9iul9dt0xytD16JlwssNJ3xGN+TXWtqOdz27bEbmyHh
-        QZT6knw+fQGgiWrZ/QEAAA==
-    http_version: 
+      string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1507220453000,"creationDate":1507220453000,"name":"DEV01_WORKLOAD","description":null,"type":"SOFTWARE","external":false,"entityState":null,"owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"fadd09c4-9fea-46ec-8342-73f1b6a4df74","parentID":"d0c3274c-397a-4173-8981-bfd2f99ef8c6","externalID":null,"EVPNCommunityTag":null,"templateID":null,"policyGroupID":2081390816}]'
+    http_version:
   recorded_at: Mon, 23 Oct 2017 12:11:47 GMT
 recorded_with: VCR 3.0.3

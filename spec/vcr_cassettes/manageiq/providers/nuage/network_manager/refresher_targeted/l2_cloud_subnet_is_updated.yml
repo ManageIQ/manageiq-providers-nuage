@@ -52,7 +52,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"firstName":"XLAB","lastName":"User","userName":"NUAGE_NETWORK_USERID","email":"NUAGE_NETWORK_USERID@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"vssStatsInterval":30,"aarFlowStatsInterval":30,"aarProbeStatsInterval":30,"entityScope":null,"externalId":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"357c861e-69b1-4daa-b482-7583ee1307a7","APIKeyExpiry":1532162751659,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 10:54:42 GMT
 - request:
     method: get
@@ -106,6 +106,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"enterprise","entityScope":null,"lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1515248895000,"creationDate":1501769486000,"description":null,"name":"FlatNet","gateway":"10.99.99.1","dynamicIpv6Address":true,"address":"10.99.99.0","netmask":"255.255.255.0","maintenanceMode":"DISABLED","routeDistinguisher":"65534:29749","routeTarget":"65534:65409","vnId":4479255,"policyChangeStatus":null,"entityState":null,"encryption":"DISABLED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"3b733a41-774d-4aaa-8e64-588d5533a5c0","parentID":"e0819464-e7fc-4a37-b29a-e72da7b5956c","externalID":null,"DHCPManaged":true,"useGlobalMAC":"DISABLED","IPv6Gateway":null,"IPv6Address":null,"IPType":"IPV4","stretched":false,"templateID":"8e45727f-30d6-4d96-82f1-8c1ab60080d9","associatedSharedNetworkResourceID":null,"serviceID":529488222,"gatewayMACAddress":"68:54:ED:00:76:39","uplinkPreference":"PRIMARY_SECONDARY","associatedUnderlayID":null,"multicast":"DISABLED","associatedMulticastChannelMapID":null,"DPI":"DISABLED"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 10:54:42 GMT
 recorded_with: VCR 3.0.3

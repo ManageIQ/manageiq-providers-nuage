@@ -52,7 +52,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"firstName":"XLAB","lastName":"User","userName":"NUAGE_NETWORK_USERID","email":"NUAGE_NETWORK_USERID@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"vssStatsInterval":30,"aarFlowStatsInterval":30,"aarProbeStatsInterval":30,"entityScope":null,"externalId":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"357c861e-69b1-4daa-b482-7583ee1307a7","APIKeyExpiry":1532162751659,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:24:39 GMT
 - request:
     method: get
@@ -107,7 +107,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '[{"children":null,"parentType":"subnet","entityScope":"ENTERPRISE","lastUpdatedBy":"43f8868f-4bc1-472c-9d19-533dcfcb1ee0","lastUpdatedDate":1528395214000,"creationDate":1528395175000,"name":"Host
         VPort 25772231","gatewayMACMoveRole":null,"trunkRole":null,"type":"HOST","subType":"NONE","description":null,"systemType":"SOFTWARE","addressSpoofing":"INHERITED","active":false,"operationalState":"INIT","peerOperationalState":null,"segmentationType":null,"owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"b19075d3-a797-4dcd-93be-de52b4247e46","parentID":"aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee","externalID":null,"assocEntityID":"b443568c-c67f-4ab8-bd9c-a9a1be11464d","domainID":"8010cb8a-e40f-4f68-b27b-503e8befb570","zoneID":"505a46cc-979b-4565-8f64-6e73dc9c8bd0","multiNICVPortID":null,"VLANID":"776239dc-6b52-4a25-b971-dca4a85bfba8","associatedFloatingIPID":"37c49c47-7737-4c94-ab80-7b5898f68f9b","hasAttachedInterfaces":true,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","associatedSendMulticastChannelMapID":null,"associatedTrunkID":null,"segmentationID":null,"associatedSSID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:24:39 GMT
 - request:
     method: get
@@ -161,7 +161,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:24:40 GMT
 - request:
     method: get
@@ -222,6 +222,6 @@ http_interactions:
         interface 2","policyDecisionID":null,"domainName":"BRIDGE-HOST-Example","zoneName":"HOST
         zone","attachedNetworkType":"SUBNET","netmask":"255.255.255.0","gateway":"10.98.77.1","networkName":"HostNet","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"fd0fe9cc-170c-492a-9e18-68ad0c281413","parentID":"b19075d3-a797-4dcd-93be-de52b4247e46","externalID":null,"IPAddress":"10.98.77.179","IPv6Address":null,"MAC":"00:05:06:07:08:09","domainID":"8010cb8a-e40f-4f68-b27b-503e8befb570","attachedNetworkID":"b443568c-c67f-4ab8-bd9c-a9a1be11464d","zoneID":"505a46cc-979b-4565-8f64-6e73dc9c8bd0","VPortID":"b19075d3-a797-4dcd-93be-de52b4247e46","tierID":null,"IPv6Gateway":null,"VPortName":"Host
         VPort 25772231"}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 20 Jul 2018 14:24:40 GMT
 recorded_with: VCR 3.0.3
