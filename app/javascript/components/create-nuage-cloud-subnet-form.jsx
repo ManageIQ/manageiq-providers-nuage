@@ -17,9 +17,11 @@ const CreateNuageCloudSubnetForm = ({ dispatch }) => {
 
     dispatch({
       type: 'FormButtons.callbacks',
-      payload: { addClicked: () => formOptions.submit() },
+      payload: {
+        addClicked: () => formOptions.submit()
+      },
     });
-  });
+  };
 
   const submitValues = (values) => {
     API.get(`/api/network_routers/${ManageIQ.record.recordId}?attributes=ems_ref,name,ems_id`).then(({ ems_ref: router_ref, ems_id }) =>
