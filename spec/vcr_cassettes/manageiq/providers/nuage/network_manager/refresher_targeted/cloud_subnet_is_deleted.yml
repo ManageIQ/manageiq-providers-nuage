@@ -53,9 +53,8 @@ http_interactions:
       - Wed, 18 Oct 2017 13:42:24 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAF2QQW/iMBCF/4vPWDLBsRNOCyQHtFVAhZW2qqrV2J5oLZkksk0Lqvrf1xRIq73YmjeeN+/z8ztprQ+xgQOSOfn9sFiSCXEwKr8C+qQc03VTTg5UUvAA1t3KH67X4P72IabGoVfWYXM8qDQ5747OTcgAIbz13txr37uL1Wq3fdxs9he3LqIfvA1425JaSYZXiOD35wHvk1elSsddcVZjF3AFA6TFNloMZP5M6mb1+LTdrzfNn7pZLB/qirxMSIgQbYhWh7oD5TAlasEFvHbCflctd+hf0S+M8RiSExnZ5jzjWQrVuv5t1TuHOtq++98HT4mkA7ceYRObjeed7r8o1lUyzo3WshUZlYozyqeypMq0Lc2EarEoUbGMp3WL7fonnj/fc55hYSgTqqRc85yWctZSbsqZMSA403J8X58G69PUNGcFZ1OZcybK7//8GUEKxoWQM2oYAuUgJFUCUoQiK8s8a1kxvRCPTNUV4OPlH8ymYxw4AgAA
-    http_version: 
+      string: '[{"firstName":"XLAB","lastName":"User","userName":"xlab","email":"xlab@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"externalId":null,"entityScope":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"5d442e8d-06b9-4c45-973f-4d93dda640c7","APIKeyExpiry":1508401754069,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
+    http_version:
   recorded_at: Wed, 18 Oct 2017 13:42:24 GMT
 - request:
     method: get
@@ -118,8 +117,9 @@ http_interactions:
       - Wed, 18 Oct 2017 13:42:24 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAKWOOw7CQAxEr2K5JhdIC03OgCiAdYglYq9srwBF3D0WUFDRoCnf/BYs5GfjGqyCPW6PIhowshTwdhIKuHFMMOygCd3Zg+XS0eyd0YgbDI4rZe7jfWW1SUlEZmqO/X7BalrJ4pHGBF+Lb/yj5J93z0NqBZcr+4LhAAAA
-    http_version: 
+      string: '{"description":"Cannot find subnet with ID unexisting-ems-ref","title":"subnet
+        not found","errors":[{"property":"","descriptions":[{"title":"subnet not found","description":"Cannot
+        find subnet with ID unexisting-ems-ref"}]}]}'
+    http_version:
   recorded_at: Wed, 18 Oct 2017 13:42:25 GMT
 recorded_with: VCR 3.0.3

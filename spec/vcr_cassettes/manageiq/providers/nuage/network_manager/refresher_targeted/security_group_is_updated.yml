@@ -53,9 +53,8 @@ http_interactions:
       - Wed, 18 Oct 2017 13:40:26 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAF2QQW/iMBCF/4vPWDLBsRNOCyQHtFVAhZW2qqrV2J5oLZkksk0Lqvrf1xRIq73YmjeeN+/z8ztprQ+xgQOSOfn9sFiSCXEwKr8C+qQc03VTTg5UUvAA1t3KH67X4P72IabGoVfWYXM8qDQ5747OTcgAIbz13txr37uL1Wq3fdxs9he3LqIfvA1425JaSYZXiOD35wHvk1elSsddcVZjF3AFA6TFNloMZP5M6mb1+LTdrzfNn7pZLB/qirxMSIgQbYhWh7oD5TAlasEFvHbCflctd+hf0S+M8RiSExnZ5jzjWQrVuv5t1TuHOtq++98HT4mkA7ceYRObjeed7r8o1lUyzo3WshUZlYozyqeypMq0Lc2EarEoUbGMp3WL7fonnj/fc55hYSgTqqRc85yWctZSbsqZMSA403J8X58G69PUNGcFZ1OZcybK7//8GUEKxoWQM2oYAuUgJFUCUoQiK8s8a1kxvRCPTNUV4OPlH8ymYxw4AgAA
-    http_version: 
+      string: '[{"firstName":"XLAB","lastName":"User","userName":"xlab","email":"xlab@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"externalId":null,"entityScope":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"5d442e8d-06b9-4c45-973f-4d93dda640c7","APIKeyExpiry":1508401754069,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
+    http_version:
   recorded_at: Wed, 18 Oct 2017 13:40:26 GMT
 - request:
     method: get
@@ -110,8 +109,8 @@ http_interactions:
       - Wed, 18 Oct 2017 13:40:26 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAI1QzU+DMBz9V5aeadJCP4CbOjS7zGVDPRgPpf2hJKUQ6KLE+L9bWNSZePDSpO+jfe89viP90lgzgEO5O1oboV6Fiy+nHlCOTNeqxqEIBajx00F3C1xsy2K/228ORaCsGv1db5QHczkFkhutZS1iLCtGMKMyw5WpaxyLqoY0g4rE7LdtHQ6UU04SwmlGE0JIhPQAyjed+5N0qp1zlDD61a6zjZ5WN0N37MO7BkY9NP1snZO2vZ9W51iE/Knb4fa6fLjYzxXgzcPglEV5rewI33X98vdpl+7VwfD/ept10JIYiIyhxlplPGgFwykXBid1TaWsMk0Tjb4mXxySK5MCpFjGQmOWcYIzVmksFFeqEkwk1JwFnj2neMX9bnvVte3RheClev7CPbS9DTV+lP2y1zLXDFKRxYmUKUs/nj4B8q6H7Q8CAAA=
-    http_version: 
+      string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1503051913000,"creationDate":1503051913000,"name":"Test
+        Policy Group","description":"Empty description","type":"SOFTWARE","external":false,"entityState":null,"owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"02e072ef-ca95-4164-856d-3ff177b9c13c","parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d","externalID":null,"EVPNCommunityTag":null,"templateID":null,"policyGroupID":1692377848}]'
+    http_version:
   recorded_at: Wed, 18 Oct 2017 13:40:26 GMT
 recorded_with: VCR 3.0.3

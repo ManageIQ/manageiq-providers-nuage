@@ -53,9 +53,8 @@ http_interactions:
       - Wed, 18 Oct 2017 13:40:27 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAF2QQW/iMBCF/4vPWDLBsRNOCyQHtFVAhZW2qqrV2J5oLZkksk0Lqvrf1xRIq73YmjeeN+/z8ztprQ+xgQOSOfn9sFiSCXEwKr8C+qQc03VTTg5UUvAA1t3KH67X4P72IabGoVfWYXM8qDQ5747OTcgAIbz13txr37uL1Wq3fdxs9he3LqIfvA1425JaSYZXiOD35wHvk1elSsddcVZjF3AFA6TFNloMZP5M6mb1+LTdrzfNn7pZLB/qirxMSIgQbYhWh7oD5TAlasEFvHbCflctd+hf0S+M8RiSExnZ5jzjWQrVuv5t1TuHOtq++98HT4mkA7ceYRObjeed7r8o1lUyzo3WshUZlYozyqeypMq0Lc2EarEoUbGMp3WL7fonnj/fc55hYSgTqqRc85yWctZSbsqZMSA403J8X58G69PUNGcFZ1OZcybK7//8GUEKxoWQM2oYAuUgJFUCUoQiK8s8a1kxvRCPTNUV4OPlH8ymYxw4AgAA
-    http_version: 
+      string: '[{"firstName":"XLAB","lastName":"User","userName":"xlab","email":"xlab@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"externalId":null,"entityScope":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"5d442e8d-06b9-4c45-973f-4d93dda640c7","APIKeyExpiry":1508401754069,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
+    http_version:
   recorded_at: Wed, 18 Oct 2017 13:40:28 GMT
 - request:
     method: get
@@ -118,9 +117,9 @@ http_interactions:
       - Wed, 18 Oct 2017 13:40:27 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAI1TUW+bMBD+K5OfQ2XAOMAbLahFWqooyfYy7cHYlwbVMciYtmzaf99BSppUe5gESNx3vu/u+84/fhN5qLWyYEhqeq0XpBX443ZDCyQlvxoDZEEwULthK5spWDzuis16U24LhLTo3LdWCQfqdkAwFnxPIaCeYKryWLyMPaFi5iVScn8ZcakiuD6W44ekfkT9JU849SmlCyItCFc35gpkLJxAobDhrkM2n97gE9AbijUNuKPonjEcRNHN/E6IOI6Nb/sKc774GFEDxmpZti88m6s528OCPCHjqxgui08HoJO2bseeZqWOojYOjDASVo0aCfJym91+LXLMt03vIK87V5unvu4OYBHnURSyNIiWYTyn7IR9AnfGGA9DhF5MqXBsGvt+yNiC9EaB1WIojKg0IETKx4diU+4mrhkl6V7oDs5+uUm8U7Ndq2t3EuAiTdrhfaSrgs2rmfr9TzPLHHMVpyr0ufCkL6THmB94sR9KL+FRUKlKMmCjjqf1mk7wIOJJxCovUYp7LATlJWy/x18heByKKq5G8+DNgTVCj2dOs5TrC9fm0PvGluvvjJxS7mcn3xUA+1JLGMv4MU3iKEDJz36vsrtzScLjNGJpkaeUprdZmgVYcZ3t/q1+2+haDvfoZjvV9oMgSmKW4KK2fYXYWW8Hx1Yj3cckousaWY+3YHtAYdQjuNfGPm+ga3orLxLzh7v1BtDj0dS+u9611jZvQ7ZZn4mOvXa1xCv2qdUPutWccXcQxoBeifaCbF1+3rAO7nVTCY0yXXL/+fkXNX5HyEIEAAA=
-    http_version: 
+      string: '[{"children":null,"parentType":"zone","entityScope":"ENTERPRISE","lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1501769601000,"creationDate":1501769443000,"address":"10.10.20.0","netmask":"255.255.255.0","name":"Subnet
+        1","dynamicIpv6Address":true,"gateway":"10.10.20.1","description":null,"maintenanceMode":"DISABLED","routeDistinguisher":"65534:25738","routeTarget":"65534:4633","vnId":10811344,"underlayEnabled":"INHERITED","underlay":false,"entityState":null,"splitSubnet":false,"encryption":"INHERITED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"d60d316a-c1ac-4412-813c-9652bdbc4e41","parentID":"6256954b-9dd6-43ed-94ff-9daa683ab8b0","externalID":null,"IPv6Address":null,"IPType":"IPV4","IPv6Gateway":null,"serviceID":1809852655,"gatewayMACAddress":"68:54:ED:00:BA:A2","PATEnabled":"INHERITED","policyGroupID":1122598490,"public":false,"templateID":null,"associatedSharedNetworkResourceID":null,"DHCPRelayStatus":"DISABLED","proxyARP":false,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED","useGlobalMAC":"DISABLED"}]'
+    http_version:
   recorded_at: Wed, 18 Oct 2017 13:40:28 GMT
 - request:
     method: get
@@ -183,8 +182,8 @@ http_interactions:
       - Wed, 18 Oct 2017 13:40:28 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAI1SwY7TMBD9FeRzLTmN7SS97ZKItUSXqC0cWHGY2I42wnGixAEixL8z7m5ZFfbAxdK8mfc8fs8PP4l+7JyZrCc7vzi3ISNgEU7raMmOmKGHzpMNQagL61EPZ7i6P1WH+qCOFbYczOHjaCBYc7tiMwfZMrtlFLhpKM+znILJOS20lkkmpDbCXtNKPMguESzJZMHTlDG2IXqyELrBv9oEgyvP82Vnb0MP89c/JfRxy8+Dt28SvMqsiHRajd/kzTXR2FlP3RjvuUDxwcF68NruBxN1SnW8uX1flag0Lo3rdBQmuxbcbKMzelqfFYi6v6sO6nSeHb57O/2/H6rEWbkVshC8oYUxkvLUGlrwtsUSQOYpNHnDyCWjMyMTKGZtTrOt1JQXgiGj0VSCAGgkl2liYn4/gp08uMh5eqeq/3FD1c+xq/oTR5Jf+sZOH9q7YQ6z8selQaNxGgMIth8dJvOiNw7ozPpuGpYxgkkhBONsy3K0dHGh05j3Xw7BPA+6iz9gf5l4+wjeW7eH8UW5rNUV8deX3+dhcEy3AgAA
+      string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1501769433000,"creationDate":1501769433000,"address":null,"netmask":null,"name":"Zone
+        1","dynamicIpv6Address":null,"description":null,"maintenanceMode":"DISABLED","publicZone":false,"encryption":"INHERITED","owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"6256954b-9dd6-43ed-94ff-9daa683ab8b0","parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d","externalID":null,"IPv6Address":null,"IPType":"IPV4","numberOfHostsInSubnets":0,"templateID":null,"policyGroupID":1955040208,"multicast":"INHERITED","associatedMulticastChannelMapID":null,"DPI":"INHERITED"}]'
     http_version:
   recorded_at: Wed, 18 Oct 2017 13:40:28 GMT
 recorded_with: VCR 3.0.3

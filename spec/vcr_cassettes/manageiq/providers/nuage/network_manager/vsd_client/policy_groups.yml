@@ -57,18 +57,8 @@ http_interactions:
       - Mon, 23 Oct 2017 11:31:49 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAALWSW2vbQBCF/4rZZy/s/eK3tFZLaImNrSQPJZTV7mwr0A1Z
-        phUl/70ruUmd0ECg7cuC5szZnU9nPv1A/mtZhR4atGqOVbVEnUsfQz52gFYo
-        tLUrG7REqVQO4963czm7yrPddne5z5JUucNw3QU3QHgzJtE4FQkwgp0IBRZG
-        G+yCEdh6r6iWygcJT23rdKAVlUQzRoTkhJAl8j24oWybP4qNq6c51tkNoZ9v
-        N7sPHzcX63RpgIPvy27yPfAMJ5L95l1+e7GbBobvA/SNq9AquuoAj3DD/NLJ
-        1X5roH89zOU69UYXArE+iREcFgo8NlwwrHmkhUoXRC3Qww+eHYF4zrTwmFud
-        HFRzbKyhuIiBRWshGq/OBp48p/Gym+3V27auj00aPHdfHmGh7qqE8buza6vS
-        j+/79thNRUYM5TYd6n75H7KXwXsdVWIuBJmALC5CjJipIoKxUBAmXsieE0kt
-        fSH7c/FX9jkchsV2plvMeM/jR1ndDePivPa32/BKvDlbwiCtLETsnZWpVwls
-        pAqYx0i1Lqyn3D/dBi3TagEYrJnyWFhJsBWFx8pJ5wolFKfh324DVZZxrY0w
-        93c/ARo+DoULBAAA
-    http_version: 
+      string: '[{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","lastUpdatedDate":1507220453000,"creationDate":1507220453000,"name":"DEV01_WORKLOAD","description":null,"type":"SOFTWARE","external":false,"entityState":null,"owner":"8a6f0e20-a4db-4878-ad84-9cc61756cd5e","ID":"fadd09c4-9fea-46ec-8342-73f1b6a4df74","parentID":"d0c3274c-397a-4173-8981-bfd2f99ef8c6","externalID":null,"EVPNCommunityTag":null,"templateID":null,"policyGroupID":2081390816},{"children":null,"parentType":"domain","entityScope":"ENTERPRISE","lastUpdatedBy":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","lastUpdatedDate":1503051913000,"creationDate":1503051913000,"name":"Test
+        Policy Group","description":"Empty description","type":"SOFTWARE","external":false,"entityState":null,"owner":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","ID":"02e072ef-ca95-4164-856d-3ff177b9c13c","parentID":"75ad8ee8-726c-4950-94bc-6a5aab64631d","externalID":null,"EVPNCommunityTag":null,"templateID":null,"policyGroupID":1692377848}]'
+    http_version:
   recorded_at: Mon, 23 Oct 2017 11:31:50 GMT
 recorded_with: VCR 3.0.3

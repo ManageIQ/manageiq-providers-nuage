@@ -53,16 +53,7 @@ http_interactions:
       - Mon, 23 Oct 2017 11:31:49 GMT
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        H4sIAAAAAAAAAF2QQW/iMBCF/4vPWHJCEgdOCyQHtFVAhZW2qqpqHE9USyaO
-        bNOCVv3vHRZIV3uxNW88b97n5z+sMz7EBg7I5uz3w2LJJszCqPwK6Ek50nVT
-        ThYUKXgAY2/lD+tasG8uRGocnDIWm+NB0eS8P1o7YQOE8OG8vtfe2YvVard9
-        3Gz2F7c+oh+8CXjbQi2S4R0i+P15wPvkVanouCvWtNgHXMEAtNhEg4HNn1nd
-        rB6ftvv1pnmtm8Xyoa7Yy4SFCNGEaNpQ96AsUqIObMBrJ+x31XKH/h39QmuP
-        gZzYyDbP0iylUJ11HytnLbbRuP5/HzwRSQ92PcISm4nnXeu+KdYVGee6bWVX
-        pFyqTPAskTOudNfxtFAdljNUIs1o3WK7/olnel/qpEhkq3nRlcizVGoOopVc
-        lOlsKqZK61yN7+vTYDxNJbkoyywphRR5+e8//40gC5EVhZxyLRB4BoXkqgCK
-        QJazPO1EmVyIR6bqCvD58gVIDKQnOAIAAA==
-    http_version: 
+      string: '[{"firstName":"XLAB","lastName":"User","userName":"xlab","email":"xlab@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"externalId":null,"entityScope":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"8d1617cd-6f8e-427d-a0c7-0829303bdd5b","APIKeyExpiry":1508841807058,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
+    http_version:
   recorded_at: Mon, 23 Oct 2017 11:31:49 GMT
 recorded_with: VCR 3.0.3

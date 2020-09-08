@@ -52,7 +52,7 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '[{"firstName":"XLAB","lastName":"User","userName":"NUAGE_NETWORK_USERID","email":"NUAGE_NETWORK_USERID@localhost","mobileNumber":null,"password":null,"role":"CSPROOT","enterpriseName":"CSP","avatarType":null,"avatarData":null,"licenseCapabilities":["ENCRYPTION_ENABLED"],"statisticsEnabled":false,"statsTSDBServerAddress":"localhost:4242","flowCollectionEnabled":false,"vssStatsInterval":30,"aarFlowStatsInterval":30,"aarProbeStatsInterval":30,"entityScope":null,"externalId":null,"ID":"5dcc7f62-7b40-4179-bdff-26bfe89eb024","APIKey":"a8e460c5-09e9-4834-89bf-f3fae30f1c4f","APIKeyExpiry":1534574372606,"enterpriseID":"76046673-d0ea-4a67-b6af-2829952f0812","externalID":null}]'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:56:31 GMT
 - request:
     method: get
@@ -108,6 +108,6 @@ http_interactions:
       string: '{"description":"Cannot find domain with ID unexisting-ems-ref","title":"domain
         not found","errors":[{"property":"","descriptions":[{"title":"domain not found","description":"Cannot
         find domain with ID unexisting-ems-ref"}]}]}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 17 Aug 2018 12:56:32 GMT
 recorded_with: VCR 3.0.3
