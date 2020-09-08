@@ -6,7 +6,7 @@ import MiqFormRenderer from '@@ddf';
 import createSchema from './create-nuage-cloud-subnet-form.schema';
 
 const CreateNuageCloudSubnetForm = ({ dispatch }) => {
-  useEffect(() => {
+  const initialize = (formOptions) => {
     dispatch({
       type: 'FormButtons.init',
       payload: {
@@ -14,7 +14,12 @@ const CreateNuageCloudSubnetForm = ({ dispatch }) => {
         pristine: true,
       },
     });
-  }, []);
+
+    dispatch({
+      type: 'FormButtons.callbacks',
+      payload: { addClicked: () => formOptions.submit() },
+    });
+  });
 
   const submitValues = (values) => {
     API.get(`/api/network_routers/${ManageIQ.record.recordId}?attributes=ems_ref,name,ems_id`).then(({ ems_ref: router_ref, ems_id }) =>
@@ -29,27 +34,13 @@ const CreateNuageCloudSubnetForm = ({ dispatch }) => {
     });
   };
 
-  const handleFormStateUpdate = (formState) => {
-    dispatch({
-      type: 'FormButtons.saveable',
-      payload: formState.valid,
-    });
-    dispatch({
-      type: 'FormButtons.pristine',
-      payload: formState.pristine,
-    });
-    dispatch({
-      type: 'FormButtons.callbacks',
-      payload: { addClicked: () => submitValues(formState.values) },
-    });
-  };
-
   return (
     <MiqFormRenderer
       schema={createSchema()}
       onSubmit={submitValues}
       showFormControls={false}
       onStateUpdate={handleFormStateUpdate}
+      initialize={initialize}
     />
   )
 };

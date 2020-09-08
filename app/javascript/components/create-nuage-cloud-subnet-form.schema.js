@@ -7,6 +7,7 @@ const createSchema = () => ({
   fields: [
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'name',
       name: 'name',
       label: __('Name'),
       placeholder: __('Subnet Name'),
@@ -18,6 +19,7 @@ const createSchema = () => ({
     },
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'address',
       name: 'address',
       label: __('Address'),
       placeholder: '100.100.100.0',
@@ -28,7 +30,7 @@ const createSchema = () => ({
           message: __('Required'),
         },
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: IPv4,
           message: __('Must be a valid IPv4 address'),
         }
@@ -36,6 +38,7 @@ const createSchema = () => ({
     },
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'netmask',
       name: 'netmask',
       label: __('Netmask'),
       placeholder: '255.255.255.0',
@@ -46,7 +49,7 @@ const createSchema = () => ({
           message: __('Required'),
         },
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: mask,
           message: __('Must be a valid netmask'),
         }
@@ -54,6 +57,7 @@ const createSchema = () => ({
     },
     {
       component: componentTypes.TEXT_FIELD,
+      id: 'gateway',
       name: 'gateway',
       label: __('Gateway'),
       placeholder: '100.100.100.1',
@@ -64,7 +68,7 @@ const createSchema = () => ({
           message: __('Required'),
         },
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: IPv4,
           message: __('Must be a valid IPv4 address'),
         }
