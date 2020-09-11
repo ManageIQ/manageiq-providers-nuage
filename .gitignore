@@ -1,4 +1,3 @@
-.rubocop-*
 /.bundle/
 /.yardoc
 /Gemfile.lock
@@ -6,15 +5,17 @@
 /coverage/
 /doc/
 /pkg/
-/qpid-proton/
 /spec/reports/
 /tmp/
 
+.rubocop-*
+/bundler.d/*
+!/bundler.d/.keep
 /config/settings.local.yml
 /config/settings/*.local.yml
 /config/environments/*.local.yml
-
+/node_modules/
 /spec/manageiq
+/yarn.lock
 
-node_modules/
-yarn.lock
+/qpid-proton/
