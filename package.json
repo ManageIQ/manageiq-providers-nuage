@@ -48,6 +48,8 @@
   "jest": {
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "<rootDir>/spec/javascript/setup.js",
-    "roots": ["<rootDir>/spec/javascript"]
+    "roots": [
+      "<rootDir>/spec/javascript"
+    ]
   }
 }
