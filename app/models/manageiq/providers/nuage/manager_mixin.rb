@@ -48,6 +48,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       :id                     => 'authentications.default.valid',
                       :name                   => 'authentications.default.valid',
                       :skipSubmit             => true,
+                      :isRequired             => true,
                       :validationDependencies => %w[type api_version],
                       :fields                 => [
                         {
