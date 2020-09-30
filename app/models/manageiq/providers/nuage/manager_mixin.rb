@@ -246,7 +246,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
       authentication = args.dig("authentications", endpoint_name)
 
       userid, password = authentication&.values_at('userid', 'password')
-      password = MiqPassword.try_decrypt(password)
+      password = ManageIQ::Password.try_decrypt(password)
       password ||= find(args["id"]).authentication_password(endpoint_name) if args["id"]
 
       hostname, port, security_protocol = endpoint&.values_at('hostname', 'port', 'security_protocol')
