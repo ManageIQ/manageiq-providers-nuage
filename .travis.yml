@@ -2,8 +2,7 @@
 dist: xenial
 language: ruby
 rvm:
-- 2.5.7
-- 2.6.5
+- 2.6.6
 sudo: required
 cache:
   bundler: true
@@ -17,10 +16,6 @@ env:
   matrix:
   - TEST_SUITE=spec
   - TEST_SUITE=yarn:test
-matrix:
-  exclude:
-  - rvm: 2.5.7
-    env: TEST_SUITE=yarn:test
 addons:
   postgresql: '10'
 before_install: bin/qpid_install.sh
