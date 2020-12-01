@@ -25,6 +25,8 @@
 :ems_refresh:
   :nuage_network:
     :allow_targeted_refresh: true
+:log:
+  :level_nuage: info
 :workers:
   :worker_base:
     :event_catcher:
@@ -33,3 +35,6 @@
           - topic/CNAMessages
           - topic/CNAAlarms
         :amqp_connect_timeout: 5.seconds
+    :queue_worker_base:
+      :ems_refresh_worker:
+        :ems_refresh_worker_nuage_network: {}
