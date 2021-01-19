@@ -6,16 +6,16 @@
       :event_groups:
         :addition:
           :critical:
-          - !ruby/regexp /^nuage_.+_create$/
+          - /^nuage_.+_create$/
         :deletion:
           :critical:
-          - !ruby/regexp /^nuage_.+_delete$/
+          - /^nuage_.+_delete$/
         :update:
           :critical:
-          - !ruby/regexp /^nuage_.+_update$/
+          - /^nuage_.+_update$/
         :status: # alarms
           :critical:
-          - !ruby/regexp /^nuage_alarm_.+$/
+          - /^nuage_alarm_.+$/
 :http_proxy:
   :nuage:
     :host:
