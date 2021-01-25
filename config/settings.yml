@@ -28,13 +28,11 @@
 :log:
   :level_nuage: info
 :workers:
-  :worker_base:
-    :event_catcher:
-      :event_catcher_nuage_network:
-        :topics:
-          - topic/CNAMessages
-          - topic/CNAAlarms
-        :amqp_connect_timeout: 5.seconds
-    :queue_worker_base:
-      :ems_refresh_worker:
-        :ems_refresh_worker_nuage_network: {}
+  :ems_refresh_worker_nuage_network:
+    :inherits_from: ems_refresh_worker
+  :event_catcher_nuage_network:
+    :amqp_connect_timeout: 5.seconds
+    :inherits_from: event_catcher
+    :topics:
+    - topic/CNAMessages
+    - topic/CNAAlarms
