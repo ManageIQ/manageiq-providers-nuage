@@ -14,6 +14,7 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :NetworkPort
 
   supports :ems_network_new
+  supports :cloud_subnet_create
 
   include Vmdb::Logging
   include ManageIQ::Providers::Nuage::ManagerMixin
