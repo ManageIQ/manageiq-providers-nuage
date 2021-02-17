@@ -52,13 +52,14 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       :validationDependencies => %w[type api_version],
                       :fields                 => [
                         {
-                          :component  => "select",
-                          :id         => "endpoints.default.security_protocol",
-                          :name       => "endpoints.default.security_protocol",
-                          :label      => _("Security Protocol"),
-                          :isRequired => true,
-                          :validate   => [{:type => "required"}],
-                          :options    => [
+                          :component    => "select",
+                          :id           => "endpoints.default.security_protocol",
+                          :name         => "endpoints.default.security_protocol",
+                          :label        => _("Security Protocol"),
+                          :isRequired   => true,
+                          :initialValue => 'ssl-with-validation',
+                          :validate     => [{:type => "required"}],
+                          :options      => [
                             {
                               :label => _("SSL without validation"),
                               :value => "ssl-no-validation"
