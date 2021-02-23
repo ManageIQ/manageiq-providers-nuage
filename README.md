@@ -1,9 +1,9 @@
 # ManageIQ::Providers::Nuage
 
-[![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-nuage.svg?branch=master)](https://travis-ci.com/ManageIQ/manageiq-providers-nuage)
+[![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-nuage.svg?branch=lasker)](https://travis-ci.com/ManageIQ/manageiq-providers-nuage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3e6702de117ffe706956/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3e6702de117ffe706956/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nuage/test_coverage)
-[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-nuage/master.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-nuage/master)
+[![Security](https://hakiri.io/github/ManageIQ/manageiq-providers-nuage/lasker.svg)](https://hakiri.io/github/ManageIQ/manageiq-providers-nuage/lasker)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-nuage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
