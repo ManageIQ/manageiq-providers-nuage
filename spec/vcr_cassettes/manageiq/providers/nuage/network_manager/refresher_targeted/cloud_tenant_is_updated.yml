@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/me
+    uri: https://nuagenetworkhost:8443/nuage/api/v5_0/me
     body:
       encoding: US-ASCII
       string: ''
@@ -58,7 +58,7 @@ http_interactions:
   recorded_at: Wed, 18 Oct 2017 13:40:23 GMT
 - request:
     method: get
-    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/enterprises/e0819464-e7fc-4a37-b29a-e72da7b5956c
+    uri: https://nuagenetworkhost:8443/nuage/api/v5_0/enterprises/e0819464-e7fc-4a37-b29a-e72da7b5956c
     body:
       encoding: US-ASCII
       string: ''

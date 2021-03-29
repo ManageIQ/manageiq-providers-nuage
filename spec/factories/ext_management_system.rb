@@ -6,12 +6,12 @@ FactoryBot.define do
     end
 
     after(:build) do |ems|
-      ems.hostname = Rails.application.secrets.nuage_network.try(:[], 'host') || 'nuagenetworkhost'
+      ems.hostname = Rails.application.secrets.nuage[:host]
     end
 
     after(:create) do |ems|
-      userid   = Rails.application.secrets.nuage_network.try(:[], 'userid') || 'NUAGE_USER_ID'
-      password = Rails.application.secrets.nuage_network.try(:[], 'password') || 'NUAGE_PASSWORD'
+      userid   = Rails.application.secrets.nuage[:userid]
+      password = Rails.application.secrets.nuage[:password]
 
       cred = {
         :userid   => userid,

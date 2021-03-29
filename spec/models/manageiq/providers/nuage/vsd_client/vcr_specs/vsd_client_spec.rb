@@ -13,21 +13,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   SUBNET_ID = '4da803f7-c0d2-4beb-b02e-341ea77e377f'.freeze
   POLICY_GROUP_ID = 'fadd09c4-9fea-46ec-8342-73f1b6a4df74'.freeze
 
-  before(:each) do
-    @userid = Rails.application.secrets.nuage_network.try(:[], 'userid') || 'NUAGE_USER_ID'
-    @password = Rails.application.secrets.nuage_network.try(:[], 'password') || 'NUAGE_PASSWORD'
-    @hostname = Rails.application.secrets.nuage_network.try(:[], 'host') || 'nuagenetworkhost'
-
-    # Ensure that VCR will obfuscate the basic auth
-    VCR.configure do |c|
-      # workaround for escaping host
-      c.before_playback do |interaction|
-        interaction.filter!(CGI.escape(@hostname), @hostname)
-        interaction.filter!(CGI.escape('NUAGE_NETWORK_HOST'), 'nuagenetworkhost')
-      end
-      c.filter_sensitive_data('NUAGE_NETWORK_AUTHORIZATION') { Base64.encode64("#{@userid}:#{@password}").chomp }
-    end
-  end
+  let(:userid) { Rails.application.secrets.nuage[:userid] }
+  let(:password) { Rails.application.secrets.nuage[:password] }
+  let(:hostname) { Rails.application.secrets.nuage[:host] }
 
   def vcr_play(cassette, method, args: [])
     VCR.use_cassette("#{described_class.parent.name.underscore}/vsd_client/#{cassette}") do
@@ -38,7 +26,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   context "when login successful" do
     before(:each) do
       VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/login') do
-        @vsd_client = described_class.new("https://#{@hostname}:8443/nuage/api/v5_0", @userid, @password)
+        @vsd_client = described_class.new("https://#{hostname}:8443/nuage/api/v5_0", userid, password)
       end
     end
 
@@ -131,7 +119,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     it "should fail on wrong password" do
       VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/wrong_pass') do
         expect do
-          described_class.new("https://#{@hostname}:8443/nuage/api/v5_0", @userid, 'wrong_password')
+          described_class.new("https://#{hostname}:8443/nuage/api/v5_0", userid, 'wrong_password')
         end.to raise_error(MiqException::MiqInvalidCredentialsError)
       end
     end
@@ -139,7 +127,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     it "should fail on wrong username" do
       VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/wrong_user') do
         expect do
-          described_class.new("https://#{@hostname}:8443/nuage/api/v5_0", 'wrong_user', @password)
+          described_class.new("https://#{hostname}:8443/nuage/api/v5_0", 'wrong_user', password)
         end.to raise_error(MiqException::MiqInvalidCredentialsError)
       end
     end
@@ -147,7 +135,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     it "should fail on wrong hostname" do
       VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/wrong_hostname') do
         expect do
-          described_class.new("https://wronghost:8443/nuage/api/v5_0", @userid, @password)
+          described_class.new("https://wronghost:8443/nuage/api/v5_0", userid, password)
         end.to raise_error(SocketError)
       end
     end

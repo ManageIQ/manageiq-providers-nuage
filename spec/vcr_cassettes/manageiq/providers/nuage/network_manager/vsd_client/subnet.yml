@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/subnets/4da803f7-c0d2-4beb-b02e-341ea77e377f
+    uri: https://nuagenetworkhost:8443/nuage/api/v5_0/subnets/4da803f7-c0d2-4beb-b02e-341ea77e377f
     body:
       encoding: US-ASCII
       string: ''

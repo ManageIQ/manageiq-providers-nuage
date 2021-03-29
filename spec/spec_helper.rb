@@ -16,4 +16,11 @@ VCR.configure do |config|
   config.default_cassette_options = {
     :decode_compressed_response => true
   }
+
+  config.define_cassette_placeholder(Rails.application.secrets.nuage_defaults[:host]) do
+    Rails.application.secrets.nuage[:host]
+  end
+  config.define_cassette_placeholder('NUAGE_NETWORK_AUTHORIZATION') do
+    Base64.encode64("#{Rails.application.secrets.nuage[:userid]}:#{Rails.application.secrets.nuage[:password]}".chomp)
+  end
 end

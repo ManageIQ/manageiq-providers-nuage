@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/me
+    uri: https://nuagenetworkhost:8443/nuage/api/v5_0/me
     body:
       encoding: US-ASCII
       string: ''
@@ -56,7 +56,7 @@ http_interactions:
   recorded_at: Fri, 20 Jul 2018 14:11:56 GMT
 - request:
     method: get
-    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/43b7faad-2c76-4945-9412-66a04bde7b6a
+    uri: https://nuagenetworkhost:8443/nuage/api/v5_0/vports/43b7faad-2c76-4945-9412-66a04bde7b6a
     body:
       encoding: US-ASCII
       string: ''
@@ -111,7 +111,7 @@ http_interactions:
   recorded_at: Fri, 20 Jul 2018 14:11:56 GMT
 - request:
     method: get
-    uri: https://NUAGE_NETWORK_HOST:8443/nuage/api/v5_0/vports/43b7faad-2c76-4945-9412-66a04bde7b6a/policygroups
+    uri: https://nuagenetworkhost:8443/nuage/api/v5_0/vports/43b7faad-2c76-4945-9412-66a04bde7b6a/policygroups
     body:
       encoding: US-ASCII
       string: ''
