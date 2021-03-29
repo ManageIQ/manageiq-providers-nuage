@@ -8,6 +8,34 @@ class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
   supports :delete
   supports :create
 
+  def self.params_for_create(ems)
+    {
+      :fields => [
+        {
+          :component    => 'select',
+          :name         => 'cloud_network_id',
+          :id           => 'cloud_network_id',
+          :label        => _('Network'),
+          :isRequired   => true,
+          :validate     => [{:type => 'required'}],
+          :includeEmpty => true,
+          :options      => ems.networks.map do |cvt|
+            {
+              :label => cvt.name,
+              :value => cvt.id,
+            }
+          end,
+        },
+        {
+          :component => 'text-field',
+          :id        => 'gateway',
+          :name      => 'gateway',
+          :label     => _('Gateway'),
+        },
+      ],
+    }
+  end
+
   def remove_network_ports
     network_ports.each(&:destroy)
   end
