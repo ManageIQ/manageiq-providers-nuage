@@ -30,22 +30,6 @@ describe ManageIQ::Providers::Nuage::NetworkManager::Refresher do
     @ems = FactoryBot.create(:ems_nuage_with_vcr_authentication, :port => 8443, :api_version => "v5_0", :security_protocol => "ssl-with-validation")
   end
 
-  before(:each) do
-    userid   = Rails.application.secrets.nuage_network.try(:[], 'userid') || 'NUAGE_USER_ID'
-    password = Rails.application.secrets.nuage_network.try(:[], 'password') || 'NUAGE_PASSWORD'
-    hostname = @ems.hostname
-
-    # Ensure that VCR will obfuscate the basic auth
-    VCR.configure do |c|
-      # workaround for escaping host
-      c.before_playback do |interaction|
-        interaction.filter!(CGI.escape(hostname), hostname)
-        interaction.filter!(CGI.escape('NUAGE_NETWORK_HOST'), 'nuagenetworkhost')
-      end
-      c.filter_sensitive_data('NUAGE_NETWORK_AUTHORIZATION') { Base64.encode64("#{userid}:#{password}").chomp }
-    end
-  end
-
   describe "targeted refresh" do
     let(:tenant_ref)           { "e0819464-e7fc-4a37-b29a-e72da7b5956c" }
     let(:security_group_ref)   { "02e072ef-ca95-4164-856d-3ff177b9c13c" }
