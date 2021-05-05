@@ -19,7 +19,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
           :isRequired   => true,
           :validate     => [{:type => 'required'}],
           :includeEmpty => true,
-          :options      => ems.networks.map do |cvt|
+          :options      => ems.cloud_networks.map do |cvt|
             {
               :label => cvt.name,
               :value => cvt.id,
