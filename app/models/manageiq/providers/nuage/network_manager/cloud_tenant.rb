@@ -6,10 +6,10 @@ class ManageIQ::Providers::Nuage::NetworkManager::CloudTenant < ::CloudTenant
   has_many   :floating_ips,    :dependent => :destroy
 
   def l3_cloud_subnets
-    cloud_subnets.where(:type => self.class.parent.l3_cloud_subnet_type)
+    cloud_subnets.where(:type => self.class.module_parent.l3_cloud_subnet_type)
   end
 
   def l2_cloud_subnets
-    cloud_subnets.where(:type => self.class.parent.l2_cloud_subnet_type)
+    cloud_subnets.where(:type => self.class.module_parent.l2_cloud_subnet_type)
   end
 end
