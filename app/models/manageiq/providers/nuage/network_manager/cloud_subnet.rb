@@ -40,23 +40,6 @@ class ManageIQ::Providers::Nuage::NetworkManager::CloudSubnet < ::CloudSubnet
     network_ports.each(&:destroy)
   end
 
-  def delete_cloud_subnet_queue(userid)
-    task_opts = {
-      :action => "deleting Cloud Subnet for user #{userid}",
-      :userid => userid
-    }
-    queue_opts = {
-      :class_name  => self.class.name,
-      :method_name => 'delete_cloud_subnet',
-      :instance_id => id,
-      :priority    => MiqQueue::NORMAL_PRIORITY,
-      :role        => 'ems_operations',
-      :zone        => ext_management_system.my_zone,
-      :args        => []
-    }
-    MiqTask.generic_action_with_callback(task_opts, queue_opts)
-  end
-
   def raw_delete_cloud_subnet
     $nuage_log.info("Deleting Cloud Subnet (ems_ref = #{ems_ref})")
 
