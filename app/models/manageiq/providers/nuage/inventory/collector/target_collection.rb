@@ -117,18 +117,8 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     safe_list { vsd_client.get_subnets_for_domain(router_ref) }
   end
 
-  def references(collection)
-    target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a) || []
-  end
-
   def parse_targets!
     # parse native targets (e.g. CloudSubnet::L3) here in case we support manual triggering targeted refresh for them.
-  end
-
-  def add_simple_target!(association, ems_ref, options: {})
-    return if ems_ref.blank?
-
-    target.add_target(:association => association, :manager_ref => {:ems_ref => ems_ref}, :options => options)
   end
 
   def infer_related_ems_refs!
@@ -140,21 +130,21 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     references_with_options(:cloud_subnet_templates).each do |template|
       next unless template[:operation] == 'DELETE'
       manager.cloud_subnets_by_extra_attr('template_id', template[:ems_ref]).each do |subnet|
-        add_simple_target!(:cloud_subnets, subnet.ems_ref, :options => { :kind => 'L3', :deleted => true })
+        add_target!(:cloud_subnets, subnet.ems_ref, :kind => 'L3', :deleted => true)
       end
     end
 
     references_with_options(:zone_templates).each do |template|
       next unless template[:operation] == 'DELETE'
       manager.cloud_subnets_by_extra_attr('zone_template_id', template[:ems_ref]).each do |subnet|
-        add_simple_target!(:cloud_subnets, subnet.ems_ref, :options => { :kind => 'L3', :deleted => true })
+        add_target!(:cloud_subnets, subnet.ems_ref, :kind => 'L3', :deleted => true)
       end
     end
 
     references_with_options(:zones).each do |zone|
       next unless zone[:operation] == 'DELETE'
       manager.cloud_subnets_by_extra_attr('zone_id', zone[:ems_ref]).each do |subnet|
-        add_simple_target!(:cloud_subnets, subnet.ems_ref, :options => { :kind => 'L3', :deleted => true })
+        add_target!(:cloud_subnets, subnet.ems_ref, :kind => 'L3', :deleted => true)
       end
     end
   end
@@ -167,7 +157,7 @@ class ManageIQ::Providers::Nuage::Inventory::Collector::TargetCollection < Manag
     references_with_options(:network_routers).each do |router|
       next unless router[:operation] == 'CREATE'
       cloud_subnets_for_router(router[:ems_ref]).each do |subnet|
-        add_simple_target!(:cloud_subnets, subnet['ID'], :options => { :kind => 'L3' })
+        add_target!(:cloud_subnets, subnet['ID'], :kind => 'L3')
       end
     end
   end
