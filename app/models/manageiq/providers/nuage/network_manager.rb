@@ -13,16 +13,12 @@ class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkM
   require_nested :FloatingIp
   require_nested :NetworkPort
 
-  supports :ems_network_new
   supports :cloud_subnet_create
+  supports :create
+  supports :update
 
   include Vmdb::Logging
   include ManageIQ::Providers::Nuage::ManagerMixin
-
-  # FIXME: remove this after the provider doesn't belong to a parent_manager
-  def self.supported_for_create?
-    true
-  end
 
   def self.ems_type
     @ems_type ||= "nuage_network".freeze
