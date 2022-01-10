@@ -27,7 +27,7 @@ module ManageIQ::Providers::Nuage::Inventory::Persister::Definitions::NetworkCol
   end
 
   def add_cross_provider_vms
-    add_collection(cloud, :vms) do |builder|
+    add_collection(cloud, :vms, {}, {:without_sti => true}) do |builder|
       builder.add_properties(
         :arel           => Vm.all,
         :strategy       => :local_db_find_references,
