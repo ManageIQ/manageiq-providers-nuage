@@ -18,14 +18,14 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   let(:hostname) { Rails.application.secrets.nuage[:host] }
 
   def vcr_play(cassette, method, args: [])
-    VCR.use_cassette("#{described_class.parent.name.underscore}/vsd_client/#{cassette}") do
+    VCR.use_cassette("#{described_class.module_parent.name.underscore}/vsd_client/#{cassette}") do
       @vsd_client.send(method, *args)
     end
   end
 
   context "when login successful" do
     before(:each) do
-      VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/login') do
+      VCR.use_cassette(described_class.module_parent.name.underscore + '/vsd_client/login') do
         @vsd_client = described_class.new("https://#{hostname}:8443/nuage/api/v5_0", userid, password)
       end
     end
@@ -117,7 +117,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
 
   context "when login fails" do
     it "should fail on wrong password" do
-      VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/wrong_pass') do
+      VCR.use_cassette(described_class.module_parent.name.underscore + '/vsd_client/wrong_pass') do
         expect do
           described_class.new("https://#{hostname}:8443/nuage/api/v5_0", userid, 'wrong_password')
         end.to raise_error(MiqException::MiqInvalidCredentialsError)
@@ -125,7 +125,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     end
 
     it "should fail on wrong username" do
-      VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/wrong_user') do
+      VCR.use_cassette(described_class.module_parent.name.underscore + '/vsd_client/wrong_user') do
         expect do
           described_class.new("https://#{hostname}:8443/nuage/api/v5_0", 'wrong_user', password)
         end.to raise_error(MiqException::MiqInvalidCredentialsError)
@@ -133,7 +133,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
     end
 
     it "should fail on wrong hostname" do
-      VCR.use_cassette(described_class.parent.name.underscore + '/vsd_client/wrong_hostname') do
+      VCR.use_cassette(described_class.module_parent.name.underscore + '/vsd_client/wrong_hostname') do
         expect do
           described_class.new("https://wronghost:8443/nuage/api/v5_0", userid, password)
         end.to raise_error(SocketError)
