@@ -349,7 +349,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
   def verify_credentials(auth_type = nil, options = {})
     auth_type ||= 'default'
 
-    raise MiqException::MiqInvalidCredentialsError, "Unsupported auth type: #{auth_type}" unless supports_authentication?(auth_type)
+    raise MiqException::MiqInvalidCredentialsError, "Unsupported auth type: #{auth_type}" unless supported_auth_types.include?(auth_type.to_s)
     raise MiqException::MiqHostError, "No credentials defined" if missing_credentials?(auth_type)
 
     options[:auth_type] = auth_type
