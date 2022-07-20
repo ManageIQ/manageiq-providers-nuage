@@ -3,7 +3,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
 
   module ClassMethods
     def params_for_create
-      @params_for_create ||= {
+      {
         :fields => [
           {
             :component    => "select",
@@ -95,7 +95,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :component  => "text-field",
                           :id         => "authentications.default.userid",
                           :name       => "authentications.default.userid",
-                          :label      => "Username",
+                          :label      => _("Username"),
                           :isRequired => true,
                           :validate   => [{:type => "required"}],
                         },
@@ -103,7 +103,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :component  => "password-field",
                           :id         => "authentications.default.password",
                           :name       => "authentications.default.password",
-                          :label      => "Password",
+                          :label      => _("Password"),
                           :type       => "password",
                           :isRequired => true,
                           :validate   => [{:type => "required"}],
@@ -185,7 +185,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :component  => "text-field",
                           :id         => "authentications.amqp.userid",
                           :name       => "authentications.amqp.userid",
-                          :label      => "Username",
+                          :label      => _("Username"),
                           :isRequired => true,
                           :validate   => [{:type => "required"}],
                         },
@@ -193,7 +193,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                           :component  => "password-field",
                           :id         => "authentications.amqp.password",
                           :name       => "authentications.amqp.password",
-                          :label      => "Password",
+                          :label      => _("Password"),
                           :type       => "password",
                           :isRequired => true,
                           :validate   => [{:type => "required"}],
