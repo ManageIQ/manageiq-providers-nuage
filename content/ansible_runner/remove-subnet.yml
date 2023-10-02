@@ -11,4 +11,4 @@
     kind: L3
     entity_type: "{{ 'L2Domain' if kind == 'L2' else 'Subnet' }}"
   roles:
-  - xlab_si.nuage_remove_entity
+  - xlab-si.nuage_remove_entity
