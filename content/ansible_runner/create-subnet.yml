@@ -9,7 +9,7 @@
   gather_facts: False
   tasks:
   - include_role:
-      name: xlab_si.nuage_create_entity
+      name: xlab-si.nuage_create_entity
     vars:
       entity_type: Zone
       parent_type: Domain
@@ -17,7 +17,7 @@
       attributes:
         name: 'CloudForms Subnets'
   - include_role:
-      name: xlab_si.nuage_create_entity
+      name: xlab-si.nuage_create_entity
     vars:
       entity_type: Subnet
       parent_type: Zone
