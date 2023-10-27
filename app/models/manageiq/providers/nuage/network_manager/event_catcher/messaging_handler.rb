@@ -1,9 +1,8 @@
+require 'qpid_proton'
 class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler < Qpid::Proton::MessagingHandler
   attr_reader :errors
 
   def initialize(options = {})
-    require 'qpid_proton'
-
     super()
     @options = options
 
