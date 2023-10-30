@@ -1,4 +1,4 @@
-describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream do
+describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Stream, :qpid_proton => true do
   before do
     allow(subject).to receive(:connection).and_return(conn)
   end

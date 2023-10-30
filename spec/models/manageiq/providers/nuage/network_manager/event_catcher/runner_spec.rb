@@ -8,7 +8,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::Runner do
   let(:ems)    { FactoryBot.create(:ems_nuage_network_with_authentication) }
   let(:handle) { double('handle', :start => nil) }
 
-  it '.event_monitor_handle' do
+  it '.event_monitor_handle', :qpid_proton => true do
     expect(subject.event_monitor_handle).not_to be_nil
   end
 
