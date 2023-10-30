@@ -11,6 +11,12 @@ module ManageIQ
           app.config.paths["config/secrets"] << root.join("config", "secrets.yml").to_s
         end
 
+        initializer 'manageiq-providers-nuage.configure_autoloader' do
+          # The following file should not be eager loaded as it depends on being installed, which isn't possible on macs and isn't done by default
+          # in ci for other plugins, core, etc.
+          Rails.autoloaders.main.ignore(root.join("app/models/manageiq/providers/nuage/network_manager/event_catcher/messaging_handler.rb")) unless Gem.loaded_specs.key?('qpid_proton')
+        end
+
         def self.vmdb_plugin?
           true
         end
