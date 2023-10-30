@@ -1,4 +1,6 @@
-describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler do
+# Note, we're using string class name to avoid autoloading the class since it requires
+# qpid_proton installed.
+describe "ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler", :qpid_proton => true do
   before do
     subject.instance_variable_set(:@conn, conn)
   end
@@ -7,7 +9,7 @@ describe ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHand
   let(:container) { double('container', :stopped => false, :stop => nil) }
   let(:conn)      { double('connection', :open_receiver => nil, :container => container) }
 
-  subject { described_class.new(options) }
+  subject { ManageIQ::Providers::Nuage::NetworkManager::EventCatcher::MessagingHandler.new(options) }
 
   it 'default connection timeout' do
     expect(subject.instance_variable_get(:@timeout)).to eq(5.seconds)

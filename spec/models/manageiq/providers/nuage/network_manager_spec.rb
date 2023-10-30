@@ -72,9 +72,10 @@ describe ManageIQ::Providers::Nuage::NetworkManager do
       end.to raise_error(MiqException::MiqInvalidCredentialsError)
     end
 
-    context 'AMQP connection' do
+    context 'AMQP connection', :qpid_proton => true do
       before do
         @conn = double('connection', :handler => handler)
+        require 'qpid_proton'
         allow(Qpid::Proton::Container).to receive(:new).and_return(@conn)
 
         creds = {}
