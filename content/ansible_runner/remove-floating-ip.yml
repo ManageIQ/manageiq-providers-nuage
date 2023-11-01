@@ -9,4 +9,4 @@
   vars:
     entity_type: FloatingIp
   roles:
-  - xlab-si.nuage_remove_entity
+  - xlab_si.nuage_remove_entity
