@@ -49,7 +49,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       :name                   => 'authentications.default.valid',
                       :skipSubmit             => true,
                       :isRequired             => true,
-                      :validationDependencies => %w[type api_version],
+                      :validationDependencies => %w[type zone_id api_version],
                       :fields                 => [
                         {
                           :component    => "select",
@@ -142,7 +142,7 @@ module ManageIQ::Providers::Nuage::ManagerMixin
                       :id                     => 'endpoints.amqp.valid',
                       :name                   => 'endpoints.amqp.valid',
                       :skipSubmit             => true,
-                      :validationDependencies => %w[type event_stream_selection],
+                      :validationDependencies => %w[type zone_id event_stream_selection],
                       :condition              => {
                         :when => 'event_stream_selection',
                         :is   => 'amqp',
