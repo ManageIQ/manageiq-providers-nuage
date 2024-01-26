@@ -1,18 +1,5 @@
 class ManageIQ::Providers::Nuage::NetworkManager < ManageIQ::Providers::NetworkManager
   include SupportsFeatureMixin
-  require_nested :EventCatcher
-  require_nested :EventParser
-  require_nested :RefreshWorker
-  require_nested :Refresher
-  require_nested :VsdClient
-  require_nested :CloudTenant
-  require_nested :NetworkRouter
-  require_nested :CloudNetwork
-  require_nested :CloudSubnet
-  require_nested :SecurityGroup
-  require_nested :FloatingIp
-  require_nested :NetworkPort
-
   supports :cloud_subnet_create
   supports :create
   supports :update
