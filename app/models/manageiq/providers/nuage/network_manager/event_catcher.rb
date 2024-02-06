@@ -1,6 +1,4 @@
 class ManageIQ::Providers::Nuage::NetworkManager::EventCatcher < ::MiqEventCatcher
-  require_nested :Runner
-
   def self.settings_name
     :event_catcher_nuage_network
   end
