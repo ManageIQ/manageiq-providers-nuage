@@ -1,4 +1,3 @@
-require 'rest-client'
 require 'rubygems'
 require 'json'
 module ManageIQ::Providers
