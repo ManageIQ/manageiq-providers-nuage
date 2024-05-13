@@ -9,6 +9,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest
   end
 
   def login
+    require 'rest-client'
     @login_url = @server + "/me"
     RestClient::Request.execute(:method => :get, :url => @login_url, :user => @user, :password => @password,
     :headers => @headers, :verify_ssl => false) do |response|
@@ -56,6 +57,7 @@ class ManageIQ::Providers::Nuage::NetworkManager::VsdClient::Rest
   end
 
   def request(url, method: :get, data: nil, verify_ssl: false)
+    require 'rest-client'
     $nuage_log.debug("Accessing Nuage VSD url #{method} #{url} with data '#{data}'")
     login unless @api_key
 
