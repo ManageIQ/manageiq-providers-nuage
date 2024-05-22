@@ -1,5 +1,3 @@
-require 'rest-client'
-require 'rubygems'
 require 'json'
 module ManageIQ::Providers
   class Nuage::NetworkManager::VsdClient
