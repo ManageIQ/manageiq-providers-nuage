@@ -6,12 +6,12 @@ FactoryBot.define do
     end
 
     after(:build) do |ems|
-      ems.hostname = Rails.application.secrets.nuage[:host]
+      ems.hostname = VcrSecrets.nuage.host
     end
 
     after(:create) do |ems|
-      userid   = Rails.application.secrets.nuage[:userid]
-      password = Rails.application.secrets.nuage[:password]
+      userid   = VcrSecrets.nuage.userid
+      password = VcrSecrets.nuage.password
 
       cred = {
         :userid   => userid,
