@@ -13,9 +13,9 @@ describe ManageIQ::Providers::Nuage::NetworkManager::VsdClient do
   SUBNET_ID = '4da803f7-c0d2-4beb-b02e-341ea77e377f'.freeze
   POLICY_GROUP_ID = 'fadd09c4-9fea-46ec-8342-73f1b6a4df74'.freeze
 
-  let(:userid) { Rails.application.secrets.nuage[:userid] }
-  let(:password) { Rails.application.secrets.nuage[:password] }
-  let(:hostname) { Rails.application.secrets.nuage[:host] }
+  let(:userid) { VcrSecrets.nuage.userid }
+  let(:password) { VcrSecrets.nuage.password }
+  let(:hostname) { VcrSecrets.nuage.host }
 
   def vcr_play(cassette, method, args: [])
     VCR.use_cassette("#{described_class.module_parent.name.underscore}/vsd_client/#{cassette}") do
