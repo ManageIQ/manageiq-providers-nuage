@@ -4,12 +4,7 @@ module ManageIQ
       class Engine < ::Rails::Engine
         isolate_namespace ManageIQ::Providers::Nuage
 
-        config.autoload_paths << root.join('lib').to_s
-
-        initializer :append_secrets do |app|
-          app.config.paths["config/secrets"] << root.join("config", "secrets.defaults.yml").to_s
-          app.config.paths["config/secrets"] << root.join("config", "secrets.yml").to_s
-        end
+        config.autoload_paths << root.join('lib')
 
         initializer 'manageiq-providers-nuage.configure_autoloader' do
           # The following file should not be eager loaded as it depends on being installed, which isn't possible on macs and isn't done by default
